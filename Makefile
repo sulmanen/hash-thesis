@@ -5,4 +5,4 @@ all:
 	pdflatex hash.tex
 
 open:
-	open -a Preview hash.pdf 	
+	open hash.pdf 	
