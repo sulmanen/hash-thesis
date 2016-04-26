@@ -1,6 +1,6 @@
-*.aux
-*.log
-*.out
+hash.aux
+hash.log
+hash.out
 hash.pdf
 *.toc
 *.bbl
