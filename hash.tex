@@ -70,7 +70,7 @@
 
 %%
 %% Käytä toinen näistä, jos kirjoitat suomeksi:
-%% ensimmäinen, jos käytät pdflatexia, joka kääntää tekstin suoraan 
+%% ensimmäinen, jos käytät pdflatexia, joka kääntää tekstin suoraan
 %% pdf-tiedostoksi (kuvat on oltava jpg- tai pdf-tiedostoina)
 %% toinen, jos haluat tuottaa ps-tiedostoa (käytä eps-formaattia kuville,
 %% alä käytä ps-muotoisia kuvia!)
@@ -866,6 +866,24 @@ ISSN-numeroita vaadita.
 \clearpage
 
 \section{Materials and methods}
+
+\subsection{Evaluating classifiers}
+To compare the dct-, and simple perceptual hash based classifiers to large scale image retrieval by SIFT features, in a systematic way, we will use receiver operating characteristic \(ROC\) graphs to visualize the performance of each classifier and compare their performance.
+
+Receiver operating characteristic graph visualizes classifier performance. We are comparing the so called simple hash, dct hash perceptual hashes to object instance detection via SIFT features.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/confusion}
+\end{center}
+\caption{Confusion matrix for binary classification. }
+\label{liitekuva}
+\end{figure}
+
+FIG Confusion matrix.
+
+All classifiers deal with a binary classification problem. Image or in case of object instance classification object was identified correctly, or it was not.
+
 \subsection{Near duplicate images}
 Definitions can vary depending on the problem at hand from finding exact matches to matching images with the same scene or object.
 
@@ -882,6 +900,8 @@ Near similar image detection is done via perceptual hashing due to their simplic
 \begin{equation}
 X_{k_1,k_2} = \sum_{n_1=0}^{N_1-1} \sum_{n_2=0}^{N_2-1}x_{n_1,n_2}cos\left[\frac{\pi}{N_1}\left(n_1+\frac{1}{2}\right)k_1\right]cos\left[\frac{\pi}{N_2}\left(n_2+\frac{1}{2}\right)k_2\right]
 \end{equation}
+
+\subsection{Large scale image retrieval by SIFT features}
 
 \subsection{Simulation}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
