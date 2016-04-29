@@ -382,11 +382,8 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 %\subsection*{Lyhenteet}
 
 \begin{tabular}{ll}
-AC         & vaihtovirta \\
-APLAC      & an object-oriented analog circuit simulator and design tool \\
-           & (originally Analysis Program for Linear Active Circuits) \\
-BCS        & Bardeen-Cooper-Schrieffer \\ %% tavuviiva - nimien v\"aliss\"a
-UA        & ''User Agent is any software that retrieves, renders and facilitates end user interaction with Web content, or whose user interface is implemented using Web technologies.''\\
+  1px & One pixel.  \\
+  UA        & ''User Agent is any software that retrieves, renders and facilitates end user interaction with Web content, or whose user interface is implemented using Web technologies.''\\
 URI         & ''Uniform Resource Identifiers (URIs, aka URLs) are short strings that identify resources in the web: documents, images, downloadable files, services, electronic mailboxes, and other resources. They make resources available under a variety of naming schemes and access methods such as HTTP, FTP, and Internet mail addressable in the same simple way. They reduce the tedium of "log in to this server, then issue this magic command ...'' down to a single click.''\\
 \end{tabular}
 
@@ -868,29 +865,27 @@ ISSN-numeroita vaadita.
 \section{Materials and methods}
 
 \subsection{Evaluating classifiers}
-To compare the dct-, and simple perceptual hash based classifiers to large scale image retrieval by SIFT features, in a systematic way, we will use receiver operating characteristic \(ROC\) graphs to visualize the performance of each classifier and compare their performance.
+To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features in a systematic way, we will use receiver operating characteristic \(ROC\) graphs to visualize the performance of each classifier and compare their performance.
 
-Receiver operating characteristic graph visualizes classifier performance. We are comparing the so called simple hash, dct hash perceptual hashes to object instance detection via SIFT features.
+In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in figure \ref{figconfusion}.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/confusion}
 \end{center}
-\caption{Confusion matrix for binary classification. }
-\label{liitekuva}
+\caption{Confusion matrix for binary classification \cite{Fawcett2006}. }
+\label{figconfusion}
 \end{figure}
 
-FIG Confusion matrix.
 
-All classifiers deal with a binary classification problem. Image or in case of object instance classification object was identified correctly, or it was not.
 
 \subsection{Near duplicate images}
 Definitions can vary depending on the problem at hand from finding exact matches to matching images with the same scene or object.
 
-Our requirements are high match rate of an image at different scales. Customer is reporting 20\% to 30\% misses (false negatives) for dct hash and reporting that the simple hash is also missing too many images. We are going to keep the problem the same, but attempt to widen the definition to the same scene or object and in this way to reduce misses while keeping the false positive rate extremely low.
+Our requirements for a classifier are high true positive rate, a high true negative rate, and a low false positive rate. of an image at different scales. Customer is reporting 20\% to 30\% misses (false negatives) for dct hash and reporting that the simple hash is also missing too many images. We are going to keep the problem the same, but attempt to widen the definition to the same scene or object and in this way to reduce misses while keeping the false positive rate extremely low.
 
 \subsection{Perceptual hashing}
-Near similar image detection is done via perceptual hashing due to their simplicity. They are simple to implement and inexpensive to compute.
+Near similar image detection is done via perceptual hashing due to their simplicity. They are simple to implement and inexpensive to compute. Hashes are not calculated for if image widht or height is less than 32px. Adding metadata to an image that small is counterproductive.
 
 
 \subsubsection{Simple hash}
@@ -906,13 +901,45 @@ X_{k_1,k_2} = \sum_{n_1=0}^{N_1-1} \sum_{n_2=0}^{N_2-1}x_{n_1,n_2}cos\left[\frac
 \subsection{Simulation}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
 
-To find out if object instance recognition by SIFT features is an improvement over perceptual hashing, simulations are in order before starting serious development work. We are faced with a binary classification problem. Since receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006} we will construct ROC graphs for the simpla hash, dct hash and large scale image retrieval with SIFT features.
+To compare object instance recognition by SIFT features to perceptual hashing we will run simulations on matlab. We are faced with a binary classification problem. Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, dct hash and large scale image retrieval with SIFT features.
 
-Solving the near similar image matching problem with SIFT-features we need to know if the new solution is an improvement over the existing perceptual hashing solutions the simple hash and a custom DCT hash.
+To begin production implementation solving the near similar image matching problem with SIFT-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. A set of images is needed, as well as well as a modified set described in table \ref{modifiedimages} simulating scenarios typically encountered in duplicate image detection.
+
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Test image sets and motivations taken from the "Recognition of object instances practical" paintings set of images.}
+\label{modifiedimages}
+\begin{center}
+\begin{tabular}{lp{0.5\linewidth}}
+  Modification & Motivation \\
+  \hline \hline
+  53\% scale& Simulate responsive site case where image has a scaled duplicate. Choose prime percentage to avoid multiple of two to push scaler to produce uneven results.\\
+  \hline
+  83\% scale& Another scaled case \\
+  \hline
+  Shave 10px & Simulate cropping image by 10px or removing a border for example\\
+  \hline
+  Shave 20px & Simulate cropping image by 20px or removing a border for example\\
+  \hline
+  10\% border & Adding a border to a known image \\
+  \hline
+  Rotate 10\% & User corrects the horizon of a photo \\
+  \hline
+  Normalize histogram & User normalizes the histogram of a photo\\
+  \hline
+  Saturate colors & User decides to modify the color palette of the image or photo\\
+  \hline
+  Horizontal flip & User uses a mirror image. Pushing near duplicate detection to the limit\\
+  \hline
+  Vertical flip & User flips the image vertically. We push near duplicate detection to the limit\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
+
 
 Paintings dataset from the "Recognition of object instances practical" http://www.robots.ox.ac.uk/~vgg/practicals/instance-recognition/index.html of a total of 1708 images will be used due to ready scripts for the SIFT case.
 
-A shell script using imagemagick will create manipulated duplicates. 11\%, 23\%, 37\%, 53\% and 83\% scales. In addition a case were the image horizon is fixed by a slight rotation is a usual case so we will use a 10\% rotation. Increased saturation is chosen for color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
+A shell script using imagemagick will create manipulated duplicates. 53\% and 83\% scales. In addition a case were the image horizon is fixed by a slight rotation is a usual case so we will use a 10\% rotation. Increased saturation is chosen for color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
 
 To simulate cropped images we will use 10\% and 20\% cropping. Adding a border is also a common operation so that case is simulated by making duplicates with a 10px border.
 
