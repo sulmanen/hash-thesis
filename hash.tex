@@ -90,7 +90,7 @@
 %% Use this if you write hard core mathematics, these are usually needed
 %%
 %% Matematiikan fontteja, symboleja ja muotoiluja lisää, näitä tarvitaan usein
-\usepackage{amsfonts,amssymb,amsbsy}
+\usepackage{amsfonts,amssymb,amsbsy,amsmath}
 \usepackage{epigraph}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
@@ -349,21 +349,8 @@ Otaniemi, 24.9.2016
 %\subsection*{Symbolit}
 
 \begin{tabular}{ll}
-%$|a_{ij}|^2$, $|a_i|^2$ & probability of two electrons having momenta
-%    $\boldsymbol p_i$ and $\boldsymbol p_j$ ($\boldsymbol p_i$ for $|a_i|^2$) \\
-%                 & at any given instant \\
-$\mathbf{B}$  & magneettivuon tiheys  \\
-$c$              & valon nopeus tyhj\"oss\"a $\approx 3\times10^8$ [m/s]\\
-%$p$              & magnitude of momentum \\
-%$\boldsymbol p$, $\boldsymbol p_i$, $\boldsymbol p_i^{'}$  & momentum vector \\
-%$p$              & magnitude of momentum \\
-%$\boldsymbol p$, $\boldsymbol p_i$, $\boldsymbol p_i^{'}$  & momentum vector \\
-%$\boldsymbol P$  &  \\
-%$p_{\mathrm{F}}$ & Fermi momentum \\
-$\omega_{\mathrm{D}}$    & Debye-taajuus \\
-$\omega_{\mathrm{latt}}$ & hilan keskim\"a\"ar\"ainen fononitaajuus \\
-$\uparrow$       & elektronin spinin suunta yl\"osp\"ain\\
-$\downarrow$     & elektronin spinin suunta alasp\"ain
+$C_{s}$ & SIFT Classifier cutoff score under which an image is classified as a miss.\\
+$fn_{count}$ & False negative count\\
 \end{tabular}
 
 \subsection*{Operators}
@@ -382,7 +369,8 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 %\subsection*{Lyhenteet}
 
 \begin{tabular}{ll}
-  1px & One pixel.  \\
+  px & A pixel.  \\
+  SIFT & Scale invariant feature transform is an algorithm by David Lowe extracting local features from images. \cite{Lowe1999}\\
   UA        & ''User Agent is any software that retrieves, renders and facilitates end user interaction with Web content, or whose user interface is implemented using Web technologies.''\\
 URI         & ''Uniform Resource Identifiers (URIs, aka URLs) are short strings that identify resources in the web: documents, images, downloadable files, services, electronic mailboxes, and other resources. They make resources available under a variety of naming schemes and access methods such as HTTP, FTP, and Internet mail addressable in the same simple way. They reduce the tedium of "log in to this server, then issue this magic command ...'' down to a single click.''\\
 \end{tabular}
@@ -412,16 +400,18 @@ URI         & ''Uniform Resource Identifiers (URIs, aka URLs) are short strings 
 %% Leip\"ateksti alkaa
 \section{Introduction}
 
-%% Ensimm\"ainen sivu tyhj\"aksi
-%%
 %% Leave first page empty
 \thispagestyle{empty}
 
-Websites of today must work on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design allows a site to deliver an optimal user experice to an end user on any supported screen size.
+Images are a cornerstone of the world wide web. ThingLink allows it's users to annotate images with clickable regions to enrich the image by linking it to relevant information on the world wide web. Responsive web design usually demands different scale images for different screen sizes for performance and quality reasons. In order for ThingLink to annotate once and use the same annotations for multiple versions of the same image, ThingLink employs near duplicate image detection by perceptual hashes. A client is reporting 20 to 30 percent false negatives for their image detection. The end result is no annotations on a different version of the image. There is nothing wrong with the system, so an improved approach to near duplicate image detection is needed.
+
+Near similar image detection can mean matching exact pixel to pixel duplicates to maching objects or scenes inside images. Object instance detection by SIFT features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance recognition be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy of image detection?
+
+Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design allows a website to deliver an optimal user experice on virtually any screen size.
 
 Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in seconds.
 
-The introduction of high quality screens such as the retina display on Apple platforms have put pressure to deliver high quality content on all screen sizes.
+The introduction of high quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency.
 
 Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
 
@@ -433,441 +423,98 @@ Matching image to metadata may not be done reliably by matching incoming URI to 
 
 For added value to the customer, reliably matching the incoming image to correct image metadata must be done on pixel data. This problem is known as Near Similar Image Matching.
 
-Another case for using different sizes of the same image on a website is a gallery and detail view. Gallery images are smaller and provide an overview of products. The user may want or need to view a detailed view of an interesting image. Therefore two images in different scale may be needed and served from different URI's
+Another case for using different sizes of the same image on a website is a gallery and detail view. Gallery images are smaller and provide an overview of products. The user may want or need to view a detailed view of an interesting image. The same image is needed in different scales and served from different URI's.
 
+This paper excludes all other uses of perceptual hashes than near duplicate detection. Cryptograhic hashes are not considered.
 
-
-T\"am\"an tekstin l\"ahteen\"a oleva tiedosto on opinn\"aytteen
-pohja, jota voi k\"aytt\"a\"a kandidaatinty\"oss\"a, diplomity\"oss\"a ja
-lisensiaatinty\"oss\"a. Tekstin
-l\"ahteen\"a oleva tiedosto on kirjoitettu  \LaTeX-tiedoston rakenteen
-opiskelemista ajatellen. Tiedoston kommentit sis\"alt\"av\"at
-tietoa, joka on hy\"odyllist\"a opinn\"aytett\"a kirjoitettaessa.
-
-%% Esimerkki luettelosta. Lyhyt ajatusviiva on k\"ayt\"oss\"a
-%% luettelossa, ja se on pituudeltaan
-%% en dash. Merkit\"a\"an latex-koodissa --.
-Johdanto selvitt\"a\"a samat asiat kuin tiivistelm\"a, mutta
-laveammin. Johdannossa kerrotaan yleens\"a seuraavat asiat
-
+\subsection{Research Questions}
 \begin{itemize}
-\item[--]Tutkimuksen taustaa ja tutkimusaiheen yleisluonteinen esittely
-\item[--]Tutkimuksen tavoitteet
-\item[--]P\"a\"akysymys ja osaongelmat
-\item[--]Tutkimuksen rajaus ja keskeiset k\"asitteet.
+\item[--] To what degree if any is object instance detection by SIFT-features an improvement over dct-, and simple perceptual hashes for near duplicate image detection?
+\item[--] Can object instance detection by SIFT-features be deployed at large scale?
+\item[--] Is it feasible to impolement object instance detection by SIFT features at large scale?
+\item[--] Does a realtime solution exist to improve on the current async solution?
 \end{itemize}
-
-Lyhyiden opinn\"aytteiden johdannot ovat yleens\"a liian pitki\"a, joten
-johdannon paisuttamista on v\"altett\"av\"a. Diplomity\"oh\"on sopii johdanto,
-joka on 2--4 sivua. %% t\"ass\"a on my\"os lyhyt ajatusviiva l. en dash.
-Kandidaatinty\"on johdannon on oltava diplomity\"on
-johdantoa lyhyempi. Sopivasti tiivistetty johdanto ei kaipaa alaotsikoita.
-
 
 %% Opinn\"aytteess\"a jokainen osa alkaa uudelta sivulta, joten \clearpage
 %%
 %% In a thesis, every section starts a new page, hence \clearpage
 \clearpage
 
-
-T\"ass\"a osassa selvitet\"a\"an, mit\"a tutkimuksen kohteena olevasta
-aiheesta tiedet\"a\"an entuudestaan. Selvityksen tulee kattaa
-tasapainoisesti koko tutkimuskentt\"a.
-
-Kun opinn\"aytety\"ot\"a kirjoitetaan, on noudatettava
-ohjeita, jotka koskevat opinn\"aytteen rakennetta,
-k\"ayt\"ant\"oj\"a, muotoseikkoja sek\"a ulkoasua. Esitell\"a\"an n\"ait\"a
-ohjeita tarkemmin.
-
-%% Osan hienojaottelua alaosiin, eik\"a v\"altt\"am\"att\"a edes tarpeen,
-%% t\"ass\"a vain esimerkkin\"a. K\"ayt\"a harkintasi mukaan
-%% osan jaottelua, joskus alaotsikot selvent\"av\"at asioita ja
-%% joskus vain sirpaloittavat tarpeettomasti teksti\"a.
-%%  Jaottelu menee seuraavasti:
-%% \section{osan otsikko}
-%% \subsection{alaotsikko}
-%% \subsubsection{ala-alaotsikko}
-%% T\"at\"a pitem\"alle ei pid\"a jaotella.
-%%
-%% Three levels of hierarchy in sectioning should be enough
-
-\subsection*{Rakenne}
-
-Opinn\"aytteen rakenteen tulee olla hyv\"an tieteellisen
-kirjoittamisen k\"ayt\"ann\"on mukainen ja sis\"alt\"a\"a v\"ahint\"a\"an seuraavat
-osat:
-
-\begin{enumerate}
-\item Nimi\"olehti
-\item Tiivistelm\"a
-\item Sis\"allysluettelo
-\item Symboli- ja lyhenneluettelo
-\item \label{a} Johdanto
-%% T\"ass\"a alla on esimerkki lainausmerkkien k\"ayt\"ost\"a. Suomalaisen tekstin
-%% lainausmerkit eiv\"at mene oikein latexissa (tai monissa muissakaan
-%% julkaisuj\"arjestelmiss\"a) kun k\"aytet\"a\"an
-%% "-merkki\"a, koska latex k\"aytt\"a\"a amerikkalaista lainausmerkkien
-%% tulostustapaa. Vaihtoehtona voi k\"aytt\"a\"a kulmalainausmerkkej\"a, jotka
-%% my\"os tulostuvat oikein.
-\item  Aikaisempi tutkimus. Ty\"on luonteen niin vaatiessa otsikko voi olla my\"os
-        >>Teoreettinen tausta>>  tai n\"aiden otsikoiden yhdistelm\"a.
-\item Tutkimusaineisto ja -menetelm\"at %% yhdysmerkki - eli tavuviiva.
-\item Tulokset
-\item \label{o} Tarkastelu. Ty\"on luonteen niin vaatiessa otsikko voi
-      olla my\"os >>Johtop\"a\"at\"okset>> tai >>Yhteenveto>>
-      tai edell\"a mainittujen otsikoiden yhdistelm\"a.
-\item L\"ahteet
-\item Liitteet.
-\end{enumerate}
-
-Tiivistelm\"an ja symboli- sek\"a lyhenneluetteloiden
-v\"aliin voi sijoittaa halutessaan esipuheen.
-
-Ty\"on osat \ref{a}-\ref{o} muodostavat \textit{tekstiosan.}  Ty\"on
-yksitt\"aisi\"a osia voidaan jakaa alaotsikoilla alaosiin, joita ei ole
-yll\"a esitetty. Alaotsikoiden k\"aytt\"aminen selvent\"a\"a parhaimmillaan
-teksti\"a, ja pahimmillaan sirpaloittaa sit\"a.  Sirpaloitumista voi est\"a\"a
-huolehtimalla siit\"a, ett\"a samalla sivulla ei esiinny useampaa
-alaotsikkoa.  Tekstin j\"asentelyss\"a on yleens\"a ongelmia, jos osassa on
-vain yksi alaosa, tai kirjoittaja joutuu k\"aytt\"am\"a\"an useampaa kuin
-kahta tasoa (osa ja alaosat): alaosien alaosat ovat harvoin tarpeen.
-\subsection*{Sivut ja kirjaintyypit}
-
-Opinn\"aytteen tulee olla kirjoitettu koneella tai
-tekstink\"asittelyohjelmalla yksipuolisesti A4-kokoiselle paperille.
-Kandidaatinty\"on tekstiosan sopiva pituus on noin 15--20 sivua ja
-diplomity\"on noin 60 sivua. Ty\"ot\"a ei ole syyt\"a tarpeettomasti pident\"a\"a.
-
-Opinn\"aytteen tekstiosan kirjaintyypin tulee olla antiikva eli
-%% esimerkki pakkotavutuksesta; "serif-tyyppinen" on tavutuksen kannalta
-%% hankala, joten pakkotavutetaan se.
-serif\--tyyp\-pi\-nen ja lis\"aksi kursivoimaton, lihavoimaton sek\"a kooltaan 12
-pistett\"a (kuten t\"ass\"a esityksess\"a). Groteskeja eli \textsf{Sans
-  serif}-tyyppisi\"a kirjaintyyppej\"a (kuten Helvetica tai Arial) ei saa
-k\"aytt\"a\"a varsinaisessa tekstiss\"a, mutta otsikoissa n\"ait\"a voidaan
-k\"aytt\"a\"a.  Otsikoissa voidaan k\"aytt\"a\"a kooltaan edell\"a mainittua
-suurempaa kirjaintyyppi\"a sek\"a tyylikeinoja, kuten lihavointia tai
-kursivointia.  Tekstiss\"a samantasoisten otsikoiden on kuitenkin oltava
-tyylilt\"a\"an ja kirjainlajeiltaan yhtenev\"aisi\"a.
-%% Esimerkki taulukosta
-\begin{table}[htb]
-%% Taulukon teksti
-\caption{Taulukoissa ja kuvissa kirjaintyypin voi valita
-tarkoituksenmukaisesti, mutta kuva- ja taulukkoteksteiss\"a tulee
-k\"aytt\"a\"a samaa kirjaintyyppi\"a kuin varsinaisessa tekstiss\"a.
-Huomaa taulukon numeroinnin sijoittuminen taulukon yl\"apuolelle. \label{taulukko1}}
-\begin{center}
-\fbox{
-\begin{tabular}{c|l|r}
-\textbf{A} & 1 & $e^{j \omega t}$ \\ \hline
-\textsf{B} & 2 & ${\mathfrak R}(c)$ \\ \hline
-\texttt{C} & 3 & $ a \in \mathbb{A}$
-\end{tabular}
-}
-\end{center}
-\end{table}
-
-Opinn\"aytteen vasen marginaali (sidonnan puoli) on
-35~mm % t\"ass\"a ~ muodostaa ns. yhdist\"av\"an v\"alily\"onnin
-ja oikea 25~mm. Yl\"amarginaali on 25~mm. Leip\"atekstin korkeus on
-enimmill\"a\"an 230mm. T\"am\"an opinn\"aytepohjan marginaalien pit\"aisi olla
-paperille tulostettuna oikein, mutta tulostimesta ja paperista
-riippuen voi esiinty\"a yhden tai kahden millimetrin suuruisia eroja.
-%% Jos k\"a\"ann\"at t\"am\"an tekstin pdflatex-komennolla ja tulostat sen katselu-
-%% ohjelmasta, toteat todenn\"ak\"oisesti em. mittojen poikkeavan enemm\"an
-%% kuin 1-2 mm.
-%% T\"am\"a on seurausta pdf-tiedoston erilaisesta kirjaintyyppim\"a\"arityksest\"a.
-%% Korkeatasoista painoty\"ot\"a varten k\"ayt\"a vain latex-komentoa ja
-%% tulosta postscript-muotoon k\"a\"annetyst\"a tiedostosta.
-\subsection*{Asemointi}
-
-%% Muutos vanhaan ohjeeseen verrattuna: aikaisemmassa ohjeessa
-%% kehotettiin k\"aytt\"am\"a\"an vasensuora-asettelua, mutta t\"ass\"a
-%% ohjeessa ollaan luovuttu tuosta vaatimuksesta ja siirrytty
-%% huoliteltumpaan, painotuotteenomaisempaan suuntaan.
-Tekstiosan tekstiss\"a k\"aytet\"a\"an kappaleiden erottamiseen sisennyst\"a,
-mutta ensimm\"aist\"a otsikon, v\"aliotsikon tai muun katkon j\"alkeist\"a
-kappaletta ei sisennet\"a. Jos kuva tai muu katko tulee kappaleiden
-v\"aliin, suositellaan katkon j\"alkeisen kappaleen sisent\"amist\"a.
-
-Mik\"ali oikea reuna halutaan tasata, tulee k\"aytt\"a\"a tavutusta ja lis\"aksi
-tarkistaa, ettei tekstiin j\"a\"a lukemista h\"airitsevi\"a pitki\"a sanav\"alej\"a. Jos
-k\"ayt\"at opinn\"aytteen tekemisess\"a \LaTeX-j\"arjestelm\"a\"a,
-t\"am\"a asia hoituu automaattisest.
-
-Opinn\"aytteen riviv\"ali on 1, mik\"a on my\"os t\"am\"an opinn\"aytepohjan k\"ayt\"ant\"o.
-Kappaleiden tulee yleens\"a olla ainakin kolmen rivin pituisia, mutta
-my\"os liian pitki\"a kappaleita tulee v\"altt\"a\"a.  T\"ass\"a opinn\"aytepohjassa
-ei tekstin luonteen vuoksi voida t\"aysin toteuttaa kappaleen pituutta koskevia
-vaatimuksia.
-
-Yksitt\"aisi\"a, kappaleen p\"a\"att\"avi\"a tai aloittavia rivej\"a sivun alussa
-tai lopussa on v\"altett\"av\"a koko ty\"oss\"a, my\"os luetteloissa ja
-liitteiss\"a.
-
-\subsection*{Numerointi}
-
-Opinn\"aytteen jokainen osa alkaa uudelta sivulta. Alaosa aloittaa uuden
-sivun vain edellisen sivun t\"aytytty\"a.
-
-Ty\"on osat numeroidaan siten, ett\"a johdanto on ensimm\"ainen numeroitava
-osa. Osien numeroinnissa k\"aytet\"a\"an arabialaisia numeroita.
-
-Nimi\"olehti, tiivistelm\"a, esipuhe, sis\"allysluettelo ja symboli- ja
-lyhenneluettelo numeroidaan esipuheesta tai t\"am\"an puuttuessa
-ensimm\"aiselt\"a luettelosivulta alkaen roomalaisin numeroin.
-
-Sivunumerointi alkaa toiselta varsinaiselta tekstisivulta, ja
-sivunumeroinnissa k\"aytet\"a\"an arabialaisia numeroita.
-
-L\"ahdeluettelo alkaa uudelta sivulta. L\"ahdeluettelon sivunumerointi
-jatkuu viimeisest\"a tekstisivusta.
-
-Jokainen liite alkaa uudelta sivulta. Liitteiden sivunumerointi
-jatkuu viimeisest\"a l\"ahdeluettelon sivusta.
-
-Sivunumero sijoitetaan sivun yl\"areunaan.
-
-Matemaattiset kaavat numeroidaan arabialaisin
-numeroin. Kaavanumerointi ei saa katketa osien v\"aliss\"a (eik\"a niin
-tapahdukaan, jos k\"ayt\"at t\"at\"a opinn\"aytepohjaa). Kaikkia kaavoja ei tarvitse
-numeroida, vaan kirjoittaja voi k\"aytt\"a\"a harkintaa numeroinnin
-tarpeellisuudessa.  Liitteiss\"a olevat kaavat numeroidaan siten, ett\"a
-liitteen ajatellaan muodostavan numeroinnin kannalta itsen\"aisen ja
-yhten\"aisen kokonaisuuden. Kaavan numero sijoitetaan oikealle puolelle
-alla olevan esimerkin mukaisesti
-\begin{equation}
-D(xy) = (Dx)y + x(Dy),  \hspace{3em} x,y \in \mathbb{A}.
-\end{equation}
-%% Kaavojen j\"alkeen ei yleens\"a laiteta sisennyst\"a.
-Kaikki kuvat ja taulukot numeroidaan erillisen juoksevan numeroinnin
-mukaisesti kuten taulukosta \ref{taulukko1} ja kuvasta \ref{kuva1} k\"ay
-ilmi.  Liitteiss\"a olevat kuvat ja taulukot numeroidaan siten, ett\"a
-liitteen ajatellaan muodostavan numeroinnin kannalta itsen\"aisen ja
-yhten\"aisen kokonaisuuden. Liitteiss\"a \ref{LiiteA} ja \ref{LiiteB} on
-esimerkkej\"a kaavojen (kaavat \ref{liitekaava1}--\ref{liitekaava2} tai
-kaavat \ref{liitekaava3}--\ref{liitekaava4}), kuvien (kuva
-\ref{liitekuva}) ja taulukoiden (taulukko \ref{liitetaulukko})
-numeroimisesta.  Liitteet numeroidaan suuraakkosin (esimerkiksi Liite
-A, Liite B tai pelk\"ast\"a\"an A, B).
-%% T\"ass\"a esimerkki kuva1.pdf -nimisen tiedoston tuomisesta kuvaksi.
-%% Komento \inclugraphics[parametrit]{argumentti} tuo kuvan.
-%% Komento \centering pakottaa kuvan keskelle.
-%% Komento \caption luo kuvatekstin ja sen numeroinnin
-%% Parametrit htb pakottavat kuvan suunnilleen siihen
-%% kohtaan, miss\"a se esiintyy tekstin l\"ahdekoodissa
-\begin{figure}[htb]
-\centering \includegraphics[height=5cm]{kuva1}
-\caption{T\"am\"a on esimerkki numeroidusta kuvatekstist\"a. \label{kuva1}}
-\end{figure}
-
-\subsection*{L\"ahdeviittausten k\"aytt\"o}
-
-L\"ahdeviittaukset tulee tehd\"a huolellisesti ja johdonmukaisesti
-numeroviitej\"arjestelm\"an mukaisesti. Numeroviitteet j\"arjestet\"a\"an
-l\"ahdeluetteloon viittausj\"arjestykseen, mutta jos l\"ahdeluettelo
-on hyvin laaja (useita sivuja), j\"arjestet\"a\"an viitteet p\"a\"asanan
-mukaiseen aakkosj\"arjestykseen. Alaviitej\"arjestelm\"a\"a
-\footnote{My\"osk\"a\"an alaviitteen\"a olevia kommentteja \underline{ei} suositella
-k\"aytett\"aviksi.} ei k\"aytet\"a.
-
-Viitteen sijoittelussa noudatetaan seuraavia s\"a\"ant\"oj\"a:
-Jos viite kohdistuu vain yhteen virkkeeseen tai virkkeen
-osaan, viite \cite{Kauranen} sijoitetaan virkkeen sis\"a\"an ennen virkett\"a
-p\"a\"att\"av\"a\"a pistett\"a. Jos taas viite koskee tekstin useampaa
-virkett\"a tai kokonaista kappaletta, sijoitetaan viite kappaleen loppuun
-pisteen j\"alkeen. \cite{Kauranen}
-
-\subsection*{L\"ahdeluettelo}
-
-L\"ahdeluettelossa esiintyy tavallisesti seuraavassa esitett\"avi\"a
-l\"ahteit\"a, joista on numeroviitej\"arjestelm\"ass\"a ilmoitettava
-asianomaisessa kohdassa vaaditut tiedot.
-
-%% Esimerkki korostamisesta. Lihavoinnin sijasta on tyylikk\"a\"amp\"a\"a
-%% ja luettavampaa k\"aytt\"a\"a kursiivia.
-\textit{Kirjasta} ilmoitetaan seuraavat tiedot:
-
-\begin{itemize}
-\item[--]tekij\"at
-\item[--]julkaisun nimi
-\item[--]painos, jos useita
-\item[--]kustannuspaikka
-\item[--]julkaisija tai kustantaja
-\item[--]julkaisuaika
-\item[--]mahdollinen sarjamerkint\"o.
-\end{itemize}
-
-Viitteet \cite{Kauranen}--\cite{Koblitz} ovat esimerkkej\"a kirjan
-esitt\"amisest\"a l\"ahdeluettelossa. Viite \cite[s.\ 83--124]{Koblitz} on
-esimerkki l\"ahdeluettelossa esiintyv\"an kirjan tiettyjen sivujen
-esitt\"amisest\"a tekstiss\"a.
-
-\textit{Artikkelista} kausijulkaisussa ilmoitetaan seuraavat tiedot:
-
-\begin{itemize}
-
-\item[--]tekij\"at
-\item[--]artikkelin nimi
-\item[--]kausijulkaisun nimi
-\item[--]julkaisuvuosi
-\item[--]kausijulkaisun volyymi tai ilmestymisvuosi
-\item[--]kausijulkaisun numero
-\item[--]sivut, joilla artikkeli on.
-\end{itemize}
-
-Viitteet \cite{bcs}--\cite{Deschamps} ovat esimerkkej\"a artikkelin
-esitt\"amisest\"a l\"ahdeluettelossa.
-
-\textit{Kokoomateoksen luvusta tai osasta} ilmoitetaan seuraavat tiedot:
-
-\begin{itemize}
-\item[--]luvun tai osan tekij\"at
-\item[--]luvun tai osan nimi
-\item[--]maininta >>Teoksessa>>
-\item[--]koko teoksen toimittajat sek\"a maininta >>(toim.)>>
-\item[--]koko teoksen tai konferenssin nimi
-\item[--]konferenssiesitelm\"an kyseess\"a ollessa sen pitopaikka ja -aika
-\item[--]painos, jos useita
-\item[--]kustannuspaikka
-\item[--]julkaisija tai kustantaja, jos aihetta t\"am\"an ilmoittamiseen on
-\item[--]julkaisuaika
-\item[--]sivut, joilla luku tai osa on
-\item[--]mahdollinen sarjamerkint\"a.
-\end{itemize}
-
-Viitteet \cite{Sihvola}--\cite{Lindblom} ovat esimerkkej\"a
-kokoomateoksen luvun tai osan esitt\"amisest\"a l\"ahdeluettelossa.
-
-\textit{Opinn\"aytety\"ost\"a} ilmoitetaan seuraavat tiedot:
-
-\begin{itemize}
-\item[--]tekij\"a
-\item[--]ty\"on nimi
-\item[--]opinn\"aytety\"on tyyppi
-\item[--]oppilaitoksen nimi
-\item[--]osaston, laitoksen tai ohjelman nimi
-\item[--]oppilaitoksen sijaintipaikka
-\item[--]vuosiluku.
-\end{itemize}
-
-Viitteet \cite{Miinusmaa}--\cite{Lonnqvist} ovat esimerkkej\"a
-opinn\"aytteen esitt\"amisest\"a l\"ahdeluettelossa.
-
-\textit{Standardista} ilmoitetaan seuraavat tiedot:
-
-\begin{itemize}
-\item[--]standardin tunnus ja numero
-\item[--]standardin nimi
-\item[--]painos, mik\"ali ei ole ensimm\"ainen
-\item[--]julkaisupaikka
-\item[--]julkaisija
-\item[--]julkaisuvuosi
-\item[--]sivum\"a\"ar\"a.
-\end{itemize}
-Viite \cite{sfs} on esimerkki standardin esitt\"amisest\"a opinn\"aytteen
-l\"ahdeluettelossa.
-
-\textit{Haastattelusta} ilmoitetaan seuraavat tiedot:
-
-\begin{itemize}
-\item[--]haastatellun henkil\"on nimi
-\item[--]haastatellun henkil\"on arvo tai asema
-\item[--]haastatellun henkil\"on edustama organisaatio
-\item[--]organisaation osoite
-\item[--]maininta siit\"a, ett\"a kyseess\"a on haastattelu ja haastattelun
-p\"aiv\"am\"a\"ar\"a.
-\end{itemize}
-
-Viite \cite{haastattelu} on esimerkki
-haastattelun esitt\"amisest\"a l\"ahdeluettelossa.
-
-Osa s\"ahk\"oisess\"a muodossa olevista artikkeleista on saatavissa my\"os
-painettuina. \textit{Vain verkosta saatavissa olevasta artikkelista} esitet\"a\"an
-seuraavat tiedot:
-
-\begin{itemize}
-\item[--]tekij\"at
-\item[--]artikkelin nimi
-\item[--]kausijulkaisun nimi
-\item[--]viestintyyppi
-\item[--]laitos tai volyymi
-\item[--]kausijulkaisun yksitt\"aist\"a osaa koskeva merkint\"a tai numero
-\item[--]julkaisuvuosi tai maininta >>P\"aivitetty>> ja p\"aivitysaika
-\item[--]maininta >>Viitattu>> ja viittaamisen ajankohta
-\item[--]maininta >>Saatavissa>> ja URL tai
-\item[--]maininta >>DOI>> ja DOI-numero (DOI=Digital Object Identifier).
-\end{itemize}
-
-Viitteet \cite{Ribeiro}--\cite{kone} ovat esimerkkej\"a s\"ahk\"oisess\"a
-muodossa olevan artikkelin esitt\"amisest\"a opinn\"aytteen
-l\"ahdeluettelossa.  Viitteet \cite{Ribeiro} ja \cite{Stieber} ovat
-saatavissa sek\"a painettuna ett\"a verkosta, joten viitteiden esitystapa
-mukailee painetun artikkelin viitteen esitystapaa, mutta sen lis\"aksi
-kerrotaan julkaisun olevan verkkolehti ja lehden olevan saatavissa
-my\"os painettuna.  Viite \cite{kone} on saatavissa vain verkosta ja
-siit\"a esitet\"a\"an yll\"a vaaditut tiedot.
-
-Valitettavasti s\"ahk\"oisess\"a muodosssa olevasta artikkelista ei ole aina
-saatavissa lai\-tos-, volyymi- tai numerotietoja.
-
-\textit{S\"ahk\"oisess\"a muodossa olevasta opinn\"aytety\"ost\"a} ilmoitetaan
-seuraavat tiedot:
-
-\begin{itemize}
-\item[--]tekij\"a
-\item[--]ty\"on nimi
-\item[--]viestintyyppi
-\item[--]opinn\"aytety\"on tyyppi
-\item[--]oppilaitoksen nimi
-\item[--]osaston, laitoksen tai ohjelman nimi
-\item[--]oppilaitoksen sijaintipaikka
-\item[--]vuosiluku
-\item[--]viittamisen ajankohta
-\item[--]maininta >>Saatavissa>> ja URL tai
-        maininta >>DOI>> ja DOI-numero.
-\end{itemize}
-
-Viite \cite{Adida} on esimerkki s\"ahk\"oisess\"a muodossa olevan
-opinn\"aytteen esitt\"amisest\"a l\"ahdeluettelossa.
-
-Viite \cite{viittaaminen} on esimerkki itsen\"aisen kirjoituksen sis\"alt\"av\"ast\"a
-verkkosivusta. T\"allainen l\"ahde on rinnastettavissa erillisteokseen.
-\textit{Verkkosivusta} esitet\"a\"an tiedot:
-
-\begin{itemize}
-\item[--] tekij\"at
-\item[--] otsikko
-\item[--] maininta >>P\"aivitetty>> ja p\"aivitysaika
-\item[--] maininta >>Viitattu>> ja viittaamisen ajankohta
-\item[--] Maininta >>Saatavissa>> ja URL.
-\end{itemize}
-
-Joskus verkkosivun kirjoitus on jaettu useammalle sivulle, jolloin
-l\"ahdeluetteloon kirjataan vain sellainen verkko-osoite, joka koskee
-koko kirjoitusta tai sen etusivua, ellei sitten
-todella tarkoiteta kirjoituksen yksitt\"aist\"a sivua.
-
-\subsection*{Muuta huomioitavaa l\"ahdeluettelossa}
-
-%% Muutos vanhoihin ohjeisiin koskien kielt\"a.
-L\"ahdeluettelossa ty\"on ja julkaisun nimi kirjoitetaan alkuper\"aisess\"a
-muodossaan. Julkaisijan kotipaikka kirjoitetaan alkukielisess\"a
-muodossaan.
-
-Viittamista koskevassa suomalaisessa standardissa
-SFS 5342 \cite{sfs} vaaditaan julkaisuista ilmoitettavaksi my\"os ISBN- tai
-ISSN-numerot, mutta n\"aiss\"a opinn\"ayteohjeissa ei ISBN- ja
-ISSN-numeroita vaadita.
-
-\clearpage
-
 \section{Materials and methods}
+Near duplicate image detection by perceptual hashing is easy to understand, implement and run at scale. The simple hash and dct hash are examples of perceptual hashes. To improve on detection accuracy we attempt to raise the abstraction level from image pixel based hashes, to detecting the scene or object in the image.
 
-\subsection{Evaluating classifiers}
-To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features in a systematic way, we will use receiver operating characteristic \(ROC\) graphs to visualize the performance of each classifier and compare their performance.
+\subsection{Near duplicate images}
+Near duplicate image definitions vary according to the problem at hand. At one extreme is ''pixel perfect'' matches while matching images of the same scene or object is at the other extreme.
 
-In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in figure \ref{figconfusion}.
+Our requirements for a classifier are high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% misses (false negatives) for dct hash and reporting that the simple hash is also missing too many images. We are going to keep the problem the same, but attempt to widen the definition to the same scene or object and in this way to reduce misses while keeping the false positive rate extremely low.
+
+\subsection{Perceptual hashes}
+
+Near similar image detection is done via perceptual hashing due to their simplicity. They are simple to implement and inexpensive to compute. Hashes are not calculated for if image widht or height is less than 32px. Annotating small images is counterproductive.
+
+Let
+
+\begin{equation}\label{hashfunction}
+h = H(I)
+\end{equation}
+
+where $h$ is the resulting hash, $H$ is the hash function and $I$ is the input image. $H$ is
+
+\begin{itemize}
+\item[--] Compression - $H$ maps from arbitrary size $I$ to fixed number of bits $m$
+\item[--] Fast computation - $H(I)$ fast to compute
+\item[--] Ease of implementation - $H(I)$ is easy to implement
+\item[--] Ease of understanding - $H(I)$ is easy to understand
+\end{itemize}
+\cite{Zauner2010}
+
+\subsubsection{Simple hash}
+
+Preparation
+
+In the case of simple hash the input image is $8px x 8px$ and the resulting hash has two parts. The most significant $64bits$ represent the image pixels and the least significatn $64bits$ represent the same hash function result of a horizontal flip of the image.
+
+The simple hash function in eq. \ref{simplehasheq}
+
+\begin{equation} \label{simplehasheq}
+  \begin{split}
+  b_{i} = 1 | I_{msB}(u,v) > px_{avg}\\
+  b_{i} = 0 | I_{msB}(u,v) \leq px_{avg}
+  \end{split}
+\end{equation}
+where $b_{i}$ denotes $ith$ hash bit where $0 \geq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \geq u,v < 8$.
+
+\begin{equation} \label{simplehasheq}
+  \begin{split}
+  b_{i} = 1 | I_{msB}(8-j,v) > px_{avg}\\
+  b_{i} = 0 | I_{msB}(8-j,v) \leq px_{avg}
+  \end{split}
+\end{equation}
+
+
+
+
+\subsubsection{DCT Hash}
+Preparation
+
+Identifier calculation
+
+Matching
+
+\begin{equation}
+X_{k_1,k_2} = \sum_{n_1=0}^{N_1-1} \sum_{n_2=0}^{N_2-1}x_{n_1,n_2}cos\left[\frac{\pi}{N_1}\left(n_1+\frac{1}{2}\right)k_1\right]cos\left[\frac{\pi}{N_2}\left(n_2+\frac{1}{2}\right)k_2\right]
+\end{equation}
+
+
+\subsection{Large scale image retrieval by SIFT features}
+
+
+\subsubsection{Cutoff}
+
+The search by $SIFT$-features will always return the highest scoring image even if the case of a $fp$. A sane $fp_{rate}$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep true misses to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $fp_{rate}$ is minimized.
+
+\subsection{Receiver operating characteristic}
+Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
 
 \begin{figure}[htb]
 \begin{center}
@@ -877,26 +524,34 @@ In our case the image is classified correctly by the classification system or it
 \label{figconfusion}
 \end{figure}
 
+We adopt the notation from ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/ROC}
+\end{center}
+\caption{ROC space example with several discrete classifiers \cite{Fawcett2006}. }
+\label{figrocspace}
+\end{figure}
 
-\subsection{Near duplicate images}
-Definitions can vary depending on the problem at hand from finding exact matches to matching images with the same scene or object.
-
-Our requirements for a classifier are high true positive rate, a high true negative rate, and a low false positive rate. of an image at different scales. Customer is reporting 20\% to 30\% misses (false negatives) for dct hash and reporting that the simple hash is also missing too many images. We are going to keep the problem the same, but attempt to widen the definition to the same scene or object and in this way to reduce misses while keeping the false positive rate extremely low.
-
-\subsection{Perceptual hashing}
-Near similar image detection is done via perceptual hashing due to their simplicity. They are simple to implement and inexpensive to compute. Hashes are not calculated for if image widht or height is less than 32px. Adding metadata to an image that small is counterproductive.
-
-
-\subsubsection{Simple hash}
-
-\subsubsection{DCT Hash}
 
 \begin{equation}
-X_{k_1,k_2} = \sum_{n_1=0}^{N_1-1} \sum_{n_2=0}^{N_2-1}x_{n_1,n_2}cos\left[\frac{\pi}{N_1}\left(n_1+\frac{1}{2}\right)k_1\right]cos\left[\frac{\pi}{N_2}\left(n_2+\frac{1}{2}\right)k_2\right]
+fp_{rate} = \frac{FP}{N}
+\end{equation}
+\begin{equation}
+tp_{rate} = \frac{TP}{P}
+\end{equation}
+\begin{equation}
+precision = \frac{TP}{TP + FP}
 \end{equation}
 
-\subsection{Large scale image retrieval by SIFT features}
+\begin{equation}
+recall = \frac{TP}{P}
+\end{equation}
+
+\begin{equation}
+accuracy = \frac{TP + TN}{P + N}
+\end{equation}
 
 \subsection{Simulation}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
@@ -933,49 +588,94 @@ To begin production implementation solving the near similar image matching probl
   \hline
   Vertical flip & User flips the image vertically. We push near duplicate detection to the limit\\
   \hline
+  Not in database & Does the system classify images correctly as not in database?\\
 \end{tabular}
 \end{center}\end{table}
 
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{True negatives dataset taken from the oxford images in "Recognition of object instances practical".}
+\label{truenegatives}
+\begin{center}
+\begin{tabular}{lp{0.5\linewidth}}
+  Modification & Motivation \\
+  \hline \hline
+  $n$ (true no) images  & Classify images correctly as $N$?\\
+\end{tabular}
+\end{center}\end{table}
 
-Paintings dataset from the "Recognition of object instances practical" http://www.robots.ox.ac.uk/~vgg/practicals/instance-recognition/index.html of a total of 1708 images will be used due to ready scripts for the SIFT case.
+Paintings dataset from the "Recognition of object instances practical" \cite{Vedaldi2012} of a total of 1708 images will be used due to ready scripts for the SIFT case.
 
 A shell script using imagemagick will create manipulated duplicates. 53\% and 83\% scales. In addition a case were the image horizon is fixed by a slight rotation is a usual case so we will use a 10\% rotation. Increased saturation is chosen for color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
 
 To simulate cropped images we will use 10\% and 20\% cropping. Adding a border is also a common operation so that case is simulated by making duplicates with a 10px border.
 
-In order to test for images not in the set we will pick 1708 images from the ThingLink database and run those images against the set. This will look for a false positive rate with images that are not in the dataset at all.
+In order to test for images not in the set we will pick 1708 images from the ThingLink database and run those images against the set. This will look for a $fp_{rate}$ rate with images that are not in the dataset.
 
 \clearpage
 
 \section{Results}
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against all three classifiers, the simple hash, the dct hash and SIFT-classifier. Average parameters exclude horizontal and vertical flip data sets as all classifiers are expected to fail hard on these sets. They are included as a corner case to see how far the SIFT-classifier can be pushed.
 
-T\"ass\"a osassa esitet\"a\"an tulokset ja vastataan tutkielman alussa
-esitettyihin tutkimuskysymyksiin. Tieteellisen kirjoitelman
-arvo mitataan t\"ass\"a osassa esitettyjen tulosten perusteella.
+\subsection{Simple hash}
 
-%% Huomaa seuraavassa kappaleessa lainausmerkkien ulkopuolella piste,
-%% koska piste ei lopeta lainattua tekstinp\"atk\"a\"a.
-%% Jos lainattu tekstinp\"atk\"a loppuu v\"alimerkkiin, tulee v\"alimerkki
-%% lainausmerkkien sis\"alle:
-%% "Et tu, Brute?" sanoi Caesar kuollessaan.
-Tutkimustuloksien merkityst\"a on aina syyt\"a arvioida ja tarkastella
-kriittisesti.  Joskus tarkastelu voi olla t\"ass\"a osassa, mutta se
-voidaan my\"os j\"att\"a\"a viimeiseen osaan, jolloin viimeisen osan nimeksi
-tulee >>Tarkastelu>>. Tutkimustulosten merkityst\"a voi arvioida my\"os
->>Johtop\"a\"at\"okset>>-otsikon alla viimeisess\"a osassa.
+\subsubsection{Optimal hamming distance}
 
-T\"ass\"a osassa on syyt\"a my\"os arvioida tutkimustulosten luotettavuutta.
-Jos tutkimustulosten merkityst\"a arvioidaan >>Tarkastelu>>-osassa,
-voi luotettavuuden arviointi olla my\"os siell\"a.
+\subsection{DCT Hash}
+
+\subsubsection{Optimal hamming distance}
+
+\subsection{Object instance detection by SIFT features}
+
+\subsubsection{Cutoff $C_{s}$}
+Search by $SIFT$-features always returns the highest scoring image even when it should reject the image. Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
+
+\begin{equation}\label{maxtnscore}
+max(score_{tndata}) = 19
+\end{equation}
+
+Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those. From the test in table \ref{truenegatives}. From fig.\ref{figcutoff} accuracy section we can deduce that the highest accuracy for this data can be achieved by setting $C_{s} = max(score_{tn}) = 19$.
+
+\begin{equation} \label{accuracy}
+ACC = \frac{TP +TN}{TP + FP + TN + FN}
+\end{equation}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/SIFTCountROC}
+\end{center}
+\caption{ Effects of cutoff on SIFT performance. }
+\label{figcutoff}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/SIFTROCperCutoff}
+\end{center}
+\caption{ ROC Space per SIFT classifier cutoff. }
+\label{figcutoffrocspace}
+\end{figure}
+
+
+
+\subsection{Classifier comparison}
+All classifiers in ROC space.
+
+The optimum hamming distance for the classifier using simple hash seems to be 4.
+The optimum hamming distance to use with a dct hash classifier seems to be 4.
+
+A table of all the tp and fp rates.
+A table with all the numbers from the ROC section.
+
+Put all classifiers in ROC space for all cases.
+
+roc graph over all cases in small multiples
+
 
 \clearpage
 
 \section{Discussion}
-
-Opinn\"aytteen tekij\"a vastaa siit\"a, ett\"a opinn\"ayte on t\"ass\"a dokumentissa
-ja opinn\"aytteen tekemist\"a k\"asittelevill\"a luennoilla sek\"a
-harjoituksissa annettujen ohjeiden mukainen muotoseikoiltaan,
-rakenteeltaan ja ulkoasultaan.
+Any conclusions from the ROC graphs. What recommendation to make? What to take a look at.
 
 
 
