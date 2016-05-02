@@ -619,16 +619,31 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 
 \subsection{Simple hash}
 
-\subsubsection{Optimal hamming distance}
-
 \subsection{DCT Hash}
+The $ROC$ of a dct hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on dct hash matcher can be seen in fig. \ref{dcttotalaccuracy}
 
-\subsubsection{Optimal hamming distance}
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/dctTotalAccuracy}
+\end{center}
+\caption{ Effect of Hamming distance tolerance on total accuracy of DCT classifier. }
+\label{dcttotalaccuracy}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/dctTotalROC}
+\end{center}
+\caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
+\label{dcttotalaccuracy}
+\end{figure}
+
+\subsubsection{Hamming distance}
 
 \subsection{Object instance detection by SIFT features}
 
 \subsubsection{Cutoff $C_{s}$}
-Search by $SIFT$-features always returns the highest scoring image even when it should reject the image. Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
+Search by $SIFT$-features always returns the highest scoring image, even in case of a $FP$. Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
 
 \begin{equation}\label{maxtnscore}
 max(score_{tndata}) = 19
