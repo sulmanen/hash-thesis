@@ -5,4 +5,4 @@ hash.pdf
 *.toc
 *.bbl
 *.blg
-
+*DS_Store
