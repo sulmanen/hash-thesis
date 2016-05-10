@@ -495,7 +495,6 @@ The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the m
 
 The matching is done by calculating the hash of an incoming image and comparing it to the hashes in the image hashes for that user. Typically the number of hashes in the set doesn not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
 
-
 \subsubsection{DCT Hash}
 Reduce image to $32$ by $32$ px grayscale and extract only the most significant byte of the RGB pixel (reduced image). A $32$ by $32$ DCT eq. \ref{dcteq} is applied to the reduced image. Using only the top $8$ by $8$ of the $32$ by $32$ DCT, the average of the DCT-values is calculated and the top left corner of the DCT values is discarded as it would throw off the average. This is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively.
 
