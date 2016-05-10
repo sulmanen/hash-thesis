@@ -369,10 +369,10 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 %\subsection*{Lyhenteet}
 
 \begin{tabular}{ll}
-  px & A pixel.  \\
-  SIFT & Scale invariant feature transform is an algorithm by David Lowe extracting local features from images. \cite{Lowe1999}\\
-  UA        & ''User Agent is any software that retrieves, renders and facilitates end user interaction with Web content, or whose user interface is implemented using Web technologies.''\\
-URI         & ''Uniform Resource Identifiers (URIs, aka URLs) are short strings that identify resources in the web: documents, images, downloadable files, services, electronic mailboxes, and other resources. They make resources available under a variety of naming schemes and access methods such as HTTP, FTP, and Internet mail addressable in the same simple way. They reduce the tedium of "log in to this server, then issue this magic command ...'' down to a single click.''\\
+px & A pixel.  \\
+SIFT & Scale invariant feature transform. \\
+UA   & facilitates end user interaction with Web content (Browser)\\
+URI  & Uniform Resource Identifiers (URIs, aka URLs)\\
 \end{tabular}
 
 %% Sivulaskurin viilausta opinn\"aytteen vaatimusten mukaan:
@@ -403,15 +403,13 @@ URI         & ''Uniform Resource Identifiers (URIs, aka URLs) are short strings 
 %% Leave first page empty
 \thispagestyle{empty}
 
-Images are a cornerstone of the world wide web. ThingLink allows it's users to annotate images with clickable regions to enrich the image by linking it to relevant information on the world wide web. Responsive web design usually demands different scale images for different screen sizes for performance and quality reasons. In order for ThingLink to annotate once and use the same annotations for multiple versions of the same image, ThingLink employs near duplicate image detection by perceptual hashes. A client is reporting 20 to 30 percent false negatives for their image detection. The end result is no annotations on a different version of the image. There is nothing wrong with the system, so an improved approach to near duplicate image detection is needed.
+Images are a cornerstone of the world wide web. ThingLink allows it's users to annotate images with clickable regions to enrich the image by linking it to relevant information on the world wide web. Responsive web design usually demands different scale images for different screen sizes for performance and quality. To annotate once and use the same annotations for multiple versions of the same image or scene, ThingLink employs near duplicate image detection by perceptual hashing. A customer is reporting 20 to 30 \% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near duplicate image. The near duplicate detection system is working as expected, so an improved approach to near duplicate image detection is needed.
 
-Near similar image detection can mean matching exact pixel to pixel duplicates to maching objects or scenes inside images. Object instance detection by SIFT features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance recognition be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy of image detection?
+Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experice on virtually any screen size.
 
-Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design allows a website to deliver an optimal user experice on virtually any screen size.
+Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds.
 
-Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in seconds.
-
-The introduction of high quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency.
+High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency.
 
 Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
 
@@ -425,13 +423,14 @@ For added value to the customer, reliably matching the incoming image to correct
 
 Another case for using different sizes of the same image on a website is a gallery and detail view. Gallery images are smaller and provide an overview of products. The user may want or need to view a detailed view of an interesting image. The same image is needed in different scales and served from different URI's.
 
+Near similar image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to maching objects or scenes in images. Object instance detection by SIFT features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance detection be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy for detecting near duplicate images?
+
 This paper excludes all other uses of perceptual hashes than near duplicate detection. Cryptograhic hashes are not considered.
 
 \subsection{Research Questions}
 \begin{itemize}
 \item[--] To what degree if any is object instance detection by SIFT-features an improvement over dct-, and simple perceptual hashes for near duplicate image detection?
-\item[--] Can object instance detection by SIFT-features be deployed at large scale?
-\item[--] Is it feasible to impolement object instance detection by SIFT features at large scale?
+\item[--] Can object instance detection by SIFT-features be deployed at large scale at ThingLink?
 \item[--] Does a realtime solution exist to improve on the current async solution?
 \end{itemize}
 
@@ -445,32 +444,29 @@ The simple hash and dct hash are examples of perceptual hashes. To improve on de
 
 Near duplicate image definitions vary according to the problem at hand. At one extreme is ''pixel perfect'' matches while matching images of the same scene or object is at the other extreme.
 
-Our requirements for a classifier are high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% misses (false negatives) for dct hash and reporting that the simple hash is also missing too many images. We are going to keep the problem the same, but attempt to widen the definition to the same scene or object and in this way to reduce misses while keeping the false positive rate extremely low.
+ThingLink requirements for a classifier are high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% false negatives for dct hash and reporting that the simple hash is also missing too many images though we do not have the exat numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
 
 \subsection{Perceptual hashing}
-Near duplicate image detection by perceptual hashing is easy to understand, implement and run at scale.
+Near duplicate image detection by perceptual hashing is easy to understand, implement and run at scale. A perceptual hash $h$
 
 \begin{equation}\label{hashfunction}
 h = H(I)
 \end{equation}
 
-where $h$ is the resulting hash, $H$ is the hash function and $I$ is the input image. $H$ is
+is the result of the hash function $H$ taking the image $I$ as input. $H$ has the followin properties:
 
 \begin{itemize}
 \item[--] Compression - $H$ maps from arbitrary size $I$ to fixed number of bits $m$
 \item[--] Fast computation - $H(I)$ fast to compute
 \item[--] Ease of implementation - $H(I)$ is easy to implement
-\item[--] Ease of understanding - $H(I)$ is easy to understand
+\item[--] Ease of understanding - $H(I)$ is easy to understand. \cite{Zauner2010}
 \end{itemize}
-\cite{Zauner2010}
+
 
 \subsubsection{Simple hash}
 
-Preparation
 
-In the case of simple hash the input image is $8px x 8px$ and the resulting hash has two parts. The most significant $64bits$ represent the image pixels and the least significatn $64bits$ represent the same hash function result of a horizontal flip of the image.
-
-The simple hash function in eq. \ref{simplehasheq}
+The simple hash (eq. \ref{simplehasheq}) nscales the image image to $8px * 8px$ grayscale before calculating the hash. The resulting hash has two parts. The most significant $64$ bits represent the image pixels and the least significatn $64bits$ represent the horizontal flip of the $8px * 8px$ grayscale image.
 
 \begin{equation} \label{simplehasheq}
   \begin{split}
@@ -478,9 +474,12 @@ The simple hash function in eq. \ref{simplehasheq}
   b_{i} = 0 | I_{msB}(u,v) \leq px_{avg}
   \end{split}
 \end{equation}
-where $b_{i}$ denotes $ith$ hash bit where $0 \geq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \geq u,v < 8$.
 
-\begin{equation} \label{simplehasheq}
+where $b_{i}$ denotes $ith$ hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \leq u,v < 8$.
+
+The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the mirror image of $I$.
+
+\begin{equation} \label{simplehasheqmirror}
   \begin{split}
   b_{i} = 1 | I_{msB}(8-j,v) > px_{avg}\\
   b_{i} = 0 | I_{msB}(8-j,v) \leq px_{avg}
@@ -589,7 +588,7 @@ recall = \frac{TP}{P}
 accuracy = \frac{TP + TN}{P + N}
 \end{equation}
 
-\subsection{Compare methods}
+\subsection{Simulated classifier comparison}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
 
 To compare object instance recognition by SIFT features to perceptual hashing we will run simulations. We are faced with a binary classification problem. Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, dct hash and large scale image retrieval with SIFT features.
@@ -753,7 +752,7 @@ ACC = \frac{TP +TN}{TP + FP + TN + FN}
 
 
 
-\subsection{Classifier comparison}
+\subsection{Simulated classifier comparison}
 All classifiers in ROC space.
 
 The optimum hamming distance for the classifier using simple hash seems to be 4.
