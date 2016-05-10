@@ -443,13 +443,12 @@ This paper excludes all other uses of perceptual hashes than near duplicate dete
 \section{Materials and methods}
 The simple hash and dct hash are examples of perceptual hashes. To improve on detection accuracy we attempt to raise the abstraction level from image pixel based hashes, to detecting the scene or object in the image.
 
-\subsection{Near duplicate images}
 Near duplicate image definitions vary according to the problem at hand. At one extreme is ''pixel perfect'' matches while matching images of the same scene or object is at the other extreme.
 
 Our requirements for a classifier are high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% misses (false negatives) for dct hash and reporting that the simple hash is also missing too many images. We are going to keep the problem the same, but attempt to widen the definition to the same scene or object and in this way to reduce misses while keeping the false positive rate extremely low.
 
-\subsection{Perceptual hashes}
-Near duplicate image detection by perceptual hashing is easy to understand, implement and run at scale. Images smaller than 32px wide or high are ignored by the simple hash and dct hash algorithms. Annotating small images is counterproductive.
+\subsection{Perceptual hashing}
+Near duplicate image detection by perceptual hashing is easy to understand, implement and run at scale.
 
 \begin{equation}\label{hashfunction}
 h = H(I)
@@ -501,6 +500,7 @@ X_{k_1,k_2} = \sum_{n_1=0}^{N_1-1} \sum_{n_2=0}^{N_2-1}x_{n_1,n_2}cos\left[\frac
 \end{equation}
 
 
+
 \subsection{Large scale image retrieval by SIFT features}
 
 \subsubsection{SIFT descriptors}
@@ -548,8 +548,6 @@ componentwise l-squared normalization
 
 global l-squared normalization
 
-\subsubsection{Cutoff}
-The search by $SIFT$-features will always return the highest scoring image even if the case of a $fp$. A sane $fp_{rate}$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep true misses to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $fp_{rate}$ is minimized.
 
 \subsection{Receiver operating characteristic}
 Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
@@ -648,6 +646,9 @@ Since we do not know how hamming distance affects classifier performance, we wil
 
 \subsection{System for near duplicate detection by local features}
 
+\subsection{Edge cases}
+Images smaller than 32px wide or high are ignored by the simple hash and dct hash algorithms. Annotating small images is counterproductive so they are ignored.
+
 \clearpage
 
 \section{Results}
@@ -720,7 +721,9 @@ The $ROC$ of a dct hash based matcher depends on the chosen hamming distance tol
 \subsection{Object instance detection by SIFT features}
 
 \subsubsection{Cutoff $C_{s}$}
-Search by $SIFT$-features always returns the highest scoring image, even in case of a $FP$. Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
+The search by $SIFT$-features will always return the highest scoring image even if the case of a $fp$. A sane $fp_{rate}$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep true misses to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $fp_{rate}$ is minimized.
+
+Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
 
 \begin{equation}\label{maxtnscore}
 max(score_{tndata}) = 19
