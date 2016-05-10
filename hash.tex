@@ -497,12 +497,19 @@ The matching is done by calculating the hash of an incoming image and comparing 
 
 
 \subsubsection{DCT Hash}
-\cite{Coskun2004}
+Reduce image to $32$ by $32$ px grayscale and extract only the most significant byte of the RGB pixel (reduced image). A $32$ by $32$ DCT eq. \ref{dcteq} is applied to the reduced image. Using only the top $8$ by $8$ of the $32$ by $32$ DCT, the average of the DCT-values is calculated and the top left corner of the DCT values is discarded as it would throw off the average. This is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively.
 
+\begin{equation}\label{dcteq}
+T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)u\pi}{2N}\right]cos\left[\frac{(2y + 1)v\pi}{2N}\right]
+\end{equation}
 
+where
 
-\begin{equation}
-X_{k_1,k_2} = \sum_{n_1=0}^{N_1-1} \sum_{n_2=0}^{N_2-1}x_{n_1,n_2}cos\left[\frac{\pi}{N_1}\left(n_1+\frac{1}{2}\right)k_1\right]cos\left[\frac{\pi}{N_2}\left(n_2+\frac{1}{2}\right)k_2\right]
+\begin{equation}\label{dctcoefeq}
+  \alpha(u) = \alpha(v)= \begin{cases}
+    \sqrt{\frac{1}{N}} \quad \textrm{for} \quad u=0\\
+    \sqrt{\frac{2}{N}} \quad \textrm{for} \quad u=1,2,\ldots,N-1
+    \end{cases}
 \end{equation}
 
 
