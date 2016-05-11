@@ -426,7 +426,7 @@ Another case for using different sizes of the same image on a website is a galle
 
 Near similar image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to maching objects or scenes in images. Object instance detection by SIFT features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance detection be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy for detecting near duplicate images?
 
-This paper excludes all other uses of perceptual hashes than near duplicate detection. Cryptograhic hashes are not considered.
+This paper only considers near duplicate detection and excludes all other uses of perceptual hashing. Cryptograhic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking.
 
 \subsection{Research Questions}
 \begin{itemize}
@@ -453,7 +453,7 @@ In order to compare the perceptual hash classifiers to the SIFT-classifier, we s
 Perceptual hashing is a good choice for implementing near due to simplicity of implementation and the ability to scale the solution to millions of images. Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded SIFT-descriptors have reportedly done searches amongst $10M$ images in $50ms$ \cite{Jegou2010}.
 
 \subsection{Perceptual hashing}
-Near duplicate image detection by perceptual hashing is easy to understand, implement and run at scale. A perceptual hash $h$
+A perceptual hash $h$
 
 \begin{equation}\label{hashfunction}
 h = H(I)
@@ -467,6 +467,28 @@ is the result of the hash function $H$ taking the image $I$ as input. $H$ has th
 \item[--] Ease of implementation - $H(I)$ is easy to implement
 \item[--] Ease of understanding - $H(I)$ is easy to understand. \cite{Zauner2010}
 \end{itemize}
+
+According to \cite{mihccak2001new} $H(I)$ where $P$ is probability and $L$ is the length of the hash, should
+\begin{enumerate}
+\item Distribute hashes equally:\\
+  \begin{equation}\label{phashdistribute}
+  P[H(X)=\alpha]\approx\frac{1}{2^L},\quad\forall\alpha\in \{0/1\}^L
+  \end{equation}
+\item Visually different images X and Y are pairwise independent: $\forall\alpha,\beta\in\{0/1\}^L$\\
+  \begin{equation}\label{phashindependent}
+    P[H(X)=\alpha|H(Y)=\beta]\approx P[H(X)=\alpha]
+  \end{equation}
+\item Approximately equal for visually similar images X, $\hat{X}$\\
+  \begin{equation}\label{phashsame}
+    P[H(X) = H(\hat{X})] \approx 1
+  \end{equation}
+
+\item Be different for visually different images X, Y\\
+  \begin{equation}\label{phashdif}
+    P[H(X)=H(Y)]\approx 0
+  \end{equation}
+\end{enumerate}
+
 
 \subsubsection{Block mean based simple hash}
 The simple hash belongs in the statistic-based hashing schemes \cite[p. 20]{Hadmi2012} and is a simplified version of the block mean value based hash in \cite{Yang2006}.
