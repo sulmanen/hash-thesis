@@ -453,7 +453,10 @@ In order to compare the perceptual hash classifiers to the SIFT-classifier, we s
 Perceptual hashing is a good choice for implementing near due to simplicity of implementation and the ability to scale the solution to millions of images. Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded SIFT-descriptors have reportedly done searches amongst $10M$ images in $50ms$ \cite{Jegou2010}.
 
 \subsection{Perceptual hashing}
-A perceptual hash $h$
+A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2006}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval. In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations.
+
+
+More precisely perceptual hash $h$
 
 \begin{equation}\label{hashfunction}
 h = H(I)
@@ -468,7 +471,7 @@ is the result of the hash function $H$ taking the image $I$ as input. $H$ has th
 \item[--] Ease of understanding - $H(I)$ is easy to understand. \cite{Zauner2010}
 \end{itemize}
 
-According to \cite{mihccak2001new} $H(I)$ where $P$ is probability and $L$ is the length of the hash, should
+In addition, according to \cite{mihccak2001new} $H(I)$ where $P$ is probability and $L$ is the length of the hash, the hash function $H$ eq. \ref{hashfunction} should
 \begin{enumerate}
 \item Distribute hashes equally:\\
   \begin{equation}\label{phashdistribute}
