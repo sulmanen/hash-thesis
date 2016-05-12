@@ -579,7 +579,35 @@ where the coefficients are
     \end{cases}
 \end{equation}
 
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{DCT hash calculation steps give a good idea into its simplicity. Compare to table \ref{simplesteps} for simple hash complexity.}
+\label{dctsteps}
+\begin{center}
+\begin{tabular}{lp{0.5\linewidth}}
+  Calculation step\\
+  \hline\hline
+  Scale image to 32 by 32 px grayscale\\
+  \hline
+  $32^2\quad*\quad \&$ \\
+  \hline
+  $32^4 \quad*\quad \cos, 3+, 10*, 2/$ \\
+  \hline
+  $32^2\quad*\quad 2*, /$\\
+  \hline
+  $64 \quad*\quad +$\\
+  \hline
+  $1 \quad*\quad -$\\
+  \hline
+  $1 \quad*\quad /, *, -$\\
+  \hline
+  $64 \quad*\quad |, <<$\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
 
+
+This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
 
 \subsection{Large scale image retrieval by SIFT features}
 
