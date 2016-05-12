@@ -455,21 +455,32 @@ Perceptual hashing is a good choice for implementing near due to simplicity of i
 \subsection{Perceptual hashing}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2006}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval. In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations.
 
-
 More precisely perceptual hash $h$
 
 \begin{equation}\label{hashfunction}
 h = H(I)
 \end{equation}
 
-is the result of the hash function $H$ taking the image $I$ as input. $H$ has the followin properties:
+is the result of the hash function $H$ taking the image $I$ as input. $H$ has the properties in table \ref{hashcriteria}.
 
-\begin{itemize}
-\item[--] Compression - $H$ maps from arbitrary size $I$ to fixed number of bits $m$
-\item[--] Fast computation - $H(I)$ fast to compute
-\item[--] Ease of implementation - $H(I)$ is easy to implement
-\item[--] Ease of understanding - $H(I)$ is easy to understand. \cite{Zauner2010}
-\end{itemize}
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Perceptual hash requirements. \cite{Zauner2010}}
+\label{hashcriteria}
+\begin{center}
+\begin{tabular}{lp{0.5\linewidth}}
+  \hline \hline
+  Compression & $H$ maps from arbitrary size $I$ to fixed number of bits $m$\\
+  \hline
+  Fast computation & $H(I)$ fast to compute \\
+  \hline
+  Ease of implementation & $H(I)$ is easy to implement\\
+  \hline
+  Ease of understanding & $H(I)$ is easy to understand\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
+
 
 In addition, according to \cite{mihccak2001new} $H(I)$ where $P$ is probability and $L$ is the length of the hash, the hash function $H$ eq. \ref{hashfunction} should
 \begin{enumerate}
@@ -494,9 +505,9 @@ In addition, according to \cite{mihccak2001new} $H(I)$ where $P$ is probability 
 
 
 \subsubsection{Block mean based simple hash}
-The simple hash belongs in the statistic-based hashing schemes \cite[p. 20]{Hadmi2012} and is a simplified version of the block mean value based hash in \cite{Yang2006}.
+According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}.
 
-The simple hash (eq. \ref{simplehasheq}) scales the image image to $8px * 8px$ grayscale before calculating the hash. The average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to.
+The simple hash (eq. \ref{simplehasheq}) scales the image image to $8px * 8px$ grayscale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to.
 
 More specifically the resulting hash has two parts. The most significant $64$ bits represent the image pixels and the least significatn $64bits$ represent the horizontal flip of the $8px * 8px$ grayscale image.
 
@@ -509,7 +520,7 @@ More specifically the resulting hash has two parts. The most significant $64$ bi
 
 where $b_{i}$ denotes $ith$ hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \leq u,v < 8$.
 
-The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the mirror image of $I$.
+The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the mirror image of $I$ where $I_{msB}$ denotes the most significant byte of the image RGB pixel value.
 
 \begin{equation} \label{simplehasheqmirror}
   \begin{split}
@@ -518,7 +529,39 @@ The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the m
   \end{split}
 \end{equation}
 
-The matching is done by calculating the hash of an incoming image and comparing it to the hashes in the image hashes for that user. Typically the number of hashes in the set doesn not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
+A simple hash is simple and fast to calculate so it meets all the criteria in table \ref{hashcriteria}. The calculation steps are in table \ref{simplesteps}. A single simple hash takes on average 70ms on Matlab 2015a on a Mid 2014 13 inch Macbook Pro.
+
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Simple calculation hash steps.}
+\label{simplesteps}
+\begin{center}
+\begin{tabular}{lp{0.5\linewidth}}
+  Calculation step\\
+  \hline \hline
+  Scale image to 8 by 8 px grayscale\\
+  \hline
+  64 adds\\
+  \hline
+  64 logical ands\\
+  \hline
+  one multiplication\\
+  \hline
+  one division\\
+  \hline
+  128 logical ands\\
+  \hline
+  128 logical ors\\
+  \hline
+  128 bitshifts\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
+
+As shown in table \ref{simplesteps}, the simple hash is very simple to calculate. It is also fast as mentioned earlier. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2006}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
+
+Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set doesn not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
+
 
 \subsubsection{DCT Hash}
 Reduce image to $32$ by $32$ px grayscale and extract only the most significant byte of the RGB pixel (reduced image). A $32$ by $32$ DCT eq. \ref{dcteq} is applied to the reduced image. Using only the top $8$ by $8$ of the $32$ by $32$ DCT, the average of the DCT-values is calculated and the top left corner of the DCT values is discarded as it would throw off the average. This is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively.
@@ -527,7 +570,7 @@ Reduce image to $32$ by $32$ px grayscale and extract only the most significant 
 T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)u\pi}{2N}\right]cos\left[\frac{(2y + 1)v\pi}{2N}\right]
 \end{equation}
 
-where
+where the coefficients are
 
 \begin{equation}\label{dctcoefeq}
   \alpha(u) = \alpha(v)= \begin{cases}
