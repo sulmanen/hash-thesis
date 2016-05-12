@@ -564,6 +564,8 @@ Content based image retrieval is done by calculating the hash of an incoming ima
 
 
 \subsubsection{DCT Hash}
+The DCT Hash operates in the frequency domain. Especially the low frequency DCT compoenents of the image are difficult to change without changing the contents of the image \cite{Fridrich1999}. The process uses a small scaled version of the image, a dct transform and thresholding to produce an $L=64$ length hash.
+
 Reduce image to $32$ by $32$ px grayscale and extract only the most significant byte of the RGB pixel (reduced image). A $32$ by $32$ DCT eq. \ref{dcteq} is applied to the reduced image. Using only the top $8$ by $8$ of the $32$ by $32$ DCT, the average of the DCT-values is calculated and the top left corner of the DCT values is discarded as it would throw off the average. This is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively.
 
 \begin{equation}\label{dcteq}
