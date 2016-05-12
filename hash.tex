@@ -504,7 +504,31 @@ In addition, according to \cite{mihccak2001new} $H(I)$ where $P$ is probability 
 \end{enumerate}
 
 \subsubsection{Hamming distance}
-Hamming distance is the number of characters two strings differ\cite{Hamming1950}. In binary strings it is the number of bits by which two binary numbers differ.
+According to \cite{Hamming1950} given alphabet $A$ the hamming distance $\Delta$ between strings $x \in A$ and $y \in A$ is
+
+\begin{equation}\label{hammingeq}
+\Delta(x,y):=\sum_{x_i\neq y_i}1\quad,\quad i=1,\ldots,n
+\end{equation}
+
+In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The hamming distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by eq. \ref{hammingeq}. If the hamming distance is within some threshold, the image can be said to be in the database.
+
+\begin{table}[htb]
+\caption{Hamming distance examples}
+\label{hammingexamples}
+\begin{center}
+  \begin{tabular}{ccr}
+&&Hamming distance\\
+    \hline \hline
+    101 & 111 & 1\\
+    \hline
+    123 & 321 & 2\\
+    \hline
+    foo & bar & 3\\
+    \hline
+\end{tabular}
+\end{center}\end{table}
+
+
 
 \subsubsection{Block mean based simple hash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}.
@@ -615,7 +639,7 @@ This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2
 \subsection{Large scale image retrieval by SIFT features}
 
 \subsubsection{SIFT descriptors}
-SIFT ''transforms image data into scale-invariant coordinates relative to local features \ref{Lowe2004}''.SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint and scene lighting. A large number of descriptors can be computed on ''off the shelf''-hardware in near realtime. \cite{Lowe2004}
+SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''.SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint and scene lighting. A large number of descriptors can be computed on ''off the shelf''-hardware in near realtime. \cite{Lowe2004}
 
 SIFT descriptors may be calculated by
 
@@ -625,7 +649,7 @@ SIFT descriptors may be calculated by
 \item Orientation assignment
 \item Keypoint descriptor
 \end{enumerate}
-\ref{Lowe2004}
+\cite{Lowe2004}
 
 A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}.
 
