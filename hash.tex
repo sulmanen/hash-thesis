@@ -432,7 +432,7 @@ This paper only considers near duplicate detection and excludes all other uses o
 \begin{itemize}
 \item[--] To what degree if any is object instance detection by SIFT-features an improvement over dct-, and simple perceptual hashes for near duplicate image detection?
 \item[--] Can object instance detection by SIFT-features be deployed at large scale at ThingLink?
-\item[--] Does a realtime solution exist to improve on the current async solution?
+\item[--] Does a soft realtime solution exist to improve on the current async solution?
 \end{itemize}
 
 \clearpage
@@ -590,7 +590,7 @@ Content based image retrieval is done by calculating the hash of an incoming ima
 
 
 \subsubsection{DCT Hash}
-The DCT Hash operates in the frequency domain. Especially the low frequency DCT compoenents of the image are difficult to change without changing the contents of the image \cite{Fridrich1999}. The process uses a small scaled version of the image, a dct transform and thresholding to produce an $L=64$ length hash.
+The process uses a scaled version of the image, a dct transform and thresholding to produce an $L=64$ length hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
 Reduce image to $32$ by $32$ px grayscale and extract only the most significant byte of the RGB pixel (reduced image). A $32$ by $32$ DCT eq. \ref{dcteq} is applied to the reduced image. Using only the top $8$ by $8$ of the $32$ by $32$ DCT, the average of the DCT-values is calculated and the top left corner of the DCT values is discarded as it would throw off the average. This is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively.
 
@@ -606,6 +606,8 @@ where the coefficients are
     \sqrt{\frac{2}{N}} \quad \textrm{for} \quad u=1,2,\ldots,N-1
     \end{cases}
 \end{equation}
+
+The image is scaled down to 32 by 32 px grayscale and the most significant byte of the RGB pixel values is extracted. The two dimentional $N=32$ type-II DCT (eq. \ref{dcteq}) is calculated. Only the top left 8 by 8 corner of the DCT result is used. From these 64 values the average is calculated and the origin value is dropped from the average. This is due to it usually being very large and throwing off the average and thresholding. The 8 by 8 values are thresholded by eq. \ref{simplehasheq} into a 64 bit hash. These steps are outlined in table \ref{dctsteps}.
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
