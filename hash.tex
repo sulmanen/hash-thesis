@@ -743,7 +743,21 @@ Google gives additional weight to words in the search that appear close together
 A loose definition would be to require neighboring matches in query image to lie close together also in the retrieved frame.
 
 \subsubsection{Fisher kernel}
-The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model.
+Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
+
+When $p$ is a pdf with parameters $\lambda$ variable length vector samples $X$
+
+\begin{equation}\label{fisherone}
+\nabla_{\lambda}\,log\,p(X\mid\lambda)
+\end{equation}
+
+which describes the direction in which parameters should be adjusted to best fit the model. This gradient vector can then be classified using a discriminative classifier. The Fisher information matrix $F_{\lambda}$
+
+
+Perronin introduction
+Characterize a signal with a gradient vector derived from a generative probability model and to subsequently feed this representation to a discriminative classifier. Perronin applies images as signals and the generative model to be a visual vocabulary.
+
+
 
 \subsubsection{VLAD descriptor representation}
 There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. Vector of locally aggregated descriptors \(VLAD\) was developed in order to represent local descriptors so image searches could be done in a large scale with accuracy, efficiency and low memory consumption. Experiments show that VLAD significantly outperforms BOF for the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with the effectivenss of indexing. \cite{Jegou2010}
