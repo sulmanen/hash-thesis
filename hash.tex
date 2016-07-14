@@ -92,6 +92,7 @@
 %% Matematiikan fontteja, symboleja ja muotoiluja lisää, näitä tarvitaan usein
 \usepackage{amsfonts,amssymb,amsbsy,amsmath}
 \usepackage{epigraph}
+\usepackage{commath}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -367,10 +368,16 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 \subsection*{Abbreviations}
 
 \begin{tabular}{ll}
-DCT & Discrete cosine transform\\
+  AKAZE & Accelerated KAZE features\\
+  AOS & Additive Operator Splitting nonlinear diffusion filtering\\
+  DCT & Discrete cosine transform\\
+  FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
+  KAZE & feature detection by local features\\
+  M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
 px & A pixel  \\
 RGB & red, green, blue color space\\
-SIFT & Scale invariant feature transform. \\
+SIFT & Scale invariant feature transform \\
+SURF & Sped Up Robust Features \\
 UA   & User Agent facilitates end user interaction with Web content (Browser)\\
 URI  & Uniform Resource Identifier aka URL\\
 \end{tabular}
@@ -653,18 +660,20 @@ The image is scaled down to 32 by 32 px grayscale and the most significant byte 
 This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
 
 \subsection{Large scale image retrieval by local features}
-To improve on perceptual hashing, we increase abstraction level to mathing an object or scene. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length.
+To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
-Local features have been used since Moravec invented a corner detector in the early 1980's. The Moravec corner detector was improved by Harris and Stephens largely by using a Gaussian window function in place of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the scale invariant feature transform (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF) not in the scope of this paper. We will cover KAZE, and AKAZE features more recent techniques using local features.
+Local features have been in use since Moravec invented the corner detector in the early 1980's. The Moravec corner detector was improved by Harris and Stephens by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the scale invariant feature transform (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF) not in the scope of this paper. We will cover KAZE, and AKAZE features more recent techniques using local features.
 
-Scale-invariant features identify the image by a large set of local descriptors that are chose so they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
+Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
-We are expecting to improve over perceptual hashes which withstand scaling extremely well but are weak in transformations which alter the relationships betwen pixel values such as rotaition. Feature matching in a large feature database is enabled by highly distinctive features.
+We are expecting to improve over perceptual hashes which withstand scaling extremely well. However they are weak under image transformations that alter the relationships betwen pixel values such as rotaition and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
 
-In order to match amongst a large number of images, the descriptors can be quantized using visual words to speed up the search. In order to further optimize search, the descriptor format is optimized. \cite{Jegou2010}
+In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
-\subsubsection{SIFT descriptors}
-SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint and scene lighting. A large number of descriptors can be computed on ''off the shelf''-hardware in near realtime. \cite{Lowe2004}
+\subsubsection{Scale Invariant Feature Transform}
+Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near realtime. \cite{Lowe2004}
+
+A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}.
 
 SIFT descriptors are extracted by
 
@@ -675,8 +684,6 @@ SIFT descriptors are extracted by
 \item Keypoint descriptor
 \end{enumerate}
 \cite{Lowe2004}
-
-A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}.
 
 \begin{figure}[htb]
 \begin{center}
@@ -705,6 +712,30 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \hat{\boldsymbol{x}} = - \frac{\partial^2D^-1}{\partial \boldsymbol{x}^2}\frac{\partial D}{\partial \boldsymbol{x}}
 \end{equation}\cite{Lowe2004}
 
+\subsubsection{KAZE}
+KAZE improves SIFT by using nonlinear diffusion filtering in place of a difference of Gaussians. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima who invented scale space analysis.
+
+KAZE features are computed in three steps.
+\begin{itemize}
+\item Build nonlinear scalespace using Additive Operator Splitting
+\item Detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scalespace
+\item Compute M-SURF descriptor orientation and scale from first order image derivatives
+\end{itemize}
+
+The nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter\cite{Alcantarilla2013}.
+
+\begin{equation}
+  \label{nonlineareq}
+  \frac{\partial L}{\partial t} = \nabla \cdot c(x,y,t)\cdot\nabla L
+\end{equation}
+\cite{Alcantarilla2012}
+
+\begin{equation}
+c(x,y,t)=g(\abs{\nabla L_\sigma(x,y,t)})
+\end{equation}
+
+\subsubsection{AKAZE}
+
 \subsubsection{Nearest neighbor search}
 
 \subsubsection{Bag of visual words}
@@ -718,7 +749,7 @@ The two types of regions complement each other in image detection. The SA region
 
 The original BoW approach uses SIFT-descriptors introduced by Lowe. The second type of region is implemented in affine covariant regions.
 
-BoW relies on quantizing descriptors into visual words for efficient retrieval. Descriptors are quantized by associating them with the nearest cluster of descriptors. The vector quantization is implemented by k-means clustering. \cite{Sivic2003} The original BoW implementation worked on video, but we will apply the simple image case only. In the original implementation, the Mahalanobis distance is used as the k-means distance function.
+BoW relies on quantizing descriptors into visual words for efficient retrieval. Descriptors are quantized by associating them with the nearest cluster of descriptors. The vector quantization is implemented by k-means clustering. \cite{Sivic2003} The original BoW implementation worked on video, but we will apply the simple image case only. In the original implementation, the Mahalanobis distance is used as the distance function in k-means clustering.
 
 In text retrieval a document is stored in a vector of word frequencies. A weight is usually applied to the vector. Term frequency-inverse document frequency, $tf-idf$ (eq. \ref{tfidf}) is a weighting scheme common in text retrieval. In $k$ words, each document is represented by a $k$-vector $V_{d}=(t_{1},...,t_{k})^{T}$
 
@@ -742,16 +773,16 @@ Google gives additional weight to words in the search that appear close together
 
 A loose definition would be to require neighboring matches in query image to lie close together also in the retrieved frame.
 
-\subsubsection{Fisher kernel}
+\subsubsection{The Fisher kernel}
 Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
 
-When $p$ is a pdf with parameters $\lambda$ variable length vector samples $X$
+$p$ is a probability density function with parameters $\lambda$ a variable length vector samples $X$
 
 \begin{equation}\label{fisherone}
 \nabla_{\lambda}\,log\,p(X\mid\lambda)
 \end{equation}
 
-which describes the direction in which parameters should be adjusted to best fit the model. This gradient vector can then be classified using a discriminative classifier. The Fisher information matrix $F_{\lambda}$
+describes the direction in which parameters should be adjusted to best fit the model. This gradient vector can then be classified using a discriminative classifier. The Fisher information matrix $F_{\lambda}$ is used for normalization required by the discriminative classifiers. \cite{Perronnin2007}
 
 
 Perronin introduction
@@ -795,7 +826,7 @@ Receiver operating characteristic \(ROC\) graphs are good in visualizing and com
 \label{figconfusion}
 \end{figure}
 
-We adopt the notation from ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
+We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
 
 \begin{figure}[htb]
 \begin{center}
@@ -950,7 +981,7 @@ The $ROC$ of a dct hash based matcher depends on the chosen hamming distance tol
 \includegraphics[height=8cm]{figures/dctTotalROC}
 \end{center}
 \caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
-\label{dcttotalaccuracy}
+\label{dctaverageaccuracy}
 \end{figure}
 
 
