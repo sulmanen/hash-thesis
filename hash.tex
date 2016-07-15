@@ -715,12 +715,12 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \subsubsection{Speeded Up Robust Features}
 
 \subsubsection{KAZE}
-KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. KAZE features by
+KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. For KAZE features one must
 
 \begin{enumerate}
-\item Build nonlinear scale space using Additive Operator Splitting
-\item Detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scale space
-\item Compute M-SURF descriptor orientation and scale from first order image derivatives
+\item build nonlinear scale space using Additive Operator Splitting
+\item detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scale space
+\item compute M-SURF descriptor orientation and scale from first order image derivatives.
 \end{enumerate}
 
 The nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter. When $t$ is large, the filtered image is simpler. \cite{Alcantarilla2013}
