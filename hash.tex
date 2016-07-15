@@ -713,7 +713,7 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \end{equation}\cite{Lowe2004}
 
 \subsubsection{KAZE}
-KAZE improves SIFT by using nonlinear diffusion filtering in place of a difference of Gaussians when building the scale space for detecting relevant features. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima who invented scale space analysis.
+KAZE improves SIFT by using nonlinear diffusion filtering in place of a difference of Gaussians when building the scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima who invented scale space analysis.
 
 KAZE features are computed in three steps.
 \begin{enumerate}
