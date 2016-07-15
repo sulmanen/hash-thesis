@@ -712,13 +712,14 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \hat{\boldsymbol{x}} = - \frac{\partial^2D^-1}{\partial \boldsymbol{x}^2}\frac{\partial D}{\partial \boldsymbol{x}}
 \end{equation}\cite{Lowe2004}
 
-\subsubsection{KAZE}
-KAZE improves SIFT by using nonlinear diffusion filtering in place of a difference of Gaussians when building the scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima who invented scale space analysis.
+\subsubsection{Speeded Up Robust Features}
 
-KAZE features are computed in three steps.
+\subsubsection{KAZE}
+KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. KAZE features by
+
 \begin{enumerate}
-\item Build nonlinear scalespace using Additive Operator Splitting
-\item Detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scalespace
+\item Build nonlinear scale space using Additive Operator Splitting
+\item Detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scale space
 \item Compute M-SURF descriptor orientation and scale from first order image derivatives
 \end{enumerate}
 
@@ -746,7 +747,7 @@ g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
 \end{equation}
 
 
-\subsubsection{AKAZE}
+\subsubsection{Accelerated KAZE}
 
 \subsubsection{Nearest neighbor search}
 
