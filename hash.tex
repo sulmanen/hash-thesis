@@ -713,16 +713,16 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \end{equation}\cite{Lowe2004}
 
 \subsubsection{KAZE}
-KAZE improves SIFT by using nonlinear diffusion filtering in place of a difference of Gaussians. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima who invented scale space analysis.
+KAZE improves SIFT by using nonlinear diffusion filtering in place of a difference of Gaussians when building the scale space for detecting relevant features. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima who invented scale space analysis.
 
 KAZE features are computed in three steps.
-\begin{itemize}
+\begin{enumerate}
 \item Build nonlinear scalespace using Additive Operator Splitting
 \item Detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scalespace
 \item Compute M-SURF descriptor orientation and scale from first order image derivatives
-\end{itemize}
+\end{enumerate}
 
-The nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter\cite{Alcantarilla2013}.
+The nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter. When $t$ is large, the filtered image is simpler. \cite{Alcantarilla2013}
 
 \begin{equation}
   \label{nonlineareq}
@@ -730,9 +730,21 @@ The nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the lumina
 \end{equation}
 \cite{Alcantarilla2012}
 
+The conductivity function eq. \ref{conductivityfunceq} has the image gradient magnitude controlling the diffusion
+
 \begin{equation}
+  \label{conductivityfunceq}
 c(x,y,t)=g(\abs{\nabla L_\sigma(x,y,t)})
 \end{equation}
+
+Perona and Malik covered several conductivity functions in \cite{Perona1990} and we will focus on $g_2$ in eq. \ref{gtwoeq} which creates the best performing classifiers according to data in \cite{Alcantarilla}. $\lambda$ is a contrast factor and controls the level of diffusion where $\nabla L_{\sigma}$ is the gradient of a Gaussian smoothed source image.
+
+
+\begin{equation}
+  \label{gtwoeq}
+g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
+\end{equation}
+
 
 \subsubsection{AKAZE}
 
@@ -980,7 +992,7 @@ The $ROC$ of a dct hash based matcher depends on the chosen hamming distance tol
 \begin{center}
 \includegraphics[height=8cm]{figures/dctTotalROC}
 \end{center}
-\caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
+\caption{ ROC spamace per hamming distance tolerance based on averaging results on all data. }
 \label{dctaverageaccuracy}
 \end{figure}
 
