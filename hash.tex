@@ -738,13 +738,14 @@ The conductivity function eq. \ref{conductivityfunceq} has the image gradient ma
 c(x,y,t)=g(\abs{\nabla L_\sigma(x,y,t)})
 \end{equation}
 
-Perona and Malik covered several conductivity functions in \cite{Perona1990} and we will focus on $g_2$ in eq. \ref{gtwoeq} which creates the best performing classifiers according to data in \cite{Alcantarilla}. $\lambda$ is a contrast factor and controls the level of diffusion where $\nabla L_{\sigma}$ is the gradient of a Gaussian smoothed source image.
-
+Perona and Malik covered several conductivity functions in \cite{Perona1990} and we will focus on $g_2$ (eq. \ref{gtwoeq}) which creates the best overall classifiers according to data in \cite{Alcantarilla}. $\lambda$ is a contrast factor and controls the level of diffusion where $\nabla L_{\sigma}$ is the gradient of a Gaussian smoothed source image.
 
 \begin{equation}
   \label{gtwoeq}
 g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
 \end{equation}
+
+$\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased . \cite{Weickert1998}
 
 
 \subsubsection{Accelerated KAZE}
