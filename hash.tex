@@ -749,6 +749,15 @@ $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L
 
 
 \subsubsection{Accelerated KAZE}
+The main drawback of KAZE features is that building the nonlinear scale space is computationally intense due to solving a large system of linear equations as there is no analytical solution to Additive Operator Splitting.
+
+AKAZE features uses FED schemes for feature detection and description that reduce computation time of nonlinear scale space. AKAZE uses an LDB descriptor over M-SURF descriptor used in KAZE.
+
+Fast Explicit Diffusion (FED) is able to build the nonlinear scale space much faster than AOS and thus AKAZE improves in speed over KAZE-, SURF-, and SIFT features.
+
+''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
+
+FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy to implement.
 
 \subsubsection{Nearest neighbor search}
 
