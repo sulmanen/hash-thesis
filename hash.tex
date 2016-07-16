@@ -723,9 +723,9 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \end{equation}\cite{Lowe2004}
 
 \subsubsection{Speeded Up Robust Features}
-Detector and descriptor that are faster to compute than state-of-the-art methods.
+Speeded Up Robust Features (SURF) was designed so the detector and descriptor are faster to compute than state-of-the-art methods at the time.
 
-SURF introduces the 'Fast-Hessian' detector that relies on integral images to reduce the computation time.
+SURF introduces the 'Fast-Hessian' detector that relies on integral images and box filter approximations of Gaussian filters with box filters to reduce the computation time.
 
 \begin{equation}
   \label{integralimage}
