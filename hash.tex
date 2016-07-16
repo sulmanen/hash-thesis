@@ -727,14 +727,34 @@ Detector and descriptor that are faster to compute than state-of-the-art methods
 
 SURF introduces the 'Fast-Hessian' detector that relies on integral images to reduce the computation time.
 
-The descriptor is a distribution of Haar-wavelet reponses within the interest point neighbourhood. The calculation of the descriptor also uses integral images for speed.
-
 \begin{equation}
   \label{integralimage}
 ii(x,y) = \sum\limits_{x'\le,y'\le y} i(x', y')
 \end{equation}
 
-An integral image (eq. \ref{integralimage}) at point $x, y$ sums up the pixels above and below. \cite{Viola2001}
+An integral image $ii(x,y)$ (eq. \ref{integralimage}) at point $x, y$ sums up the pixels above and below where $i(x,y)$ is the source image. \cite{Viola2001}
+
+\begin{equation}
+  \label{integralimagerowsum}
+s(x,y) = s(x, y - 1) + i(x,y)
+\end{equation}
+
+\begin{equation}
+  \label{integralimagepartial}
+  ii(x,y) = ii(x-1,y) + s(x,y)
+\end{equation}
+
+The integral image is very quick to calculate in one pass using the cumulative row sum $s(x,y)$ (eq. \ref{integralimagerowsum} and recurrence of integral images (eq. \ref{integralimagepartial}) where $s(x, -1) = 0$ and $ii(-1,y)=0$. A rectangular sum follows from four array references in figure \ref{integralimagefig}.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/integralimage}
+\end{center}
+\caption{Rectangular sums from integral images. Point 1 is the sum of pixels in A. Point 4 is $A + B + C + D$.\cite{Viola2001}}
+\label{figconfusion}
+\end{figure}
+
+The calculation of the descriptor also uses integral images for speed. The descriptor is a distribution of Haar-wavelet reponses within the interest point neighbourhood.
 
 
 \subsubsection{KAZE}
@@ -768,7 +788,9 @@ Perona and Malik covered several conductivity functions in \cite{Perona1990} and
 g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
 \end{equation}
 
-$\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased . \cite{Weickert1998}
+$\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased. \cite{Weickert1998}
+
+
 
 
 \subsubsection{Accelerated KAZE}
