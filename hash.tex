@@ -369,11 +369,13 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 
 \begin{tabular}{ll}
   AKAZE & Accelerated KAZE features\\
+  BRISK & Binary Robust Invariant Scalable Keypoints\\
   AOS & Additive Operator Splitting nonlinear diffusion filtering\\
   DCT & Discrete cosine transform\\
   FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
   KAZE & feature detection by local features\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
+  ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
 px & A pixel  \\
 RGB & red, green, blue color space\\
 SIFT & Scale invariant feature transform \\
@@ -662,7 +664,15 @@ This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2
 \subsection{Large scale image retrieval by local features}
 To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
-Local features have been in use since Moravec invented the corner detector in the early 1980's. The Moravec corner detector was improved by Harris and Stephens by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the scale invariant feature transform (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF) not in the scope of this paper. We will cover KAZE, and AKAZE features more recent techniques using local features.
+Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
+
+\begin{enumerate}
+\item Find keypoints of interest in image
+\item Encode keypoints in a visual descriptor
+\item Match incoming descriptor to all known descriptors
+\end{enumerate}
+
+Local features have been in use since Moravec invented the corner detector in the early 1980's. The Moravec corner detector was improved by Harris and Stephens by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the scale invariant feature transform (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF), and BRISK and ORB which are not covered here. We will cover KAZE, and AKAZE features more recent techniques using local features.
 
 Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
@@ -749,15 +759,13 @@ $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L
 
 
 \subsubsection{Accelerated KAZE}
-The main drawback of KAZE features is that building the nonlinear scale space is computationally intense due to solving a large system of linear equations as there is no analytical solution to Additive Operator Splitting.
-
-AKAZE features uses FED schemes for feature detection and description that reduce computation time of nonlinear scale space. AKAZE uses an LDB descriptor over M-SURF descriptor used in KAZE.
+The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering using Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations. A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) schemes reducing computation time of the nonlinear scale space. In addition, AKAZE uses an LDB descriptor over M-SURF descriptor used in KAZE.
 
 Fast Explicit Diffusion (FED) is able to build the nonlinear scale space much faster than AOS and thus AKAZE improves in speed over KAZE-, SURF-, and SIFT features.
 
 ''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
 
-FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy to implement.
+FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement.
 
 \subsubsection{Nearest neighbor search}
 
