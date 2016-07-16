@@ -723,6 +723,19 @@ $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them
 \end{equation}\cite{Lowe2004}
 
 \subsubsection{Speeded Up Robust Features}
+Detector and descriptor that are faster to compute than state-of-the-art methods.
+
+SURF introduces the 'Fast-Hessian' detector that relies on integral images to reduce the computation time.
+
+The descriptor is a distribution of Haar-wavelet reponses within the interest point neighbourhood. The calculation of the descriptor also uses integral images for speed.
+
+\begin{equation}
+  \label{integralimage}
+ii(x,y) = \sum\limits_{x'\le,y'\le y} i(x', y')
+\end{equation}
+
+An integral image (eq. \ref{integralimage}) at point $x, y$ sums up the pixels above and below. \cite{Viola2001}
+
 
 \subsubsection{KAZE}
 KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. For KAZE features one must
