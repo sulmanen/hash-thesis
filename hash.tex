@@ -466,7 +466,7 @@ Perceptual hashing is a good choice for implementing near duplicate image detect
 Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches amongst $10M$ images in $50ms$ \cite{Jegou2010}.
 
 \subsection{Perceptual hashing}
-A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2006}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
+A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
 In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations.
 
@@ -599,7 +599,7 @@ A simple hash is simple and fast to calculate so it meets all the criteria in ta
 \end{tabular}
 \end{center}\end{table}
 
-As shown in table \ref{simplesteps}, the simple hash is very simple to calculate. It is also fast as mentioned earlier. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2006}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
+As shown in table \ref{simplesteps}, the simple hash is very simple to calculate. It is also fast as mentioned earlier. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
 
 Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set doesn not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
 
@@ -792,7 +792,7 @@ The conductivity function eq. \ref{conductivityfunceq} has the image gradient ma
 c(x,y,t)=g(\abs{\nabla L_\sigma(x,y,t)})
 \end{equation}
 
-Perona and Malik covered several conductivity functions in \cite{Perona1990} and we will focus on $g_2$ (eq. \ref{gtwoeq}) which creates the best overall classifiers according to data in \cite{Alcantarilla}. $\lambda$ is a contrast factor and controls the level of diffusion where $\nabla L_{\sigma}$ is the gradient of a Gaussian smoothed source image.
+Perona and Malik covered several conductivity functions in \cite{Perona1990} and we will focus on $g_2$ (eq. \ref{gtwoeq}) which creates the best overall classifiers according to data in \cite{Alcantarilla2012}. $\lambda$ is a contrast factor and controls the level of diffusion where $\nabla L_{\sigma}$ is the gradient of a Gaussian smoothed source image.
 
 \begin{equation}
   \label{gtwoeq}
@@ -811,8 +811,20 @@ Fast Explicit Diffusion (FED) is able to build the nonlinear scale space faster 
 
 ''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
 
-FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement.
+FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement. Factorization of the box filter
 
+\begin{equation}
+  \label{boxfilterfactor}
+\tau_j = \frac{\tau_max}{2cos^2\left( \pi \frac{2j+1}{4n+2}\right)}
+\end{equation}
+
+where $n$ is the number of explicit diffusion steps, $\tau_{max}$ is the maximal step size that does not violate the stability condition of the explicit scheme.
+
+The FED cycle stopping time $\theta_n$
+
+\begin{equation}
+\theta_n = \sum{j=0}{n-1}\tau_j=\tau_{max}\frac{n^2+n}{3}
+\end{equation}
 
 
 \subsubsection{Nearest neighbor search}
@@ -999,7 +1011,7 @@ Images smaller than 32px wide or high are ignored by the simple hash and dct has
 \clearpage
 
 \section{Results}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against all three classifiers, the simple hash, the dct hash and SIFT-classifier. SIFT-classifier outperforms the perceptual hashes in all categories except the simple hash for 53\% scale fig. \ref{tptotal}. The only miss for the SIFT-matcher is a duplicate image in the paintings dataset. SIFT outperforms the perceptual hashes for FP for all test sets in fig. \ref{fpTotal}.
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against all three classifiers, the simple hash, the dct hash and SIFT-classifier. SIFT-classifier outperforms the perceptual hashes in all categories except the simple hash for 53\% scale fig. \ref{tptotal}. The only miss for the SIFT-matcher is a duplicate image in the paintings dataset. SIFT outperforms the perceptual hashes for FP for all test sets in fig. \ref{fptotal}.
 
 For the $TN$ test set the SIFT-classifier performed the worst returning all false positives instead of misses. This was due to not setting a cutoff score. If returned matches from a search score less than this cutoff score, the image should be classified as a $TN$. The max score from the $TN$-set was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, we simulate setting the cutoff score from 1 to 19 and run the simulations for each cutoff score.
 
@@ -1027,7 +1039,7 @@ For the $TN$ test set the SIFT-classifier performed the worst returning all fals
 \begin{center}
 \includegraphics[height=8cm]{figures/tnBar}
 \end{center}
-\caption{ $TN$ for near duplicate modifications in table \ref{tnimages} }
+\caption{ $TN$ for near duplicate modifications in table \ref{truenegatives} }
 \label{tntotal}
 \end{figure}
 
@@ -1035,7 +1047,7 @@ For the $TN$ test set the SIFT-classifier performed the worst returning all fals
 \begin{center}
 \includegraphics[height=8cm]{figures/cutoff}
 \end{center}
-\caption{ $TN$ image set max scores returned for images not in database \ref{tnimages} }
+\caption{ $TN$ image set max scores returned for images not in database \ref{truenegatives} }
 \label{sifttnscores}
 \end{figure}
 
