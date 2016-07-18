@@ -823,8 +823,23 @@ where $n$ is the number of explicit diffusion steps, $\tau_{max}$ is the maximal
 The FED cycle stopping time $\theta_n$
 
 \begin{equation}
-\theta_n = \sum{j=0}{n-1}\tau_j=\tau_{max}\frac{n^2+n}{3}
+\theta_n = \sum_{j=0}^{n-1}\tau_j=\tau_{max}\frac{n^2+n}{3}
 \end{equation}
+
+Equation \ref{nonlineareq} can be discretized as
+
+\begin{equation}
+  \label{discretenonlineareq}
+\frac{L^{i+1}-Lî}{\tau}=A(L^i)L^i
+\end{equation}
+
+where $A(L_i)$ is the image conductivity matrix and $\tau$ is the constant step size on condition $\tau < \tau_{max}$ to meet stability conditions.
+
+\begin{equation}
+  \label{fednextevolution}
+  L^{i+1}=(I + \tau A(L^i))L^i
+\end{equation}
+
 
 
 \subsubsection{Nearest neighbor search}
