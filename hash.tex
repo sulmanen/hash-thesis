@@ -803,13 +803,9 @@ $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L
 
 
 \subsubsection{Accelerated KAZE}
-The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations, which is computationally intensive.
+The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations, which is computationally intensive. A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
 
-A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
-
-Fast Explicit Diffusion (FED) is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features.
-
-''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
+Fast Explicit Diffusion (FED) is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. ''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
 
 FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement. Factorization of the box filter
 
@@ -842,6 +838,19 @@ where
 
 $A(L_i)$ is the image conductivity matrix and $\tau$ is the constant step size on condition $\tau < \tau_{max}$ to meet stability conditions.
 
+FED cycles while building the scale space are run from short to long. A scale space consists of $O$ octaves (index $o$) and $S$ (index $s$) sub-levels. Scale $\sigma$ is
+
+\begin{equation}
+  \label{scalespace}
+  \sigma_i(o,s) = 2^{o+s/S},o \in[0\ldots O-1], s \in [0\ldots S-1], i \in [0 \ldots M]
+  \end{equation}
+
+where $M$ is the total number of filtered images.
+
+\begin{equation}
+  \label{scaletotime}
+t_i = \frac{1}{2}\sigma^2_i,i={0\ldots M}
+\end{equation}
 
 
 \subsubsection{Nearest neighbor search}
