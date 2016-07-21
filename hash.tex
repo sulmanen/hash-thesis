@@ -93,6 +93,7 @@
 \usepackage{amsfonts,amssymb,amsbsy,amsmath}
 \usepackage{epigraph}
 \usepackage{commath}
+\usepackage{listings}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -662,7 +663,7 @@ The image is scaled down to 32 by 32 px grayscale and the most significant byte 
 
 This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
 
-\subsection{Large scale image retrieval by local features}
+\subsection{Local features}
 To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
 Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
@@ -678,8 +679,6 @@ Local features have been in use since Moravec invented the corner detector in th
 Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
 We are expecting to improve over perceptual hashes which withstand scaling extremely well. However they are weak under image transformations that alter the relationships betwen pixel values such as rotaition and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
-
-In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
 \subsubsection{Scale Invariant Feature Transform}
 Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near realtime. \cite{Lowe2004}
@@ -879,8 +878,20 @@ A-KAZE uses a Modified Local Difference Binary descriptor. The LDB descriptor is
 
 LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses grids of finer steps dividing the descriptor into subgrids. M-LDB rotates these LDB grids to the interest point orientation. Due to this rotation, integral images may not be used to calculate averages of pixels inside the subgrids, the subgrids are subsampled in steps which are a function of the scale $\sigma$ M-LDB re-uses the derivatives from the detection step in the descriptor.
 
+\lstinputlisting{fedtest.m}
 
-\subsubsection{Nearest neighbor search}
+
+
+
+
+
+
+
+
+\subsection{Large scale image retrieval}
+In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
+
+\subsubsection{Approximate Nearest Neighbor}
 
 \subsubsection{Bag of visual words}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
@@ -953,7 +964,6 @@ From vectors to codes
 Experiments
 
 
-\subsubsection{Approximate Nearest Neighbor}
 
 \clearpage
 
