@@ -893,6 +893,9 @@ Matching a new image descriptor to a set of known image descriptors can be as si
 NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \end{equation}
 
+which Donald Knuth also named as the \emph{post-office problem} vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?''. Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{0}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
+
+
 
 \subsubsection{Bag of visual words}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
