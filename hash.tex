@@ -881,17 +881,18 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 \lstinputlisting{fed.m}
 
 
-
-
-
-
-
-
-
 \subsection{Large scale image retrieval}
+
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
-\subsubsection{Approximate Nearest Neighbor}
+\subsubsection{Nearest Neighbor search}
+Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search
+
+\begin{equation}
+\label{nneq}
+NN(x) = arg \min_{y\in Y}\norm{x-y}^2
+\end{equation}
+
 
 \subsubsection{Bag of visual words}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
