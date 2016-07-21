@@ -886,14 +886,14 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
 \subsubsection{Nearest Neighbor search}
-Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search
+Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search (eq. \ref{nneq}) which Donald Knuth also named as the \emph{post-office problem} vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?''. Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
+
 
 \begin{equation}
 \label{nneq}
 NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \end{equation}
 
-which Donald Knuth also named as the \emph{post-office problem} vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?''. Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
 
 
 
