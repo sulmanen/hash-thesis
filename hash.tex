@@ -531,11 +531,11 @@ According to \cite{Hamming1950} given alphabet $A$ the hamming distance $\Delta$
 In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The hamming distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by eq. \ref{hammingeq}. If the hamming distance is within some threshold, the image can be said to be in the database.
 
 \begin{table}[htb]
-\caption{Hamming distance examples}
+\caption{Hamming distance for strings.}
 \label{hammingexamples}
 \begin{center}
   \begin{tabular}{ccr}
-&&Hamming distance\\
+&&$\Delta(x,y)$\\
     \hline \hline
     101 & 111 & 1\\
     \hline
@@ -827,7 +827,7 @@ Equation \ref{nonlineareq} can be discretized as
 
 \begin{equation}
   \label{discretenonlineareq}
-\frac{L^{i+1}-Lî}{\tau}=A(L^i)L^i
+\frac{L^{i+1}-L^i}{\tau}=A(L^i)L^i
 \end{equation}
 
 where
@@ -896,14 +896,14 @@ Matching a new image descriptor to a set of known image descriptors can be as si
 NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \end{equation}
 
-To improve scalability, one can relax the conditions on nearest neighbor. Approximate Nearest Neighbor assigns the nearest neighbor according to probability.
+To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=4cm]{figures/nntradeoffs}
 \end{center}
 \caption{Tradeoffs for improving nearest neighbor search}
-\label{figconfusion}
+\label{nntradeoffs}
 \end{figure}
 
 
