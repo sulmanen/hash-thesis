@@ -890,7 +890,9 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
 \subsubsection{Nearest Neighbor search}
-Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search (eq. \ref{nneq}) which Donald Knuth also named as the \emph{post-office problem} vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?''. Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
+Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search (eq. \ref{nneq}) which Donald Knuth also named as the \emph{post-office problem} in vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?''.
+
+Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
 
 
 \begin{equation}
@@ -907,6 +909,8 @@ NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \end{figure}
 
 To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Aprroximate nearest neighbor mehtods are able to solve the ''curse of dimensionality'' in many cases.
+
+Approximate nearest neighbor is defined as in a normed space $l_p^d$ preprocess set of points $P$ to efficiently return a point $p\in P$ for any given query point $q$, such that $d(q,p) \lq (1 + \epsilon)d(q,P)$. $d(q, P)$ is the distance between the closest point in $P$ to $q$. \cite{Gionis1999}
 
 \subsubsection{ANN: Locality Sensitive Hashing}
 The original SIFT descriptor had 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales poorly. Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'', where $d > 3$ for NN search \cite{Gionis1999}. LSH scales well for $d > 50$ \cite{Gionis1999}.
