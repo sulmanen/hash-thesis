@@ -377,6 +377,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   DoG & Difference of Gaussians\\
   FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
   KAZE & feature detection by local features\\
+  K-NN & K-Nearest Neighbor\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
   NN & Nearest Neighbor\\
   ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
@@ -904,10 +905,13 @@ NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \label{nntradeoffs}
 \end{figure}
 
-To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Aprroximate nearest neighbor mehtods attempt
+To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Aprroximate nearest neighbor mehtods are able to solve the ''curse of dimensionality'' in many cases.
 
 \subsubsection{ANN: Locality Sensitive Hashing}
-The original SIFT descriptor had 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales poorly. Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'' for NN search \cite{Gionis1999}.
+The original SIFT descriptor had 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales poorly. Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'', where $d > 3$ for NN search \cite{Gionis1999}. LSH scales well for $d > 50$ \cite{Gionis1999}.
+
+The idea behind LSH is to hash data points in a way so the probability of collision is high for points close to one another compared to points that are far apart \cite{Gionis1999}.
+
 
 
 
