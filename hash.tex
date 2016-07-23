@@ -916,7 +916,7 @@ Approximate nearest neighbor is defined as in a normed space $l_p^d$ preprocess 
 \subsubsection{ANN: Locality Sensitive Hashing}
 The original SIFT descriptor has 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales poorly. Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'', where $d > 3$ for NN search \cite{Gionis1999}. LSH scales well for $d > 50$ \cite{Gionis1999}.
 
-The goal of LSH is to hash data points in a way so the probability of collision is high for points close to one another compared to points that are far apart. By allowing for small error in the results and adding to storage requirements, the query time is significantly improved. \cite{Gionis1999}
+The goal of LSH is to hash data points in a way so the probability of collision is high for points close to one another compared to points that are far apart. By allowing for small error (eq. \ref{lsherroreq}) in the results and adding to storage requirements, the query time is significantly improved, giving up quality for speed as seen in fig. \ref{nntradeoffs} . \cite{Gionis1999}
 
 LSH has $m$ hash functions, hash tables and keys per vector. Each point in the set $P$ has $m$ hash keys as an index. At query time $m$ keys are computed on the query vector and all the vectors associated with the new keys are retrieved forming a shorter list where it's feasible to use exact distance for matching.
 
