@@ -920,6 +920,8 @@ The goal of LSH is to hash data points in a way so the probability of collision 
 
 LSH has $m$ hash functions, hash tables and keys per vector. Each point in the set $P$ has $m$ hash keys as an index. At query time $m$ keys are computed on the query vector and all the vectors associated with the new keys are retrieved forming a shorter list where it's feasible to use exact distance for matching.
 
+\lstinputlisting{lshinit.m}
+
 For the Approximate 1-NNS problem the effective error $E$ is
 
 \begin{equation}
