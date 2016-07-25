@@ -980,6 +980,15 @@ A loose definition would be to require neighboring matches in query image to lie
 
 \subsubsection{Product Quantization}
 
+\begin{equation}
+  \label{quantizereq}
+d(x,y)^2 \approx d(x,q(y))^2
+\end{equation}
+
+where $x$ is the query vector, $y$ is the database vector and quantizer function is $q(y)$. The error on estimated distance is bound by the quantization error, $e_d \leq e_q$.  \cite{Jegou2014}
+
+
+
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=4cm]{figures/pq}
