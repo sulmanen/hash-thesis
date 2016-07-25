@@ -1016,11 +1016,34 @@ $d(u_j(x),c_{j,i}) : j = 1\ldots m,i=1\ldots k^*$ are computed prior to the quer
 \begin{center}
 \includegraphics[height=8cm]{figures/sdcadc}
 \end{center}
-\caption{The increased distance distortion in the symmetric case (SDC) vs. the asymmetric case (ADC) introduced by the extra quantization $q(x)$. \cite{Jegou2014}}
+\caption{The increased distance distortion in the symmetric case (SDC) vs. the asymmetric case (ADC) introduced by the extra quantization $q(x)$. \cite{Jegou2008}}
 \label{nosdc}
 \end{figure}
 
-ANN search with ADC is fast and reduces memory usage with some sacrifice in quality. The search is exhaustive and scales global image description well. If local descriptors are considered, exhaustive search is not feasible due to multiple queries and billions of descriptors \cite{Jegou2008}. In order to make search with local descriptors, the inverted file system from \cite{Sivic2003} is used forming an \emph{inverted file system with asymmetric distance computation} (IVFADC).
+ANN search with ADC is fast and reduces memory usage with some sacrifice in quality. The search is exhaustive and scales global image description well. If local descriptors are considered, exhaustive search is not feasible due to multiple queries and billions of descriptors \cite{Jegou2008}. In order to make search with local descriptors, the inverted file system from \cite{Sivic2003} is used forming an \emph{inverted file system with asymmetric distance computation} (IVFADC) (fig. \ref{ivfadcfig}).
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/ivfadc}
+\end{center}
+\caption{Block diagram of inverted file with asymmetric distance computation (IVFADC) system. \cite{Jegou2008}}
+\label{ivfadcfig}
+\end{figure}
+
+The inverted file allows to rapidly access a short list of images close to the query \cite{Jegou2008}. In addition to the image index, an encoding of the difference between the query vector and the coarse centroid (table).
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Inverted list $\mathcal{L}_i$ entry with identifier and encoded residual $q_P(r(y))$ \cite{Jegou2008}}
+\label{ivfadc}
+\begin{center}
+\begin{tabular}{ll}
+  field & length (bits)\\
+  \hline
+  identifier&8-32\\
+  code & $m[\log_2k^*]$\\
+\end{tabular}
+\end{center}\end{table}
+
 
 \subsubsection{The Fisher kernel}
 Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
