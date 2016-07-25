@@ -1053,6 +1053,9 @@ To add vector $y$ to index $\mathcal{Y}$
 \item add new entry (table \ref{ivfadcentry}) to inverted list $\mathcal{L}_i$ in accordance to $q_c(y)$.
 \end{enumerate}
 
+When querying $k-ANN(x)$ the inverted list $L_i$ that corresponds to the coarse quantizer result is scanned. It is usual that $x$'s nearest neighbor is not quantized to the same centroid with $x$ but some centroid nearby. $w$ nearest lists $\mathcal{L}_i$ are used instead. \cite{Jegou2008}
+
+
 To query k-ANN of $x$
 \begin{enumerate}
 \item do $q_c(x)$ to find $w$ nearest lists in $\mathcal{L}_i$ and from subset of $\mathcal{Y}$
@@ -1061,6 +1064,8 @@ To query k-ANN of $x$
   \item select K nearest neighbors of $x$ from subset of $\mathcal{Y}$.
 \end{enumerate}
 \cite{Jegou2008}
+
+If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to be visited where $k'$ is the number of centroids in $q_c$ and $w$ is the number of NN for $q_c(x)$ retrievied \cite{Jegou2008}.
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
