@@ -378,6 +378,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   DoG & Difference of Gaussians\\
   $\epsilon -NN$ & $\epsilon$ - Nearest Neighbor, like ANN\\
   FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
+  IVFADC & inverted file system with asymmetric distance computation\\
   KAZE & feature detection by local features\\
   K-NN & K-Nearest Neighbor\\
   LSH & Locality Sensitive Hashing\\
@@ -1019,7 +1020,7 @@ $d(u_j(x),c_{j,i}) : j = 1\ldots m,i=1\ldots k^*$ are computed prior to the quer
 \label{nosdc}
 \end{figure}
 
-ANN search with ADC is fast and reduces memory usage with some sacrifice in quality. The search is exhaustive and scales global image description well. If local descriptors are considered, exhaustive search is not feasible due to multiple queries and billions of descriptors \cite{Jegou2008}.
+ANN search with ADC is fast and reduces memory usage with some sacrifice in quality. The search is exhaustive and scales global image description well. If local descriptors are considered, exhaustive search is not feasible due to multiple queries and billions of descriptors \cite{Jegou2008}. In order to make search with local descriptors, the inverted file system from \cite{Sivic2003} is used forming an \emph{inverted file system with asymmetric distance computation} (IVFADC).
 
 \subsubsection{The Fisher kernel}
 Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
