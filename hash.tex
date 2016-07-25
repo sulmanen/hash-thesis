@@ -1032,7 +1032,18 @@ ANN search with ADC is fast and reduces memory usage with some sacrifice in qual
 
 The inverted file allows to rapidly access a short list of images close to the query \cite{Jegou2008}. An inverted file entry has and image index and an encoding of the difference between the query vector and the coarse centroid (table \ref{ivfadcentry}).
 
-To set up the inverted file, the coarse quantizer $q_c$ which assigns queries to $\mathcal{L}_i$ is learned using k-means clustering. $1000 \leq k' \leq 1000000$ for SIFT descriptors \cite{Jegou2008}.
+To set up the inverted file, the coarse quantizer $q_c$ which assigns queries to $\mathcal{L}_i$ is learned using k-means clustering. $1000 \leq k' \leq 1000000$ for SIFT descriptors \cite{Jegou2008}. A product quantizer $q_p$ like in \cite{Sivic2003} is used to encode a residual vector $r(y)$ between the coarse quantized centroid $q_c(y)$ and the vector $y$ (eq. \ref{ivfadcres}). ANN distance $\ddot{d}$ in this scenario where product subquantizers $q_{p_j}$ (eq. \ref{ivfadcestimate}). The distances between $u_j(x-q_c(y))$
+and product quantizer $q_{p_j}$ centroids $c_{i,j}$ are computed in advanced and stored in lookup tables. \cite{Jegou2008}
+
+\begin{equation}
+  \label{ivfadcres}
+r(y) = y - q_c(y)
+\end{equation}
+
+\begin{equation}
+  \label{ivfadcestimate}
+  \ddot{d}(x,y)^2 = \sum_jd\left(u_j(x-q_c(y)), q_{p_j}(u_j(y-q_c(y)))\right)^2
+\end{equation}
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
