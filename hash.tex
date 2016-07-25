@@ -1015,10 +1015,11 @@ $d(u_j(x),c_{j,i}) : j = 1\ldots m,i=1\ldots k^*$ are computed prior to the quer
 \begin{center}
 \includegraphics[height=8cm]{figures/sdcadc}
 \end{center}
-\caption{The increased distance distortion in the symmetric case (SDC) vs. the asymmetric case (ADC) introduced by the extra quantization of $q(x)$. \cite{Jegou2014}}
+\caption{The increased distance distortion in the symmetric case (SDC) vs. the asymmetric case (ADC) introduced by the extra quantization $q(x)$. \cite{Jegou2014}}
 \label{nosdc}
 \end{figure}
 
+ANN search with ADC is fast and reduces memory usage with some sacrifice in quality. The search is exhaustive and scales global image description well. If local descriptors are considered, exhaustive search is not feasible due to multiple queries and billions of descriptors \cite{Jegou2008}.
 
 \subsubsection{The Fisher kernel}
 Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
