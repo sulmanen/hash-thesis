@@ -993,7 +993,7 @@ The quantizer should be fast enough and precise. The database vector $y$ is spli
 
 In order to query amongst
 
-In \emph{asymmetric distance computation} (ADC) in eq. \ref{adceq}, the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case called \emph{symmetric distance computation} (SDC) not covered here. Distance $d(x,y)$ approximation $\tilde{d}(x,y)$
+In \emph{asymmetric distance computation} (ADC) in eq. \ref{adceq}, the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case (fig. \ref{nosdc}) called \emph{symmetric distance computation} (SDC) not covered here. Distance $d(x,y)$ approximation $\tilde{d}(x,y)$
 
 \begin{equation}
   \label{adceq}
@@ -1009,6 +1009,14 @@ $d(u_j(x),c_{j,i}) : j = 1\ldots m,i=1\ldots k^*$ are computed prior to the quer
 \end{center}
 \caption{Simple product quantizer \cite{Jegou2014}}
 \label{pqfig}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=4cm]{figures/sdcadc}
+\end{center}
+\caption{The increased distance distortion in the symmetric case (SDC) vs. the asymmetric case (ADC) introduced by the extra quantization of $q(x)$. \cite{Jegou2014}}
+\label{nosdc}
 \end{figure}
 
 
