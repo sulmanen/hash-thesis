@@ -1030,11 +1030,14 @@ ANN search with ADC is fast and reduces memory usage with some sacrifice in qual
 \label{ivfadcfig}
 \end{figure}
 
-The inverted file allows to rapidly access a short list of images close to the query \cite{Jegou2008}. In addition to the image index, an encoding of the difference between the query vector and the coarse centroid (table).
+The inverted file allows to rapidly access a short list of images close to the query \cite{Jegou2008}. An inverted file entry has and image index and an encoding of the difference between the query vector and the coarse centroid (table \ref{ivfadcentry}).
+
+To set up the inverted file, the coarse quantizer $q_c$ which assigns queries to $\mathcal{L}_i$ is learned using k-means clustering. $1000 \leq k' \leq 1000000$ for SIFT descriptors \cite{Jegou2008}.
+
 \def\arraystretch{1.5}
 \begin{table}[htb]
 \caption{Inverted list $\mathcal{L}_i$ entry with identifier and encoded residual $q_P(r(y))$ \cite{Jegou2008}}
-\label{ivfadc}
+\label{ivfadcentry}
 \begin{center}
 \begin{tabular}{lc}
   field & length (bits)\\
