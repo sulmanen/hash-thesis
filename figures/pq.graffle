@@ -149,7 +149,7 @@
 			<array>
 				<string>{272.55172413793105, 71}</string>
 				<string>{271, 86}</string>
-				<string>{279.07768171870606, 110.55615242486635}</string>
+				<string>{280.7716903891714, 110.58683388243135}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -315,7 +315,7 @@ optimization}</string>
 			<integer>32</integer>
 			<key>Points</key>
 			<array>
-				<string>{318.29257845292346, 113.0589375934203}</string>
+				<string>{321.69727744531059, 113.03752661989445}</string>
 				<string>{363, 99}</string>
 				<string>{409.99527319223921, 113.07044107552073}</string>
 			</array>
@@ -353,7 +353,7 @@ optimization}</string>
 			<array>
 				<string>{160.07962647139419, 112.8300711226903}</string>
 				<string>{202, 97}</string>
-				<string>{249.93790649852116, 112.88126963754688}</string>
+				<string>{250.67565712747685, 113.1292118292231}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -401,7 +401,7 @@ optimization}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{222, 111}, {123, 26}}</string>
+			<string>{{222, 111}, {129, 28}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -418,7 +418,8 @@ optimization}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 quantisation}</string>
+\f0\fs24 \cf0 quantisation 
+\i q(x)}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -495,7 +496,7 @@ optimization}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2016-07-25 06:45:08 +0000</string>
+	<string>2016-07-25 07:33:14 +0000</string>
 	<key>Modifier</key>
 	<string>Samuli Ulmanen</string>
 	<key>NotesVisible</key>
@@ -576,7 +577,7 @@ optimization}</string>
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{335, -0}, {795, 777}}</string>
+		<string>{{335, 0}, {795, 777}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
