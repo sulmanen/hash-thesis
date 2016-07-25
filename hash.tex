@@ -993,12 +993,14 @@ The quantizer should be fast enough and precise. The database vector $y$ is spli
 
 In order to query amongst
 
-In asymmetric distance computation (ADC), the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case called \emph{symmetric distance computation} (SDC) not covered here.
+In \emph{asymmetric distance computation} (ADC) in eq. \ref{adceq}, the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case called \emph{symmetric distance computation} (SDC) not covered here. Distance $d(x,y)$ approximation $\tilde{d}(x,y)$
 
 \begin{equation}
   \label{adceq}
   \tilde{d}(x,y)=d(x, q(y))=\sqrt{\sum_jd(u_j(x),q_j(u_j(y)))^2}
 \end{equation}
+
+$d(u_j(x),c_{j,i}) : j = 1\ldots m,i=1\ldots k^*$ are computed prior to the query. Since the square root is monotonically increasing it can be left uncalculated as the ranking of database vectors remains the same regardless of the square root\cite{Jegou2011}
 
 
 \begin{figure}[htb]
