@@ -369,6 +369,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 \subsection*{Abbreviations}
 
 \begin{tabular}{ll}
+  ADC & Asymmetric Distance Computation\\
   AKAZE & Accelerated KAZE features\\
   ANN & Approximate Nearest Neighbor\\
   BRISK & Binary Robust Invariant Scalable Keypoints\\
@@ -385,6 +386,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
 px & A pixel  \\
 RGB & red, green, blue color space\\
+SDC & Symmetric Distance Computation\\
 SIFT & Scale invariant feature transform \\
 SURF & Sped Up Robust Features \\
 UA   & User Agent facilitates end user interaction with Web content (Browser)\\
@@ -987,11 +989,16 @@ d(x,y)^2 \approx d(x,q(y))^2
 
 where $x$ is the query vector, $y$ is the database vector and quantizer function is $q(y)$. The error on estimated distance is bound by the quantization error, $e_d \leq e_q$.  \cite{Jegou2014}
 
-The quantizer should be fast enough and precise. $y$ is split $y \rightarrow [y_1 \ldots y_m]$ which are each quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimentinal vector can be split into four subvectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
+The quantizer should be fast enough and precise. The database vector $y$ is split $y \rightarrow [y_1 \ldots y_m]$ each of which is quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimentinal vector can be split into four subvectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
 
 In order to query amongst
 
+In asymmetric distance computation (ADC), the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case called \emph{symmetric distance computation} (SDC) not covered here.
 
+\begin{equation}
+  \label{adceq}
+  \tilde{d}(x,y)=d(x, q(y))=\sqrt{\sum_jd(u_j(x),q_j(u_j(y)))^2}
+\end{equation}
 
 
 \begin{figure}[htb]
