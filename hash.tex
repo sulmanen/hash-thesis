@@ -1045,12 +1045,12 @@ r(y) = y - q_c(y)
   \ddot{d}(x,y)^2 = \sum_jd\left(u_j(x-q_c(y)), q_{p_j}(u_j(y-q_c(y)))\right)^2
 \end{equation}
 
-To index vector $y$
+To add vector $y$ to index $\mathcal{Y}$
 \begin{enumerate}
 \item calculate $q_c(y)$
 \item compute the residual $r(y)$ (eq. \ref{ivfadcres})
 \item look up $q_p(r(y))$ by finding $u_j(y)$ per $q_j(u_j(y))$ for all product quantizers ($j = 1 \ldots m$)
-\item add new entry (table \ref{ivfadcentry}) to inverted list $\mathcal{L}_i$ in accordance to $q_c(y)$
+\item add new entry (table \ref{ivfadcentry}) to inverted list $\mathcal{L}_i$ in accordance to $q_c(y)$.
 \end{enumerate}
 
 To query k-ANN of $x$
@@ -1058,8 +1058,9 @@ To query k-ANN of $x$
 \item do $q_c(x)$ to find $w$ nearest lists in $\mathcal{L}_i$ and from subset of $\mathcal{Y}$
 \item $\forall j$ do $d(u_j(r(x)), c_{i,j})^2$, the squared distance for subquantized values and its centroids
 \item sum up $m$ looked up values by executing equation \ref{ivfadcestimate}
-  \item select K nearest neighbors of $x$ from subset of $\mathcal{Y}$
+  \item select K nearest neighbors of $x$ from subset of $\mathcal{Y}$.
 \end{enumerate}
+\cite{Jegou2008}
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
