@@ -987,8 +987,9 @@ d(x,y)^2 \approx d(x,q(y))^2
 
 where $x$ is the query vector, $y$ is the database vector and quantizer function is $q(y)$. The error on estimated distance is bound by the quantization error, $e_d \leq e_q$.  \cite{Jegou2014}
 
-The quantizer should be fast enough and precise \cite{Jegou2014}. $y$ is split $y \rightarrow [y_1 \ldots y_m]$ which are each quantized $[q(y_1)\ldots q(y_m)]$.
+The quantizer should be fast enough and precise. $y$ is split $y \rightarrow [y_1 \ldots y_m]$ which are each quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimentinal vector can be split into four subvectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
 
+In order to query amongst
 
 
 
