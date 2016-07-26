@@ -1130,16 +1130,17 @@ Characterize a signal with a gradient vector derived from a generative probabili
 \subsubsection{VLAD descriptor representation}
 The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted lists becomes unfeasible due to search efficiency (speed) and memory consumption of the image descriptors \cite{Jegou2010}.
 
-Vector of locally aggregated descriptors (VLAD) attempts to optimize the three constraints in fig. \ref{nntradeoffs} for NN-search jointly. There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption. Experiments show that VLAD significantly outperforms BOF for the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with the effectivenss of indexing. \cite{Jegou2010}
+Vector of locally aggregated descriptors (VLAD) attempts to optimize the three constraints in fig. \ref{nntradeoffs} for NN-search jointly. There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. Search efficiency was solved by min-Hashing \cite{Chum2008}, \cite{Chum2009} but they still maintain a significant memory footprint \cite{Jegou2010}.
 
-VLAD works by
+VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption drawing inspiration from BoW and the Fisher Vector. VLAD greatly exceeds BoW in performance for a set of images of the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with indexing. \cite{Jegou2010}
+
+Main steps of computing a VLAD descriptor are
 \begin{enumerate}
 \item aggregating local descriptors into a vector
 \item reducing the dimensionality of the vector
 \item providing efficient indexing.
 \end{enumerate}
 
-and it draws inspiration from BoW and the Fisher Vector.
 
 Image vector representation
 
