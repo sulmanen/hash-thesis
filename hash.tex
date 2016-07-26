@@ -475,6 +475,26 @@ Perceptual hashing is a good choice for implementing near duplicate image detect
 
 Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches amongst $10M$ images in $50ms$ \cite{Jegou2010}.
 
+\subsection{Web application response times}
+The expectations of the customer using a web application set the standard for duplicate image detection response time. \cite{Nielsen1993}
+
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Web application response time. The 3 important limits. \cite{Nielsen1993}}
+\label{webresponse times}
+\begin{center}
+  \begin{tabular}{rl}
+    \hline
+  response time (s) & user experience\\
+  \hline
+  0.1 & user feels system is acting instantaneously\\
+  1 & user flow of thought uninterrupted\\
+  10 & user loses attention\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
+
+
 \subsection{Perceptual hashing}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
@@ -1100,6 +1120,8 @@ Characterize a signal with a gradient vector derived from a generative probabili
 
 
 \subsubsection{VLAD descriptor representation}
+The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted lists becomes unfeasible due to search efficiency (speed) and memory consumption of the image descriptors \cite{Jegou2010}.
+
 Vector of locally aggregated descriptors (VLAD) attempts to optimize the three constraints in fig. \ref{nntradeoffs} for NN-search jointly. There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption. Experiments show that VLAD significantly outperforms BOF for the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with the effectivenss of indexing. \cite{Jegou2010}
 
 VLAD works by
