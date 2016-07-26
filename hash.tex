@@ -1198,12 +1198,24 @@ By minimizing equation \ref{pcaerror} one can choose $\mu, v_q$ and $\lambda$. \
 x_p = x -\epsilon_p(x)
 \end{equation}
 
-where $\epsilon_p$ is the error vector. \cite{Jegou2014}
+where $\epsilon_p$ is the error vector. \cite{Jegou2014} When we run $x_p$ through the ADC quantizer we get
 
 \begin{equation}\label{vladpcaquant}
   q(x_p) = x - \epsilon_p(x) - \epsilon_q(x_p)
 \end{equation}
 
+The variance of different components of $x_p$ are not balanced due to the PCA \cite{Jegou2014} which leads to a more coarse quantization of the first principal components which by PCA definition have greater variance the the rest of the components. To fix this issue, the Householder matrix
+
+\begin{equation}\label{householder}
+Q = I - 2vv^T
+\end{equation}
+maybe used to find $Q$ such that $X'' = QX' = QMX$ components have equal variances.\cite{Jegou2014} Only then can the dimentionality reduction and indexing be optimized jointly to find D', the optimal PCA output dimension $D'$ by
+
+\begin{equation}\label{jointoptimization}
+e(D') = \frac{1}{card(\mathcal{L})}\sum_{x\in \mathcal{L}}\norm{\epsilon_p(x)}^2 + \norm{\epsilon_q(x_p)}^2
+\end{equation}
+
+Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search performs very well \cite{Jegou2014}.
 \clearpage
 
 \section{Materials and methods}
