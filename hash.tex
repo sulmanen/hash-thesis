@@ -1134,19 +1134,18 @@ Vector of locally aggregated descriptors (VLAD) attempts to optimize the three c
 
 VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption drawing inspiration from BoW and the Fisher Vector. VLAD greatly exceeds BoW in performance for a set of images of the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with indexing. \cite{Jegou2010}
 
-Main steps of computing a VLAD descriptor are
+Roughly, the main steps of computing a VLAD descriptor are
 \begin{enumerate}
-\item aggregating local descriptors into a vector
-\item reducing the dimensionality of the vector
-\item providing efficient indexing.
+\item aggregating local descriptors into a single vector
+\item reducing the dimensionality of that vector
+\item providing efficient indexing for all vectors in the system.
 \end{enumerate}
 
+\begin{equation}
+  \label{vlad}
+  v_{i,j} = \sum_{x \rigtharrow NN(x)=c_i}x_j-c_{i,j}
+\end{equation}
 
-Image vector representation
-
-From vectors to codes
-
-Experiments
 
 
 
