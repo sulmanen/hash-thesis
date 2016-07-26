@@ -1192,11 +1192,13 @@ The dimention of the model is $q$ and the mean $\mu \in \Re^p$. $v_q$ is a $p \t
 \min_{\mu,\lambda_1\ldots N, v_q}\sum_{n=1}^N \abs{x_n-\mu - v_q\lambda_n}.
 \end{equation}
 
-By minimizing equation \ref{pcaerror} one can choose $\mu, v_q$ and $\lambda$. \cite{Blei2008}
+By minimizing equation \ref{pcaerror} one can choose $\mu, v_q$ and $\lambda$. \cite{Blei2008} As a projection, $x$ can be approximated by
 
 \begin{equation}\label{vladpca}
 x_p = x -\epsilon_p(x)
 \end{equation}
+
+where $\epsilon_p$ is the error vector. \cite{Jegou2014}
 
 \begin{equation}\label{vladpcaquant}
   q(x_p) = x - \epsilon_p(x) - \epsilon_q(x_p)
