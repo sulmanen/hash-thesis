@@ -385,14 +385,14 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
   NN & Nearest Neighbor\\
   ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
-px & A pixel  \\
-RGB & red, green, blue color space\\
-SDC & Symmetric Distance Computation\\
-SIFT & Scale invariant feature transform \\
-SURF & Sped Up Robust Features \\
-UA   & User Agent facilitates end user interaction with Web content (Browser)\\
-URI  & Uniform Resource Identifier aka URL\\
-VLAD & Vector of Locally Aggregated Descriptors\\
+  px & A pixel  \\
+  RGB & red, green, blue color space\\
+  SDC & Symmetric Distance Computation\\
+  SIFT & Scale invariant feature transform \\
+  SURF & Sped Up Robust Features \\
+  UA   & User Agent facilitates end user interaction with Web content (Browser)\\
+  URI  & Uniform Resource Identifier aka URL\\
+  VLAD & Vector of Locally Aggregated Descriptors\\
 \end{tabular}
 
 %% Sivulaskurin viilausta opinn\"aytteen vaatimusten mukaan:
@@ -1100,16 +1100,16 @@ Characterize a signal with a gradient vector derived from a generative probabili
 
 
 \subsubsection{VLAD descriptor representation}
-There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. Vector of locally aggregated descriptors \(VLAD\) was developed in order to represent local descriptors so image searches could be done in a large scale with accuracy, efficiency and low memory consumption. Experiments show that VLAD significantly outperforms BOF for the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with the effectivenss of indexing. \cite{Jegou2010}
+Vector of locally aggregated descriptors (VLAD) attempts to optimize the three constraints in fig. \ref{nntradeoffs} for NN-search jointly. There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption. Experiments show that VLAD significantly outperforms BOF for the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with the effectivenss of indexing. \cite{Jegou2010}
 
 VLAD works by
 \begin{enumerate}
-\item the way in which local descriptors are aggregated into a vector
-\item dimentionality reduction of the vectors
-\item the indexing algorithm
+\item aggregating local descriptors into a vector
+\item reducing the dimensionality of the vector
+\item providing efficient indexing.
 \end{enumerate}
 
-and it draws inspiration from BOF and the Fisher Vector.
+and it draws inspiration from BoW and the Fisher Vector.
 
 Image vector representation
 
