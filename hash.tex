@@ -1010,7 +1010,7 @@ Google gives additional weight to words in the search that appear close together
 
 A loose definition would be to require neighboring matches in query image to lie close together also in the retrieved frame.
 
-\subsubsection{Product Quantization}
+\subsubsection{Product Quantization} \label{PQ}
 
 \begin{equation}
   \label{quantizereq}
@@ -1141,10 +1141,36 @@ Roughly, the main steps of computing a VLAD descriptor are
 \item providing efficient indexing for all vectors in the system.
 \end{enumerate}
 
+Like in \cite{Sivic2003}, \cite{Jegou2011} a codebook $\mathcal{C}={c_1 \ldots c_k}$ of $k$ visual words is created using k-means clustering. For each $d$-dimentional local descriptor $x$ is associated to the nearest visual word (eq. \ref{vladdescriptortovw})
+
+\begin{equation}
+  \label{vladdescriptortovw}
+c_i = NN(x).
+\end{equation}
+
+Final dimention $D$ for the VLAD descriptor is in eq. \ref{vladdescriptordimention}
+
+\begin{equation}
+  \label{vladdescriptordimention}
+  D = k \times d,
+\end{equation}
+
+and the VLAD descriptor $v_i,j$ comes from (eq. \ref{vlad})
+
 \begin{equation}
   \label{vlad}
-  v_{i,j} = \sum_{x \rigtharrow NN(x)=c_i}x_j-c_{i,j}
+  v_{i,j} = \sum_{x, NN(x)=c_i} x_j - c_{i,j}
 \end{equation}
+
+where $i$ is an index for the visual word and $j$ an index for the local descriptor component. $v$ is then normalized (eq. \ref{vladnorm})
+\begin{equation}
+  \label{vladnorm}
+  v := \frac{v}{\norm{v}^2}
+  \end{equation}
+
+.\cite{Jegou2014} Excellent results can be obtained with a small $k$ \cite{Jegou2014}. We will use $k=256$ in this paper.
+
+To decrease the memory footprint of the descriptor an make it efficiently searchable, it should be coded from a dimention $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimentionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
 
 
 
