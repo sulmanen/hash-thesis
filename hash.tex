@@ -94,6 +94,7 @@
 \usepackage{epigraph}
 \usepackage{commath}
 \usepackage{listings}
+\usepackage{bm}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -385,6 +386,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
   NN & Nearest Neighbor\\
   ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
+  PCA & Principal Component Analysis\\
   px & A pixel  \\
   RGB & red, green, blue color space\\
   SDC & Symmetric Distance Computation\\
@@ -1170,10 +1172,19 @@ where $i$ is an index for the visual word and $j$ an index for the local descrip
 
 .\cite{Jegou2014} Excellent results can be obtained with a small $k$ \cite{Jegou2014}. We will use $k=256$ in this paper.
 
-To decrease the memory footprint of the descriptor an make it efficiently searchable, it should be coded from a dimention $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimentionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
+To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimention $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimentionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
 
+Principal Component Analysis (PCA) transforms observed data into linearly uncorrelated principal components. Here it is used for dimentionality reduction. Given $\boldsymbol{X}$ with $n$ observations in $d$ dimensions PCA (eq. \ref{pca})
 
+\begin{equation} \label{pca}
+\boldsymbol{T}_L = \boldsymbol{X} \cdot \boldsymbol{W}_{L}
+\end{equation}
 
+maps $d$ dimentions to $L$ dimentions which is also the number of principal components kept. $W$ is matrix of weights and $T$ are the principal components. The score matrix maximises variance of the preserved original data and minimising the total squared reconstruction error (eq. \ref{pcaerror})
+
+\begin{equation}\label{pcaerror}
+
+\end{equation}
 
 \clearpage
 
