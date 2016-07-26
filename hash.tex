@@ -1174,27 +1174,25 @@ where $i$ is an index for the visual word and $j$ an index for the local descrip
 
 To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimention $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimentionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
 
-Principal Component Analysis (PCA) transforms observed data into linearly uncorrelated principal components.
-
-Were assuming data $\boldsymbol{X} \in \Re^{p}$ to be zero mean, that is eq. \ref{zeromean} holds. Let the reconstruction of $\boldsymbol{X}$ in $\Re^{q}$ be
+Principal Component Analysis (PCA) transforms observed data into linearly uncorrelated principal components. Were assuming data $\boldsymbol{X} \in \Re^{p}$ to be zero mean, that is eq. \ref{zeromean} holds.
 
 \begin{equation}\label{zeromean}
 \frac{1}{N}\sum_n \boldsymbol{x}_n = 0
 \end{equation}
 
-Here it is used for dimentionality reduction. Given $\boldsymbol{X}$ with $n$ observations in $d$ dimensions PCA (eq. \ref{pca})
-
+Let the reconstruction of $\boldsymbol{X}$ in $\Re^{q}$ be
 
 \begin{equation} \label{pca}
 f(\lambda) = \mu + v_q\lambda
 \end{equation}
 
-maps $d$ dimentions to $L$ dimentions which is also the number of principal components kept. $W$ is matrix of weights and $T$ are the principal components. The score matrix maximises variance of the preserved original data and minimising the total squared reconstruction error (eq. \ref{pcaerror})
+The dimention of the model is $q$ and the mean $\mu \in \Re^p$. $v_q$ is a $p \times q$ matrix with $q$ orthogonal unit vetors. $\lambda \in \Re^q$ are the principal components in $q$ dimensions. The reconstruction error is given by
 
 \begin{equation}\label{pcaerror}
-\min_{\mu,\lambda_1\ldots N, v_q}\sum_{n=1}^N \abs{x_n-\mu - v_q\lambda_n}
+\min_{\mu,\lambda_1\ldots N, v_q}\sum_{n=1}^N \abs{x_n-\mu - v_q\lambda_n}.
 \end{equation}
 
+By minimizing equation \ref{pcaerror} one can choose $\mu, v_q$ and $\lambda$.
 \clearpage
 
 \section{Materials and methods}
