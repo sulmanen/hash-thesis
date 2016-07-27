@@ -1113,7 +1113,7 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
 \end{center}\end{table}
 
 \subsubsection{min-Hash}
-min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID.
+min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with a $\mathcal{V}$ word vocabulary, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
 
 min-Hash (eq. \ref{minhash}) is probability that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The similarity function can vary. Set similarity is used here.
 
@@ -1129,7 +1129,6 @@ m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
 P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
 \end{equation}
 
-Introduction
 
 Definitions as set intersection problems
 
