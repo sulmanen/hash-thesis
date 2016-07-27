@@ -393,6 +393,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   SDC & Symmetric Distance Computation\\
   SIFT & Scale invariant feature transform \\
   SURF & Sped Up Robust Features \\
+  tf-idf & term frequency - inverse document frequency\\
   UA   & User Agent facilitates end user interaction with Web content (Browser)\\
   UI   & User Interface\\
   URI  & Uniform Resource Identifier aka URL\\
@@ -920,6 +921,39 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 
 \lstinputlisting{fed.m}
 
+\subsubsection{min-Hash}
+
+\begin{equation}\label{minhash}
+m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
+\end{equation}
+
+\begin{equation}\label{minhashretrieval}
+P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
+\end{equation}
+
+Introduction
+
+Definitions as set intersection problems
+
+Implementation issues
+
+
+
+
+Introduction
+
+Image Representation and Similarity Measures
+
+
+min-Hash background
+
+Extensions
+
+Experimental Results
+
+Conclusions
+
+\cite{Chum2008} \cite{Broder1997}
 
 \subsection{Large scale image retrieval}
 

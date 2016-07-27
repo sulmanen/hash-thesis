@@ -58,6 +58,25 @@ title = {{SURF: Speeded up robust features}},
 volume = {3951 LNCS},
 year = {2006}
 }
+@misc{Blei20,
+author = {Blei, Dave},
+month = {apr},
+publisher = {Princeton University Department of Computer Science},
+title = {{COS 424: Interacting with Data}},
+year = {2008}
+}
+@inproceedings{Broder1997,
+abstract = {Given two documents A and B we define two mathematical notions: their resemblance r(A,B) and their containment c(A,B) that seem to capture well the informal notions of “roughly the same” and “roughly contained.” The basic idea is to reduce these issues to set intersection problems that can be easily evaluated by a process of random sampling that can be done inde- pendently for each document. Furthermore, the resemblance can be evaluated using a fixed size sample for each document. This paper discusses the mathematical properties of these measures and the efficient implementation of the sampling process using Rabin fingerprints.},
+author = {Broder, Andrei Z},
+booktitle = {Proceedings of the Compression and Complexity of Sequences 1997},
+doi = {10.1109/SEQUEN.1997.666900},
+isbn = {0-8186-8132-2},
+issn = {0818681322},
+pages = {21--29},
+title = {{On the Resemblance and Containment of Documents}},
+url = {http://dl.acm.org/citation.cfm?id=829502.830043},
+year = {1997}
+}
 @inproceedings{Chum2009,
 abstract = {We propose a novel hashing scheme for image retrieval, clustering and automatic object discovery. Unlike commonly used bag-of-words approaches, the spatial extent of image features is exploited in our method. The geometric information is used both to construct repeatable hash keys and to increase the discriminability of the description. Each hash key combines visual appearance (visual words) with semi-local geometric information. Compared with the state-of-the-art min-hash, the proposed method has both higher recall (probability of collision for hashes on the same object) and lower false positive rates (random collisions). The advantages of geometric min-hashing approach are most pronounced in the presence of viewpoint and scale change, significant occlusion or small physical overlap of the viewing fields. We demonstrate the power of the proposed method on small object discovery in a large unordered collection of images and on a large scale image clustering problem.},
 author = {Chum, Ondrej and Perd{\&}apos;och, Michal and Matas, Jiri},
@@ -254,25 +273,6 @@ publisher = {Springer},
 title = {{New Iterative Geometric Methods for Robust Perceptual Image Hashing}},
 year = {2002}
 }
-@article{Lowe2004,
-abstract = {This paper presents a method for extracting distinctive invariant features from images that can be used to perform reliable matching between different views of an object or scene. The features are invariant to image scale and rotation, and are shown to provide robust matching across a substantial range of affine distortion, change in 3D viewpoint, addition of noise, and change in illumination. The features are highly distinctive, in the sense that a single feature can be correctly matched with high probability against a large database of features from many images. This paper also describes an approach to using these features for object recognition. The recognition proceeds by matching individual features to a database of features from known objects using a fast nearest-neighbor algorithm, followed by a Hough transform to identify clusters belonging to a single object, and finally performing verification through least-squares solution for consistent pose parameters. This approach to recognition can robustly identify objects among clutter and occlusion while achieving near real-time performance.},
-archivePrefix = {arXiv},
-arxivId = {cs/0112017},
-author = {Lowe, David G.},
-doi = {10.1023/B:VISI.0000029664.99615.94},
-eprint = {0112017},
-isbn = {1568811012},
-issn = {09205691},
-journal = {International Journal of Computer Vision},
-keywords = {Image matching,Invariant features,Object recognition,Scale invariance},
-number = {2},
-pages = {91--110},
-pmid = {20064111},
-primaryClass = {cs},
-title = {{Distinctive image features from scale-invariant keypoints}},
-volume = {60},
-year = {2004}
-}
 @inproceedings{Lowe1999,
 abstract = {An object recognition system has been developed that uses a new class of local image features. The features are invariant to image scaling, translation, and rotation, and partially invariant to illumination changes and affine or 3D projection. These features share similar properties with neurons in inferior temporal cortex that are used for object recognition in primate vision. Features are efficiently detected through a staged filtering approach that identifies stable points in scale space. Image keys are created that allow for local geometric deformations by representing blurred image gradients in multiple orientation planes and at multiple scales. The keys are used as input to a nearest neighbor indexing method that identifies candidate object matches. Final verification of each match is achieved by finding a low residual least squares solution for the unknown model parameters. Experimental results show that robust object recognition can be achieved in cluttered partially occluded images with a computation time of under 2 seconds},
 archivePrefix = {arXiv},
@@ -291,6 +291,25 @@ title = {{Object recognition from local scale-invariant features}},
 url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=790410},
 volume = {2},
 year = {1999}
+}
+@article{Lowe2004,
+abstract = {This paper presents a method for extracting distinctive invariant features from images that can be used to perform reliable matching between different views of an object or scene. The features are invariant to image scale and rotation, and are shown to provide robust matching across a substantial range of affine distortion, change in 3D viewpoint, addition of noise, and change in illumination. The features are highly distinctive, in the sense that a single feature can be correctly matched with high probability against a large database of features from many images. This paper also describes an approach to using these features for object recognition. The recognition proceeds by matching individual features to a database of features from known objects using a fast nearest-neighbor algorithm, followed by a Hough transform to identify clusters belonging to a single object, and finally performing verification through least-squares solution for consistent pose parameters. This approach to recognition can robustly identify objects among clutter and occlusion while achieving near real-time performance.},
+archivePrefix = {arXiv},
+arxivId = {cs/0112017},
+author = {Lowe, David G.},
+doi = {10.1023/B:VISI.0000029664.99615.94},
+eprint = {0112017},
+isbn = {1568811012},
+issn = {09205691},
+journal = {International Journal of Computer Vision},
+keywords = {Image matching,Invariant features,Object recognition,Scale invariance},
+number = {2},
+pages = {91--110},
+pmid = {20064111},
+primaryClass = {cs},
+title = {{Distinctive image features from scale-invariant keypoints}},
+volume = {60},
+year = {2004}
 }
 @inproceedings{Miller1968,
 abstract = {The literature concerning man-computer transactions abounds in controversy about the limits of "system response time" to a user's command or inquiry at a terminal. Two major semantic issues prohibit resolving this controversy. One issue centers around the question of "Response time to what?" The implication is that different human purposes and actions will have different acceptable or useful response times.},
@@ -331,13 +350,6 @@ url = {http://www.useit.com/jakob/useengbook.html},
 volume = {44},
 year = {1993}
 }
-@article{Nielsen1993a,
-abstract = {Summary: There are 3 main time limits (which are determined by human perceptual abilities) to keep in mind when optimizing web and application performance.},
-author = {Nielsen, Jakob},
-journal = {Usability Engineering},
-title = {{Response times: The 3 important limits}},
-year = {1993}
-}
 @article{Nielsen2010,
 abstract = {From 0.1 seconds to 10 years or more, user interface design has many different timeframes, and each has its own particular usability issues.},
 author = {Nielsen, Jakob},
@@ -345,6 +357,13 @@ journal = {Time},
 pages = {10--15},
 title = {{Powers of 10 : Time Scales in User Experience}},
 year = {2010}
+}
+@article{Nielsen1993a,
+abstract = {Summary: There are 3 main time limits (which are determined by human perceptual abilities) to keep in mind when optimizing web and application performance.},
+author = {Nielsen, Jakob},
+journal = {Usability Engineering},
+title = {{Response times: The 3 important limits}},
+year = {1993}
 }
 @article{Perona1990,
 abstract = {A new definition of scale-space is suggested, and a class of algorithms used to realize a diffusion process is introduced. The diffusion coefficient is chosen to vary spatially in such a way as to encourage intraregion smoothing rather than interregion smoothing. It is shown that the `no new maxima should be generated at coarse scales' property of conventional scale space is preserved. As the region boundaries in the approach remain sharp, a high-quality edge detector which successfully exploits global information is obtained. Experimental results are shown on a number of images. Parallel hardware implementations are made feasible because the algorithm involves elementary, local operations replicated over the image},
@@ -459,11 +478,4 @@ booktitle = {W3C Wiki},
 title = {{Definition of User Agent}},
 url = {https://www.w3.org/WAI/UA/work/wiki/Definition{\_}of{\_}User{\_}Agent},
 urldate = {2016-04-12}
-}
-@misc{Blei2008,
-author = {Blei, Dave},
-month = {apr},
-publisher = {Princeton University Department of Computer Science},
-title = {{COS 424: Interacting with Data}},
-year = {2008}
 }
