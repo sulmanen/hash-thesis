@@ -922,12 +922,17 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 \lstinputlisting{fed.m}
 
 \subsubsection{min-Hash}
+min-Hash (eq. \ref{minhash}) is probability that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}).
+
+\begin{equation}\label{similarityminhash}
+sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
+\end{equation}
 
 \begin{equation}\label{minhash}
 m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
 \end{equation}
 
-\begin{equation}\label{minhashretrieval}
+\begin{equation}\label{minhashsim}
 P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
 \end{equation}
 
