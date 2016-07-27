@@ -1209,13 +1209,14 @@ The variance of different components of $x_p$ are not balanced due to the PCA \c
 \begin{equation}\label{householder}
 Q = I - 2vv^T
 \end{equation}
+
 maybe used to find $Q$ such that $X'' = QX' = QMX$ components have equal variances.\cite{Jegou2014} Only then can the dimentionality reduction and indexing be optimized jointly to find D', the optimal PCA output dimension $D'$ by
 
 \begin{equation}\label{jointoptimization}
 e(D') = \frac{1}{card(\mathcal{L})}\sum_{x\in \mathcal{L}}\norm{\epsilon_p(x)}^2 + \norm{\epsilon_q(x_p)}^2
 \end{equation}
 
-Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search performs very well \cite{Jegou2014}. From 10M images a Euclidean NN search with VLAD takes 7.2s. An ADC search takes 716ms. VLAD with IVFADC takes 46ms \cite{Jegou2014}.
+Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search performs very well. From 10M images a Euclidean NN search with VLAD takes 7.2s. An ADC search takes 716ms. VLAD with IVFADC takes 46ms \cite{Jegou2014}.
 \clearpage
 
 \section{Materials and methods}
