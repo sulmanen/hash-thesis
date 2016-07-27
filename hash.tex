@@ -921,45 +921,6 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 
 \lstinputlisting{fed.m}
 
-\subsubsection{min-Hash}
-min-Hash (eq. \ref{minhash}) is probability that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}).
-
-\begin{equation}\label{similarityminhash}
-sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
-\end{equation}
-
-\begin{equation}\label{minhash}
-m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
-\end{equation}
-
-\begin{equation}\label{minhashsim}
-P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
-\end{equation}
-
-Introduction
-
-Definitions as set intersection problems
-
-Implementation issues
-
-
-
-
-Introduction
-
-Image Representation and Similarity Measures
-
-
-min-Hash background
-
-Extensions
-
-Experimental Results
-
-Conclusions
-
-\cite{Chum2008} \cite{Broder1997}
-
 \subsection{Large scale image retrieval}
 
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
@@ -1150,6 +1111,45 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
   code & $m[\log_2k^*]$\\
 \end{tabular}
 \end{center}\end{table}
+
+\subsubsection{min-Hash}
+min-Hash (eq. \ref{minhash}) is probability that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The similarity function can vary. Set similarity is used here.
+
+\begin{equation}\label{similarityminhash}
+sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
+\end{equation}
+
+\begin{equation}\label{minhash}
+m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
+\end{equation}
+
+\begin{equation}\label{minhashsim}
+P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
+\end{equation}
+
+Introduction
+
+Definitions as set intersection problems
+
+Implementation issues
+
+
+
+
+Introduction
+
+Image Representation and Similarity Measures
+
+
+min-Hash background
+
+Extensions
+
+Experimental Results
+
+Conclusions
+
+\cite{Chum2008} \cite{Broder1997}
 
 
 \subsubsection{The Fisher kernel}
