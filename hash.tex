@@ -978,7 +978,7 @@ E = \frac{1}{\abs{Q}}\sum_{q\in Q}\frac{d_{LSH}}{d^*}
 where $d^*$ is the distance from $q$ to the nearest point over all successful queries.
 
 
-\subsubsection{Bag of visual words}
+\subsubsection{Bag of visual words}\label{BOW}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
 
 To calculate image descriptors two types of viewopint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.\cite{Sivic2003}
@@ -1113,6 +1113,8 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
 \end{center}\end{table}
 
 \subsubsection{min-Hash}
+min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID.
+
 min-Hash (eq. \ref{minhash}) is probability that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The similarity function can vary. Set similarity is used here.
 
 \begin{equation}\label{similarityminhash}
