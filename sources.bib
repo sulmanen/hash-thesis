@@ -493,6 +493,20 @@ title = {{Partition min-hash for partial duplicate image discovery}},
 volume = {6311 LNCS},
 year = {2010}
 }
+@article{Chum2010,
+abstract = {We propose a randomized data mining method that finds clusters of spatially overlapping images. The core of the method relies on the min-Hash algorithm for fast detection of pairs of images with spatial overlap, the so-called cluster seeds. The seeds are then used as visual queries to obtain clusters which are formed as transitive closures of sets of partially overlapping images that include the seed. We show that the probability of finding a seed for an image cluster rapidly increases with the size of the cluster. The properties and performance of the algorithm are demonstrated on data sets with 10(4), 10(5), and 5 x 10(6) images. The speed of the method depends on the size of the database and the number of clusters. The first stage of seed generation is close to linear for databases sizes up to approximately 2(34) approximately 10(10) images. On a single 2.4 GHz PC, the clustering process took only 24 minutes for a standard database of more than 100,000 images, i.e., only 0.014 seconds per image.},
+author = {Chum, Ondrej and Matas, Jiř{\'{i}}},
+doi = {10.1109/TPAMI.2009.166},
+issn = {01628828},
+journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+keywords = {Bag of words,Image clustering,Image retrieval,MinHash},
+number = {2},
+pages = {371--377},
+pmid = {20075465},
+title = {{Large-scale discovery of spatially related images}},
+volume = {32},
+year = {2010}
+}
 @article{Li2015,
 abstract = {In this paper, we study the problem of discovering visual patterns and partial-duplicate images, which is fundamental to visual concept representation and image parsing, but very challenging when the database is extremely large, such as billions of images indexed by a commercial search engine. Although extensive research with sophisticated algorithms has been conducted for either partial-duplicate clustering or visual pattern discovery, most of them can not be easily extended to this scale, since both are clustering problems in nature and require pairwise comparisons. To tackle this computational challenge, we introduce a novel and highly parallelizable framework to discover partial-duplicate images and visual patterns in a unified way in distributed computing systems. We emphasize the nested property of local features, and propose the generalized nested feature (GNF) as a mid-level representation for regions and local patterns. Initial coarse clusters are then discovered by GNFs, upon which n-gram GNF is defined to represent co-occurrent visual patterns. After that, efficient merging and refining algorithms are used to get the partial-duplicate clusters, and logical combinations of probabilistic GNF models are leveraged to represent the visual patterns of partially duplicate images. Extensive experiments show the parallelizable property and effectiveness of the algorithms on both partial-duplicate clustering and visual pattern discovery. With 2000 machines, it costs about eight and 400 minutes to process one million and 40 million images respectively, which is quite efficient compared to previous methods.},
 author = {Li, Wei and Wang, Changhu and Zhang, Lei and Rui, Yong and Zhang, Bo},
