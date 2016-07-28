@@ -1117,7 +1117,7 @@ min-Hash was used in \cite{Broder1997} to search for similar text documents amon
 
 The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
 
-Considering the 128 dimentional SIFT descriptor and 10 million images, if one uses 400 hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a dataset with 128 columns but only 400 rows.
+Considering the 128 dimentional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a dataset with 128 columns but only 400 rows.
 
 min-Hash (eq. \ref{minhash}) is the smalles element of set $\mathcal{A_i}$ under ordering by $f_j$
 
@@ -1144,6 +1144,24 @@ P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \
 \end{equation}
 
 Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
+
+To ease retrieval the mih-Hashes are organized into \emph{sketches} \cite{Chum2008}, \cite{Broder1997}
+
+\begin{equation}\label{sketch}
+(m(\mathcal{A_1},f_1) \ldots m(\mathcal{A_1},f_n))
+\end{equation}
+
+which have similarity
+
+\begin{equation}\label{sketchsim}
+sim_s(\mathcal{A}_1, \mathcal{A}_2)^n \cite{Chum2008}.
+\end{equation}
+
+The sketch similarity is evaluated first, and only if it is above some threshold the full similarity $sim_s(\mathcal{A}_1, \mathcal{A}_2)$ is evaluated \cite{Chum2008}. The probability $P(\mathcal{A}_1 \sim^h \mathcal{A}_2)$ of sets $\mathcal{A}_1$ and $\mathcal{A}_2$ having at least $h$ identical sketches from $k$ picked
+
+\begin{equation} \label{sketchsimilarityprob}
+P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^{k-i} \quad \cite{Chum2008}.
+\end{equation}
 
 
 \subsubsection{The Fisher kernel}
