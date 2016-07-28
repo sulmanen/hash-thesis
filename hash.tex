@@ -507,7 +507,7 @@ Given a certain amount of delay, human mental efficiency drops regarding to the 
 \end{center}\end{table}
 
 
-\subsection{Perceptual hashing}
+\subsection{Perceptual hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
 In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations.
@@ -1113,9 +1113,19 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
 \end{center}\end{table}
 
 \subsubsection{min-Hash}
-min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
+min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects.
 
-min-Hash (eq. \ref{minhash}) is the probability that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
+The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
+
+Considering the 128 dimentional SIFT descriptor and 10 million images, if one uses 400 hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a dataset with 128 columns but only 400 rows.
+
+min-Hash (eq. \ref{minhash}) is the smalles element of set $\mathcal{A_i}$ under ordering by $f_j$
+
+\begin{equation}\label{minhash}
+m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X). \ref{Chum2008}
+\end{equation}
+
+It estimates object (text or image) similarity based on (eq. \ref{minhash}) the probability (eq. \ref{minhashsim}) that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The used similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
 
 \begin{equation}\label{similarityminhash}
 sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
@@ -1129,29 +1139,11 @@ sim_n(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^
 
 where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document \cite{Chum2008}.
 
-\begin{equation}\label{minhash}
-m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
-\end{equation}
-
 \begin{equation}\label{minhashsim}
 P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
 \end{equation}
 
-
-Introduction
-
-Image Representation and Similarity Measures
-
-
-min-Hash background
-
-Extensions
-
-Experimental Results
-
-Conclusions
-
-\cite{Chum2008} \cite{Broder1997}
+Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
 
 
 \subsubsection{The Fisher kernel}
