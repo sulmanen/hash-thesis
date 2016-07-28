@@ -948,7 +948,7 @@ To improve scalability, one can relax the conditions on nearest neighbor. The tr
 
 Approximate nearest neighbor is defined as in a normed space $l_p^d$ preprocess set of points $P$ to efficiently return a point $p\in P$ for any given query point $q$, such that $d(q,p) \lq (1 + \epsilon)d(q,P)$. $d(q, P)$ is the distance between the closest point in $P$ to $q$. \cite{Gionis1999}
 
-\subsubsection{ANN: Locality Sensitive Hashing}
+\subsubsection{Locality Sensitive Hashing}
 The original SIFT descriptor has 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales linearly (poorly). Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'', where $d > 3$ for NN search \cite{Gionis1999}. LSH scales well for $d > 50$ \cite{Gionis1999}. We will only cover the main idea behind the LSH family of methods. A review of the state of the art in 2008 can be found in \cite{Andoni2008}. Finding optimal hash functions for LSH applications has attracted much more recently so we examine \emph{Optimal LSH for Angular Distance} \cite{Andoni2015} by Andoni et al. from 2015.
 
 For hash function $g$ to be Locality-Sensitive, the probability of collision is higher for points that are nearby than for those that are fare away \cite{Andoni2015}.
@@ -976,6 +976,59 @@ E = \frac{1}{\abs{Q}}\sum_{q\in Q}\frac{d_{LSH}}{d^*}
   \end{equation}
 
 where $d^*$ is the distance from $q$ to the nearest point over all successful queries.
+
+
+\subsubsection{min-Hash}
+min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large datasets.
+
+The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
+
+Considering the 128 dimentional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a dataset with 128 columns but only 400 rows.
+
+min-Hash (eq. \ref{minhash}) is the smalles element of set $\mathcal{A_i}$ under ordering by $f_j$
+
+\begin{equation}\label{minhash}
+m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X). \quad \cite{Chum2008}
+\end{equation}
+
+It estimates object (text or image) similarity based on (eq. \ref{minhash}) the probability (eq. \ref{minhashsim}) that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The used similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
+
+\begin{equation}\label{similarityminhash}
+sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
+\end{equation}
+
+ and for images drawing inspiration from the \emph{tf-idf} scheme a histogram instersection approach
+
+\begin{equation}\label{similarityminhashimages}
+sim_h(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
+\end{equation}
+
+where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document. $d_w \geq 0$ is the importance of $X_w$. This similarity measure performed better in efficiency and quality than Jaccard distance for the TrecVid 2006 data set. \cite{Chum2008}
+
+\begin{equation}\label{minhashsim}
+P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
+\end{equation}
+
+Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
+
+To ease retrieval the min-Hashes are organized into \emph{sketches} \cite{Chum2008}, \cite{Broder1997}
+
+\begin{equation}\label{sketch}
+(m(\mathcal{A_1},f_1) \ldots m(\mathcal{A_1},f_n))
+\end{equation}
+
+which have similarity
+
+\begin{equation}\label{sketchsim}
+sim_s(\mathcal{A}_1, \mathcal{A}_2)^n \cite{Chum2008}.
+\end{equation}
+
+Sketching reduces the number of false positives retrieved by min-Hash \cite{Chum2008}. The sketch similarity is evaluated first, and only if it is above some threshold the full similarity $sim_s(\mathcal{A}_1, \mathcal{A}_2)$ is evaluated \cite{Chum2008}. The probability $P(\mathcal{A}_1 \sim^h \mathcal{A}_2)$ of sets $\mathcal{A}_1$ and $\mathcal{A}_2$ having at least $h$ identical sketches from $k$ picked
+
+\begin{equation} \label{sketchsimilarityprob}
+P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^{k-i} \quad \cite{Chum2008}.
+\end{equation}
+\cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set. In the TrecVid 2006 data set, and University of Kentucky database cases it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result leading to a lower number of sketch hits and better quality search results \cite{Chum2008}. However, \cite{Chum2008} leaves min-hash performance for very large image databases (millions of images) for further research.
 
 
 \subsubsection{Bag of visual words}\label{BOW}
@@ -1111,60 +1164,6 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
   code & $m[\log_2k^*]$\\
 \end{tabular}
 \end{center}\end{table}
-
-\subsubsection{min-Hash}
-min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large datasets.
-
-The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
-
-Considering the 128 dimentional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a dataset with 128 columns but only 400 rows.
-
-min-Hash (eq. \ref{minhash}) is the smalles element of set $\mathcal{A_i}$ under ordering by $f_j$
-
-\begin{equation}\label{minhash}
-m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X). \quad \cite{Chum2008}
-\end{equation}
-
-It estimates object (text or image) similarity based on (eq. \ref{minhash}) the probability (eq. \ref{minhashsim}) that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The used similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
-
-\begin{equation}\label{similarityminhash}
-sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
-\end{equation}
-
- and for images drawing inspiration from the \emph{tf-idf} scheme a histogram instersection approach
-
-\begin{equation}\label{similarityminhashimages}
-sim_h(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
-\end{equation}
-
-where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document. $d_w \geq 0$ is the importance of $X_w$. This similarity measure performed better in efficiency and quality than Jaccard distance for the TrecVid 2006 data set. \cite{Chum2008}
-
-\begin{equation}\label{minhashsim}
-P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
-\end{equation}
-
-Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
-
-To ease retrieval the min-Hashes are organized into \emph{sketches} \cite{Chum2008}, \cite{Broder1997}
-
-\begin{equation}\label{sketch}
-(m(\mathcal{A_1},f_1) \ldots m(\mathcal{A_1},f_n))
-\end{equation}
-
-which have similarity
-
-\begin{equation}\label{sketchsim}
-sim_s(\mathcal{A}_1, \mathcal{A}_2)^n \cite{Chum2008}.
-\end{equation}
-
-Sketching reduces the number of false positives retrieved by min-Hash \cite{Chum2008}. The sketch similarity is evaluated first, and only if it is above some threshold the full similarity $sim_s(\mathcal{A}_1, \mathcal{A}_2)$ is evaluated \cite{Chum2008}. The probability $P(\mathcal{A}_1 \sim^h \mathcal{A}_2)$ of sets $\mathcal{A}_1$ and $\mathcal{A}_2$ having at least $h$ identical sketches from $k$ picked
-
-\begin{equation} \label{sketchsimilarityprob}
-P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^{k-i} \quad \cite{Chum2008}.
-\end{equation}
-\cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set. In the TrecVid 2006 data set, and University of Kentucky database cases it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result leading to a lower number of sketch hits and better quality search results \cite{Chum2008}. However, \cite{Chum2008} leaves min-hash performance for very large image databases (millions of images) for further research.
-
-
 
 \subsubsection{The Fisher kernel}
 Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
