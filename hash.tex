@@ -808,7 +808,7 @@ The second part of the descriptor, $\sum \abs{d_x}, \sum \abs{d_y}$ accounts for
 
 Matching requires fast indexing and additionally storing the sign of the Laplacian for the interest point speeds up searches. The 'Fast-Hessian' detector in the SURF paper was found to be three times faster than the DoG detector by Lowe used in SIFT. SURF improved over SIFT in recall by $4.5\%$. \cite{Bay2006}
 
-\subsubsection{KAZE}
+\subsubsection{KAZE Features}
 KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. For KAZE features one must
 
 \begin{enumerate}
@@ -842,7 +842,7 @@ g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
 $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased. \cite{Weickert1998}
 
 
-\subsubsection{Accelerated KAZE}
+\subsubsection{Accelerated KAZE Features}
 The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations, which is computationally intensive. A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
 
 Fast Explicit Diffusion (FED) is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. ''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
