@@ -1134,10 +1134,10 @@ sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2
  and for images drawing inspiration from the \emph{tf-idf} scheme a histogram instersection approach
 
 \begin{equation}\label{similarityminhashimages}
-sim_n(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
+sim_h(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
 \end{equation}
 
-where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document \cite{Chum2008}.
+where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document \cite{Chum2008}. This similarity measure performed better than Jaccard distance for the TrecVid 2006 data set \cite{Chum2008}.
 
 \begin{equation}\label{minhashsim}
 P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
@@ -1162,6 +1162,8 @@ The sketch similarity is evaluated first, and only if it is above some threshold
 \begin{equation} \label{sketchsimilarityprob}
 P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^{k-i} \quad \cite{Chum2008}.
 \end{equation}
+Sketching reduces the number of false positives retrieved by min-Hash \cite{Chum2008}. \cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}.
+
 
 
 \subsubsection{The Fisher kernel}
