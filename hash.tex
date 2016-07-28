@@ -921,11 +921,11 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 
 \lstinputlisting{fed.m}
 
-\subsection{Large scale image retrieval}
+\subsection{Large Scale Image Retrieval}
 
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
-\subsubsection{Nearest Neighbor search}
+\subsubsection{Nearest Neighbor Search}
 Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search (eq. \ref{nneq}) which Donald Knuth also named as the \emph{post-office problem} in vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?'' which is analogous to ''which known image descriptor is closest to this new image descriptor?''.
 
 Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
@@ -1031,7 +1031,7 @@ P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^
 \cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set. In the TrecVid 2006 data set, and University of Kentucky database cases it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result leading to a lower number of sketch hits and better quality search results \cite{Chum2008}. However, \cite{Chum2008} leaves min-hash performance for very large image databases (millions of images) for further research.
 
 
-\subsubsection{Bag of visual words}\label{BOW}
+\subsubsection{Bag of Visual Words}\label{BOW}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
 
 To calculate image descriptors two types of viewopint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.\cite{Sivic2003}
@@ -1165,7 +1165,7 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
 \end{tabular}
 \end{center}\end{table}
 
-\subsubsection{The Fisher kernel}
+\subsubsection{The Fisher Kernel}
 Pattern classification with generative or discriminative methods? The Fisher kernel brings the best of both worlds \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features is extracted from an image. It was first applied to image classification by Perronin et al. \cite{Perronnin2007}.
 
 $p$ is a probability density function with parameters $\lambda$ a variable length vector samples $X$
