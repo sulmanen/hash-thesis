@@ -1162,7 +1162,7 @@ The sketch similarity is evaluated first, and only if it is above some threshold
 \begin{equation} \label{sketchsimilarityprob}
 P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^{k-i} \quad \cite{Chum2008}.
 \end{equation}
-Sketching reduces the number of false positives retrieved by min-Hash \cite{Chum2008}. \cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set. In the TrecVid 2006 case it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result \cite{Chum2008}.
+Sketching reduces the number of false positives retrieved by min-Hash \cite{Chum2008}. \cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set. In the TrecVid 2006 data set, and University of Kentucky database cases it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result leading to a lower number of sketch hits and better quality search results \cite{Chum2008}. However, \cite{Chum2008} leaves min-hash performance for very large image databases (millions of images) for further research.
 
 
 
