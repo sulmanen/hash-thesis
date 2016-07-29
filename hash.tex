@@ -459,6 +459,7 @@ This paper only considers near duplicate detection and excludes all other uses o
 \item[--] To what degree if any is object instance detection by local features an improvement over dct-, and simple perceptual hashes for near duplicate image detection?
 \item[--] Can object instance detection by local features be deployed at large scale at ThingLink?
 \item[--] Does a soft realtime solution exist to improve on the current queued solution?
+  \item[--] Can the method be chose in a way to extend later towards object discovery with minimal work?
 \end{itemize}
 
 \clearpage
@@ -979,7 +980,7 @@ where $d^*$ is the distance from $q$ to the nearest point over all successful qu
 
 
 \subsubsection{min-Hash}
-min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large datasets.
+min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images for sample data sets. \cite{Chum2010} Uses min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large datasets.
 
 The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
 
