@@ -1046,7 +1046,7 @@ Their requirements are similar to what is attempted in this paper.
 
 For querying the Oxford Landmark dataset, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC \cite{Chum2010}.
 
-Growing the dataset size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the dataset size and $L$ to be the number of hash functions \cite{Chum2010}.
+Growing the dataset size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the dataset size and $L$ to be the number of images in the cluster \cite{Chum2010}. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table.
 
 In \cite{Lee2010} a high $FP$-rate is a serious problem for large dataset. Another problem for direct image retrieval is low recall \cite{Chum2010}.
 
