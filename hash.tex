@@ -1297,7 +1297,15 @@ e(D') = \frac{1}{card(\mathcal{L})}\sum_{x\in \mathcal{L}}\norm{\epsilon_p(x)}^2
 
 Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search performs very well. From 10M images a Euclidean NN search with VLAD takes 7.2s. An ADC search takes 716ms. VLAD with IVFADC takes 46ms \cite{Jegou2014}.
 
-Arandjelovi\'{c} and Zisserman improve
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/vladnorm}
+\end{center}
+\caption{The effect of normalization on burstiness in VLAD dimension vs. standard deviation (std) which denotes amount of energy stored in that dimension. Clearly intra-normalization followed by L2 normalization evens out energy stored in different VLAD dimensions. \cite{Arandjelovic2013}.}
+\label{figconfusion}
+\end{figure}
+
+In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three ways to improve performance. First they decrease burstiness (fig. \ref{vladburstiness}), few large components in the VLAD vector can dominate similarity computations
 
 
 \clearpage
