@@ -383,6 +383,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   KAZE & feature detection by local features\\
   K-NN & K-Nearest Neighbor\\
   LSH & Locality Sensitive Hashing\\
+  mAP & mean average precision, a metric for retrieval performance\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
   NDID & Near Duplicate Image Detection\\
   NN & Nearest Neighbor\\
@@ -1302,10 +1303,10 @@ Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search perfo
 \includegraphics[height=8cm]{figures/vladnorm}
 \end{center}
 \caption{The effect of normalization on burstiness in VLAD dimension vs. standard deviation (std) which denotes amount of energy stored in that dimension. Clearly intra-normalization followed by L2 normalization evens out energy stored in different VLAD dimensions. \cite{Arandjelovic2013}.}
-\label{figconfusion}
+\label{vladburstiness}
 \end{figure}
 
-In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three ways to improve performance. First they decrease burstiness (fig. \ref{vladburstiness}), few large components in the VLAD vector can dominate similarity computations. Intra-normalization alleviates burstiness \cite{Arandjelovic2013}.
+In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three ways to improve performance. First they decrease burstiness (fig. \ref{vladburstiness}), few large components in the VLAD vector can dominate similarity computations. Intra-normalization alleviates burstiness and improves \emph{mAP} \cite{Arandjelovic2013}.
 
 
 \clearpage
