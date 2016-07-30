@@ -1033,7 +1033,14 @@ P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^
 \end{equation}
 \cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set resulting in an \emph{idf} like method \cite{Chum2010}. In the TrecVid 2006 data set, and University of Kentucky database cases it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result leading to a lower number of sketch hits and better quality search results \cite{Chum2008}. However, \cite{Chum2008} leaves min-hash performance for very large image databases (millions of images) for further research.
 
-Querying large sets of images is considered in \cite{Chum2010} where min-Hash is used for fast detection of duplicate images. This is done by using min-Hash for detection of random pairs of image with spatial overlap. These are named cluster seeds which are then used as queries to find similar images including the seed. \cite{Chum2010}
+Querying large sets of images is considered in \cite{Chum2010} where min-Hash is used for fast detection of duplicate images. This is done by using min-Hash for detection of random pairs of image with spatial overlap. These are named cluster seeds which are then used as queries to find similar images including the seed. In other words
+
+\begin{enumerate}
+\item store descriptors in a hash table where the probability of an image being in the same bin is the same as their similarity
+\item calculate exact similarity for images falling into the same bin
+\item if pair of images pass the similarity test, check spatial consistency
+\item if image pair passes step 3., they become cluster seeds \cite{Chum2010}.
+\end{enumerate}
 
 Their requirements are similar to what is attempted in this paper.
 
