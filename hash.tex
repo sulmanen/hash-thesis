@@ -385,6 +385,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   LSH & Locality Sensitive Hashing\\
   mAP & mean average precision, a metric for retrieval performance\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
+  MultiVLAD & Multiple VLAD descriptors\\
   NDID & Near Duplicate Image Detection\\
   NN & Nearest Neighbor\\
   ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
@@ -1302,13 +1303,15 @@ Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search perfo
 \begin{center}
 \includegraphics[height=8cm]{figures/vladnorm}
 \end{center}
-\caption{The effect of normalization on burstiness in VLAD dimension vs. standard deviation (std) which denotes amount of energy stored in that dimension. Clearly intra-normalization followed by L2 normalization evens out energy stored in different VLAD dimensions. \cite{Arandjelovic2013}.}
+\caption{The effect of normalization on burstiness in VLAD dimension vs. standard deviation (std) which denotes amount of energy stored in that dimension. Clearly intra-normalization followed by L2 normalization evens out energy stored in different VLAD dimensions. Burstiness could result from a repeated structure in the image like a brick wall or a tiled floor for example. \cite{Arandjelovic2013}.}
 \label{vladburstiness}
 \end{figure}
 
 In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three ways to improve performance. First they decrease burstiness (fig. \ref{vladburstiness}), few large components in the VLAD vector can dominate similarity computations. Intra-normalization alleviates burstiness and improves \emph{mAP} \cite{Arandjelovic2013}.
 
-If the visual vocabulary is trained using one dataset and used on another, the recognition performance suffers. Vocabulary adaptation in \cite{Arandjelovic2013} alleviate the symptoms without re-training the vocabulary which would be expensive and inconvenient especially for large datasets. It would also require the storing of the original descriptors \cite{Arandjelovic2013}. \emph{Cluster center adaptation} uses $\hat{\mu}$ which are adapted to the mean of descriptors assigned to the same center $k$ \cite{Arandjelovic2013}.
+Second, if the visual vocabulary is trained using one dataset and used on another, the recognition performance suffers. Vocabulary adaptation in \cite{Arandjelovic2013} alleviate the symptoms without re-training the vocabulary which would be expensive and inconvenient especially for large datasets. It would also require the storing of the original descriptors \cite{Arandjelovic2013}. \emph{Cluster center adaptation} uses $\hat{\mu}$ which are adapted to the mean of descriptors assigned to the same center $k$ \cite{Arandjelovic2013}.
+
+Third, VLAD loses to BoW in performance for objects that cover a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD).
 
 \clearpage
 
