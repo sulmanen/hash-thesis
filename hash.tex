@@ -1311,7 +1311,7 @@ In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three 
 
 Second, if the visual vocabulary is trained using one dataset and used on another, the recognition performance suffers. Vocabulary adaptation in \cite{Arandjelovic2013} alleviate the symptoms without re-training the vocabulary which would be expensive and inconvenient especially for large datasets. It would also require the storing of the original descriptors \cite{Arandjelovic2013}. \emph{Cluster center adaptation} uses $\hat{\mu}$ which are adapted to the mean of descriptors assigned to the same center $k$ \cite{Arandjelovic2013}.
 
-Third, VLAD loses to BoW in performance for objects that cover a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD).
+Third, VLAD loses to BoW in performance for objects that cover a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD), which is especially useful in object recognition. MultiVLAD extracts a total of 14 VLAD descriptors from a single image. A $3 \times 3$ grid over the image gives $9$, $2 \times 2$ grid gives four and one for the whole image. This comes at the cost of memory but is still feasible on off the shelf hardware at ~28GB for 100 million images \cite{Arandjelovic2013}.
 
 \clearpage
 
