@@ -1308,6 +1308,7 @@ Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search perfo
 
 In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three ways to improve performance. First they decrease burstiness (fig. \ref{vladburstiness}), few large components in the VLAD vector can dominate similarity computations. Intra-normalization alleviates burstiness and improves \emph{mAP} \cite{Arandjelovic2013}.
 
+If the visual vocabulary is trained using one dataset and used on another, the recognition performance suffers. Vocabulary adaptation in \cite{Arandjelovic2013} alleviate the symptoms without re-training the vocabulary which would be expensive and inconvenient especially for large datasets. It would also require the storing of the original descriptors \cite{Arandjelovic2013}. \emph{Cluster center adaptation} uses $\hat{\mu}$ which are adapted to the mean of descriptors assigned to the same center $k$ \cite{Arandjelovic2013}.
 
 \clearpage
 
