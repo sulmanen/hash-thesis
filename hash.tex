@@ -1216,9 +1216,13 @@ As shown in \cite{Jaakkola1999} a Fisher kernel for $G_\lambda^X$ is
 K(X,Y) = G_\lambda^{X'}F_\lambda^{-1}G_\lambda^Y \quad \cite{Perronnin2010}
 \end{equation}
 
+As the Fisher information matrix $F_\lambda$ is symmetric and positive definite, a Cholesky decomposition exists as $F_\lambda = L_\lambda'L_\lambda$ $K(X,Y)$ becomes
+
 \begin{equation}\label{fishervectorfinal}
 \mathcal{G}_\lambda^X = L_\lambda G_\lambda^X
 \end{equation}
+
+also known as the \emph{Fisher vector} of X \cite{Perronnin2010}.
 
 \begin{equation}\label{gmm}
 G_\lambda^X = \frac{1}{T}\sum_{t=1}^T \nabla_\lambda \log u_\lambda(x_t)
