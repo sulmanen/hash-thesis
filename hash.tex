@@ -373,16 +373,17 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   ADC & Asymmetric Distance Computation\\
   AKAZE & Accelerated KAZE features\\
   ANN & Approximate Nearest Neighbor\\
+  AOS & Additive Operator Splitting nonlinear diffusion filtering\\
   BOF & Bag of Features\\
   BoW & Bag-of-Words representation, also seen used interchangeably with BOF\\
   BRISK & Binary Robust Invariant Scalable Keypoints\\
-  AOS & Additive Operator Splitting nonlinear diffusion filtering\\
   DCT & Discrete cosine transform\\
   DoG & Difference of Gaussians\\
   $\epsilon -NN$ & $\epsilon$ - Nearest Neighbor, like ANN\\
   FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
   FK & Fisher Kernel\\
   FV & Fisher Vector\\
+  GMM & Gaussian Mixture Model\\
   IVFADC & inverted file system with asymmetric distance computation\\
   KAZE & feature detection by local features\\
   K-NN & K-Nearest Neighbor\\
@@ -1222,7 +1223,17 @@ As the Fisher information matrix $F_\lambda$ is symmetric and positive definite,
 \mathcal{G}_\lambda^X = L_\lambda G_\lambda^X
 \end{equation}
 
-also known as the \emph{Fisher vector} of X \cite{Perronnin2010}.
+also known as the \emph{Fisher vector} of X \cite{Perronnin2010}. $u_\lambda$ is chosen to be a Gaussian mixture model (GMM) (eq. \ref{gmmeq})
+
+\begin{equation}\label{gmmeq}
+u_\lambda = \sum_{i=1}^K w_iu_i(x)
+\end{equation}
+
+trained by Maximum Likelyhood (ML) estimation and an image training set.
+
+\begin{equation}\label{lambdaparams}
+\lambda = {w_i,\mu_i, \Sigma_i, i=1 \ldots K}
+\end{equation}
 
 \begin{equation}\label{gmm}
 G_\lambda^X = \frac{1}{T}\sum_{t=1}^T \nabla_\lambda \log u_\lambda(x_t)
