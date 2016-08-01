@@ -1226,8 +1226,15 @@ G_\lambda^X = \frac{1}{T}\sum_{t=1}^T \nabla_\lambda \log u_\lambda(x_t)
 
 \begin{equation} \label{descriptortogaussian}
 \gamma_t(i) = \frac{w_iu_i(x_t)}{\sum_j=1^Kw_ju_j(x_t)}
-  \end{equation}
+\end{equation}
 
+\begin{equation}\label{fishervectormu}
+\mathcal{G}_{\mu,i}^X = \frac{1}{T\sqrt{w_i}} \sum_{t=1}^T \gamma_t(i)\left(\frac{x_t - \mu_i}{\sigma_i}\right)
+\end{equation}
+
+\begin{equation}\label{fishervectorsigma}
+\mathcal{G}_{\sigma,i}^X = \frac{1}{T\sqrt{2w_i}} \sum_{t=1}^T \gamma_t(i)\left[\frac{(x_t - \mu_i)^2}{\sigma_i^2} -1\right]
+  \end{equation}
 
 
 
