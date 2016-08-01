@@ -1205,7 +1205,9 @@ $X = {x_t, t = 1 \ldots T}$ is a set of T local feature descriptors of an image 
  G_\lambda^X = \frac{1}{T}\nabla_\lambda\log u_\lambda(X)
 \end{equation}
 
-describes $X$ as gradient vector. The dimentionality of $G_\lambda^X$ depends only on the number of parameters in $\lambda$, not on $T$ \cite{Perronnin2010}. As different images have different numbers of interest points, this method allows for images in a database to be represented by codes of equal dimention. The Fisher information matrix of $u_\lambda$ is $F_\lambda$.
+describes $X$ as gradient vector. The dimentionality of $G_\lambda^X$ depends only on the number of parameters in $\lambda$, not on $T$ \cite{Perronnin2010}. As different images have different numbers of interest points, this method allows for images in a database to be represented by codes of equal dimention.
+
+We walk through the formation of the Fisher Vector as done in \cite{Perronnin2010}. The Fisher information matrix of $u_\lambda$ is $F_\lambda$.
 
 \begin{equation}\label{fishermatrix}
 F_\lambda = E_{x~u_\lambda}[\nabla_\lambda\log u_\lambda(x)']
@@ -1233,17 +1235,23 @@ where $w_i$ is the mixture weigh, $\mu_i$ is the mean and $\Sigma_i$ is the cova
 \begin{equation}\label{gmm}
 G_\lambda^X = \frac{1}{T}\sum_{t=1}^T \nabla_\lambda \log u_\lambda(x_t) \quad \cite{Perronnin2010}
 \end{equation}
+
+$\gamma_t(i)$ is a soft assignment of descriptor $x_t$ to Gaussian $i$
 \begin{equation} \label{descriptortogaussian}
 \gamma_t(i) = \frac{w_iu_i(x_t)}{\sum_{j=1}^Kw_ju_j(x_t)}
 \end{equation}
+and gradient vector $\mathcal{G_\lambda^X} = [\mathcal{G}_{\mu,i} \mathcal{G}_{\sigma,i}] $ where
 \begin{equation}\label{fishervectormu}
 \mathcal{G}_{\mu,i}^X = \frac{1}{T\sqrt{w_i}} \sum^T_{t=1} \gamma_t(i)\left(\frac{x_t - \mu_i}{\sigma_i}\right)
 \end{equation}
+
+is the gradient with respect to the mean $\mu_i$ and
+
 \begin{equation}\label{fishervectorsigma}
 \mathcal{G}_{\sigma,i}^X = \frac{1}{T\sqrt{2w_i}} \sum_{t=1}^T \gamma_t(i)\left[\frac{(x_t - \mu_i)^2}{\sigma_i^2} -1\right]
   \end{equation}
 
-
+is the gradient with respect to the standard deviation $\sigma_i$ (vector division is done term by term). \cite{Perronnin2010}
 
 
 $p$ is a probability density function with parameters $\lambda$ a variable length vector samples $X$
