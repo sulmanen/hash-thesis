@@ -440,13 +440,7 @@ Responsive web design usually demands different scale images for different scree
 
 A customer is reporting 20 to 30 \% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near duplicate image. The near duplicate detection system is working as expected, so an improved approach to near duplicate image detection is needed.
 
-Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experice on virtually any screen size.
-
-Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds.
-
-High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency.
-
-Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
+Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experice on virtually any screen size. Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
 
 It is typical for a site to serve different scaled version of the same image for each breakpoint usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UA's. The UA scaling is also not on par with expectations.
 
@@ -928,7 +922,7 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 
 \lstinputlisting{fed.m}
 
-\subsection{Large Scale Image Retrieval}
+\subsection{Large Scale Image Matching}
 
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
