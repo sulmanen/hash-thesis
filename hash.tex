@@ -1253,6 +1253,10 @@ The Fisher vector has not been used extensively for large scale retrieval possib
 
 Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors).
 
+\begin{equation}\label{fisherrewrite}
+\frac{1}{T}\mathcal{G}_i^X=\frac{w_i^X}{\sqrt{w_i}}\delta_i^X
+\end{equation}
+
 \begin{equation}\label{fisherdoteq}
 \mathcal{G}_\lambda^{X'}\mathcal{G}_\lambda^Y \propto \sum_{i=}^N\frac{w_i^Xw_i^Y}{w_i}\delta_i^{X'}\delta_i^Y,
 \end{equation}
