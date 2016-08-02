@@ -926,7 +926,9 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 
 \lstinputlisting{fed.m}
 
-\subsection{Large Scale Image Matching}
+\subsection{Large Scale Image Retrieval}
+
+When all the descriptors in the database do not fit into system RAM, the efficiency of the retrieval system collapses due to disk access \cite{Philbin2007}.
 
 In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
