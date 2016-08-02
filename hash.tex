@@ -514,6 +514,49 @@ Given a certain amount of delay, human mental efficiency drops regarding to the 
 \end{tabular}
 \end{center}\end{table}
 
+\subsection{Classifier comparison}
+\subsubsection{Receiver operating characteristic}
+Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/confusion}
+\end{center}
+\caption{Confusion matrix for binary classification \cite{Fawcett2006}. }
+\label{figconfusion}
+\end{figure}
+
+We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/ROC}
+\end{center}
+\caption{ROC space example with several discrete classifiers \cite{Fawcett2006}. }
+\label{figrocspace}
+\end{figure}
+
+
+\begin{equation}
+fp_{rate} = \frac{FP}{N}
+\end{equation}
+\begin{equation}
+tp_{rate} = \frac{TP}{P}
+\end{equation}
+\begin{equation}
+precision = \frac{TP}{TP + FP}
+\end{equation}
+
+\begin{equation}
+recall = \frac{TP}{P}
+\end{equation}
+
+\begin{equation}
+accuracy = \frac{TP + TN}{P + N}
+\end{equation}
+
+\subsubsection{Precision-Recall Curves}
+
 
 \subsection{Perceptual hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
@@ -1389,52 +1432,10 @@ Second, if the visual vocabulary is trained using one dataset and used on anothe
 Third, VLAD loses to BoW in performance for objects occupying a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD), which is especially useful in object recognition. MultiVLAD extracts a total of 14 VLAD descriptors from a single image. A $3 \times 3$ grid over the image gives $9$, $2 \times 2$ grid gives four and one for the whole image. This comes at the cost of memory but is still feasible on off the shelf hardware at ~28GB for 100 million images \cite{Arandjelovic2013}. MultiVLAD outperforms 1792-D (vocab. size) VLAD, but is found to be inferior for images that cover at least 20\% of the image \cite{Arandjelovic2013}.
 
 
-
-
 \clearpage
 
 \section{Materials and methods}
 \subsection{Comparing image classifiers}
-\subsubsection{Receiver operating characteristic}
-Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/confusion}
-\end{center}
-\caption{Confusion matrix for binary classification \cite{Fawcett2006}. }
-\label{figconfusion}
-\end{figure}
-
-We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/ROC}
-\end{center}
-\caption{ROC space example with several discrete classifiers \cite{Fawcett2006}. }
-\label{figrocspace}
-\end{figure}
-
-
-\begin{equation}
-fp_{rate} = \frac{FP}{N}
-\end{equation}
-\begin{equation}
-tp_{rate} = \frac{TP}{P}
-\end{equation}
-\begin{equation}
-precision = \frac{TP}{TP + FP}
-\end{equation}
-
-\begin{equation}
-recall = \frac{TP}{P}
-\end{equation}
-
-\begin{equation}
-accuracy = \frac{TP + TN}{P + N}
-\end{equation}
-
 \subsubsection{Simulated classifier comparison}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
 
