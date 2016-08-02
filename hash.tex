@@ -537,17 +537,17 @@ We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for outp
 \end{figure}
 
 
-\begin{equation}
+\begin{equation}\label{FPR}
 fp_{rate} = \frac{FP}{N}
 \end{equation}
-\begin{equation}
+\begin{equation}\label{TPR}
 tp_{rate} = \frac{TP}{P}
 \end{equation}
-\begin{equation}
+\begin{equation}\label{precision}
 precision = \frac{TP}{TP + FP}
 \end{equation}
 
-\begin{equation}
+\begin{equation}\label{recall}
 recall = \frac{TP}{P}
 \end{equation}
 
@@ -556,7 +556,7 @@ accuracy = \frac{TP + TN}{P + N}
 \end{equation}
 
 \subsubsection{Precision-Recall Curves}
-Provost et al. warned of misleading reporting using accuracy alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset \cite{Davis2006}. Precision-Recall (PR) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of datasets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
+Provost et al. warned of misleading reporting using accuracy alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of datasets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
 \begin{center}
