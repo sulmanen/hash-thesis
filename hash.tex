@@ -536,7 +536,6 @@ We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for outp
 \label{figrocspace}
 \end{figure}
 
-
 \begin{equation}\label{FPR}
 fp_{rate} = \frac{FP}{N}
 \end{equation}
@@ -551,7 +550,7 @@ precision = \frac{TP}{TP + FP}
 recall = \frac{TP}{P}
 \end{equation}
 
-\begin{equation}
+\begin{equation}\label{accuracy}
 accuracy = \frac{TP + TN}{P + N}
 \end{equation}
 
@@ -566,7 +565,7 @@ Provost et al. warned of misleading reporting using accuracy alone to rate binar
 \label{rocpr}
 \end{figure}
 
-
+Recall equals TPR (eq. \ref{recall}, \ref{tpr}) and precision is the TP-count over $TP \cup FP$ (eq. \ref{precision}). If recall $\neq 0$ then there exists a one-to-one correspondence between a ROC and PR curve \cite{Davis2006}.
 
 \subsection{Perceptual hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
