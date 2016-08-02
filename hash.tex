@@ -391,6 +391,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   LSH & Locality Sensitive Hashing\\
   mAP & mean average precision, a metric for retrieval performance\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
+  MLE & Maximum Likelyhood Estimation\\
   MultiVLAD & Multiple VLAD descriptors\\
   NDID & Near Duplicate Image Detection\\
   NN & Nearest Neighbor\\
@@ -1223,11 +1224,11 @@ As the Fisher information matrix $F_\lambda$ is symmetric and positive definite,
 \begin{equation}\label{fishervectorfinal}
 \mathcal{G}_\lambda^X = L_\lambda G_\lambda^X
 \end{equation}
-also known as the \emph{Fisher vector} of X \cite{Perronnin2010}. $u_\lambda$ is chosen to be a Gaussian mixture model (GMM) (eq. \ref{gmare $$meq})
+also known as the \emph{Fisher vector} of X \cite{Perronnin2010}. $u_\lambda$ is chosen to be a Gaussian mixture model (GMM) (eq. \ref{gmmeq}) where each $u_i$ is analogous to a visual word the size of the vocabulary being $K$ \cite{Perronnin2010a}
 \begin{equation}\label{gmmeq}
 u_\lambda = \sum_{i=1}^K w_iu_i(x)
 \end{equation}
-trained by Maximum Likelyhood (ML) estimation and an image training set. Model parameters $\lambda$ are
+trained by Maximum Likelyhood Estimation (MLE) and an image training set. Model parameters $\lambda$ are
 \begin{equation}\label{lambdaparams}
 \lambda = {w_i,\mu_i, \Sigma_i, i=1 \ldots K}
 \end{equation}
