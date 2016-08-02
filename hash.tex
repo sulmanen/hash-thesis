@@ -1250,7 +1250,7 @@ is the gradient with respect to the standard deviation $\sigma_i$ (vector divisi
 
 The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimentional representations (100k even) \cite{Perronnin2010a}. However when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
 
-Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors) is used.
+Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors) is used. This guarantees retrieval of the query image first if it is contained in the image database \cite{Perronnin2010a}.
 
 Writing eq. \ref{fishervectormu} in equations \ref{fishernormdistance}, \ref{fishertotalassignment} and \ref{fishermeanassignment} we get
 \begin{equation}\label{fisherrewrite}
