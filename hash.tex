@@ -1252,11 +1252,11 @@ The Fisher vector has not been used extensively for large scale retrieval possib
 
 Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors) is used.
 
-Writing eq. \ref{fishervectormu} by equations \ref{fishernormdistance}, \ref{fishertotalassignment} and \ref{fishermeanassignment} we get
+Writing eq. \ref{fishervectormu} in equations \ref{fishernormdistance}, \ref{fishertotalassignment} and \ref{fishermeanassignment} we get
 \begin{equation}\label{fisherrewrite}
 \frac{1}{T}\mathcal{G}_i^X=\frac{w_i^X}{\sqrt{w_i}}\delta_i^X
 \end{equation}
-so the dot product of image $X$ and $Y$ fisher vectors is proportional to
+so the dot product of image $X$ and $Y$ Fisher vectors is proportional to
 \begin{equation}\label{fisherdoteq}
 \mathcal{G}_\lambda^{X'}\mathcal{G}_\lambda^Y \propto \sum_{i=}^N\frac{w_i^Xw_i^Y}{w_i}\delta_i^{X'}\delta_i^Y,
 \end{equation}
@@ -1264,14 +1264,16 @@ where
 \begin{equation}\label{fishernormdistance}
 \delta_i^X = \frac{\mu_i^X - \mu_i}{\sigma_i},
 \end{equation}
-and for visual word $i$ $w_i^X$ is the fraction of descriptors of image $X$ soft-assigned to it.
+and for visual word $i$ $w_i^X$ is the fraction of descriptors of image $X$ soft-assigned to it
 \begin{equation}\label{fishertotalassignment}
-w_i^X = \frac{1}{T}\sum_{t=1}^T\gamma_t(i),
+w_i^X = \frac{1}{T}\sum_{t=1}^T\gamma_t(i).
   \end{equation}
-and $\mu_i^X$ mean of $X$s descriptors divided by the probability of assignment to the $i$th Gaussian
+$\mu_i^X$ is the mean of $X$s descriptors divided by the probability of assignment to the $i$th Gaussian
 \begin{equation}\label{fishermeanassignment}
 \mu_i^X=\frac{\sum_{t=1}^T\gamma_t(i)x_t}{\sum_{t=1}^T\gamma_t(i)}.
 \end{equation}
+
+
 
 \subsubsection{Vector of Locally Aggregated Descriptors}
 Since the introduction of BoW \cite{Sivic2003}, one of the most outstanding contributions in the field of feature detection and description is the \emph{Vector of Locally Aggregated Descriptors} (VLAD) making it possible to store all the descriptors of a very large dataset into main memory for fast matching and retrieval \cite{Arandjelovic2013}. The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted index becomes infeasible due to search efficiency (speed) and memory consumption of the image descriptors for large scale \cite{Jegou2010}.
