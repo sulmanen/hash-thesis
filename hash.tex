@@ -573,10 +573,10 @@ Recall equals TPR (eq. \ref{recall}, \ref{tpr}) and precision is the TP-count ov
 
 As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
 
-In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculated. \cite{Davies200}
+In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculatedaccording to equation \ref{printerpolate}. \cite{Davies200}
 
 \begin{equation}\label{printerpolate}
-
+\left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
 \end{equation}
 
 \subsection{Perceptual hashing} \label{perceptualhash}
