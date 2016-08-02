@@ -556,7 +556,7 @@ accuracy = \frac{TP + TN}{P + N}
 \end{equation}
 
 \subsubsection{Precision-Recall Curves}
-Provost et al. warned of misleading reporting when using accuracy alone \cite{Provost1997} and recommended ROC curves for reporting on binary classifiers. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset \cite{Davis2006}.
+Provost et al. warned of misleading reporting when using accuracy alone \cite{Provost1997} and recommended ROC curves for reporting on binary classifiers. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset \cite{Davis2006}. Precision-Recall curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of datasets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system.
 
 \subsection{Perceptual hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
