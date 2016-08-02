@@ -393,7 +393,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   LSH & Locality Sensitive Hashing\\
   mAP & mean average precision, a metric for retrieval performance\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
-  MLE & Maximum Likelyhood Estimation\\
+  MLE & Maximum Likelihood Estimation\\
   MultiVLAD & Multiple VLAD descriptors\\
   NDID & Near Duplicate Image Detection\\
   NN & Nearest Neighbor\\
@@ -451,23 +451,23 @@ Responsive web design usually demands different scale images for different scree
 
 A customer is reporting 20 to 30 \% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near duplicate image. The near duplicate detection system is working as expected, so an improved approach to near duplicate image detection is needed.
 
-Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experice on virtually any screen size. Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
+Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experience on virtually any screen size. Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
 
-It is typical for a site to serve different scaled version of the same image for each breakpoint usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UA's. The UA scaling is also not on par with expectations.
+It is typical for a site to serve different scaled version of the same image for each break point usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UAs. The UA scaling is also not on par with expectations.
 
 Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users' time and the network providers' resources.
 
-Matching image to metadata is unreliable by matching incoming URI to a scene URI. In a fast paced environment it is not valuable to the customer to add the same metadata to different versions of the same image.
+Matching image to meta-data is unreliable by matching incoming URI to a scene URI. In a fast paced environment it is not valuable to the customer to add the same meta-data to different versions of the same image.
 
-For added value to the customer, reliale matching of the incoming image to correct image metadata must be done based on pixel values. This problem is known as Near Duplicate Image Detection.
+For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near Duplicate Image Detection.
 
-Near duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to maching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance detection be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy for detecting near duplicate images?
+Near duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance detection be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy for detecting near duplicate images?
 
-This paper only considers near duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptograhic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an insteresting topic not considered in the scope of this paper.
+This paper only considers near duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not considered in the scope of this paper.
 
 \subsection{Research Questions}
 \begin{itemize}
-\item[--] To what degree if any is object instance detection by local features an improvement over dct-, and simple perceptual hashes for near duplicate image detection?
+\item[--] To what degree if any is object instance detection by local features an improvement over DCT-, and simple perceptual hashes for near duplicate image detection?
 \item[--] Can object instance detection by local features be deployed at large scale at ThingLink for improved near duplicate detection?
 \item[--] Does a soft realtime solution exist to improve on the current queued solution?
   \item[--] Can the method be chose in a way to extend later towards object discovery with minimal work?
@@ -476,26 +476,26 @@ This paper only considers near duplicate detection and excludes all other uses o
 \clearpage
 
 \section{Related research}
-To what degree if any is object instance detection by local features an improvement over dct-, and simple perceptual hashes for near duplicate image detection?
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple perceptual hashes for near duplicate image detection?
 
-ThingLink requirements for a classifier are a high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% false negatives for dct hash and reporting that the simple hash is also missing too many images though we do not have the excat numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
+ThingLink requirements for a classifier are a high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
 
-Near duplicate image definitions vary according to the problem at hand. At one extreme is ''pixel perfect'' matches while xmatching images of the same scene or object is at the other extreme.
+Near duplicate image definitions vary according to the problem at hand. At one extreme is ''pixel perfect'' matches while matching images of the same scene or object is at the other extreme.
 
-The simple hash and dct hash are perceptual hashes. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
+The simple hash and DCT hash are perceptual hashes. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
 
-Object instance detection by local features is a good choice for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted by the image. Local feature descriptors are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Object instance detection works especially well for processed duplicate images, the case we are trying to solve.
+Object instance detection by local features is a good choice for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted by the image. Local feature descriptors are by definition invariant to isotropic scaling and rotation and can withstand some offline distortion, noise and illumination changes. Object instance detection works especially well for processed duplicate images, the case we are trying to solve.
 
 In order to compare the perceptual hash classifiers to the local features classifier, we simulate near duplicate cases on a set of images. The performance of each classifier is then compared head to head.
 
 Perceptual hashing is a good choice for implementing near duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images.
 
-Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches amongst $10M$ images in $50ms$ \cite{Jegou2010}.
+Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
 \subsection{User Interface Response Times}
 The expectations of the customer to the application User Interface (UI) response times (table \ref{webresponsetimes}) set the standard for duplicate image detection system response time for this paper. They have not formally changed since Robert B. Miller researched the subject in 1968 \cite{Nielsen1993}. Nielsen and much of usability literature mentions ''user'' as the main actor of the system. Here we will use ''customer'' to maintain focus on high quality.
 
-The system should react as fast as possible, unless the customer cannot keep up with the actions in the UI. If response time is over 2s the user should be given continuous feedback, possibly via percent-done indicator \cite{Myers1985}. They are highly recommended to be used for operations taking over 10s \cite{Nielsen1993}. Progress indicators make the wait less painful by giving the user something to look at while waiting. They assure th user the system is working on their action and give the user some indication of how long before a response is expected. \cite{Nielsen1993a}
+The system should react as fast as possible, unless the customer cannot keep up with the actions in the UI. If response time is over 2s the user should be given continuous feedback, possibly via percent-done indicator \cite{Myers1985}. They are highly recommended to be used for operations taking over 10s \cite{Nielsen1993}. Progress indicators make the wait less painful by giving the user something to look at while waiting. They assure the user the system is working on their action and give the user some indication of how long before a response is expected. \cite{Nielsen1993a}
 
 If the system does not know how long an operation will take, a progress indicator will give the user indication that the system is working on their request and make the wait less painful. A busy cursor or a progress spinner may also be appropriate for tasks expected to take less than 10s as the user has little time to work on other tasks while waiting for the system. \cite{Nielsen1993a}
 
@@ -520,7 +520,7 @@ Given a certain amount of delay, human mental efficiency drops regarding to the 
 
 \subsection{Classifier comparison}
 \subsubsection{Receiver operating characteristic}
-Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the dct-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
+Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
 
 \begin{figure}[htb]
 \begin{center}
@@ -559,7 +559,7 @@ accuracy = \frac{TP + TN}{P + N}
 \end{equation}
 
 \subsubsection{Precision-Recall Curves}
-Provost et al. warned of misleading reporting using accuracy (eq. \ref{confaccuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of datasets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
+Provost et al. warned of misleading reporting using accuracy (eq. \ref{confaccuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -573,7 +573,7 @@ Recall equals TPR (eq. \ref{recall}, \ref{TPR}) and precision is the TP-count ov
 
 As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
 
-In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculatedaccording to equation \ref{printerpolate}. \cite{Davis2006}
+In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculated according to equation \ref{printerpolate}. \cite{Davis2006}
 
 \begin{equation}\label{printerpolate}
 \left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
@@ -662,9 +662,9 @@ In other words, it is the number of characters two strings differ. In binary str
 \subsubsection{Block mean based simple hash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}.
 
-The simple hash (eq. \ref{simplehasheq}) scales the image image to $8px * 8px$ grayscale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to.
+The simple hash (eq. \ref{simplehasheq}) scales the image image to $8px * 8px$ gray scale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to.
 
-More specifically the resulting hash has two parts. The most significant $64$ bits represent the image pixels and the least significatn $64bits$ represent the horizontal flip of the $8px * 8px$ grayscale image.
+More specifically the resulting hash has two parts. The most significant $64$ bits represent the image pixels and the least significant $64bits$ represent the horizontal flip of the $8px * 8px$ gray scale image.
 
 \begin{equation} \label{simplehasheq}
   \begin{split}
@@ -694,7 +694,7 @@ A simple hash is simple and fast to calculate so it meets all the criteria in ta
 \begin{tabular}{lp{0.5\linewidth}}
   Calculation step\\
   \hline \hline
-  Scale image to 8 by 8 px grayscale\\
+  Scale image to 8 by 8 px gray scale\\
   \hline
   64 adds\\
   \hline
@@ -715,16 +715,16 @@ A simple hash is simple and fast to calculate so it meets all the criteria in ta
 
 As shown in table \ref{simplesteps}, the simple hash is very simple to calculate. It is also fast as mentioned earlier. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
 
-Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set doesn not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
+Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
 
 
 \subsubsection{DCT based hash}
-According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromize between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A dct based hash is formed using a grayscale scaled version of the image, a dct transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
+According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromised between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
-To create the hash, the image is reduced to $32$ by $32$ px grayscale. From the result, the most significant byte of the pixel (reduced image) is used. A $N =32$ DCT eq. \ref{dcteq} is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
+To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. A $N =32$ DCT eq. \ref{dcteq} is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
 
 
-Using only $N = 8$ (topleft corner) of the $N=32$ DCT, the average of the result is calculated and origin result value is discarded as it would throw off the average. The use of average as a threshold is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively according to eq. \ref{simplehasheq}.
+Using only $N = 8$ (top left corner) of the $N=32$ DCT, the average of the result is calculated and origin result value is discarded as it would throw off the average. The use of average as a threshold is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively according to eq. \ref{simplehasheq}.
 
 \begin{equation}\label{dcteq}
 T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)u\pi}{2N}\right]cos\left[\frac{(2y + 1)v\pi}{2N}\right]
@@ -737,7 +737,7 @@ T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)
     \end{cases}
 \end{equation}
 
-The image is scaled down to 32 by 32 px grayscale and the most significant byte of the pixel is extracted. The two dimentional $N=32$ type-II DCT (eq. \ref{dcteq}) is calculated. Only the top left 8 by 8 corner of the DCT result is used. Most of the image information resides in the low frequency components (top left corner). From these 64 values the average is calculated and the origin value is dropped from the average. In figure \ref{dctkernels} we see the origin being very large compared to the rest of the DCT basis values. This throws off the average and thresholding. The 8 by 8 values are thresholded by eq. \ref{simplehasheq} into a 64 bit hash. These steps are outlined in table \ref{dctsteps}.
+The image is scaled down to 32 by 32 px gray scale and the most significant byte of the pixel is extracted. The two dimensional $N=32$ type-II DCT (eq. \ref{dcteq}) is calculated. Only the top left 8 by 8 corner of the DCT result is used. Most of the image information resides in the low frequency components (top left corner). From these 64 values the average is calculated and the origin value is dropped from the average. In figure \ref{dctkernels} we see the origin being very large compared to the rest of the DCT basis values. This throws off the average and thresholding. The 8 by 8 values are thresholded by eq. \ref{simplehasheq} into a 64 bit hash. These steps are outlined in table \ref{dctsteps}.
 
 \begin{figure}[htb]
 \begin{center}
@@ -779,11 +779,11 @@ This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2
 \subsection{Local features}
 To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
-Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
+Key-point detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
 
 \begin{enumerate}
-\item Find keypoints of interest in image
-\item Encode keypoints in a visual descriptor
+\item Find key-points of interest in image
+\item Encode key-points in a visual descriptor
 \item Match incoming descriptor to all known descriptors
 \end{enumerate}
 
@@ -791,10 +791,10 @@ Local features have been in use since Moravec invented the corner detector in th
 
 Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
-We are expecting to improve over perceptual hashes which withstand scaling extremely well. However they are weak under image transformations that alter the relationships betwen pixel values such as rotaition and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
+We are expecting to improve over perceptual hashes which withstand scaling extremely well. However they are weak under image transformations that alter the relationships between pixel values such as rotation and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
 
 \subsubsection{Scale Invariant Feature Transform}
-Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near realtime. \cite{Lowe2004}
+Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near real time. \cite{Lowe2004}
 
 A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}.
 
@@ -802,9 +802,9 @@ SIFT descriptors are extracted by
 
 \begin{enumerate}
 \item Scale space extrema detection identifies scales and locations that can be repeatedly extracted under changing conditions.
-\item Keypoint localization
+\item Key-point localization
 \item Orientation assignment
-\item Keypoint descriptor
+\item Key-point descriptor
 \end{enumerate}
 \cite{Lowe2004}
 
@@ -829,7 +829,7 @@ G(x,y,k\sigma) - G(x, y, \sigma) \approx (k - 1)\sigma^{2}\nabla^{2}G
 
 where the right hand side is a scale-normalized Laplacian of Gaussian.
 
-$D$ are keypoint candidates. The robust keypoints are weeded out by fitting them to the surrounding data. \cite{Lowe2004} Adding the offset
+$D$ are key-point candidates. The robust key-points are weeded out by fitting them to the surrounding data. \cite{Lowe2004} Adding the offset
 
 \begin{equation}\label{keypointoffset}
 \hat{\boldsymbol{x}} = - \frac{\partial^2D^-1}{\partial \boldsymbol{x}^2}\frac{\partial D}{\partial \boldsymbol{x}}
@@ -865,9 +865,9 @@ The integral image is very quick to calculate using the cumulative row sum $s(x,
 \label{integralimagefig}
 \end{figure}
 
-The calculation of the descriptor also uses integral images for speed. The descriptor is a distribution of Haar-wavelet reponses within the interest point neighbourhood. \cite{Bay2006}
+The calculation of the descriptor also uses integral images for speed. The descriptor is a distribution of Haar-wavelet responses within the interest point neighborhood. \cite{Bay2006}
 
-The orientation of the descriptor is determined by Haar-wavelet responses in $x$ and $y$ directions in the scale $s$ that the keypoint was detected with $6s$ radius at sampling step size also $s$. Wavelet size is $4s$. Responses are weighted with a Gaussian $(\sigma = 2.5s)$ at the interest point. The dominant direction is estimated by summing up the responses over a sliding window angle of $\frac{\pi}{3}$. The horizontal and vertical results are summed to form a new vector and the longest vector angle is the orientation of the interest point. The SURF descriptor is a square region centered on the interest point. \cite{Bay2006}
+The orientation of the descriptor is determined by Haar-wavelet responses in $x$ and $y$ directions in the scale $s$ that the key-point was detected with $6s$ radius at sampling step size also $s$. Wavelet size is $4s$. Responses are weighted with a Gaussian $(\sigma = 2.5s)$ at the interest point. The dominant direction is estimated by summing up the responses over a sliding window angle of $\frac{\pi}{3}$. The horizontal and vertical results are summed to form a new vector and the longest vector angle is the orientation of the interest point. The SURF descriptor is a square region centered on the interest point. \cite{Bay2006}
 
 The size of the region is $20s$ and is split into $4 \times 4$ sub-regions. Let $d_x$ and $d_y$ be Haar wavelet responses in along horizontal and vertical region edges respectively. For robustness, the responses are weighted with a Gaussian $(\sigma = 3.3)$ and $d_x, d_y$ are summed independently to form the first part of the sub-region descriptor in eq. \ref{surfdescriptor}. \cite{Bay2006}
 
@@ -876,12 +876,12 @@ The size of the region is $20s$ and is split into $4 \times 4$ sub-regions. Let 
 v = (\sum d_x, \sum d_y, \sum \abs{d_x}, \sum \abs{d_y})
   \end{equation}
 
-The second part of the descriptor, $\sum \abs{d_x}, \sum \abs{d_y}$ accounts for sizes of polarity changes. As each region is divided into $4 \times 4$ subregions, each region generates a 64 length descriptor. Normalization to a unit vector provides scale invariance while the wavelet responses are invariant to luminance changes. \cite{Bay2006}
+The second part of the descriptor, $\sum \abs{d_x}, \sum \abs{d_y}$ accounts for sizes of polarity changes. As each region is divided into $4 \times 4$ sub-regions, each region generates a 64 length descriptor. Normalization to a unit vector provides scale invariance while the wavelet responses are invariant to luminance changes. \cite{Bay2006}
 
 Matching requires fast indexing and additionally storing the sign of the Laplacian for the interest point speeds up searches. The 'Fast-Hessian' detector in the SURF paper was found to be three times faster than the DoG detector by Lowe used in SIFT. SURF improved over SIFT in recall by $4.5\%$. \cite{Bay2006}
 
 \subsubsection{KAZE Features}
-KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no downsampling of the scale space like in SIFT. The computation time is simlar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. For KAZE features one must
+KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no down-sampling of the scale space like in SIFT. The computation time is similar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundaries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. For KAZE features one must
 
 \begin{enumerate}
 \item build nonlinear scale space using Additive Operator Splitting
@@ -966,7 +966,7 @@ t_i = \frac{1}{2}\sigma^2_i,\{i=0\ldots M\}
 
 To reduce noise the source image may be processed with a Gaussian of $\sigma_0$. The contrast factor $\lambda$ is the 70th percentile of the input image gradient histogram.
 
-The pyramidal FED scheme has an outer loop and an inner loop. The inner loop performs the filterign according to step sizes set by the outer loop. The outerloop also takes care of downsampling with mask $(\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$. The downsampled image is the input to the next octave. For 2D images the maximum step size is $\tau_{max}$ when the image derivative grid size is 1px. The contrast parameter $\lambda$ also needs to be modified for each octave as the downsampling mask reduces contrast by 25\%.
+The pyramidal FED scheme has an outer loop and an inner loop. The inner loop performs the filtering according to step sizes set by the outer loop. The outer loop also takes care of down-sampling with mask $(\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$. The down-sampled image is the input to the next octave. For 2D images the maximum step size is $\tau_{max}$ when the image derivative grid size is 1px. The contrast parameter $\lambda$ also needs to be modified for each octave as the down-sampling mask reduces contrast by 25\%.
 
 A Hessian (eq. \ref{akazehessian}) is calculated for each $L^i$
 
@@ -985,11 +985,11 @@ In order to be accepted as a feature location, a maxima has to
 \item it is maxima at level $i+1$ and $i-1$ in a $\sigma_i\times\sigma_i$ window
 \end{enumerate}
 
-After detection the precise interest point location is found by fitting a 2D quadratic function to the determinant of the Hessian response in the neighbourhood of $3 \times 3$ px and finding the maximum.
+After detection the precise interest point location is found by fitting a 2D quadratic function to the determinant of the Hessian response in the neighborhood of $3 \times 3$ px and finding the maximum.
 
 A-KAZE uses a Modified Local Difference Binary descriptor. The LDB descriptor is modified to speed up calculations relating to rotation invariance.
 
-LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses grids of finer steps dividing the descriptor into subgrids. M-LDB rotates these LDB grids to the interest point orientation. Due to this rotation, integral images may not be used to calculate averages of pixels inside the subgrids, the subgrids are subsampled in steps which are a function of the scale $\sigma$ M-LDB re-uses the derivatives from the detection step in the descriptor.
+LDB stores intensity, means of the horizontal and vertical derivatives. LDB uses grids of finer steps dividing the descriptor into sub-grids. M-LDB rotates these LDB grids to the interest point orientation. Due to this rotation, integral images may not be used to calculate averages of pixels inside the sub-grids, the sub-grids are sub-sampled in steps which are a function of the scale $\sigma$ M-LDB re-uses the derivatives from the detection step in the descriptor.
 
 \lstinputlisting{fed.m}
 
@@ -997,12 +997,12 @@ LDB stores intencity, means of the horizontal and vertical derivatives. LDB uses
 
 When all the descriptors in the database do not fit into system RAM, the efficiency of the retrieval system collapses due to disk access \cite{Philbin2007}.
 
-In order to match amongst a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
+In order to match among a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
 \subsubsection{Nearest Neighbor Search}
 Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search (eq. \ref{nneq}) which Donald Knuth also named as the \emph{post-office problem} in vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?'' which is analogous to ''which known image descriptor is closest to this new image descriptor?''.
 
-Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimentionality of each image descriptor.
+Matching in a set of millions of images is not feasible in user facing applications as the time complexity is $\mathcal{O}(nd)$ where $n$ is the number of image descriptors in the set and $d$ is the dimensionality of each image descriptor.
 
 
 \begin{equation}
@@ -1018,7 +1018,7 @@ NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \label{nntradeoffs}
 \end{figure}
 
-To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Aprroximate nearest neighbor mehtods are able to solve the ''curse of dimensionality'' in many cases.
+To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Approximate nearest neighbor methods are able to solve the ''curse of dimensionality'' in many cases.
 
 Approximate nearest neighbor is defined as in a normed space $l_p^d$ preprocess set of points $P$ to efficiently return a point $p\in P$ for any given query point $q$, such that $d(q,p) \lq (1 + \epsilon)d(q,P)$. $d(q, P)$ is the distance between the closest point in $P$ to $q$. \cite{Gionis1999}
 
@@ -1053,15 +1053,15 @@ where $d^*$ is the distance from $q$ to the nearest point over all successful qu
 
 
 \subsubsection{min-Hash}
-min-Hash was used in \cite{Broder1997} to search for similar text documents amongst 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images for sample data sets. \cite{Chum2010} Uses min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. It finds similar images with a probability near to one, near similar images with small probability and unrelated images with 0 probability \cite{Chum2010}.
+min-Hash was used in \cite{Broder1997} to search for similar text documents among 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images for sample data sets. \cite{Chum2010} Uses min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. It finds similar images with a probability near to one, near similar images with small probability and unrelated images with 0 probability \cite{Chum2010}.
 
-Essentially it is LSH for sets \cite{Chum2010}. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large datasets.
+Essentially it is LSH for sets \cite{Chum2010}. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets.
 
 The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
 
-Considering the 128 dimentional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a dataset with 128 columns but only 400 rows.
+Considering the 128 dimensional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a data set with 128 columns but only 400 rows.
 
-min-Hash (eq. \ref{minhash}) is the smalles element of set $\mathcal{A_i}$ under ordering by $f_j$
+min-Hash (eq. \ref{minhash}) is the smallest element of set $\mathcal{A_i}$ under ordering by $f_j$
 
 \begin{equation}\label{minhash}
 m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X). \quad \cite{Chum2008}
@@ -1073,7 +1073,7 @@ It estimates object (text or image) similarity based on (eq. \ref{minhash}) the 
 sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
 \end{equation}
 
- and for images drawing inspiration from the \emph{tf-idf} scheme a histogram instersection approach
+ and for images drawing inspiration from the \emph{tf-idf} scheme a histogram intersection approach
 
 \begin{equation}\label{similarityminhashimages}
 sim_h(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
@@ -1119,21 +1119,21 @@ Their requirements are similar to what is attempted in this paper.
 
 \begin{enumerate}
 \item scalable to tens of millions of images
-\item adding new images to the dtabase is possible without recomputing the entire cluster
+\item adding new images to the database is possible without recomputing the entire cluster
 \item easy to parallellize
 \item probability of recall is independent of cluster size \cite{Chum2010}.
 \end{enumerate}
 
-For querying the Oxford Landmark dataset, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC \cite{Chum2010}.
+For querying the Oxford Landmark data set, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC \cite{Chum2010}.
 
-Growing the dataset size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the dataset size and $L$ to be the number of images in the cluster \cite{Chum2010}. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table.
+Growing the data set size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the data set size and $L$ to be the number of images in the cluster \cite{Chum2010}. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table.
 
-In \cite{Lee2010} a high $FP$-rate is a serious problem for large dataset. Another problem for direct image retrieval is low recall \cite{Chum2010}.
+In \cite{Lee2010} a high $FP$-rate is a serious problem for large data set. Another problem for direct image retrieval is low recall \cite{Chum2010}.
 
 \subsubsection{Bag-of-Visual Words}\label{BOW}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
 
-To calculate image descriptors two types of viewopint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.\cite{Sivic2003}
+To calculate image descriptors two types of viewpoint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.\cite{Sivic2003}
 
 The second type of region used is the Maximally Stable (MS) region. For these regions are the region area stays constant as the intensity threshold is changed.
 
@@ -1157,7 +1157,7 @@ with $n_{id}$ is word $i$ appearing $n$ times in document $d$ and $n_{d}$ is the
 
 where $N_{rel}$ is the number of relevant images for particular query image, $N$ is the total number of images and $R_{i}$ is the $i$th image rank. $Rank$ is a number between 0 and 1.
 
-Retrieval uses an inverted file where each word has a hit list for all occurrences of the word in all documents. In the visual word case, each visual word has knowledge of the image it is found in. The document vector is sparce and the retrieval is very fast.
+Retrieval uses an inverted file where each word has a hit list for all occurrences of the word in all documents. In the visual word case, each visual word has knowledge of the image it is found in. The document vector is sparse and the retrieval is very fast.
 
 The user specifies an area of interest in a frame and descriptors are calculated for stable regions. The descriptors are then quantized into visual words. A stop list filters out all visual words which occur frequently. Sivic and Zisserman found their case to work best dropping top 5\% and bottom 10\% of words.
 
@@ -1174,9 +1174,9 @@ d(x,y)^2 \approx d(x,q(y))^2
 
 where $x$ is the query vector, $y$ is the database vector and quantizer function is $q(y)$. The error on estimated distance is bound by the quantization error, $e_d \leq e_q$.  \cite{Jegou2014}
 
-The quantizer should be fast enough and precise. The database vector $y$ is split $y \rightarrow [y_1 \ldots y_m]$ each of which is quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimentinal vector can be split into four subvectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
+The quantizer should be fast enough and precise. The database vector $y$ is split $y \rightarrow [y_1 \ldots y_m]$ each of which is quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimensional vector can be split into four sub-vectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
 
-In order to query amongst
+In order to query among
 
 In \emph{asymmetric distance computation} (ADC) in eq. \ref{adceq}, the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case (fig. \ref{nosdc}) called \emph{symmetric distance computation} (SDC) not covered here. Distance $d(x,y)$ approximation $\tilde{d}(x,y)$
 
@@ -1242,13 +1242,13 @@ When querying $k-ANN(x)$ the inverted list $L_i$ that corresponds to the coarse 
 To query k-ANN of $x$
 \begin{enumerate}
 \item do $q_c(x)$ to find $w$ nearest lists in $\mathcal{L}_i$ and from subset of $\mathcal{Y}$
-\item $\forall j$ do $d(u_j(r(x)), c_{i,j})^2$, the squared distance for subquantized values and its centroids
+\item $\forall j$ do $d(u_j(r(x)), c_{i,j})^2$, the squared distance for sub-quantized values and its centroids
 \item sum up $m$ looked up values by executing equation \ref{ivfadcestimate}
   \item select K nearest neighbors of $x$ from subset of $\mathcal{Y}$.
 \end{enumerate}
 \cite{Jegou2008}
 
-If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to be visited where $k'$ is the number of centroids in $q_c$ and $w$ is the number of NN for $q_c(x)$ retrievied \cite{Jegou2008}.
+If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to be visited where $k'$ is the number of centroids in $q_c$ and $w$ is the number of NN for $q_c(x)$ retrieved \cite{Jegou2008}.
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
@@ -1264,13 +1264,13 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
 \end{center}\end{table}
 
 \subsubsection{The Fisher Vector}\label{FV}
-The Fisher kernel brings the best of both pattern classification with generative and discriminative methods \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector, the Fisher Vector (FV) (eq. \ref{fishervectorfinal}), given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accomodates for variable amounts of features extracted from an image. It was applied to image classification by by Perronin et al. \cite{Perronnin2007} and improved in \cite{Perronnin2010} where images are treated as signals and the generative model (GMM) is a kind of visual vocabulary. \cite{Perronnin2010a} extends FV for use in large scale image retrieval. Similar to $tf-idf$, it discounts the influence of common visual words (Gaussians in this case) \cite{Perronnin2010a}.
+The Fisher kernel brings the best of both pattern classification with generative and discriminative methods \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector, the Fisher Vector (FV) (eq. \ref{fishervectorfinal}), given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accommodates for variable amounts of features extracted from an image. It was applied to image classification by by Perronin et al. \cite{Perronnin2007} and improved in \cite{Perronnin2010} where images are treated as signals and the generative model (GMM) is a kind of visual vocabulary. \cite{Perronnin2010a} extends FV for use in large scale image retrieval. Similar to $tf-idf$, it discounts the influence of common visual words (Gaussians in this case) \cite{Perronnin2010a}.
 
 The Fisher vector according to \cite{Perronnin2010} can be used to process local descriptors. $X = {x_t, t = 1 \ldots T}$ is a set of T local feature descriptors of an image generated by a process modeled by $u_\lambda$.
 \begin{equation}\label{fishervector}
  G_\lambda^X = \frac{1}{T}\nabla_\lambda\log u_\lambda(X)
 \end{equation}
-describes $X$ as gradient vector. The dimentionality of $G_\lambda^X$ depends only on the number of parameters in $\lambda$, not on $T$ \cite{Perronnin2010}. As different images have different numbers of interest points, this method allows for images in a database to be represented by codes of equal dimention. Equation \ref{fishervector} describes the direction in which parameters should be adjusted to best fit the model. One may characterize a signal with a gradient vector derived from a generative probability model $u_\lambda$ and to subsequently feed this representation to a discriminative classifier. \cite{Perronnin2007}
+describes $X$ as gradient vector. The dimensionality of $G_\lambda^X$ depends only on the number of parameters in $\lambda$, not on $T$ \cite{Perronnin2010}. As different images have different numbers of interest points, this method allows for images in a database to be represented by codes of equal dimension. Equation \ref{fishervector} describes the direction in which parameters should be adjusted to best fit the model. One may characterize a signal with a gradient vector derived from a generative probability model $u_\lambda$ and to subsequently feed this representation to a discriminative classifier. \cite{Perronnin2007}
 
 We walk through the formation of the Fisher Vector as done in \cite{Perronnin2010}. The Fisher information matrix of $u_\lambda$ is $F_\lambda$.
 \begin{equation}\label{fishermatrix}
@@ -1289,7 +1289,7 @@ also known as the \emph{Fisher vector} of X \cite{Perronnin2010}. $u_\lambda$ is
 \begin{equation}\label{gmmeq}
 u_\lambda = \sum_{i=1}^K w_iu_i(x)
 \end{equation}
-trained by Maximum Likelyhood Estimation (MLE) and an image training set. Model parameters $\lambda$ are
+trained by Maximum Likelihood Estimation (MLE) and an image training set. Model parameters $\lambda$ are
 \begin{equation}\label{lambdaparams}
 \lambda = {w_i,\mu_i, \Sigma_i, i=1 \ldots K}
 \end{equation}
@@ -1312,7 +1312,7 @@ is the gradient with respect to the mean $\mu_i$ and
   \end{equation}
 is the gradient with respect to the standard deviation $\sigma_i$ (vector division is done term by term). \cite{Perronnin2010}
 
-The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimentional representations (100k even) \cite{Perronnin2010a}. However when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
+The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimensional representations (100k even) \cite{Perronnin2010a}. However when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
 
 Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors) is used. This guarantees retrieval of the query image first if it is contained in the image database \cite{Perronnin2010a}.
 
@@ -1342,11 +1342,11 @@ The $\frac{w_i^Xw_i^Y}{w_i}$ on the right side of eq. \ref{fisherdoteq} is the p
 If $\delta_i^{X'}$ and $\delta_i^{Y}$ have similar direction and a large norm, $\delta_i^{X'}\delta_i^{Y}$ in equation \ref{fisherdoteq} is large. Their direction is similar if the descriptors of $X$ and the descriptors of $Y$ assigned to visual word (Gaussian) $i$ have a similar average. $\delta_i^{X'}$ and $\delta_i^{Y}$ have a large norm if $\mu_i^X$ and $\mu_i^Y$ are far from the Gaussian mean $\mu_i$ of the visual word (Gaussian) of $i$. \cite{Perronnin2010a}
 
 \subsubsection{Vector of Locally Aggregated Descriptors}
-Since the introduction of BoW \cite{Sivic2003}, one of the most outstanding contributions in the field of feature detection and description is the \emph{Vector of Locally Aggregated Descriptors} (VLAD) making it possible to store all the descriptors of a very large dataset into main memory for fast matching and retrieval \cite{Arandjelovic2013}. The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted index becomes infeasible due to search efficiency (speed) and memory consumption of the image descriptors for large scale \cite{Jegou2010}.
+Since the introduction of BoW \cite{Sivic2003}, one of the most outstanding contributions in the field of feature detection and description is the \emph{Vector of Locally Aggregated Descriptors} (VLAD) making it possible to store all the descriptors of a very large data set into main memory for fast matching and retrieval \cite{Arandjelovic2013}. The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted index becomes unfeasible due to search efficiency (speed) and memory consumption of the image descriptors for large scale \cite{Jegou2010}.
 
 VLAD optimizes the three constraints in fig. \ref{nntradeoffs} for NN-search jointly. There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. Search efficiency was solved by min-Hashing \cite{Chum2008}, \cite{Chum2009} but they still maintain a significant memory footprint \cite{Jegou2010}.
 
-VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption drawing inspiration from BoW and the Fisher Vector (FV) (section \ref{FV}). In \cite{Jegou2012} VLAD is shown to be a non-probabilistic FV. VLAD greatly exceeds BoW in performance for a set of images of the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with indexing. \cite{Jegou2010}
+VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption drawing inspiration from BoW and the Fisher Vector (FV) (section \ref{FV}). In \cite{Jegou2012} VLAD is shown to be a non-probabilistic FV. VLAD greatly exceeds BoW in performance for a set of images of the same size. It provides good search accuracy with reasonable vector dimensionality. It jointly optimizes reduction in dimensions with indexing. \cite{Jegou2010}
 
 Roughly, the main steps of computing a VLAD descriptor are
 \begin{enumerate}
@@ -1355,14 +1355,14 @@ Roughly, the main steps of computing a VLAD descriptor are
 \item providing efficient indexing for all vectors in the system.
 \end{enumerate}
 
-Like in \cite{Sivic2003}, \cite{Jegou2011} a codebook $\mathcal{C}={c_1 \ldots c_k}$ of $k$ visual words is created using k-means clustering. For each $d$-dimentional local descriptor $x$ is associated to the nearest visual word (eq. \ref{vladdescriptortovw})
+Like in \cite{Sivic2003}, \cite{Jegou2011} a code book $\mathcal{C}={c_1 \ldots c_k}$ of $k$ visual words is created using k-means clustering. For each $d$-dimensional local descriptor $x$ is associated to the nearest visual word (eq. \ref{vladdescriptortovw})
 
 \begin{equation}
   \label{vladdescriptortovw}
 c_i = NN(x).
 \end{equation}
 
-Final dimention $D$ for the VLAD descriptor is in eq. \ref{vladdescriptordimention}
+Final dimension $D$ for the VLAD descriptor is in eq. \ref{vladdescriptordimention}
 
 \begin{equation}
   \label{vladdescriptordimention}
@@ -1384,7 +1384,7 @@ where $i$ is an index for the visual word and $j$ an index for the local descrip
 
 .\cite{Jegou2014} Excellent results can be obtained with a small $k$ \cite{Jegou2014}. We will use $k=256$ in this paper.
 
-To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimention $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimentionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
+To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimension $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimensionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
 
 Principal Component Analysis (PCA) transforms observed data into linearly uncorrelated principal components. Were assuming data $\boldsymbol{X} \in \Re^{p}$ to be zero mean, that is eq. \ref{zeromean} holds.
 
@@ -1398,7 +1398,7 @@ Let the reconstruction of $\boldsymbol{X}$ in $\Re^{q}$ be
 f(\lambda) = \mu + v_q\lambda
 \end{equation}
 
-The dimention of the model is $q$ and the mean $\mu \in \Re^p$. $v_q$ is a $p \times q$ matrix with $q$ orthogonal unit vetors. $\lambda \in \Re^q$ are the principal components in $q$ dimensions. The reconstruction error is given by
+The dimension of the model is $q$ and the mean $\mu \in \Re^p$. $v_q$ is a $p \times q$ matrix with $q$ orthogonal unit vectors. $\lambda \in \Re^q$ are the principal components in $q$ dimensions. The reconstruction error is given by
 
 \begin{equation}\label{pcaerror}
 \min_{\mu,\lambda_1\ldots N, v_q}\sum_{n=1}^N \abs{x_n-\mu - v_q\lambda_n}.
@@ -1422,7 +1422,7 @@ The variance of different components of $x_p$ are not balanced due to the PCA \c
 Q = I - 2vv^T
 \end{equation}
 
-maybe used to find $Q$ such that $X'' = QX' = QMX$ components have equal variances.\cite{Jegou2014} Only then can the dimentionality reduction and indexing be optimized jointly to find D', the optimal PCA output dimension $D'$ by
+maybe used to find $Q$ such that $X'' = QX' = QMX$ components have equal variances.\cite{Jegou2014} Only then can the dimensionality reduction and indexing be optimized jointly to find D', the optimal PCA output dimension $D'$ by
 
 \begin{equation}\label{jointoptimization}
 e(D') = \frac{1}{card(\mathcal{L})}\sum_{x\in \mathcal{L}}\norm{\epsilon_p(x)}^2 + \norm{\epsilon_q(x_p)}^2
@@ -1440,13 +1440,13 @@ Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search perfo
 
 In \cite{Arandjelovic2013}, Arandjelovi\'{c} and Zisserman modify VLAD in three ways to improve retrieval performance. First they decrease burstiness \cite{Jegou2009}, \cite{Delhumeau2013} (fig. \ref{vladburstiness}), few large components in the VLAD vector can dominate similarity computations. SSR normalization decreases burstiness but does not eliminate it. Intra-normalization alleviates burstiness and improves \emph{mAP} \cite{Arandjelovic2013}. Instead of L2-, or signed square root-normalizing over all descriptor blocks, the sum of the residuals within each VLAD block is normalized. Afterwards L2 normalization is carried out. Intra-normalization is very successful in repressing burstiness (fig. \ref{vladburstiness}).
 
-Second, if the visual vocabulary is trained using one dataset and used on another, the recognition performance suffers. Vocabulary adaptation in \cite{Arandjelovic2013} alleviates the symptoms without re-training the vocabulary, an expensive and inconvenient operation especially for large datasets. It would also require the storing of the original descriptors. \emph{Cluster center adaptation} uses $\hat{\mu}$ which are adapted to the mean of descriptors assigned to the same center $k$. The VLAD descriptors are then updated to use the new centers. Their assignment to a center does not change, but this makes comparing image similarity using VLAD more precise. Vocabulary adaptation and intra-normalization are orthogonal and may be used independently. Increases of as much as 34\% (fig. \ref{vladadapt}) may be observed using both vocabulary adaptation and intra-normalization. \cite{Arandjelovic2013}
+Second, if the visual vocabulary is trained using one data set and used on another, the recognition performance suffers. Vocabulary adaptation in \cite{Arandjelovic2013} alleviates the symptoms without re-training the vocabulary, an expensive and inconvenient operation especially for large data sets. It would also require the storing of the original descriptors. \emph{Cluster center adaptation} uses $\hat{\mu}$ which are adapted to the mean of descriptors assigned to the same center $k$. The VLAD descriptors are then updated to use the new centers. Their assignment to a center does not change, but this makes comparing image similarity using VLAD more precise. Vocabulary adaptation and intra-normalization are orthogonal and may be used independently. Increases of as much as 34\% (fig. \ref{vladadapt}) may be observed using both vocabulary adaptation and intra-normalization. \cite{Arandjelovic2013}
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=3cm]{figures/vladadapt}
 \end{center}
-\caption{Comparing retrieval performance in the INRIA Holidays dataset between VLAD, \emph{innorm} intra-normalization, \emph{adapt} vocabulary adaptation, \emph{adapt+innorm} is both vocabulary adaptation and intra-normalization. \cite{Arandjelovic2013}.}
+\caption{Comparing retrieval performance in the INRIA Holidays data set between VLAD, \emph{innorm} intra-normalization, \emph{adapt} vocabulary adaptation, \emph{adapt+innorm} is both vocabulary adaptation and intra-normalization. \cite{Arandjelovic2013}.}
 \label{vladadapt}
 \end{figure}
 
@@ -1460,7 +1460,7 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 \subsubsection{Simulated classifier comparison}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
 
-To compare object instance recognition by SIFT features to perceptual hashing we will run simulations. We are faced with a binary classification problem. Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, dct hash and large scale image retrieval with SIFT features.
+To compare object instance recognition by SIFT features to perceptual hashing we will run simulations. We are faced with a binary classification problem. Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, DCT hash and large scale image retrieval with SIFT features.
 
 To begin production implementation solving the near similar image matching problem with SIFT-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. A set of images is needed, as well as well as a modified set described in table \ref{modifiedimages} simulating scenarios typically encountered in duplicate image detection.
 
@@ -1492,7 +1492,7 @@ To begin production implementation solving the near similar image matching probl
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
-\caption{True negatives dataset taken from the oxford images in "Recognition of object instances practical".}
+\caption{True negatives data set taken from the oxford images in "Recognition of object instances practical".}
 \label{truenegatives}
 \begin{center}
 \begin{tabular}{lp{0.5\linewidth}}
@@ -1502,19 +1502,19 @@ To begin production implementation solving the near similar image matching probl
 \end{tabular}
 \end{center}\end{table}
 
-Paintings dataset from the "Recognition of object instances practical" \cite{Vedaldi2012} of a total of 1708 images will be used due to ready scripts for the SIFT case.
+Paintings data set from the "Recognition of object instances practical" \cite{Vedaldi2012} of a total of 1708 images will be used due to ready scripts for the SIFT case.
 
 An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
 
 To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border.
 
-To test for images not in the set we will pick 1708 images from the ''Object instance recognition practical'' Oxford dataset and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the dataset.
+To test for images not in the set we will pick 1708 images from the ''Object instance recognition practical'' Oxford data set and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
 
 Since we do not know how hamming distance affects classifier performance, we will run all sets for hamming distances 0,4,8 \& 12 to tune the hamming distance.
 
 
 \subsubsection{Edge cases}
-Images smaller than 32px wide or high are ignored by the simple hash and dct hash algorithms. Annotating small images is counterproductive so they are ignored.
+Images smaller than 32px wide or high are ignored by the simple hash and DCT hash algorithms. Annotating small images is counterproductive so they are ignored.
 
 
 \subsection{Near duplicate detection system}
@@ -1522,7 +1522,7 @@ Images smaller than 32px wide or high are ignored by the simple hash and dct has
 \clearpage
 
 \section{Results}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against all three classifiers, the simple hash, the dct hash and SIFT-classifier. SIFT-classifier outperforms the perceptual hashes in all categories except the simple hash for 53\% scale fig. \ref{tptotal}. The only miss for the SIFT-matcher is a duplicate image in the paintings dataset. SIFT outperforms the perceptual hashes for FP for all test sets in fig. \ref{fptotal}.
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against all three classifiers, the simple hash, the DCT hash and SIFT-classifier. SIFT-classifier outperforms the perceptual hashes in all categories except the simple hash for 53\% scale fig. \ref{tptotal}. The only miss for the SIFT-matcher is a duplicate image in the paintings data set. SIFT outperforms the perceptual hashes for FP for all test sets in fig. \ref{fptotal}.
 
 For the $TN$ test set the SIFT-classifier performed the worst returning all false positives instead of misses. This was due to not setting a cutoff score. If returned matches from a search score less than this cutoff score, the image should be classified as a $TN$. The max score from the $TN$-set was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, we simulate setting the cutoff score from 1 to 19 and run the simulations for each cutoff score.
 
@@ -1568,7 +1568,7 @@ For the $TN$ test set the SIFT-classifier performed the worst returning all fals
 \subsection{Simple hash}
 
 \subsection{DCT Hash}
-The $ROC$ of a dct hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on dct hash matcher can be seen in fig. \ref{dcttotalaccuracy}
+The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on DCT hash matcher can be seen in fig. \ref{dcttotalaccuracy}
 
 \begin{figure}[htb]
 \begin{center}
@@ -1582,7 +1582,7 @@ The $ROC$ of a dct hash based matcher depends on the chosen hamming distance tol
 \begin{center}
 \includegraphics[height=8cm]{figures/dctTotalROC}
 \end{center}
-\caption{ ROC spamace per hamming distance tolerance based on averaging results on all data. }
+\caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
 \label{dctaverageaccuracy}
 \end{figure}
 
@@ -1626,14 +1626,14 @@ ACC = \frac{TP +TN}{TP + FP + TN + FN}
 All classifiers in ROC space.
 
 The optimum hamming distance for the classifier using simple hash seems to be 4.
-The optimum hamming distance to use with a dct hash classifier seems to be 4.
+The optimum hamming distance to use with a DCT hash classifier seems to be 4.
 
-A table of all the tp and fp rates.
+A table of all the TP and FP rates.
 A table with all the numbers from the ROC section.
 
 Put all classifiers in ROC space for all cases.
 
-roc graph over all cases in small multiples
+ROC graph over all cases in small multiples
 
 \subsection{System for near duplicate detection by local features}
 
