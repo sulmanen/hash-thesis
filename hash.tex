@@ -556,15 +556,16 @@ accuracy = \frac{TP + TN}{P + N}
 \end{equation}
 
 \subsubsection{Precision-Recall Curves}
-Provost et al. warned of misleading reporting when using accuracy alone \cite{Provost1997} and recommended ROC curves for reporting on binary classifiers. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset \cite{Davis2006}. Precision-Recall (PR) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of datasets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers which appear hidden in ROC space (fig. \ref{rocpr}).
+Provost et al. warned of misleading reporting using accuracy alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset \cite{Davis2006}. Precision-Recall (PR) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of datasets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=4cm]{figures/rocpr}
+\includegraphics[height=6cm]{figures/rocpr}
 \end{center}
-\caption{ \cite{Davis2006}}
+\caption{ROC curve and the corresponding PR curve on the right. \cite{Davis2006}}
 \label{rocpr}
 \end{figure}
+
 
 
 \subsection{Perceptual hashing} \label{perceptualhash}
