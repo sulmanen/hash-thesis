@@ -1066,7 +1066,7 @@ In \cite{Lee2010} a high $FP$-rate is a serious problem for large dataset. Anoth
 
 
 
-\subsubsection{Bag of Visual Words}\label{BOW}
+\subsubsection{Bag-of-Visual Words}\label{BOW}
 Bag of words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
 
 To calculate image descriptors two types of viewopint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.\cite{Sivic2003}
@@ -1255,7 +1255,13 @@ is the gradient with respect to the standard deviation $\sigma_i$ (vector divisi
 
 The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimentional representations (100k even) \cite{Perronnin2010a}. However when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
 
-Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perrornnin2010a} cosine similarity (dot product of L2-normalized vectors).
+Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perrornnin2010a} cosine similarity (dot product of L2-normalized vectors).
+
+\begin{equation}\label{fisherdoteq}
+\mathcal{G}_\lambda^{X'}\mathcal{G}_\lambda^Y \propto \sum_{i=}^N\frac{w_i^Xw_i^Y}{w_i}\delta_i^{X'}\delta_i^Y
+\end{equation}
+
+
 
 \subsubsection{Vector of Locally Aggregated Descriptors}
 Since the introduction of BoW \cite{Sivic2003}, one of the most outstanding contributions in the field of feature detection and description is the \emph{Vector of Locally Aggregated Descriptors} (VLAD) making it possible to store all the descriptors of a very large dataset into main memory for fast matching and retrieval \cite{Arandjelovic2013}. The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted index becomes infeasible due to search efficiency (speed) and memory consumption of the image descriptors for large scale \cite{Jegou2010}.
