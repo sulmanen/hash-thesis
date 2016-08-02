@@ -1273,6 +1273,8 @@ $\mu_i^X$ is the mean of $X$s descriptors divided by the probability of assignme
 \mu_i^X=\frac{\sum_{t=1}^T\gamma_t(i)x_t}{\sum_{t=1}^T\gamma_t(i)}.
 \end{equation}
 
+The $\frac{w_i^Xw_i^Y}{w_i}$ on the right side of eq. \ref{fisherdoteq} is the product of visual word $i$ frequency in images $X$ and $Y$, the \emph{term frequency} in \emph{tf-idf} divided by the global frequency of i, in other words the \emph{inverse document frequency} analogous to the \emph{tf-idf} implementation in \cite{Sivic2003}.
+
 
 
 \subsubsection{Vector of Locally Aggregated Descriptors}
