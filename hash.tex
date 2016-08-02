@@ -1255,7 +1255,7 @@ is the gradient with respect to the standard deviation $\sigma_i$ (vector divisi
 
 The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimentional representations (100k even) \cite{Perronnin2010a}. However when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
 
-Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product \cite{Perronnin2010a}, a simple operation.
+Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perrornnin2010a} cosine similarity (dot product of L2-normalized vectors).
 
 \subsubsection{Vector of Locally Aggregated Descriptors}
 Since the introduction of BoW \cite{Sivic2003}, one of the most outstanding contributions in the field of feature detection and description is the \emph{Vector of Locally Aggregated Descriptors} (VLAD) making it possible to store all the descriptors of a very large dataset into main memory for fast matching and retrieval \cite{Arandjelovic2013}. The indexing approach in \cite{Sivic2003} and \cite{Jegou2008} using inverted index becomes infeasible due to search efficiency (speed) and memory consumption of the image descriptors for large scale \cite{Jegou2010}.
