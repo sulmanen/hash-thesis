@@ -382,6 +382,8 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   $\epsilon -NN$ & $\epsilon$ - Nearest Neighbor, like ANN\\
   FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
   FK & Fisher Kernel\\
+  FP & False Positive\\
+  FN & False Negative\\
   FV & Fisher Vector\\
   GMM & Gaussian Mixture Model\\
   IVFADC & inverted file system with asymmetric distance computation\\
@@ -407,6 +409,8 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   SSR & Signed Square Root normalization\\
   SURF & Sped Up Robust Features \\
   tf-idf & term frequency - inverse document frequency\\
+  TP & True Positive\\
+  TN & True Negative\\
   UA   & User Agent facilitates end user interaction with Web content (Browser)\\
   UI   & User Interface\\
   URI  & Uniform Resource Identifier aka URL\\
@@ -566,6 +570,8 @@ Provost et al. warned of misleading reporting using accuracy alone to rate binar
 \end{figure}
 
 Recall equals TPR (eq. \ref{recall}, \ref{tpr}) and precision is the TP-count over $TP \cup FP$ (eq. \ref{precision}). If recall $\neq 0$ then there exists a one-to-one correspondence between a ROC and PR curve \cite{Davis2006}. If a curve ''dominates another'' \cite{Provost1997}, that is is completely above the other curve in ROC space it doesn't mean this relationship is transferred into the PR curve. However, vice-versa relationship holds. If a curve dominates another in PR space it also dominates the other curve in ROC space. \cite{Davis2006}
+
+As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
 
 \subsection{Perceptual hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
@@ -1334,7 +1340,7 @@ Since the introduction of BoW \cite{Sivic2003}, one of the most outstanding cont
 
 VLAD optimizes the three constraints in fig. \ref{nntradeoffs} for NN-search jointly. There are two limits to the number of images that can be indexed in practice. The memory footprint of one image descriptor and the search efficiency. Search efficiency was solved by min-Hashing \cite{Chum2008}, \cite{Chum2009} but they still maintain a significant memory footprint \cite{Jegou2010}.
 
-VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption drawing inspiration from BoW and the Fisher Vector (FV) (section \ref{FK}). In \cite{Jegou2012} VLAD is shown to be a non-probabilistic FV. VLAD greatly exceeds BoW in performance for a set of images of the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with indexing. \cite{Jegou2010}
+VLAD was developed in order to represent local descriptors so image searches could be scaled with accuracy, efficiency and low memory consumption drawing inspiration from BoW and the Fisher Vector (FV) (section \ref{FV}). In \cite{Jegou2012} VLAD is shown to be a non-probabilistic FV. VLAD greatly exceeds BoW in performance for a set of images of the same size. It provides good seach accuracy with reasonable vector dimentionality. It jointly optimizes reduction in dimensions with indexing. \cite{Jegou2010}
 
 Roughly, the main steps of computing a VLAD descriptor are
 \begin{enumerate}
