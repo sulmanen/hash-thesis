@@ -1517,7 +1517,9 @@ Since we do not know how hamming distance affects classifier performance, we wil
 Images smaller than 32px wide or high are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is also the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
 \subsubsection{Local Features}
-For the local features classifier, ready code and database from \cite{Vedaldi2012}. The code is modified for compatibility with Matlab 2015a. Later the cutoff score is added.
+For the Local Features classifier, ready code and image database on paintings from \cite{Vedaldi2012} is used. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make comparison reasonable.
+
+Local Features use the SIFT-descriptor. For retrieval an inverted file is used. Explain the descriptor and the retrieval structures used here
 
 \subsection{Near Duplicate Image Detection System}
 
