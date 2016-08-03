@@ -376,7 +376,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   AOS & Additive Operator Splitting nonlinear diffusion filtering\\
   BOF & Bag of Features\\
   BoW & Bag-of-Words representation, also seen used interchangeably with BOF\\
-  BRISK & Binary Robust Invariant Scalable Key-Points\\
+  BRISK & Binary Robust Invariant Scalable Keypoints\\
   DCT & Discrete cosine transform\\
   DoG & Difference of Gaussians\\
   $\epsilon -NN$ & $\epsilon$ - Nearest Neighbor, like ANN\\
@@ -779,11 +779,11 @@ This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2
 \subsection{Local features}
 To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
-Key-point detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
+Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
 
 \begin{enumerate}
-\item Find key-points of interest in image
-\item Encode key-points in a visual descriptor
+\item Find keypoints of interest in image
+\item Encode keypoints in a visual descriptor
 \item Match incoming descriptor to all known descriptors
 \end{enumerate}
 
@@ -802,9 +802,9 @@ SIFT descriptors are extracted by
 
 \begin{enumerate}
 \item Scale space extrema detection identifies scales and locations that can be repeatedly extracted under changing conditions.
-\item Key-point localization
+\item Keypoint localization
 \item Orientation assignment
-\item Key-point descriptor
+\item Keypoint descriptor
 \end{enumerate}
 \cite{Lowe2004}
 
@@ -829,7 +829,7 @@ G(x,y,k\sigma) - G(x, y, \sigma) \approx (k - 1)\sigma^{2}\nabla^{2}G
 
 where the right hand side is a scale-normalized Laplacian of Gaussian.
 
-$D$ are key-point candidates. The robust key-points are weeded out by fitting them to the surrounding data. \cite{Lowe2004} Adding the offset
+$D$ are keypoint candidates. The robust keypoints are weeded out by fitting them to the surrounding data. \cite{Lowe2004} Adding the offset
 
 \begin{equation}\label{keypointoffset}
 \hat{\boldsymbol{x}} = - \frac{\partial^2D^-1}{\partial \boldsymbol{x}^2}\frac{\partial D}{\partial \boldsymbol{x}}
@@ -867,7 +867,7 @@ The integral image is very quick to calculate using the cumulative row sum $s(x,
 
 The calculation of the descriptor also uses integral images for speed. The descriptor is a distribution of Haar-wavelet responses within the interest point neighborhood. \cite{Bay2006}
 
-The orientation of the descriptor is determined by Haar-wavelet responses in $x$ and $y$ directions in the scale $s$ that the key-point was detected with $6s$ radius at sampling step size also $s$. Wavelet size is $4s$. Responses are weighted with a Gaussian $(\sigma = 2.5s)$ at the interest point. The dominant direction is estimated by summing up the responses over a sliding window angle of $\frac{\pi}{3}$. The horizontal and vertical results are summed to form a new vector and the longest vector angle is the orientation of the interest point. The SURF descriptor is a square region centered on the interest point. \cite{Bay2006}
+The orientation of the descriptor is determined by Haar-wavelet responses in $x$ and $y$ directions in the scale $s$ that the keypoint was detected with $6s$ radius at sampling step size also $s$. Wavelet size is $4s$. Responses are weighted with a Gaussian $(\sigma = 2.5s)$ at the interest point. The dominant direction is estimated by summing up the responses over a sliding window angle of $\frac{\pi}{3}$. The horizontal and vertical results are summed to form a new vector and the longest vector angle is the orientation of the interest point. The SURF descriptor is a square region centered on the interest point. \cite{Bay2006}
 
 The size of the region is $20s$ and is split into $4 \times 4$ sub-regions. Let $d_x$ and $d_y$ be Haar wavelet responses in along horizontal and vertical region edges respectively. For robustness, the responses are weighted with a Gaussian $(\sigma = 3.3)$ and $d_x, d_y$ are summed independently to form the first part of the sub-region descriptor in eq. \ref{surfdescriptor}. \cite{Bay2006}
 
