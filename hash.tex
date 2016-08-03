@@ -1456,8 +1456,7 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 \clearpage
 
 \section{Materials and methods}
-\subsection{Comparing image classifiers}
-\subsubsection{Simulated classifier comparison}
+\subsection{Perceptual hashing vs. SIFT-Classifier for Near Duplicate Image Detection}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
 
 To compare object instance recognition by SIFT features to perceptual hashing we will run simulations. We are faced with a binary classification problem. Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, DCT hash and large scale image retrieval with SIFT features.
@@ -1502,7 +1501,7 @@ To begin production implementation solving the near similar image matching probl
 \end{tabular}
 \end{center}\end{table}
 
-Paintings data set from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images will be used due to ready scripts for the SIFT case.
+Paintings data set from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to ready scripts for the SIFT case.
 
 An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
 
@@ -1511,7 +1510,6 @@ To simulate image cropping, we crop from all sides by $10px$. Adding a border is
 To test for images not in the set we will pick 1708 images from the ''Object instance recognition practical'' Oxford data set and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
 
 Since we do not know how hamming distance affects classifier performance, we will run all sets for hamming distances 0,4,8 \& 12 to tune the hamming distance.
-
 
 \subsubsection{Edge cases}
 Images smaller than 32px wide or high are ignored by the simple hash and DCT hash algorithms. Annotating small images is counterproductive so they are ignored.
