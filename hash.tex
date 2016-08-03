@@ -1427,12 +1427,12 @@ precision = \frac{TP}{TP + FP}
 recall = \frac{TP}{P}
 \end{equation}
 
-\begin{equation}\label{confaccuracy}
-accuracy = \frac{TP + TN}{P + N}
+\begin{equation}\label{accuracy}
+accuracy = \frac{TP + TN}{P + N} = \frac{TP +TN}{TP + FP + TN + FN}
 \end{equation}
 
 \subsubsection{Precision-Recall Curves}
-Provost et al. warned of misleading reporting using accuracy (eq. \ref{confaccuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
+Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1555,13 +1555,6 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 \label{tntotal}
 \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/cutoff}
-\end{center}
-\caption{ $TN$ image set max scores returned for images not in database \ref{truenegatives} }
-\label{sifttnscores}
-\end{figure}
 
 \subsection{Simple hash}
 
@@ -1587,9 +1580,16 @@ The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tol
 \end{figure}
 
 
-\subsection{Object instance detection by SIFT features}
+\subsection{Object Instance Detection by Local Features Classifier}
 
-\subsubsection{Cutoff $C_{s}$}
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=7cm]{figures/cutoff}
+\end{center}
+\caption{ $TN$ image set maximum scores returned by the local features classifier for images not in database \ref{truenegatives}. The y-axis marks the score and the x-axis denotes the image number. The maximum of maximums score is 19. Setting $\mathcal{C}_s=19$ will classify all $TN$ images correctly.}
+\label{sifttnscores}
+\end{figure}
+
 The search by $SIFT$-features will always return the highest scoring image even if the case of a $fp$. A sane $fp_{rate}$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep true misses to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $fp_{rate}$ is minimized.
 
 Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
@@ -1600,15 +1600,11 @@ max(score_{tndata}) = 19
 
 Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those. From the test in table \ref{truenegatives}. From fig.\ref{figcutoff} accuracy section we can deduce that the highest accuracy for this data can be achieved by setting $C_{s} = max(score_{tn}) = 19$.
 
-\begin{equation} \label{accuracy}
-ACC = \frac{TP +TN}{TP + FP + TN + FN}
-\end{equation}
-
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/SIFTCountROC}
 \end{center}
-\caption{ Effects of cutoff on SIFT performance. }
+\caption{ Effects of cutoff on Local Features-classifier performance. }
 \label{figcutoff}
 \end{figure}
 
@@ -1616,7 +1612,7 @@ ACC = \frac{TP +TN}{TP + FP + TN + FN}
 \begin{center}
 \includegraphics[height=8cm]{figures/SIFTROCperCutoff}
 \end{center}
-\caption{ ROC Space per SIFT classifier cutoff. }
+\caption{ ROC Space per Local Features-classifier cutoff. }
 \label{figcutoffrocspace}
 \end{figure}
 
