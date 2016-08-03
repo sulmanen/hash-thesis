@@ -1512,9 +1512,9 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \subsubsection{Perceptual Hashing}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by production code so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
 
-Since we do not know how hamming distance affects classifier performance, we will run all sets for hamming distances 0, 4, 8 \& 12 to find an optimal Hamming Distance.
+We do not know how varying the hamming distance affects classifier performance, we will run all sets for hamming distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform.
 
-Images smaller than 32px wide or high are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is also the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
+Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is also the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
 \subsubsection{Local Features}
 For the Local Features classifier, ready code and image database on paintings from \cite{Vedaldi2012} is used. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make comparison reasonable.
