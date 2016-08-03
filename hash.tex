@@ -388,6 +388,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   GMM & Gaussian Mixture Model\\
   IVFADC & inverted file system with asymmetric distance computation\\
   KAZE & feature detection by local features\\
+  k-d tree & k-dimensional tree\\
   K-NN & K-Nearest Neighbor\\
   L2-norm & L2 or $l^2$ normalization. Divide by vector absolute value\\
   LSH & Locality Sensitive Hashing\\
@@ -1519,7 +1520,7 @@ Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash
 \subsubsection{Local Features}
 For the Local Features classifier, ready code and image database on paintings from \cite{Vedaldi2012} is used. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make comparison reasonable.
 
-Simulation code for Local Features use the SIFT-descriptor (section \ref{SIFTSection}). For retrieval an inverted file is used. Explain the descriptor and the retrieval structures used here
+Simulation code for Local Features use the SIFT-descriptor (section \ref{SIFTSection}).
 
 \subsection{Near Duplicate Image Detection System}
 
