@@ -1467,7 +1467,7 @@ Paintings dataset from the ''Recognition of object instances practical'' \cite{V
 \subsubsection{Image Datasets}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
-An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border.
+An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
 
 To test for images not in the set we pick 1708 images from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
 
@@ -1528,7 +1528,9 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 
 Unexpectedly, the $TN$ test set on the local features-classifier performed the worst with $FPR = 1$. Since the local features classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
-If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$. The max score from the $TN$-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ data set (table \ref{truenegatives})
+If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$. The max score from the $TN$-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}).
+
+In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ data set (table \ref{truenegatives}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1578,7 +1580,6 @@ The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tol
 \label{dctaverageaccuracy}
 \end{figure}
 
-
 \subsection{Object Instance Detection by Local Features Classifier}
 
 \begin{figure}[htb]
@@ -1589,15 +1590,15 @@ The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tol
 \label{sifttnscores}
 \end{figure}
 
-The search by $SIFT$-features will always return the highest scoring image even if the case of a $fp$. A sane $fp_{rate}$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep true misses to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $fp_{rate}$ is minimized.
+The search by Local Features always returns the highest scoring image even if the case of a $fp$. A sane $fp_{rate}$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep FN to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $fp_{rate}$ is minimized.
 
-Fig. \ref{figcutoffrocspace} shows $SIFT$-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of a the SIFT classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
+Fig. \ref{figcutoffrocspace} shows Local Featuers-classifier performance degrade as $C_{s}->0$. From fig.\ref{figcutoff} we can see the $fn_{count}$ increase linearly as cutoff increases where as the $fp_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features Classifier per $C_{s}$ over data from runs of images in table \ref{modifiedimages} up to
 
 \begin{equation}\label{maxtnscore}
 max(score_{tndata}) = 19
 \end{equation}
 
-Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those. From the test in table \ref{truenegatives}. From fig.\ref{figcutoff} accuracy section we can deduce that the highest accuracy for this data can be achieved by setting $C_{s} = max(score_{tn}) = 19$.
+From the test in table \ref{truenegatives}. From fig.\ref{figcutoff} accuracy section we can deduce that the highest accuracy for this data can be achieved by setting $C_{s} = max(score_{tn}) = 19$.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1615,10 +1616,8 @@ Vertical and horizontal flips are excluded as we do not expect our classifiers t
 \label{figcutoffrocspace}
 \end{figure}
 
-
-
 \subsection{Simulated classifier comparison}
-All classifiers in ROC space.
+All classifiers in PR space.
 
 The optimum hamming distance for the classifier using simple hash seems to be 4.
 The optimum hamming distance to use with a DCT hash classifier seems to be 4.
@@ -1636,7 +1635,7 @@ ROC graph over all cases in small multiples
 \clearpage
 
 \section{Discussion}
-Any conclusions from the ROC graphs. What recommendation to make? What to take a look at.
+Any conclusions from the PR graphs. What recommendation to make? What to take a look at.
 
 
 
