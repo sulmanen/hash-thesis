@@ -405,7 +405,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   RGB & red, green, blue color space\\
   ROC & Receiver Operating Characteristic\\
   SDC & Symmetric Distance Computation\\
-  SIFT & Scale invariant feature transform \\
+  SIFT & Scale Invariant Feature Transform \\
   SSR & Signed Square Root normalization\\
   SURF & Sped Up Robust Features \\
   tf-idf & term frequency - inverse document frequency\\
@@ -706,8 +706,8 @@ Scale-invariant features identify the image by a large set of local descriptors 
 
 We are expecting to improve over perceptual hashes which withstand scaling extremely well. However they are weak under image transformations that alter the relationships between pixel values such as rotation and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
 
-\subsubsection{Scale Invariant Feature Transform}
-Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near real time. \cite{Lowe2004}
+\subsubsection{Scale Invariant Feature Transform} \label{SIFTSection}
+Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT-descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near real time. \cite{Lowe2004}
 
 A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}.
 
@@ -1519,7 +1519,7 @@ Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash
 \subsubsection{Local Features}
 For the Local Features classifier, ready code and image database on paintings from \cite{Vedaldi2012} is used. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make comparison reasonable.
 
-Local Features use the SIFT-descriptor. For retrieval an inverted file is used. Explain the descriptor and the retrieval structures used here
+Simulation code for Local Features use the SIFT-descriptor (section \ref{SIFTSection}). For retrieval an inverted file is used. Explain the descriptor and the retrieval structures used here
 
 \subsection{Near Duplicate Image Detection System}
 
@@ -1527,7 +1527,6 @@ Local Features use the SIFT-descriptor. For retrieval an inverted file is used. 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-
 Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the simple hash-, the DCT-hash- and SIFT-classifiers. The SIFT-classifier outperforms both the perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. SIFT-classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
 
 Unexpectedly, the $TN$ test set on the local features-classifier performed the worst with $FPR = 1$. Since the local features classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
