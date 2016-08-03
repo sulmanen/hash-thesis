@@ -1431,7 +1431,7 @@ recall = \frac{TP}{P}
 accuracy = \frac{TP + TN}{P + N} = \frac{TP +TN}{TP + FP + TN + FN}
 \end{equation}
 
-\subsubsection{Precision-Recall Curves}
+\subsubsection{Precision-Recall Curves}\label{PRSection}
 Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
@@ -1454,24 +1454,22 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 
 \clearpage
 
-\section{Materials and methods}
+\section{Materials and Methods}
 We expect the local features-classifier to outperform the crude perceptual hashes. However to begin production implementation of improving near similar image detection we need to make sure we understand to what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes for near duplicate image detection. To compare object instance recognition by local features to perceptual hashing we will run simulations.
 
 A test set of images is needed, as well as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image set (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
-We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the simple hash, DCT-hash and large scale image retrieval by local features and compare classifier performance.
-
+We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the Simple Hash, DCT Hash and large scale image retrieval by local features and compare classifier performance.
 
 \subsection{Classifier Comparison}
+Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. Near duplicate sets are formed using Imagemagick shell scripts. For each near duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
 
 \subsubsection{Image Datasets}
-Paintings data set from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
+Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
-An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
+An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border.
 
-To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border.
-
-To test for images not in the set we will pick 1708 images from the ''Object instance recognition practical'' Oxford data set and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
+To test for images not in the set we pick 1708 images from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
@@ -1501,7 +1499,7 @@ To test for images not in the set we will pick 1708 images from the ''Object ins
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
-\caption{True negatives data set taken from the oxford images in ''Recognition of object instances practical''.}
+\caption{TN dataset taken from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}. The expectation is that no duplicates are found for these images in the database.}
 \label{truenegatives}
 \begin{center}
 \begin{tabular}{lp{0.5\linewidth}}
@@ -1512,6 +1510,7 @@ To test for images not in the set we will pick 1708 images from the ''Object ins
 \end{center}\end{table}
 
 \subsubsection{Perceptual Hashing}
+
 Since we do not know how hamming distance affects classifier performance, we will run all sets for hamming distances 0,4,8 \& 12 to tune the hamming distance.
 Images smaller than 32px wide or high are ignored by the simple hash and DCT hash algorithms. Annotating small images is counterproductive so they are ignored.
 
