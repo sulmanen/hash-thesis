@@ -1457,11 +1457,11 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 \section{Materials and methods}
 \subsection{Perceptual hashing vs. Local Features based-Classifier for Near Duplicate Image Detection}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-To begin production implementation solving the near similar image matching problem with local-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes for near duplicate image detection?
+To begin production implementation solving the near similar image matching problem with local-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes for near duplicate image detection? To compare object instance recognition by local features to perceptual hashing we will run simulations.
 
-To compare object instance recognition by local features to perceptual hashing we will run simulations. We are faced with a binary classification problem the image is either knon to be in the database, and the known image is returned or it is not in the database. A set of images is needed, as well as well as a modified set described in table \ref{modifiedimages} simulating scenarios typically encountered in duplicate image detection.
+We are faced with a binary classification problem the image is either knon to be in the database, and the known image is returned or it is not in the database. A set of images is needed, as well as well as modified sets described in table \ref{modifiedimages} and a set of images not modified but clearly not in the database, simulating scenarios typically encountered in duplicate image detection. We also test the classifiers with images known not to be in the database with a TN image set (table \ref{truenegatives}).
 
-Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, DCT hash and large scale image retrieval with SIFT features.
+Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the simple hash, DCT-hash and large scale image retrieval by local features.
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
