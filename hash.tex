@@ -1492,7 +1492,7 @@ To begin production implementation solving the near similar image matching probl
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
-\caption{True negatives data set taken from the oxford images in "Recognition of object instances practical".}
+\caption{True negatives data set taken from the oxford images in ''Recognition of object instances practical''.}
 \label{truenegatives}
 \begin{center}
 \begin{tabular}{lp{0.5\linewidth}}
@@ -1502,7 +1502,7 @@ To begin production implementation solving the near similar image matching probl
 \end{tabular}
 \end{center}\end{table}
 
-Paintings data set from the "Recognition of object instances practical" \cite{Vedaldi2012} of a total of 1708 images will be used due to ready scripts for the SIFT case.
+Paintings data set from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images will be used due to ready scripts for the SIFT case.
 
 An Imagemagick shell script generates manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches.
 
@@ -1515,7 +1515,6 @@ Since we do not know how hamming distance affects classifier performance, we wil
 
 \subsubsection{Edge cases}
 Images smaller than 32px wide or high are ignored by the simple hash and DCT hash algorithms. Annotating small images is counterproductive so they are ignored.
-
 
 \subsection{Near duplicate detection system}
 
