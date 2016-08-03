@@ -492,93 +492,6 @@ Perceptual hashing is a good choice for implementing near duplicate image detect
 
 Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
-\subsection{User Interface Response Times}
-The expectations of the customer to the application User Interface (UI) response times (table \ref{webresponsetimes}) set the standard for duplicate image detection system response time for this paper. They have not formally changed since Robert B. Miller researched the subject in 1968 \cite{Nielsen1993}. Nielsen and much of usability literature mentions ''user'' as the main actor of the system. Here we will use ''customer'' to maintain focus on high quality.
-
-The system should react as fast as possible, unless the customer cannot keep up with the actions in the UI. If response time is over 2s the user should be given continuous feedback, possibly via percent-done indicator \cite{Myers1985}. They are highly recommended to be used for operations taking over 10s \cite{Nielsen1993}. Progress indicators make the wait less painful by giving the user something to look at while waiting. They assure the user the system is working on their action and give the user some indication of how long before a response is expected. \cite{Nielsen1993a}
-
-If the system does not know how long an operation will take, a progress indicator will give the user indication that the system is working on their request and make the wait less painful. A busy cursor or a progress spinner may also be appropriate for tasks expected to take less than 10s as the user has little time to work on other tasks while waiting for the system. \cite{Nielsen1993a}
-
-Given a certain amount of delay, human mental efficiency drops regarding to the task at hand \cite{Miller1968}. If the system takes longer than 10s to respond, the customer focus is lost and it is very likely that your UI loses the customer \cite{Nielsen1993a}. Between 1-10s response time the customers impatience grows. At 1s users notice the delayed response but retain the feeling of being in control and maintain focus on the task at hand. The customer feels like they are in a conversation. However the customer will not click as readily. When user interacts with the UI, 100ms is perceived as immediate, the user feels like they are doing tasks \emph{themselves} \cite{Nielsen2010}. Customers make their first decisions about the visual appeal of a UI in the first 50ms of interaction. \cite{Nielsen2010}
-
-\def\arraystretch{1.5}
-\begin{table}[htb]
-\caption{Web application response time. The 3 important limits. \cite{Miller1968},\cite{Nielsen1993}}
-\label{webresponsetimes}
-\begin{center}
-  \begin{tabular}{rl}
-    \hline
-  response time (s) & user experience\\
-  \hline
-  0.1 & customer feels system is acting instantaneously\\
-  1 & customer flow of thought uninterrupted\\
-  2 & customer is annoyed\\
-  10 & customer loses attention\\
-  \hline
-\end{tabular}
-\end{center}\end{table}
-
-\subsection{Comparing classifiers}
-\subsubsection{Receiver operating characteristic}
-Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/confusion}
-\end{center}
-\caption{Confusion matrix for binary classification \cite{Fawcett2006}. }
-\label{figconfusion}
-\end{figure}
-
-We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/ROC}
-\end{center}
-\caption{ROC space example with several discrete classifiers \cite{Fawcett2006}. }
-\label{figrocspace}
-\end{figure}
-
-\begin{equation}\label{FPR}
-fp_{rate} = \frac{FP}{N}
-\end{equation}
-\begin{equation}\label{TPR}
-tp_{rate} = \frac{TP}{P}
-\end{equation}
-\begin{equation}\label{precision}
-precision = \frac{TP}{TP + FP}
-\end{equation}
-
-\begin{equation}\label{recall}
-recall = \frac{TP}{P}
-\end{equation}
-
-\begin{equation}\label{confaccuracy}
-accuracy = \frac{TP + TN}{P + N}
-\end{equation}
-
-\subsubsection{Precision-Recall Curves}
-Provost et al. warned of misleading reporting using accuracy (eq. \ref{confaccuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=6cm]{figures/rocpr}
-\end{center}
-\caption{ROC curve on the left and the corresponding PR curve on the right. \cite{Davis2006}}
-\label{rocpr}
-\end{figure}
-
-Recall equals TPR (eq. \ref{recall}, \ref{TPR}) and precision is the TP-count over $TP \cup FP$ (eq. \ref{precision}). If recall $\neq 0$ then there exists a one-to-one correspondence between a ROC and PR curve \cite{Davis2006}. If a curve ''dominates another'' \cite{Provost1997}, that is is completely above the other curve in ROC space it doesn't mean this relationship is transferred into the PR curve. However, vice-versa relationship holds. If a curve dominates another in PR space it also dominates the other curve in ROC space. \cite{Davis2006}
-
-As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
-
-In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculated according to equation \ref{printerpolate}. \cite{Davis2006}
-
-\begin{equation}\label{printerpolate}
-\left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
-\end{equation}
-
 \subsection{Perceptual hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
@@ -1455,13 +1368,75 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 \clearpage
 
 \section{Materials and methods}
+
+\subsection{Comparing classifiers}
+\subsubsection{Receiver operating characteristic}\label{ROCSection}
+Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/confusion}
+\end{center}
+\caption{Confusion matrix for binary classification \cite{Fawcett2006}. }
+\label{figconfusion}
+\end{figure}
+
+We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/ROC}
+\end{center}
+\caption{ROC space example with several discrete classifiers \cite{Fawcett2006}. }
+\label{figrocspace}
+\end{figure}
+
+\begin{equation}\label{FPR}
+fp_{rate} = \frac{FP}{N}
+\end{equation}
+\begin{equation}\label{TPR}
+tp_{rate} = \frac{TP}{P}
+\end{equation}
+\begin{equation}\label{precision}
+precision = \frac{TP}{TP + FP}
+\end{equation}
+
+\begin{equation}\label{recall}
+recall = \frac{TP}{P}
+\end{equation}
+
+\begin{equation}\label{confaccuracy}
+accuracy = \frac{TP + TN}{P + N}
+\end{equation}
+
+\subsubsection{Precision-Recall Curves}
+Provost et al. warned of misleading reporting using accuracy (eq. \ref{confaccuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=6cm]{figures/rocpr}
+\end{center}
+\caption{ROC curve on the left and the corresponding PR curve on the right. \cite{Davis2006}}
+\label{rocpr}
+\end{figure}
+
+Recall equals TPR (eq. \ref{recall}, \ref{TPR}) and precision is the TP-count over $TP \cup FP$ (eq. \ref{precision}). If recall $\neq 0$ then there exists a one-to-one correspondence between a ROC and PR curve \cite{Davis2006}. If a curve ''dominates another'' \cite{Provost1997}, that is is completely above the other curve in ROC space it doesn't mean this relationship is transferred into the PR curve. However, vice-versa relationship holds. If a curve dominates another in PR space it also dominates the other curve in ROC space. \cite{Davis2006}
+
+As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
+
+In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculated according to equation \ref{printerpolate}. \cite{Davis2006}
+
+\begin{equation}\label{printerpolate}
+\left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
+\end{equation}
+
 \subsection{Perceptual hashing vs. Local Features based-Classifier for Near Duplicate Image Detection}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-To begin production implementation solving the near similar image matching problem with local-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes for near duplicate image detection? To compare object instance recognition by local features to perceptual hashing we will run simulations.
+To begin production implementation improving near similar image detection we need to understand to what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes for near duplicate image detection. To compare object instance recognition by local features to perceptual hashing we will run simulations.
 
-We are faced with a binary classification problem the image is either knon to be in the database, and the known image is returned or it is not in the database. A set of images is needed, as well as well as modified sets described in table \ref{modifiedimages} and a set of images not modified but clearly not in the database, simulating scenarios typically encountered in duplicate image detection. We also test the classifiers with images known not to be in the database with a TN image set (table \ref{truenegatives}).
+We are faced with a binary classification problem. The query image has a duplicate in the database, and that duplicate image is returned or it is not in the database. A test set of images is needed, as well as well as modified sets described in table \ref{modifiedimages} and a set of images not modified but clearly not in the database, simulating scenarios typically encountered in duplicate image detection. We also test the classifiers with images known not to be in the database with a TN image set (table \ref{truenegatives}).
 
-Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the simple hash, DCT-hash and large scale image retrieval by local features.
+We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the simple hash, DCT-hash and large scale image retrieval by local features.
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
@@ -1511,8 +1486,35 @@ To test for images not in the set we will pick 1708 images from the ''Object ins
 
 Since we do not know how hamming distance affects classifier performance, we will run all sets for hamming distances 0,4,8 \& 12 to tune the hamming distance.
 
+
 \subsubsection{Edge cases}
 Images smaller than 32px wide or high are ignored by the simple hash and DCT hash algorithms. Annotating small images is counterproductive so they are ignored.
+
+\subsection{User Interface Response Times}
+The expectations of the customer to the application User Interface (UI) response times (table \ref{webresponsetimes}) set the standard for duplicate image detection system response time for this paper. They have not formally changed since Robert B. Miller researched the subject in 1968 \cite{Nielsen1993}. Nielsen and much of usability literature mentions ''user'' as the main actor of the system. Here we will use ''customer'' to maintain focus on high quality.
+
+The system should react as fast as possible, unless the customer cannot keep up with the actions in the UI. If response time is over 2s the user should be given continuous feedback, possibly via percent-done indicator \cite{Myers1985}. They are highly recommended to be used for operations taking over 10s \cite{Nielsen1993}. Progress indicators make the wait less painful by giving the user something to look at while waiting. They assure the user the system is working on their action and give the user some indication of how long before a response is expected. \cite{Nielsen1993a}
+
+If the system does not know how long an operation will take, a progress indicator will give the user indication that the system is working on their request and make the wait less painful. A busy cursor or a progress spinner may also be appropriate for tasks expected to take less than 10s as the user has little time to work on other tasks while waiting for the system. \cite{Nielsen1993a}
+
+Given a certain amount of delay, human mental efficiency drops regarding to the task at hand \cite{Miller1968}. If the system takes longer than 10s to respond, the customer focus is lost and it is very likely that your UI loses the customer \cite{Nielsen1993a}. Between 1-10s response time the customers impatience grows. At 1s users notice the delayed response but retain the feeling of being in control and maintain focus on the task at hand. The customer feels like they are in a conversation. However the customer will not click as readily. When user interacts with the UI, 100ms is perceived as immediate, the user feels like they are doing tasks \emph{themselves} \cite{Nielsen2010}. Customers make their first decisions about the visual appeal of a UI in the first 50ms of interaction. \cite{Nielsen2010}
+
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Web application response time. The 3 important limits. \cite{Miller1968},\cite{Nielsen1993}}
+\label{webresponsetimes}
+\begin{center}
+  \begin{tabular}{rl}
+    \hline
+  response time (s) & user experience\\
+  \hline
+  0.1 & customer feels system is acting instantaneously\\
+  1 & customer flow of thought uninterrupted\\
+  2 & customer is annoyed\\
+  10 & customer loses attention\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
 
 \subsection{Near duplicate detection system}
 
