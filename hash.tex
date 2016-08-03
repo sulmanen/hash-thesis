@@ -467,7 +467,7 @@ This paper only considers near duplicate detection and excludes all other uses o
 
 \subsection{Research Questions}
 \begin{itemize}
-\item[--] To what degree if any is object instance detection by local features an improvement over DCT-, and simple perceptual hashes for near duplicate image detection?
+\item[--] To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection?
 \item[--] Can object instance detection by local features be deployed at large scale at ThingLink for improved near duplicate detection?
 \item[--] Does a soft realtime solution exist to improve on the current queued solution?
   \item[--] Can the method be chose in a way to extend later towards object discovery with minimal work?
@@ -1452,16 +1452,18 @@ Second, if the visual vocabulary is trained using one data set and used on anoth
 
 Third, VLAD loses to BoW in performance for objects occupying a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD), which is especially useful in object recognition. MultiVLAD extracts a total of 14 VLAD descriptors from a single image. A $3 \times 3$ grid over the image gives $9$, $2 \times 2$ grid gives four and one for the whole image. This comes at the cost of memory but is still feasible on off the shelf hardware at ~28GB for 100 million images \cite{Arandjelovic2013}. MultiVLAD outperforms 1792-D (vocab. size) VLAD, but is found to be inferior for images that cover at least 20\% of the image \cite{Arandjelovic2013}.
 
-
 \clearpage
 
 \section{Materials and methods}
 \subsection{Perceptual hashing vs. SIFT-Classifier for Near Duplicate Image Detection}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
+To begin production implementation solving the near similar image matching problem with local-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes for near duplicate image detection?
 
-To compare object instance recognition by SIFT features to perceptual hashing we will run simulations. We are faced with a binary classification problem. Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, DCT hash and large scale image retrieval with SIFT features.
+To compare object instance recognition by local features to perceptual hashing we will run simulations. We are faced with a binary classification problem the image is either knon to be in the database, and the known image is returned or it is not in the database. A set of images is needed, as well as well as a modified set described in table \ref{modifiedimages} simulating scenarios typically encountered in duplicate image detection.
 
-To begin production implementation solving the near similar image matching problem with SIFT-features we need to know if the new solution is an improvement over the existing what we call the simple hash and a version DCT hash. A set of images is needed, as well as well as a modified set described in table \ref{modifiedimages} simulating scenarios typically encountered in duplicate image detection.
+Receiver operating characteristics have been useful for visualizing classifier performance \cite{Fawcett2006}. We will construct ROC graphs for the simple hash, DCT hash and large scale image retrieval with SIFT features.
+
+
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
