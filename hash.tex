@@ -1521,11 +1521,11 @@ Images smaller than 32px wide or high are ignored by the simple hash and DCT has
 \clearpage
 
 \section{Results}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against all three classifiers, the simple hash, the DCT hash and SIFT-classifier. SIFT-classifier outperforms the perceptual hashes in all categories except the simple hash for 53\% scale fig. \ref{tptotal}. The only miss for the SIFT-matcher is a duplicate image in the paintings data set. SIFT outperforms the perceptual hashes for FP for all test sets in fig. \ref{fptotal}.
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the simple hash-, the DCT-hash- and SIFT-classifiers. The SIFT-classifier outperforms both the perceptual hashes in all categories except the simple hash for 53\% scale (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. SIFT-classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
 
-For the $TN$ test set the SIFT-classifier performed the worst returning all false positives instead of misses. This was due to not setting a cutoff score. If returned matches from a search score less than this cutoff score, the image should be classified as a $TN$. The max score from the $TN$-set was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, we simulate setting the cutoff score from 1 to 19 and run the simulations for each cutoff score.
+For the $TN$ test set the SIFT-classifier performed the worst returning all false positives instead of misses. This was due to not setting a cutoff score meaning ''query image not found in database''. The data was investigated for an optimal $\mathcal{C}_s$.
 
-
+If returned matches from a search score less than this cutoff score $\mathcal{C_s}$, the image is classified as a $TN$. The max score from the $TN$-set was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1535,7 +1535,6 @@ For the $TN$ test set the SIFT-classifier performed the worst returning all fals
 \label{tptotal}
 \end{figure}
 
-
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/fpBar}
@@ -1543,7 +1542,6 @@ For the $TN$ test set the SIFT-classifier performed the worst returning all fals
 \caption{ $FP$ for near duplicate modifications in table \ref{modifiedimages} }
 \label{fptotal}
 \end{figure}
-
 
 \begin{figure}[htb]
 \begin{center}
@@ -1561,10 +1559,9 @@ For the $TN$ test set the SIFT-classifier performed the worst returning all fals
 \label{sifttnscores}
 \end{figure}
 
-
-
-
 \subsection{Simple hash}
+
+
 
 \subsection{DCT Hash}
 The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on DCT hash matcher can be seen in fig. \ref{dcttotalaccuracy}
