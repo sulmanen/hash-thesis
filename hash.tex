@@ -779,15 +779,15 @@ This version of DCT-Hash takes 194ms on a 13'' mid 2014 Macbook Pro and Matlab 2
 \subsection{Local features}
 To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
-Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same.
+Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same
 
 \begin{enumerate}
 \item Find keypoints of interest in image
 \item Encode keypoints in a visual descriptor
-\item Match incoming descriptor to all known descriptors
+\item Match incoming descriptor to all known descriptors.
 \end{enumerate}
 
-Local features have been in use since Moravec invented the corner detector in the early 1980's. The Moravec corner detector was improved by Harris and Stephens by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the scale invariant feature transform (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF), and BRISK and ORB which are not covered here. We will cover KAZE, and AKAZE features more recent techniques using local features.
+Local features have been in use since Moravec invented the corner detector in the early 1980's. The Moravec corner detector was improved by Harris and Stephens by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the \emph{Scale Invariant Feature Transform} (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF), and BRISK and ORB which are not covered here. We will however cover KAZE, and AKAZE features, more recent methods using local features.
 
 Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
