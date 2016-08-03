@@ -1466,7 +1466,7 @@ To begin production implementation solving the near similar image matching probl
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
-\caption{Test image sets and motivations taken from the "Recognition of object instances practical" paintings set of images.}
+\caption{Test image sets taken from the "Recognition of object instances practical" \cite{Vedaldi2012} paintings image set. }
 \label{modifiedimages}
 \begin{center}
 \begin{tabular}{lp{0.5\linewidth}}
@@ -1521,11 +1521,9 @@ Images smaller than 32px wide or high are ignored by the simple hash and DCT has
 \clearpage
 
 \section{Results}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the simple hash-, the DCT-hash- and SIFT-classifiers. The SIFT-classifier outperforms both the perceptual hashes in all categories except the simple hash for 53\% scale (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. SIFT-classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the simple hash-, the DCT-hash- and SIFT-classifiers. The SIFT-classifier outperforms both the perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. SIFT-classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
 
-For the $TN$ test set the SIFT-classifier performed the worst returning all false positives instead of misses. This was due to not setting a cutoff score meaning ''query image not found in database''. The data was investigated for an optimal $\mathcal{C}_s$.
-
-If returned matches from a search score less than this cutoff score $\mathcal{C_s}$, the image is classified as a $TN$. The max score from the $TN$-set was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score.
+Unexpectedly, the $TN$ test set the SIFT-classifier performed the worst returning all false positives instead of misses. This was due to not setting a cutoff score meaning ''query image not found in database'', a TN classification. The data was then investigated for an optimal cutoff score $\mathcal{C}_s$. If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$. The max score from the $TN$-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}). In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ data set (table \ref{truenegatives})
 
 \begin{figure}[htb]
 \begin{center}
