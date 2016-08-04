@@ -572,9 +572,7 @@ In other words, it is the number of characters two strings differ. In binary str
 \end{tabular}
 \end{center}\end{table}
 
-
-
-\subsubsection{Block mean based simple hash}
+\subsubsection{Block mean based simple hash}\label{simplehash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}.
 
 The simple hash (eq. \ref{simplehasheq}) scales the image image to $8px * 8px$ gray scale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to.
@@ -1575,7 +1573,7 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \label{tntotal}
 \end{figure}
 
-\subsection{Simple Hash} \label{simplehash}
+\subsection{Simple Hash}
 TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here also the Simple Hash NDID breaks down.
 
 \begin{figure}[htb]
