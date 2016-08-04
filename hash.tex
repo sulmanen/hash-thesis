@@ -1520,9 +1520,7 @@ We do not know how varying the hamming distance affects classifier performance, 
 Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is also the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
 \subsubsection{Local Features}
-For the Local Features classifier, ready code and image database on paintings from \cite{Vedaldi2012} is used. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make comparison reasonable.
-
-Simulation code for is heavily based on the code provided by ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words.
+Simulation code is heavily based on the code provided by ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make the classification work as needed for NDID.
 
 \begin{figure}[htb]
 \begin{center}
