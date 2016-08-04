@@ -1577,7 +1577,7 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \subsection{Simple Hash}
 TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down.
 
-Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) and is also optimal in ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2006} cites 10 to be a good Hamming distance where to classify two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
+Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) and is also optimal (out of those tested) in ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming distance where to classify two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1596,7 +1596,9 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \end{figure}
 
 \subsection{DCT Hash}
-The $ROC$ of a DCT Hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on DCT Hash matcher can be seen in fig. \ref{dcttotalaccuracy}
+TPR and FPR for DCT Hash NDID are in figures \ref{tptotal} and \ref{fptotal} for all near duplicate datasets from table \ref{modifiedimages}. Most cases achieve $TPR > 90\%$ with 10\% white border, 10\% rotation and 10px crop near duplicates. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has $TPR \approx 70\%$, ~20\% worse than the Simple Hash.
+
+The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance tolerance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC seems to suggest 4 is the optimal setting for the paintings dataset.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1611,7 +1613,7 @@ The $ROC$ of a DCT Hash based matcher depends on the chosen hamming distance tol
 \includegraphics[height=10cm]{figures/dctTotalROC}
 \end{center}
 \caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
-\label{dctaverageaccuracy}
+\label{dcttotalroc}
 \end{figure}
 
 \subsection{Local Features}
