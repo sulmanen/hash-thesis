@@ -411,6 +411,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   SURF & Sped Up Robust Features \\
   tf-idf & term frequency - inverse document frequency\\
   TP & True Positive\\
+  TPR & True Positive Rate\\
   TN & True Negative\\
   UA   & User Agent facilitates end user interaction with Web content (Browser)\\
   UI   & User Interface\\
@@ -1575,7 +1576,7 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \end{figure}
 
 \subsection{Simple Hash}
-TP-rates for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiediamges} in figure \ref{tptotal}. It performs surprisingly well compared to simplicity of implementation. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Here the Simple Hash NDID totally breaks down. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here also the Simple Hash NDID breaks down. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate.
+TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiediamges} in figure \ref{tptotal}. It performs surprisingly well compared to simplicity of implementation. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Here the Simple Hash NDID totally breaks down. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here also the Simple Hash NDID breaks down. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate.
 
 
 \begin{figure}[htb]
