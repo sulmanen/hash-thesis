@@ -1465,6 +1465,8 @@ We also need to know how the classifiers perform against one another and report 
 \subsection{Classifier Comparison}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. Near duplicate sets are formed using Imagemagick shell scripts. For each near duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
 
+We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
+
 \subsubsection{Image Datasets}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
@@ -1520,7 +1522,7 @@ Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash
 \subsubsection{Local Features}
 For the Local Features classifier, ready code and image database on paintings from \cite{Vedaldi2012} is used. The code is modified for compatibility with Matlab 2015a. Later the cutoff score was added to make comparison reasonable.
 
-Simulation code for Local Features use the SIFT-descriptor (section \ref{SIFTSection}).
+Simulation code for is heavily based on the code provided by ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words.
 
 \begin{figure}[htb]
 \begin{center}
