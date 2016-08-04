@@ -1513,7 +1513,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \end{center}\end{table}
 
 \subsubsection{Perceptual Hashing}
-An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by production code so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
+An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by code running on ThingLink so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
 
 We do not know how varying the hamming distance affects classifier performance, we will run all sets for hamming distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform.
 
@@ -1544,9 +1544,9 @@ Simulation code is heavily based on the code provided by ''Recognition of Object
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the simple hash-, the DCT-hash- and SIFT-classifiers. The SIFT-classifier outperforms both the perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. SIFT-classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the Simple Hash-, the DCT-Hash- and the Local Features-classifiers. As expected, the Local Features-classifier outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. SIFT-classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
 
-Unexpectedly, the $TN$ test set on the local features-classifier performed the worst with $FPR = 1$. Since the local features classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
+Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
 If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$. The max score from the $TN$-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}).
 
@@ -1554,7 +1554,7 @@ In order to determine optimum cutoff, simulations were run setting the cutoff sc
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=8cm]{figures/tpBar}
+\includegraphics[height=10cm]{figures/tpBar}
 \end{center}
 \caption{ $TP$ for near duplicate modifications in table \ref{modifiedimages} }
 \label{tptotal}
@@ -1562,7 +1562,7 @@ In order to determine optimum cutoff, simulations were run setting the cutoff sc
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=8cm]{figures/fpBar}
+\includegraphics[height=10cm]{figures/fpBar}
 \end{center}
 \caption{ $FP$ for near duplicate modifications in table \ref{modifiedimages} }
 \label{fptotal}
@@ -1570,7 +1570,7 @@ In order to determine optimum cutoff, simulations were run setting the cutoff sc
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=8cm]{figures/tnBar}
+\includegraphics[height=10cm]{figures/tnBar}
 \end{center}
 \caption{ $TN$ for near duplicate modifications in table \ref{truenegatives} }
 \label{tntotal}
