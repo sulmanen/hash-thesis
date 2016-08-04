@@ -1575,9 +1575,8 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \label{tntotal}
 \end{figure}
 
-\subsection{Simple Hash}
-TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiediamges} in figure \ref{tptotal}. It performs surprisingly well compared to simplicity of implementation. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Here the Simple Hash NDID totally breaks down. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here also the Simple Hash NDID breaks down. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate.
-
+\subsection{Simple Hash} \label{simplehash}
+TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here also the Simple Hash NDID breaks down.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1614,8 +1613,7 @@ The $ROC$ of a DCT Hash based matcher depends on the chosen hamming distance tol
 \label{dctaverageaccuracy}
 \end{figure}
 
-\subsection{Local Features Classifier}
-
+\subsection{Local Features}
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=7cm]{figures/cutoff}
@@ -1669,6 +1667,11 @@ ROC graph over all cases in small multiples
 \clearpage
 
 \section{Discussion}
+\subsection{Simple Hash}
+The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
+\subsection{DCT Hash}
+\subsection{Local Features}
+
 Any conclusions from the PR graphs. What recommendation to make? What to take a look at.
 
 
