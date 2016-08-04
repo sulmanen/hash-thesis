@@ -1574,7 +1574,9 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \end{figure}
 
 \subsection{Simple Hash}
-TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here also the Simple Hash NDID breaks down.
+TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down.
+
+Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) and is also optimal in ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2006} cites 10 to be a good Hamming distance where to classify two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1588,8 +1590,8 @@ TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalROC}
 \end{center}
-\caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
-\label{simpleaverageaccuracy}
+\caption{ROC space per hamming distance tolerance based on averaging results on all data. }
+\label{simpletotalroc}
 \end{figure}
 
 \subsection{DCT Hash}
