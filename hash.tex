@@ -1576,17 +1576,30 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \label{tntotal}
 \end{figure}
 
-
 \subsection{Simple hash}
 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/simpleTotalAccuracy}
+\end{center}
+\caption{ Effect of Hamming distance tolerance on total accuracy of Simple Hash classifier. }
+\label{simpletotalaccuracy}
+\end{figure}
 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/simpleTotalROC}
+\end{center}
+\caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
+\label{simpleaverageaccuracy}
+\end{figure}
 
 \subsection{DCT Hash}
 The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on DCT hash matcher can be seen in fig. \ref{dcttotalaccuracy}
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=8cm]{figures/dctTotalAccuracy}
+\includegraphics[height=10cm]{figures/dctTotalAccuracy}
 \end{center}
 \caption{ Effect of Hamming distance tolerance on total accuracy of DCT classifier. }
 \label{dcttotalaccuracy}
@@ -1594,7 +1607,7 @@ The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tol
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=8cm]{figures/dctTotalROC}
+\includegraphics[height=10cm]{figures/dctTotalROC}
 \end{center}
 \caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
 \label{dctaverageaccuracy}
