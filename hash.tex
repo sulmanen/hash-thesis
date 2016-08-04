@@ -1544,13 +1544,11 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 \label{vedaldiquery}
 \end{figure}
 
-\subsection{Near Duplicate Image Detection System}
-
 \clearpage
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the Simple Hash-, the DCT-Hash- and the Local Features-classifiers. As expected, the Local Features-classifier outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the SIFT-matcher is a duplicate image in the paintings data set and this is expected to be a challenge in designing a local features based classifier for large scale. Local Features-Classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the Simple Hash-, the DCT Hash- and the Local Features-classifiers. As expected, the Local Features-classifier outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the Local Features classifier is a duplicate image in the database. Duplicate images in the database are expected to be a challenge in designing a local features based classifier for large scale. Local Features-Classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1576,13 +1574,13 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \label{tntotal}
 \end{figure}
 
-\subsection{Simple hash}
+\subsection{Simple Hash}
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalAccuracy}
 \end{center}
-\caption{ Effect of Hamming distance tolerance on total accuracy of Simple Hash classifier. }
+\caption{Effect of Hamming distance tolerance on total accuracy of Simple Hash duplicate detection.}
 \label{simpletotalaccuracy}
 \end{figure}
 
@@ -1595,13 +1593,13 @@ Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were 
 \end{figure}
 
 \subsection{DCT Hash}
-The $ROC$ of a DCT hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on DCT hash matcher can be seen in fig. \ref{dcttotalaccuracy}
+The $ROC$ of a DCT Hash based matcher depends on the chosen hamming distance tolerance. The effect on setting hamming distance tolerance on DCT Hash matcher can be seen in fig. \ref{dcttotalaccuracy}
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalAccuracy}
 \end{center}
-\caption{ Effect of Hamming distance tolerance on total accuracy of DCT classifier. }
+\caption{ Effect of Hamming distance tolerance on total accuracy of DCT hash duplicate detection. }
 \label{dcttotalaccuracy}
 \end{figure}
 
