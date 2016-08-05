@@ -1548,7 +1548,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three classifiers, the Simple Hash-, the DCT Hash- and the Local Features-classifiers. As expected, the Local Features-classifier outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}). The only miss for the Local Features classifier is a duplicate image in the database. Duplicate images in the database are expected to be a challenge in designing a local features based classifier for large scale. Local Features-Classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems, the Simple Hash-, the DCT Hash- and Local Features-based system. As expected, Local Features (SIFT) outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1617,6 +1617,9 @@ The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance tol
 \end{figure}
 
 \subsection{Local Features}
+TPR and FPR for the Local Features NDID for the set can be found in figure \ref{tptotal} and \ref{fptotal} denoted as SIFT, due to the SIFT descriptor being used. The only miss for Local Features is a duplicate image in the database which results in a $FP$ being recorded depending on which of the duplicates takes top spot during sort at random. Local Features-Classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}).
+
+
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=7cm]{figures/cutoff}
@@ -1672,11 +1675,12 @@ ROC graph over all cases in small multiples
 \section{Discussion}
 \subsection{Simple Hash}
 The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
+
 \subsection{DCT Hash}
+
 \subsection{Local Features}
 
-Any conclusions from the PR graphs. What recommendation to make? What to take a look at.
-
+Duplicate images in the database are expected to be a challenge in designing a local features based classifier for large scale.
 
 
 \clearpage
