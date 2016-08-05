@@ -629,7 +629,7 @@ A simple hash is simple and fast to calculate so it meets all the criteria in ta
 
 As shown in table \ref{simplesteps}, the simple hash is very simple to calculate. It is also fast as mentioned earlier. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
 
-Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A hamming distance tolerance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the hamming distance.
+Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A Hamming Distance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the Hamming Distance.
 
 
 \subsubsection{DCT based hash}
@@ -1548,7 +1548,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems, the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined by running the sets through Hamming Distances $0-12$ in intervals of 4. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception due to chance (fig. \ref{tptotal}).
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems, the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception due to chance (fig. \ref{tptotal}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1583,7 +1583,7 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalAccuracy}
 \end{center}
-\caption{Effect of Hamming distance tolerance on total accuracy of Simple Hash duplicate detection.}
+\caption{Effect of Hamming Distance on total accuracy of Simple Hash duplicate detection.}
 \label{simpletotalaccuracy}
 \end{figure}
 
@@ -1591,20 +1591,20 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalROC}
 \end{center}
-\caption{ROC space per hamming distance tolerance based on averaging results on all data. }
+\caption{ROC space per Hamming Distance based on averaging results on all data. }
 \label{simpletotalroc}
 \end{figure}
 
 \subsection{DCT Hash}
 TPR and FPR for DCT Hash NDID are in figures \ref{tptotal} and \ref{fptotal} for all near duplicate datasets from table \ref{modifiedimages}. Most cases achieve $TPR > 90\%$ with 10\% white border, 10\% rotation and 10px crop near duplicates. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has $TPR \approx 70\%$, ~20\% worse than the Simple Hash.
 
-The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance tolerance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC seems to suggest 4 is the optimal setting for the paintings dataset.
+The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC seems to suggest 4 is the optimal setting for the paintings dataset.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalAccuracy}
 \end{center}
-\caption{ Effect of Hamming distance tolerance on total accuracy of DCT hash duplicate detection. }
+\caption{ Effect of Hamming Distance on total accuracy of DCT hash duplicate detection. }
 \label{dcttotalaccuracy}
 \end{figure}
 
@@ -1612,7 +1612,7 @@ The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance tol
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalROC}
 \end{center}
-\caption{ ROC space per hamming distance tolerance based on averaging results on all data. }
+\caption{ ROC space per Hamming Distance based on averaging results on all data. }
 \label{dcttotalroc}
 \end{figure}
 
