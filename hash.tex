@@ -62,7 +62,6 @@
 %% pdf (use jpg or pdf figures), or
 %% the 2nd when producing a ps file (use eps figures, don't use ps figures!).
 \documentclass[english,12pt,a4paper,pdftex,elec,utf8]{aaltothesis}
-%\documentclass[english,12pt,a4paper,dvips]{aaltothesis}
 
 %% To the \documentclass above
 %% specify your school: arts, biz, chem, elec, eng, sci
@@ -1548,7 +1547,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems, the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception due to chance (fig. \ref{tptotal}).
+Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for FPR excluding the 53\% scale duplicate set where the Simple Hash is equally good (fig. \ref{tptotal}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1575,15 +1574,15 @@ Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} w
 \end{figure}
 
 \subsection{Simple Hash}
-TPR for Simple Hash NDID are over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where $TPR < 5\%$. Another case with where $TPR < 5\%$ is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down.
+TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down.
 
-Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) and is also optimal (out of those tested) in ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming distance where to classify two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
+Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalAccuracy}
 \end{center}
-\caption{Effect of Hamming Distance on total accuracy of Simple Hash duplicate detection.}
+\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modified images}) and the TN set (table \ref{truenegatives}).}
 \label{simpletotalaccuracy}
 \end{figure}
 
@@ -1591,20 +1590,20 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalROC}
 \end{center}
-\caption{ROC space per Hamming Distance based on averaging results on all data. }
+\caption{Simple Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages}. }
 \label{simpletotalroc}
 \end{figure}
 
 \subsection{DCT Hash}
-TPR and FPR for DCT Hash NDID are in figures \ref{tptotal} and \ref{fptotal} for all near duplicate datasets from table \ref{modifiedimages}. Most cases achieve $TPR > 90\%$ with 10\% white border, 10\% rotation and 10px crop near duplicates. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has $TPR \approx 70\%$, ~20\% worse than the Simple Hash.
+For most duplicate sets (table \ref{modifiedimages}) TPR > 90\% (fig. \ref{tptotal}). FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has $TPR \approx 70\%$, ~20\% worse than the Simple Hash.
 
-The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC seems to suggest 4 is the optimal setting for the paintings dataset.
+The $ROC$ of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalAccuracy}
 \end{center}
-\caption{ Effect of Hamming Distance on total accuracy of DCT hash duplicate detection. }
+\caption{DCT Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modified images}) and the TN set (table \ref{truenegatives})}
 \label{dcttotalaccuracy}
 \end{figure}
 
@@ -1612,36 +1611,31 @@ The $ROC$ of a DCT Hash based matcher depends on the chosen Hamming Distance. Th
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalROC}
 \end{center}
-\caption{ ROC space per Hamming Distance based on averaging results on all data. }
+\caption{DCT Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages}.}
 \label{dcttotalroc}
 \end{figure}
 
 \subsection{Local Features}
-TPR and FPR for the Local Features NDID for the set can be found in figure \ref{tptotal} and \ref{fptotal} denoted as SIFT, due to the SIFT descriptor being used. The only miss for Local Features is a duplicate image in the database which results in a $FP$ being recorded depending on which of the duplicates takes top spot during sort at random. Local Features-Classifier outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with 53\% scale duplicate dataset being the exception. Here Local Features ties with the Simple Hash.
+TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal} and \ref{fptotal}. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR almost hitting 100\%. The only miss for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features ties with the Simple Hash.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=7cm]{figures/cutoff}
 \end{center}
-\caption{ $TN$ image set maximum scores returned by the local features classifier for images not in database \ref{truenegatives}. The y-axis marks the score and the x-axis denotes the image number. The maximum of maximums score is 19. Setting $\mathcal{C}_s=19$ will classify all $TN$ images correctly.}
+\caption{ TN image set maximum scores returned by the local features classifier for images not in database \ref{truenegatives}. The y-axis marks the score and the x-axis denotes the image number. The maximum of maximums score is 19. Setting $\mathcal{C}_s=19$ will classify all TN images correctly.}
 \label{sifttnscores}
 \end{figure}
 
-The search by Local Features always returns the highest scoring image even if the case of a $FP$. A sane $FPR$ (close to zero) can be achieved by choosing a cutoff score so that as many as possible of the sets in table \ref{modifiedimages}, and keep FN to a minimum. We run the sets and plot the scores of matches from each set and find a score such that $tp_{rate}$ is maximized and $FPR$ is minimized. The max score from the $TN$-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}).
+The search by Local Features always returns the highest scoring image. This results in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}).
 
-Fig. \ref{figcutoffrocspace} shows Local Featuers-classifier performance degrade as $\mathcal{C}_{s}->0$. From fig.\ref{figcutoff} we can see the $FN_{count}$ increase linearly as cutoff increases where as the $FP_{count}$ decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features Classifier per $\mathcal{C}_{s}$ over data from runs of images in table \ref{modifiedimages} up to
+Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so it looks like 19 would be a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
 
-\begin{equation}\label{maxtnscore}
-max(score_{tndata}) = 19
-\end{equation}
-
-From the test in table \ref{truenegatives}. From fig.\ref{figcutoff} accuracy section we can deduce that the highest accuracy for this data can be achieved by setting $C_{s} = max(score_{tn}) = 19$.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/SIFTCountROC}
 \end{center}
-\caption{ Effects of cutoff on Local Features-classifier performance. }
+\caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase very slowly and linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
 \label{figcutoff}
 \end{figure}
 
@@ -1649,22 +1643,9 @@ From the test in table \ref{truenegatives}. From fig.\ref{figcutoff} accuracy se
 \begin{center}
 \includegraphics[height=8cm]{figures/SIFTROCperCutoff}
 \end{center}
-\caption{ ROC Space per Local Features-classifier cutoff. }
+\caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from TN dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
 \label{figcutoffrocspace}
 \end{figure}
-
-\subsection{Simulated classifier comparison}
-All classifiers in PR space.
-
-The optimum hamming distance for the classifier using simple hash seems to be 4.
-The optimum hamming distance to use with a DCT hash classifier seems to be 4.
-
-A table of all the TP and FP rates.
-A table with all the numbers from the ROC section.
-
-Put all classifiers in ROC space for all cases.
-
-ROC graph over all cases in small multiples
 
 \subsection{System for near duplicate detection by local features}
 
