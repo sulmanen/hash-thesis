@@ -1548,7 +1548,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems, the Simple Hash-, the DCT Hash- and Local Features-based system. As expected, Local Features (SIFT) outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception (fig. \ref{tptotal}).
+Modified image sets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems, the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined by running the sets through Hamming Distances $0-12$ in intervals of 4. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all image sets with the Simple Hash for 53\% scale being an exception due to chance (fig. \ref{tptotal}).
 
 \begin{figure}[htb]
 \begin{center}
