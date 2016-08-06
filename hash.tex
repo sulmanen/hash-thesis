@@ -1547,13 +1547,13 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for FPR excluding the 53\% scale duplicate set where the Simple Hash is equally good (fig. \ref{tptotal}).
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? Simulations on the paintings dataset from \cite{Vedaldi2012} should answer this question. Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the perceptual hashes, optimal Hamming Distance was determined. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined. As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for FPR excluding the 53\% scale duplicate set where the Simple Hash is equally good (fig. \ref{tptotal}).
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/tpBar}
 \end{center}
-\caption{ $TPR$ for near duplicate modifications in table \ref{modifiedimages} }
+\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} }
 \label{tptotal}
 \end{figure}
 
@@ -1561,7 +1561,7 @@ Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} w
 \begin{center}
 \includegraphics[height=10cm]{figures/fpBar}
 \end{center}
-\caption{ $FPR$ for near duplicate modifications in table \ref{modifiedimages} }
+\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} }
 \label{fptotal}
 \end{figure}
 
@@ -1569,7 +1569,7 @@ Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} w
 \begin{center}
 \includegraphics[height=10cm]{figures/tnBar}
 \end{center}
-\caption{ $TN$ for near duplicate modifications in table \ref{truenegatives} }
+\caption{ TN for near duplicate modifications in table \ref{truenegatives} }
 \label{tntotal}
 \end{figure}
 
@@ -1582,7 +1582,7 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalAccuracy}
 \end{center}
-\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modified images}) and the TN set (table \ref{truenegatives}).}
+\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) and the TN set (table \ref{truenegatives}).}
 \label{simpletotalaccuracy}
 \end{figure}
 
@@ -1595,9 +1595,9 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \end{figure}
 
 \subsection{DCT Hash}
-For most duplicate sets (table \ref{modifiedimages}) TPR > 90\% (fig. \ref{tptotal}). FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has $TPR \approx 70\%$, ~20\% worse than the Simple Hash.
+For most duplicate sets (table \ref{modifiedimages}) TPR > 90\% (fig. \ref{tptotal}). FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
 
-The $ROC$ of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
+The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1618,13 +1618,13 @@ The $ROC$ of a DCT Hash NDID depends on the chosen Hamming Distance. The effect 
 \subsection{Local Features}
 TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal} and \ref{fptotal}. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR almost hitting 100\%. The only miss for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features ties with the Simple Hash.
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=7cm]{figures/cutoff}
-\end{center}
-\caption{ TN image set maximum scores returned by the local features classifier for images not in database \ref{truenegatives}. The y-axis marks the score and the x-axis denotes the image number. The maximum of maximums score is 19. Setting $\mathcal{C}_s=19$ will classify all TN images correctly.}
-\label{sifttnscores}
-\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%\includegraphics[height=7cm]{figures/cutoff}
+%\end{center}
+%\caption{ TN image set maximum scores returned by the local features classifier for images not in database \ref{truenegatives}. The y-axis marks the score and the x-axis denotes the image number. The maximum of maximums score is 19. Setting $\mathcal{C}_s=19$ will classify all TN images correctly.}
+%\label{sifttnscores}
+%\end{figure}
 
 The search by Local Features always returns the highest scoring image. This results in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}).
 
@@ -1653,15 +1653,36 @@ Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathca
 \clearpage
 
 \section{Discussion}
+To what degree if any is object instance detection by local features an improvement over DCT-, and Simple- perceptual hashes for NDID?
+
+Evaluate the dataset. Evaluate the modified images.
+
+Evaluate the method.
+
+Fucking excellent. With the exception of 53 \% scale where it ties with Simple hash.
+
+Handling duplicate images in the database. This is a case for ThingLink
+
+Why is that? object instance recognition shines in comparing the same image slightly modified because it was designed to match scenes from different images and to detect known scenes or objects in much more variant circumstances than near duplicate images. The SIFT descriptor is by definition scale and rotation invariant. It is capable of matching insituations of affine distortion, change in 3D camera location, noise and changes in lighting.\cite{Lowe2004}
+
+Corner cases.
+Totally white images. Totally black images.
+
+On questions?
+
+20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
+
 \subsection{Simple Hash}
 The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
 
 \subsection{DCT Hash}
+Performs better than Simple Hash for changes affecting the colors, which is anticipated.
 
 \subsection{Local Features}
 
 Duplicate images in the database are expected to be a challenge in designing a local features based classifier for large scale.
 
+Global and local desriptors.
 
 \clearpage
 %% L\"ahdeluettelo
