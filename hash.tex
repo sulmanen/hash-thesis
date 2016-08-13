@@ -1648,7 +1648,7 @@ TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal}
 %\label{sifttnscores}
 %\end{figure}
 
-The search by Local Features always returns the highest scoring image. This results in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19 (fig. \ref{sifttnscores}).
+The search by Local Features always returns the highest scoring image. This results in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
 
 Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so it looks like 19 would be a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
 
