@@ -1603,7 +1603,7 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalAccuracy}
 \end{center}
-\caption{DCT Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modified images}) and the TN set (table \ref{truenegatives})}
+\caption{DCT Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) and the TN set (table \ref{truenegatives})}
 \label{dcttotalaccuracy}
 \end{figure}
 
@@ -1617,6 +1617,28 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 
 \subsection{Local Features}
 TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal} and \ref{fptotal}. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR almost hitting 100\%. The only miss for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features ties with the Simple Hash.
+
+\begin{table}[htb]
+\caption{NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}.}
+\label{liitetaulukko}
+\begin{center}
+\fbox{
+  \begin{tabular}{lccc}
+    \hline
+    Modification & FP & TP & FN\\
+    \hline
+    53\% Scale & 1 & 1694 & 13 \\
+    83\% Scale & 1 & 1704 & 3 \\
+    Crop 10px  & 1 & 1704 & 3 \\
+    10\% Border & 1 & 1704 & 3 \\
+    Rotate 10\% & 1 & 1698 & 9\\
+    Normalize Histogram & 1 & 1702 & 5\\
+    Saturate Colors & 1 & 1705 & 2\\
+\end{tabular}}
+\end{center}
+\end{table}
+
+
 
 %\begin{figure}[htb]
 %\begin{center}
@@ -1670,7 +1692,15 @@ Totally white images. Totally black images.
 
 On questions?
 
+If we were to use AKAZE features with VLAD encoding, that would need another run of simulations.
+
+1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. VLAD is a bad approximation of the actual descriptors, is the accuracy enough?
+
 20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
+
+
+Do the PR graphs bring something new?
+
 
 \subsection{Simple Hash}
 The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
@@ -1685,6 +1715,7 @@ Duplicate images in the database are expected to be a challenge in designing a l
 Global and local desriptors.
 
 \clearpage
+
 %% L\"ahdeluettelo
 %%
 %% \phantomsection varmistaa, ett\"a hyperref-paketti latoo hypertekstilinkit
