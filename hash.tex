@@ -94,6 +94,7 @@
 \usepackage{commath}
 \usepackage{listings}
 \usepackage{bm}
+\usepackage{booktabs}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -1578,13 +1579,13 @@ TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \r
 
 Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
-\begin{table}[htb]
-\caption{NDID by Simple Hash results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}.}
+\begin{table*}
+\caption{NDID by Simple Hash results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. The results are for }
 \label{simpleresults}
 \begin{center}
-\fbox{
-  \begin{tabular}{lccc}
-    \hline
+
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
     Modification & FP & TP & FN\\
     \hline
     53\% Scale & 1 & 1694 & 13 \\
@@ -1594,9 +1595,10 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
     Rotate 10\% & 1 & 1698 & 9\\
     Normalize Histogram & 1 & 1702 & 5\\
     Saturate Colors & 1 & 1705 & 2\\
-\end{tabular}}
+    \bottomrule
+\end{tabular}
 \end{center}
-\end{table}
+\end{table*}
 
 
 \begin{figure}[htb]
@@ -1620,13 +1622,13 @@ For most duplicate sets (table \ref{modifiedimages}) TPR > 90\% (fig. \ref{tptot
 
 The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
 
-\begin{table}[htb]
+\begin{table}
 \caption{NDID by DCT Hash results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}.}
 \label{dctresults}
 \begin{center}
-\fbox{
-  \begin{tabular}{lccc}
-    \hline
+
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
     Modification & FP & TP & FN\\
     \hline
     53\% Scale & 1 & 1694 & 13 \\
@@ -1636,7 +1638,7 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
     Rotate 10\% & 1 & 1698 & 9\\
     Normalize Histogram & 1 & 1702 & 5\\
     Saturate Colors & 1 & 1705 & 2\\
-\end{tabular}}
+\end{tabular}
 \end{center}
 \end{table}
 
@@ -1664,7 +1666,6 @@ TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal}
 \caption{NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}.}
 \label{siftresults}
 \begin{center}
-\fbox{
   \begin{tabular}{lccc}
     \hline
     Modification & FP & TP & FN\\
@@ -1676,7 +1677,7 @@ TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal}
     Rotate 10\% & 1 & 1698 & 9\\
     Normalize Histogram & 1 & 1702 & 5\\
     Saturate Colors & 1 & 1705 & 2\\
-\end{tabular}}
+\end{tabular}
 \end{center}
 \end{table}
 
