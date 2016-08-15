@@ -1579,27 +1579,27 @@ TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \r
 
 Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as equal, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
-\begin{table*}
-\caption{NDID by Simple Hash results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. The results are for }
-\label{simpleresults}
+\begin{table}[htb]\footnotesize
+\caption{ NDID by Simple Hash results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
+\label{siftresults}
 \begin{center}
-
-  \begin{tabular}{@{}lccc@{}}
+  \setlength\tabcolsep{2pt} % default value: 6pt
+  \begin{tabular}{@{}lccccccccccccccc@{}}
     \toprule
-    Modification & FP & TP & FN\\
-    \hline
-    53\% Scale & 1 & 1694 & 13 \\
-    83\% Scale & 1 & 1704 & 3 \\
-    Crop 10px  & 1 & 1704 & 3 \\
-    10\% Border & 1 & 1704 & 3 \\
-    Rotate 10\% & 1 & 1698 & 9\\
-    Normalize Histogram & 1 & 1702 & 5\\
-    Saturate Colors & 1 & 1705 & 2\\
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+    53\% Scale   & 9 & 1612 & 87 &\phantom{abc} & 11 & 1696 & 1 &\phantom{abc} & 11 & 1697 & 0 &\phantom{abc} & 11 & 1697 & 0\\
+    83\% Scale   & -1 & -1704 & -3 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13\\
+    Crop 10px    & -1 & -1704 & -3 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13\\
+    10\% Border  & -1 & -1704 & -3 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13\\
+    Rotate 10\%  & -1 & -1698 & -9 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13\\
+    Normalize    & -1 & -1702 & -5 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13\\
+    Saturate     & -1 & -1705 & -2 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13 &\phantom{abc} & -1 & -1694 & -13\\
     \bottomrule
 \end{tabular}
 \end{center}
-\end{table*}
-
+\end{table}
 
 \begin{figure}[htb]
 \begin{center}
@@ -1663,28 +1663,26 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \subsection{Local Features}
 TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal} and \ref{fptotal}. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR ~100\%. The single FP for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features ties with the Simple Hash.
 
-\begin{table}[htb]\footnotesize
-\caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
-\label{siftresults}
+\begin{table*}
+\caption{NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. The results are for }
+\label{simpleresults}
 \begin{center}
-  \setlength\tabcolsep{2pt} % default value: 6pt
-  \begin{tabular}{@{}lccccccccccccccc@{}}
+
+  \begin{tabular}{@{}lccc@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
-\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
-    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13\\
-    83\% Scale   & 1 & 1704 & 3 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13\\
-    Crop 10px    & 1 & 1704 & 3 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 & \phantom{abc} & 1 & 1694 & 13\\
-    10\% Border  & 1 & 1704 & 3 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13\\
-    Rotate 10\%  & 1 & 1698 & 9 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13\\
-    Normalize    & 1 & 1702 & 5 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13\\
-    Saturate     & 1 & 1705 & 2 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13 &\phantom{abc} & 1 & 1694 & 13\\
+    Modification & FP & TP & FN\\
+    \hline
+    53\% Scale & 1 & 1694 & 13 \\
+    83\% Scale & 1 & 1704 & 3 \\
+    Crop 10px  & 1 & 1704 & 3 \\
+    10\% Border & 1 & 1704 & 3 \\
+    Rotate 10\% & 1 & 1698 & 9\\
+    Normalize Histogram & 1 & 1702 & 5\\
+    Saturate Colors & 1 & 1705 & 2\\
     \bottomrule
 \end{tabular}
 \end{center}
-\end{table}
-
+\end{table*}
 
 
 %\begin{figure}[htb]
