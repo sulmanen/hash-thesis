@@ -1622,27 +1622,27 @@ For most duplicate sets (table \ref{modifiedimages}) TPR > 90\% (fig. \ref{tptot
 
 The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID can be seen in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
 
-\begin{table}
-\caption{NDID by DCT Hash results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}.}
-\label{dctresults}
+\begin{table}[htb]\footnotesize
+\caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
+\label{siftresults}
 \begin{center}
-
-  \begin{tabular}{@{}lccc@{}}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    Modification & FP & TP & FN\\
-    \hline
-    53\% Scale & 1 & 1694 & 13 \\
-    83\% Scale & 1 & 1704 & 3 \\
-    Crop 10px  & 1 & 1704 & 3 \\
-    10\% Border & 1 & 1704 & 3 \\
-    Rotate 10\% & 1 & 1698 & 9\\
-    Normalize Histogram & 1 & 1702 & 5\\
-    Saturate Colors & 1 & 1705 & 2\\
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+    53\% Scale   & 0 & 384 & 1324 &\phantom{abc} & 5 & 1605 & 98 &\phantom{abc} & 7 & 1697 & 4 &\phantom{abc} & 9 & 1699 & 0\\
+    83\% Scale   & 9 & 1633 & 66 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0\\
+    Crop 10px    & 9 & 370 & 1329 &\phantom{abc} & 22 & 1553 & 133 &\phantom{abc} & 27 & 1667 & 14 &\phantom{abc} & 33 & 1675 & 0\\
+    10\% Border  & 1 & 0 & 1707 & \phantom{abc} & 214 & 10 & 1484 &\phantom{abc} & 1079 & 23 & 606 &\phantom{abc} & 1639 & 29 & 40\\
+    Rotate 10\%  & 0 & 0 & 1708 &\phantom{abc} & 68 & 6 & 1634 &\phantom{abc} & 737 & 19 & 952 &\phantom{abc} & 1568 & 32 & 108\\
+    Normalize    & 7 & 987 & 714 &\phantom{abc} & 15 & 1653 & 40 &\phantom{abc} & 20 & 1679 & 9 &\phantom{abc} & 26 & 1682 & 0\\
+    Saturate     & 8 & 644 & 1056 &\phantom{abc} & 25 & 1605 & 78 &\phantom{abc} & 28 & 1675 & 5 &\phantom{abc} & 29 & 1679 & 0\\
     \bottomrule
 \end{tabular}
 \end{center}
 \end{table}
-
 
 \begin{figure}[htb]
 \begin{center}
