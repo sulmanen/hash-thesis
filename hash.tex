@@ -1549,31 +1549,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
-To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the Simple Hash and DCT Hash, optimal Hamming Distance was determined by running comparisons for $D_H \in \{0,4,8,12\}$. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined from ROC space (fig. \ref{figcutoffrocspace}). Based on these results the NDID systems are compared head to head using optimal settings in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}).
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=10cm]{figures/tpBar}
-\end{center}
-\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} }
-\label{tptotal}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=10cm]{figures/fpBar}
-\end{center}
-\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} }
-\label{fptotal}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=10cm]{figures/tnBar}
-\end{center}
-\caption{ TN for near duplicate modifications in table \ref{truenegatives} }
-\label{tntotal}
-\end{figure}
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the Simple Hash (fig. \ref{simpletotalroc}) and DCT Hash (fig. \ref{dcttotalroc}), near optimal Hamming Distance was determined by running comparisons for $D_H \in \{0,4,8,12\}$ and plotting the results in ROC space. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined from ROC space (fig. \ref{figcutoffrocspace}). Based on these results the NDID systems are compared head to head using optimal settings in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}).
 
 \subsection{Simple Hash}
 TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down.
@@ -1714,7 +1690,31 @@ Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathca
 \label{figcutoffrocspace}
 \end{figure}
 
-\subsection{System for near duplicate detection by local features}
+\subsection{Comparison}
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/tpBar}
+\end{center}
+\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} }
+\label{tptotal}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/fpBar}
+\end{center}
+\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} }
+\label{fptotal}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/tnBar}
+\end{center}
+\caption{ TN for near duplicate modifications in table \ref{truenegatives} }
+\label{tntotal}
+\end{figure}
+
 
 
 \clearpage
