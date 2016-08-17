@@ -1728,10 +1728,9 @@ The paintings dataset excluding black and white images from \cite{Vedaldi2012} w
 The duplicate datasets in table \ref{modifiedimages} were chosen to represent near duplicate images and they agree with the definition of near duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers.
 
 Evaluate the method.
+1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. VLAD is a bad approximation of the actual descriptors, is the accuracy enough?
 
-Fucking excellent. With the exception of 53 \% scale where it ties with Simple Hash.
-
-Handling duplicate images in the database. This is a case for ThingLink
+Handling duplicate images for Local Features NDID. This is a case for ThingLink
 
 Why is that? object instance recognition shines in comparing the same image slightly modified because it was designed to match scenes from different images and to detect known scenes or objects in much more variant circumstances than near duplicate images. The SIFT descriptor is by definition scale and rotation invariant. It is capable of matching insituations of affine distortion, change in 3D camera location, noise and changes in lighting.\cite{Lowe2004}
 
@@ -1742,16 +1741,16 @@ On questions?
 
 If we were to use AKAZE features with VLAD encoding, that would need another run of simulations.
 
-1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. VLAD is a bad approximation of the actual descriptors, is the accuracy enough?
+
 
 20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
 
 
 Do the PR graphs bring something new?
 
-
 \subsection{Simple Hash}
 The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
+
 
 \subsection{DCT Hash}
 Performs better than Simple Hash for changes affecting the colors, which is anticipated.
