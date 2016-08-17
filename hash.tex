@@ -1457,7 +1457,7 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 
 \clearpage
 
-\section{Materials and Methods}
+\section{Materials and Methods} \label{mame}
 We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin production implementation of improving near similar image detection we need to make sure we understand to what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
 A test set of images is needed, as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image dataset (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
@@ -1716,23 +1716,21 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 \label{tntotal}
 \end{figure}
 
-
-
 \clearpage
 
 \section{Discussion}
-To what degree if any is object instance detection by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR excluding the 53\% scale duplicate set where the Simple Hash better (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}.
+To what degree if any is object instance detection by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR excluding the 53\% scale duplicate set where the Simple Hash better (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{The}.
 
-The paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence. It is quite small compared to the 3.5M images ThingLink hostsand homogenous. All of the images are in the JPEG format while ThingLink hosts GIF's and PNG's also. How do these methods compare on other formats?
+siftresults duplicate datasets in table \ref{modifiedimages} were chosen to represent near duplicate images and they agree with the definition of near duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers. The definition for a near duplicate image is broader here than at ThingLink, where a near duplicate refers to scaled images only. The broader definition was used to bring out differences in Simple Hash-, DCT Hash- and Local Features NDID.
 
-The duplicate datasets in table \ref{modifiedimages} were chosen to represent near duplicate images and they agree with the definition of near duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers.
+The paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence as a ready built database for Local Features NDID had been built. It is quite small compared to the 3.5M images ThingLink hosts and homogenous. All of the images are in the JPEG format while ThingLink hosts GIF's and PNG's also. How do these methods compare on other formats?
+
+1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. Obvisously the method described in section \ref{mame} cannot be used in this scale. VLAD is a bad approximation of the actual descriptors, so the question remains is it accurate enough to better than 80\% accurate required for the ThingLink customers.
+
+According to \cite{Zauner2010}, a good $D_H$ for detecting duplicate images is 10. However we found, on average (for near duplicates in table \ref{modifiedimages}) the accuracy to be best for $D_H = 4$ for the Simple Hash and $D_H = 4$ for the DCT Hash. A closer look at the data in tables \ref{simpleresults} and \ref{dctresults} reveals that $D_H = 8$ does perform better for the scale case and we do not include 10 in our simulations due to time constraints.
 
 Evaluate the method.
-1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. VLAD is a bad approximation of the actual descriptors, is the accuracy enough?
 
-Handling duplicate images for Local Features NDID. This is a case for ThingLink
-
-Why is that? object instance recognition shines in comparing the same image slightly modified because it was designed to match scenes from different images and to detect known scenes or objects in much more variant circumstances than near duplicate images. The SIFT descriptor is by definition scale and rotation invariant. It is capable of matching insituations of affine distortion, change in 3D camera location, noise and changes in lighting.\cite{Lowe2004}
 
 Corner cases.
 Totally white images. Totally black images.
@@ -1741,10 +1739,7 @@ On questions?
 
 If we were to use AKAZE features with VLAD encoding, that would need another run of simulations.
 
-
-
 20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
-
 
 Do the PR graphs bring something new?
 
