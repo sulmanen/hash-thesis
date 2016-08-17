@@ -389,6 +389,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
   FV & Fisher Vector\\
   GMM & Gaussian Mixture Model\\
   IVFADC & inverted file system with asymmetric distance computation\\
+  JPEG & lossy compression for digital images by DCT\\
   KAZE & feature detection by local features\\
   k-d tree & k-dimensional tree\\
   K-NN & K-Nearest Neighbor\\
@@ -1690,6 +1691,7 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 %\end{figure}
 
 \subsection{Comparison}
+
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=10cm]{figures/tpBar}
@@ -1719,9 +1721,13 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 \clearpage
 
 \section{Discussion}
-To what degree if any is object instance detection by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for FPR excluding the 53\% scale duplicate set where the Simple Hash is equally good (fig. \ref{tptotal}).
 
-Evaluate the dataset. Evaluate the modified images.
+
+To what degree if any is object instance detection by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR excluding the 53\% scale duplicate set where the Simple Hash better (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}.
+
+The paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence. It is quite small compared to the 3.5M images ThingLink hostsand homogenous. All of the images are in the JPEG format.
+
+Evaluate the modified images.
 
 Evaluate the method.
 
