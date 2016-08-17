@@ -1638,10 +1638,30 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \end{figure}
 
 \subsection{Local Features}
-TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal} and \ref{fptotal}. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR ~100\%. The single FP for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features ties with the Simple Hash.
+The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/SIFTCountROC}
+\end{center}
+\caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase very slowly and linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
+\label{figcutoff}
+\end{figure}
+
+Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so it looks like 19 would be a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/SIFTROCperCutoff}
+\end{center}
+\caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from TN dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
+\label{figcutoffrocspace}
+\end{figure}
+
+TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptotal} respectively. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR ~100\%. The single FP for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features loses to the Simple Hash when Simple Hash $D_H \geq 4 $ best seen comparing tables \ref{siftresults} and \ref{simpleresults}.
 
 \begin{table*}
-\caption{NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
+\caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
 \label{siftresults}
 \begin{center}
   \begin{tabular}{@{}lccc@{}}
@@ -1668,27 +1688,6 @@ TPR and FPR for the Local Features NDID for the set are in figures \ref{tptotal}
 %\caption{ TN image set maximum scores returned by the local features classifier for images not in database \ref{truenegatives}. The y-axis marks the score and the x-axis denotes the image number. The maximum of maximums score is 19. Setting $\mathcal{C}_s=19$ will classify all TN images correctly.}
 %\label{sifttnscores}
 %\end{figure}
-
-The search by Local Features always returns the highest scoring image. This results in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
-
-Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so it looks like 19 would be a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
-
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/SIFTCountROC}
-\end{center}
-\caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase very slowly and linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
-\label{figcutoff}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/SIFTROCperCutoff}
-\end{center}
-\caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from TN dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
-\label{figcutoffrocspace}
-\end{figure}
 
 \subsection{Comparison}
 \begin{figure}[htb]
