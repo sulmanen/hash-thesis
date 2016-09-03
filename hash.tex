@@ -266,14 +266,13 @@
 %%
 %% Suomenkielinen tiivistelmä. Poista, jos et tarvitse sitä.
 %% Opinnäytteen ostikko suomeksi
-\thesistitle{Opinnäyteohje}
-\advisor{TkT Olli Ohjaaja}
+\thesistitle{Hajautusfunkion korvaaminen paikallisilla erityispiirteillä duplikaattikuvien tunnistuksessa}
+\advisor{TkT Juho Kannala}
 \degreeprogram{Electronics and electrical engineering}
 \department{Radiotieteen ja -tekniikan laitos}
 \professorship{Piiriteoria}
-%% Avainsanat
-\keywords{Vastus, Resistanssi,\\ Lämpötila}
-%% Tiivistelmän tekstiosa
+\keywords{hajautusfunktio, paikalliset piirteet}
+
 \begin{abstractpage}[finnish]
   Tiivistelmässä on lyhyt selvitys (noin 100 sanaa)
   kirjoituksen tärkeimmästä sisällöstä: mitä ja miten on tutkittu,
@@ -452,8 +451,8 @@ This paper only considers near duplicate detection and excludes all other uses o
 \begin{itemize}
 \item[--] To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection?
 \item[--] Can object instance detection by local features be deployed at large scale at ThingLink for improved near duplicate detection?
-\item[--] Does a soft realtime solution exist to improve on the current queued solution?
-  \item[--] Can the method be chose in a way to extend later towards object discovery with minimal work?
+\item[--] What is a good Hamming Distance to use for NDID by perceptual hashing
+\item[--] What is a good cutoff score to classify an image a true negative in NDID with local features?
 \end{itemize}
 
 \clearpage
@@ -461,13 +460,13 @@ This paper only considers near duplicate detection and excludes all other uses o
 \section{Related research}
 To what degree if any is object instance detection by local features an improvement over DCT-, and simple perceptual hashes for near duplicate image detection?
 
-ThingLink requirements for a classifier are a high true positive rate, a high true negative rate, and a low false positive rate of images at different scales. A customer is reporting 20\% to 30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
+ThingLink requirements for a classifier are a high true positive rate (TPR), a high true negative rate, and a low false positive rate (FPR) of images at different scales. A customer is reporting 20\% to 30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
 
-Near duplicate image definitions vary according to the problem at hand. At one extreme is ''pixel perfect'' matches while matching images of the same scene or object is at the other extreme.
+Near duplicate image definitions vary according to the problem at hand. At one extreme are ''pixel perfect'' matches while methods for matching images of the same scene or object lie at the other extreme.
 
-The simple hash and DCT hash are perceptual hashes. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
+The Simple Hash and DCT Hash are perceptual hashes in use a ThingLink every day. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
 
-Object instance detection by local features is a good choice for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted by the image. Local feature descriptors are by definition invariant to isotropic scaling and rotation and can withstand some offline distortion, noise and illumination changes. Object instance detection works especially well for processed duplicate images, the case we are trying to solve.
+Object instance detection by local features is a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted by the image. Local feature descriptors are by definition invariant to isotropic scaling and rotation and can withstand some offline distortion, noise and illumination changes. Object instance detection works especially well for processed duplicate images, the case we are trying to solve.
 
 In order to compare the perceptual hash classifiers to the local features classifier, we simulate near duplicate cases on a set of images. The performance of each classifier is then compared head to head.
 
