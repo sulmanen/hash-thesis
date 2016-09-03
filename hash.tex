@@ -1491,7 +1491,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \end{tabular}
 \end{center}\end{table}
 
-The Paintings Dataset from \cite{Vedaldi2012} contains images of homogenous quality and domain. ThingLink images are very heterogenous in quality and subject. An image dataset of 446 ThingLink images excluding duplicates is used to evaluate performance in the ThingLink domain. The images are varied from upclose food photos to broad landscapes.
+The Paintings Dataset from \cite{Vedaldi2012} contains images of homogenous quality and domain. ThingLink images are very heterogenous in quality and subject. An image dataset of 446 ThingLink images excluding duplicates is used to evaluate performance in the ThingLink domain. The images are varied from upclose food photos to broad landscapes. For the perceptual hashes, a good Hamming distance is determined. For Local Features NDID a good cutoff score is determined.
 
 \subsubsection{Perceptual Hashing}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by code running on ThingLink so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
@@ -1574,6 +1574,7 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \label{simpletotalroc}
 \end{figure}
 
+
 \subsection{DCT Hash}
 TPR > 90\% for most duplicate sets (table \ref{modifiedimages}) in figure \ref{tptotal}. FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
 
@@ -1616,6 +1617,30 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \caption{DCT Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages}.}
 \label{dcttotalroc}
 \end{figure}
+
+\begin{table}[htb]\footnotesize
+\caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+\label{simpleresults}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+    53\% Scale   & - & 1612 & 87 &\phantom{abc} & 11 & 1696 & 1 &\phantom{abc} & 11 & 1697 & 0 &\phantom{abc} & 11 & 1697 & 0\\
+    83\% Scale   & - & 1633 & 66 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0\\
+    Crop 10px    & 4 & 30 & 412 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 42 & 391 & 13 &\phantom{abc} & 49 & 396 & 1\\
+    10\% Border  & 0 & 0 & 446 & \phantom{abc} & 17 & 8 & 421 &\phantom{abc} & 132 & 33 & 281 &\phantom{abc} & 320 & 57 & 69\\
+    Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 6 & 6 & 428 &\phantom{abc} & 93 & 27 & 326 &\phantom{abc} & 276 & 43 & 127\\
+    Normalize    & 28 & 324 & 94 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 410 & 0 &\phantom{abc} & 36 & 410 & 0\\
+    Saturate     & - & 644 & 1056 &\phantom{abc} & 25 & 1605 & 78 &\phantom{abc} & 28 & 1675 & 5 &\phantom{abc} & 29 & 1679 & 0\\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+
 
 \subsection{Local Features}
 The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
