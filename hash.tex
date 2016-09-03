@@ -1574,6 +1574,28 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \label{simpletotalroc}
 \end{figure}
 
+\begin{table}[htb]\footnotesize
+\caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+\label{simplethinglinkresults}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+    53\% Scale   & 34 & 357 & 55 &\phantom{abc} & 11 & 409 & 26 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
+    83\% Scale   & 34 & 366 & 46 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
+    Crop 10px    & 4 & 30 & 412 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 42 & 391 & 13 &\phantom{abc} & 49 & 396 & 1\\
+    10\% Border  & 0 & 0 & 446 & \phantom{abc} & 17 & 8 & 421 &\phantom{abc} & 132 & 33 & 281 &\phantom{abc} & 320 & 57 & 69\\
+    Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 6 & 6 & 428 &\phantom{abc} & 93 & 27 & 326 &\phantom{abc} & 276 & 43 & 127\\
+    Normalize    & 28 & 324 & 94 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 410 & 0 &\phantom{abc} & 36 & 410 & 0\\
+    Saturate     & 17 & 199 & 230 &\phantom{abc} & 35 & 392 & 19 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 409 & 1\\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
 
 \subsection{DCT Hash}
 TPR > 90\% for most duplicate sets (table \ref{modifiedimages}) in figure \ref{tptotal}. FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
@@ -1619,8 +1641,8 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \end{figure}
 
 \begin{table}[htb]\footnotesize
-\caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
-\label{simpleresults}
+\caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for thingLink dataset. }
+\label{dctresults}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
@@ -1628,18 +1650,17 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
     & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & - & 1612 & 87 &\phantom{abc} & 11 & 1696 & 1 &\phantom{abc} & 11 & 1697 & 0 &\phantom{abc} & 11 & 1697 & 0\\
-    83\% Scale   & 34 & 366 & 46 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
-    Crop 10px    & 4 & 30 & 412 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 42 & 391 & 13 &\phantom{abc} & 49 & 396 & 1\\
-    10\% Border  & 0 & 0 & 446 & \phantom{abc} & 17 & 8 & 421 &\phantom{abc} & 132 & 33 & 281 &\phantom{abc} & 320 & 57 & 69\\
-    Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 6 & 6 & 428 &\phantom{abc} & 93 & 27 & 326 &\phantom{abc} & 276 & 43 & 127\\
-    Normalize    & 28 & 324 & 94 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 410 & 0 &\phantom{abc} & 36 & 410 & 0\\
-    Saturate     & - & 644 & 1056 &\phantom{abc} & 25 & 1605 & 78 &\phantom{abc} & 28 & 1675 & 5 &\phantom{abc} & 29 & 1679 & 0\\
+    53\% Scale   & 0 & 384 & 1324 &\phantom{abc} & 5 & 1605 & 98 &\phantom{abc} & 7 & 1697 & 4 &\phantom{abc} & 9 & 1699 & 0\\
+    83\% Scale   & 1 & 303 & 1404 &\phantom{abc} & 4 & 1551 & 153 &\phantom{abc} & 8 & 1698 & 2 &\phantom{abc} & 8 & 1700 & 0\\
+    Crop 10px    & 0 & 107 & 1601 &\phantom{abc} & 6 & 1250 & 452 &\phantom{abc} & 13& 1659 & 36 &\phantom{abc} & 20 & 1687 & 1\\
+    10\% Border  & 1 & 0 & 1707 & \phantom{abc} & 214 & 10 & 1484 &\phantom{abc} & 1079 & 23 & 606 &\phantom{abc} & 1639 & 29 & 40\\
+    Rotate 10\%  & 0 & 0 & 1708 &\phantom{abc} & 6 & 0 & 1702 &\phantom{abc} & 403 & 14 & 1291 &\phantom{abc} & 1605 & 38 & 65\\
+    Normalize    & 2 & 1026 & 680 &\phantom{abc} & 7 & 1654 & 47 &\phantom{abc} & 12 & 1687 & 9 &\phantom{abc} & 15 & 1691 & 2\\
+    Saturate     & 2 & 681 & 1025 &\phantom{abc} & 7 & 1667 & 34 &\phantom{abc} & 8 & 1700 & 0 &\phantom{abc} & 8 & 1700 & 0\\
     \bottomrule
 \end{tabular}
 \end{center}
 \end{table}
-
 
 
 \subsection{Local Features}
