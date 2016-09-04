@@ -1738,6 +1738,23 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 \end{center}
 \end{table*}
 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/thinglink_SIFTCountROC}
+\end{center}
+\caption{ Effects of cutoff on Local Features NDID performance for ThingLink dataset. At the top, FN increase very slowly and linearly as $\mathcal{C}_s \rightarrow 16$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 16$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 16$. $\mathcal{C}_s=16$ is optimal.}
+\label{thinglinkfigcutoff}
+\end{figure}
+
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/thinglink_SIFTROCperCutoff}
+\end{center}
+\caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 16$ built from TN ThingLink dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
+\label{thinglinkfigcutoffrocspace}
+\end{figure}
+
 
 %\begin{figure}[htb]
 %\begin{center}
