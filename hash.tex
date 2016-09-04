@@ -1596,6 +1596,22 @@ Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accur
 \end{center}
 \end{table}
 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/thinglink_simpleTotalAccuracy}
+\end{center}
+\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) and the TN set (table \ref{truenegatives}) for the ThingLink dataset.}
+\label{thinglinksimpletotalaccuracy}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/thinglink_simpleTotalROC}
+\end{center}
+\caption{Simple Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset. }
+\label{thinglinksimpletotalroc}
+\end{figure}
+
 
 \subsection{DCT Hash}
 TPR > 90\% for most duplicate sets (table \ref{modifiedimages}) in figure \ref{tptotal}. FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
@@ -1661,6 +1677,22 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \end{tabular}
 \end{center}
 \end{table}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/thinglink_dctTotalAccuracy}
+\end{center}
+\caption{DCT Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
+\label{thinglinkdcttotalaccuracy}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=10cm]{figures/thinglink_dctTotalROC}
+\end{center}
+\caption{DCT Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset.}
+\label{thinglinkdcttotalroc}
+\end{figure}
 
 
 \subsection{Local Features}
