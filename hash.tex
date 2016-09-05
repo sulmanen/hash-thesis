@@ -1439,6 +1439,8 @@ We expect the Local Features-classifier to outperform perceptual hashing for NDI
 
 A test set of images is needed, as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image dataset (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
+A ThingLink export of images should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}.
+
 We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
 \subsection{Classifier Comparison}
@@ -1446,7 +1448,7 @@ Paintings dataset from the ''Recognition of object instances practical'' \cite{V
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
 
-\subsubsection{Image Datasets}
+\subsubsection{Paintings dataset}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
 An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
@@ -1491,7 +1493,12 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \end{tabular}
 \end{center}\end{table}
 
-The Paintings Dataset from \cite{Vedaldi2012} contains images of homogenous quality and domain. ThingLink images are very heterogenous in quality and subject. An image dataset of 446 ThingLink images excluding duplicates is used to evaluate performance in the ThingLink domain. The images are varied from upclose food photos to broad landscapes. For the perceptual hashes, a good Hamming distance is determined. For Local Features NDID a good cutoff score is determined.
+The Paintings Dataset from \cite{Vedaldi2012} contains images of homogenous quality and domain.
+
+\subsubsection{ThingLink dataset}
+The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
+
+This imageset is heterogenous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A TN dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The TN-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
 
 \subsubsection{Perceptual Hashing}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by code running on ThingLink so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
