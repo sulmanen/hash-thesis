@@ -1439,7 +1439,7 @@ We expect the Local Features-classifier to outperform perceptual hashing for NDI
 
 A test set of images is needed, as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image dataset (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
-A ThingLink export of images should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}.
+A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}.
 
 We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
