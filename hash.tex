@@ -1333,34 +1333,18 @@ Second, if the visual vocabulary is trained using one data set and used on anoth
 
 Third, VLAD loses to BoW in performance for objects occupying a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD), which is especially useful in object recognition. MultiVLAD extracts a total of 14 VLAD descriptors from a single image. A $3 \times 3$ grid over the image gives $9$, $2 \times 2$ grid gives four and one for the whole image. This comes at the cost of memory but is still feasible on off the shelf hardware at ~28GB for 100 million images \cite{Arandjelovic2013}. MultiVLAD outperforms 1792-D (vocab. size) VLAD, but is found to be inferior for images that cover at least 20\% of the image \cite{Arandjelovic2013}.
 
-\subsection{User Interface Response Times}
-The expectations of the customer to the application User Interface (UI) response times (table \ref{webresponsetimes}) set the standard for duplicate image detection system response time for this paper. They have not formally changed since Robert B. Miller researched the subject in 1968 \cite{Nielsen1993}. Nielsen and much of usability literature mentions ''user'' as the main actor of the system. Here we will use ''customer'' to maintain focus on high quality.
+\clearpage
 
-The system should react as fast as possible, unless the customer cannot keep up with the actions in the UI. If response time is over 2s the user should be given continuous feedback, possibly via percent-done indicator \cite{Myers1985}. They are highly recommended to be used for operations taking over 10s \cite{Nielsen1993}. Progress indicators make the wait less painful by giving the user something to look at while waiting. They assure the user the system is working on their action and give the user some indication of how long before a response is expected. \cite{Nielsen1993a}
+\section{Materials and Methods} \label{mame}
+We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin production implementation of improving near similar image detection we need to make sure we understand to what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
-If the system does not know how long an operation will take, a progress indicator will give the user indication that the system is working on their request and make the wait less painful. A busy cursor or a progress spinner may also be appropriate for tasks expected to take less than 10s as the user has little time to work on other tasks while waiting for the system. \cite{Nielsen1993a}
+A test set of images is needed, as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image dataset (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
-Given a certain amount of delay, human mental efficiency drops regarding to the task at hand \cite{Miller1968}. If the system takes longer than 10s to respond, the customer focus is lost and it is very likely that your UI loses the customer \cite{Nielsen1993a}. Between 1-10s response time the customers impatience grows. At 1s users notice the delayed response but retain the feeling of being in control and maintain focus on the task at hand. The customer feels like they are in a conversation. However the customer will not click as readily. When user interacts with the UI, 100ms is perceived as immediate, the user feels like they are doing tasks \emph{themselves} \cite{Nielsen2010}. Customers make their first decisions about the visual appeal of a UI in the first 50ms of interaction. \cite{Nielsen2010}
+A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}.
 
-\def\arraystretch{1.5}
-\begin{table}[htb]
-\caption{Web application response time. The 3 important limits. \cite{Miller1968},\cite{Nielsen1993}}
-\label{webresponsetimes}
-\begin{center}
-  \begin{tabular}{rl}
-    \hline
-  response time (s) & user experience\\
-  \hline
-  0.1 & customer feels system is acting instantaneously\\
-  1 & customer flow of thought uninterrupted\\
-  2 & customer is annoyed\\
-  10 & customer loses attention\\
-  \hline
-\end{tabular}
-\end{center}\end{table}
+We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
-\subsection{Comparing Classifiers}
-\subsubsection{Receiver Operating Characteristic}\label{ROCSection}
+\subsection{Receiver Operating Characteristic}\label{ROCSection}
 Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
 
 \begin{figure}[htb]
@@ -1399,7 +1383,7 @@ recall = \frac{TP}{P}
 accuracy = \frac{TP + TN}{P + N} = \frac{TP +TN}{TP + FP + TN + FN}
 \end{equation}
 
-\subsubsection{Precision-Recall Curves}\label{PRSection}
+\subsection{Precision-Recall Curves}\label{PRSection}
 Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested (\cite{craven2005markov}) to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
@@ -1420,16 +1404,6 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 \left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
 \end{equation}
 
-\clearpage
-
-\section{Materials and Methods} \label{mame}
-We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin production implementation of improving near similar image detection we need to make sure we understand to what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
-
-A test set of images is needed, as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image dataset (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
-
-A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}.
-
-We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
 \subsection{Classifier Comparison}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. Near duplicate sets are formed using Imagemagick shell scripts. For each near duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.

@@ -1,0 +1,25 @@
+\subsection{User Interface Response Times}
+The expectations of the customer to the application User Interface (UI) response times (table \ref{webresponsetimes}) set the standard for duplicate image detection system response time for this paper. They have not formally changed since Robert B. Miller researched the subject in 1968 \cite{Nielsen1993}. Nielsen and much of usability literature mentions ''user'' as the main actor of the system. Here we will use ''customer'' to maintain focus on high quality.
+
+The system should react as fast as possible, unless the customer cannot keep up with the actions in the UI. If response time is over 2s the user should be given continuous feedback, possibly via percent-done indicator \cite{Myers1985}. They are highly recommended to be used for operations taking over 10s \cite{Nielsen1993}. Progress indicators make the wait less painful by giving the user something to look at while waiting. They assure the user the system is working on their action and give the user some indication of how long before a response is expected. \cite{Nielsen1993a}
+
+If the system does not know how long an operation will take, a progress indicator will give the user indication that the system is working on their request and make the wait less painful. A busy cursor or a progress spinner may also be appropriate for tasks expected to take less than 10s as the user has little time to work on other tasks while waiting for the system. \cite{Nielsen1993a}
+
+Given a certain amount of delay, human mental efficiency drops regarding to the task at hand \cite{Miller1968}. If the system takes longer than 10s to respond, the customer focus is lost and it is very likely that your UI loses the customer \cite{Nielsen1993a}. Between 1-10s response time the customers impatience grows. At 1s users notice the delayed response but retain the feeling of being in control and maintain focus on the task at hand. The customer feels like they are in a conversation. However the customer will not click as readily. When user interacts with the UI, 100ms is perceived as immediate, the user feels like they are doing tasks \emph{themselves} \cite{Nielsen2010}. Customers make their first decisions about the visual appeal of a UI in the first 50ms of interaction. \cite{Nielsen2010}
+
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Web application response time. The 3 important limits. \cite{Miller1968},\cite{Nielsen1993}}
+\label{webresponsetimes}
+\begin{center}
+  \begin{tabular}{rl}
+    \hline
+  response time (s) & user experience\\
+  \hline
+  0.1 & customer feels system is acting instantaneously\\
+  1 & customer flow of thought uninterrupted\\
+  2 & customer is annoyed\\
+  10 & customer loses attention\\
+  \hline
+\end{tabular}
+\end{center}\end{table}
