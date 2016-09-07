@@ -1693,6 +1693,8 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 \end{center}
 \end{table*}
 
+\clearpage
+
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/thinglink_SIFTCountROC}
@@ -1709,6 +1711,26 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 \caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 16$ built from TN ThingLink dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
 \label{thinglinkfigcutoffrocspace}
 \end{figure}
+
+\begin{table*}
+\caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset, with $\mathcal{C}_s = 16$.}
+\label{siftresults}
+\begin{center}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Modification & FP & TP & FN\\
+    \hline
+    53\% Scale & 34 & 399 & 13 \\
+    83\% Scale & 35 & 408 & 3 \\
+    Crop 10px  & 35 & 408 & 3 \\
+    10\% Border & 35 & 410 & 1 \\
+    Rotate 10\% & 35 & 407 & 4\\
+    Normalize Histogram & 35 & 410 & 1\\
+    Saturate Colors & 35 & 410 & 1\\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{table*}
 
 
 %\begin{figure}[htb]
