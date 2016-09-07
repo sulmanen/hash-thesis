@@ -144,12 +144,12 @@
 %%
 %% Vain DI/M.Sc.- ja lisensiaatintyölle: valitse laitos,
 %% professuuri ja sen professuurikoodi.
-\department{Department of Radio Science and Technology}
+\department{Department of Signal Processing and Acoustics}
 %\department{Radiotieteen ja -tekniikan laitos}
 
-\professorship{Circuit theory}
+\professorship{Digital Signal Processing}
 %\professorship{Piiriteoria}
-\code{S-55}
+\code{S3013}
 %%
 
 %% Valitse yksi näistä kolmesta
@@ -184,7 +184,7 @@
 %% For B.Sc. thesis use the date when you present your thesis.
 %%
 %% Kandidaatintyön päivämäärä on sen esityspäivämäärä!
-\date{28.2.2014}
+\date{\today}
 
 %% B.Sc. or M.Sc. thesis supervisor
 %% Note the "\" after the comma. This forces the following space to be
@@ -257,7 +257,7 @@
 \thesistitle{Hajautusfunkion korvaaminen paikallisilla erityispiirteillä kuvien duplikaattitunnistuksessa}
 \advisor{TkT Juho Kannala}
 \degreeprogram{Electronics and electrical engineering}
-\department{Radiotieteen ja -tekniikan laitos}
+\department{Signaalinkäsittely ja akustiikan laitos}
 \professorship{Digitaalinen signaalinkäsittely}
 \keywords{hajautusfunktio, paikalliset piirteet}
 
@@ -272,10 +272,10 @@
 %%
 %% Esipuhe
 \mysection{Preface}
-Pia suggested I thank her for endless patience. Thank you Tua for being an inspiration! Thanks to Janne for the lunches and guidance and Prof. Juho Kannala for taking me under his wing.\\
+Pia suggested I thank her for her endless patience. Thank you Tua for being an inspiration! Thanks to Janne for the lunches and guidance and Prof. Juho Kannala for introducing me to some of the Giants of Computer Vision and taking me under his instruction.\\
 
 \vspace{5cm}
-Otaniemi, 24.9.2016
+Otaniemi, \today
 
 \vspace{5mm}
 {\hfill Samuli Y.\ T.\ Ulmanen \hspace{1cm}}
@@ -1482,7 +1482,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 \clearpage
 
 \section{Results}
-\epigraph{Without data you're just another person with an opinion}{W. Edwards Deming}
+\epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
 To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the Simple Hash (fig. \ref{simpletotalroc}) and DCT Hash (fig. \ref{dcttotalroc}), a good Hamming Distance was determined by running comparisons for $D_H \in \{0,4,8,12\}$ and plotting the results in ROC space. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined from ROC space (fig. \ref{figcutoffrocspace}). Based on these results the NDID systems were compared head to head using optimal settings in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}.
 Good $D_H \in \{0,4,8,12\}$ was determined for the perceptual hashes based on the ThingLink dataset consisting of images exported from the service. A good $\mathcal{C}_s$ for the Local Features NDID was determined based on the ThingLink dataset. Table \ref{modifiedimages} modifications were run against the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}).
 
