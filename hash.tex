@@ -255,7 +255,7 @@
 %% Suomenkielinen tiivistelmä. Poista, jos et tarvitse sitä.
 %% Opinnäytteen ostikko suomeksi
 \thesistitle{Hajautusfunkion korvaaminen paikallisilla erityispiirteillä kuvien duplikaattitunnistuksessa}
-\advisor{TkT Juho Kannala}
+\advisor{Lic.Sc. (Tech.) Janne Jalkanen}
 \degreeprogram{Electronics and electrical engineering}
 \department{Signaalinkäsittely ja akustiikan laitos}
 \professorship{Digitaalinen signaalinkäsittely}
@@ -1321,13 +1321,15 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 \clearpage
 
 \section{Materials and Methods} \label{mame}
-We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin production implementation of improving near similar image detection we need to make sure we understand to what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
+We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin implementing near similar image detection improvements we need to certain object instance detection by local features is an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
-A test set of images is needed, as well as modified sets of the originals described in table \ref{modifiedimages} simulating near duplicate images. We also test the classifiers with images known not to be in the database with a TN image dataset (table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
+A test set of images and modified near duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database (TN image dataset table \ref{truenegatives}), a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
 A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}.
 
-We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. We will construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
+We pick a sample of images from ThingLink. We pick 446 images without duplicates as well as another 446 images to be the TN set.
+
+We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. In addition to ROC curves we will also construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
 \subsection{Receiver Operating Characteristic}\label{ROCSection}
 Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
