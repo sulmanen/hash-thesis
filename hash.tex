@@ -1645,7 +1645,6 @@ The comparison between the Simple Hash and the Local Features NDID systems are i
     Normalize    & 32 & 332 & 82 &\phantom{abc} & 35 & 407 & 4 &\phantom{abc} & 35 & 410 & 1 &\phantom{abc} & 36 & 410 & 0\\
     Saturate     & 16 & 170 & 260 &\phantom{abc} & 35  & 403 & 8 &\phantom{abc} & 35 & 411 & 0 &\phantom{abc} & 35 & 411 & 0\\
    Not in database & 1 & 0 & 0 &\phantom{abc} & 15  & 0 & 0 &\phantom{abc} & 49 & 0 & 0 &\phantom{abc} & 186 & 0 & 0\\
-
     \bottomrule
 \end{tabular}
 \end{center}
@@ -1666,7 +1665,6 @@ The comparison between the Simple Hash and the Local Features NDID systems are i
 \caption{DCT Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset.}
 \label{thinglinkdcttotalroc}
 \end{figure}
-
 
 \subsection{Local Features}
 The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
@@ -1813,7 +1811,6 @@ For the ThingLink dataset, duplicate detection results for modified sets in tabl
 \caption{ TN for near duplicate modifications in table \ref{truenegatives} for the ThingLink dataset.}
 \label{thinglinktntotal}
 \end{figure}
-
 
 \clearpage
 
