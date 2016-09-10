@@ -779,7 +779,6 @@ g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
 
 $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased. \cite{Weickert1998}
 
-
 \subsubsection{Accelerated KAZE Features}
 The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations, which is computationally intensive. A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
 
@@ -1449,14 +1448,14 @@ The ThingLink dataset consists of 446 images without duplicates exported from Th
 
 This imageset is heterogenous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A TN dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The TN-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
 
-\subsubsection{Perceptual Hashing}
+\subsubsection{Perceptual Hashing Setup}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by code running on ThingLink so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
 
 We do not know how varying the hamming distance affects classifier performance. As a result we will run all sets for hamming distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
 
 Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
-\subsubsection{Local Features}
+\subsubsection{Local Features Setup}
 Simulation code is heavily based on the code provided by ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
 
 Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
@@ -1467,7 +1466,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[height=7cm]{figures/vedaldigenindex}
+  \includegraphics[height=7cm]{figures/vedaldigenindex}
 \end{center}
 \caption{Build image database for the local features-classifier simulations according to \cite{Vedaldi2012}}
 \label{vedaldigenindex}
@@ -1485,13 +1484,13 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 
 \section{Results}
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
-To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the Simple Hash (fig. \ref{simpletotalroc}) and DCT Hash (fig. \ref{dcttotalroc}), a good Hamming Distance was determined by running comparisons for $D_H \in \{0,4,8,12\}$ and plotting the results in ROC space. For the Local Features NDID system, an optimal cutoff score $\mathcal{C}_s$ was determined from ROC space (fig. \ref{figcutoffrocspace}). Based on these results the NDID systems were compared head to head using optimal settings in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}.
-Good $D_H \in \{0,4,8,12\}$ was determined for the perceptual hashes based on the ThingLink dataset consisting of images exported from the service. A good $\mathcal{C}_s$ for the Local Features NDID was determined based on the ThingLink dataset. Table \ref{modifiedimages} modifications were run against the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}).
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the Simple Hash (fig. \ref{simpletotalroc}) and DCT Hash (fig. \ref{dcttotalroc}), a good Hamming Distance was determined by running comparisons for $D_H \in \{0,4,8,12\}$ and plotting the results in ROC space. For Local Features NDID, a good cutoff score $\mathcal{C}_s$ was determined from ROC space (fig. \ref{figcutoffrocspace}). Based on these results the NDID systems were compared head to head using optimal settings in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}.
+Good $D_H \in \{0,4,8,12\}$ was determined for the perceptual hashes based on the ThingLink dataset consisting of images exported from the service. A good $\mathcal{C}_s$ for the Local Features NDID was determined based on the ThingLink dataset by ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run against the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}).
 
 \subsection{Simple Hash}
 TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}. Increasing $H_D$ moves results from FN to FP.
 
-Optimal Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
+A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
 \begin{table}[htb]\footnotesize
 \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
@@ -1615,7 +1614,7 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 
 \begin{table}[htb]\footnotesize
 \caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
-\label{dctresults}
+\label{thinglinkdctresults}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
@@ -1716,7 +1715,7 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 
 \begin{table*}
 \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset, with $\mathcal{C}_s = 16$.}
-\label{siftresults}
+\label{thinglinksiftresults}
 \begin{center}
   \begin{tabular}{@{}lccc@{}}
     \toprule
