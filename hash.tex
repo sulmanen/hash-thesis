@@ -1488,10 +1488,10 @@ To what degree if any is object instance detection by local features an improvem
 
 Modified image datasets in tables \ref{modifiedimages} and \ref{truenegatives} were run against three NDID systems-the Simple Hash-, the DCT Hash- and Local Features-based system. For the Simple Hash (fig. \ref{simpletotalroc}) and DCT Hash (fig. \ref{dcttotalroc}), a good Hamming Distance was determined by searching for duplicates for modified sets in table \ref{modifiedimages} for $D_H \in \{0,4,8,12\}$, averaging the results and plotting the averages in ROC space. For Local Features NDID, a good cutoff score $\mathcal{C}_s$ was determined from ROC space (fig. \ref{figcutoffrocspace}). Based on these results the NDID systems were compared head to head using the determined $\mathcal{C}_s$ and $D_H$ for TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}.
 
-For the ThingLink dataset consisting of images exported from the service, good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes. A good $\mathcal{C}_s$ for the Local Features NDID was found by plotting the results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}).
+For the ThingLink dataset consisting of images exported from the service, good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes. A good $\mathcal{C}_s$ for Local Features NDID was found by plotting the results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}).
 
 \subsection{Simple Hash}
-TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. Here the Simple Hash NDID simply breaks down, which is very evident it counts from table \ref{simpleresults}. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}. Increasing $H_D$ moves counts from FN to FP.
+For the paintings dataset, TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}. Increasing $H_D$ moves counts from FN to FP.
 
 A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
@@ -1532,6 +1532,10 @@ A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accura
 \caption{Simple Hash NDID average ROC space. Hamming Distance used denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages}. }
 \label{simpletotalroc}
 \end{figure}
+
+For the ThingLink dataset the counts for detecting duplicates for modified sets from table \ref{modifiedimages} aren in table \ref{simplethinglinkresults.} The accuracy according to eq. \ref{accuracy} averaged over all modified sets (table \ref{modifiedimages}) with data from table \ref{simplethinglinkresults} per $D_H$ is in figure \ref{thinglinksimpletotalaccuracy}.
+
+ROC space for $D_H \in{0,4,8,12}$ averaged over all modified sets (table \ref{modifiedimages}) for the ThingLink dataset is in figure \ref{thinglinksimpletotalroc}.
 
 \begin{table}[htb]\footnotesize
 \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
