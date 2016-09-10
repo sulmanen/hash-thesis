@@ -1533,9 +1533,7 @@ A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accura
 \label{simpletotalroc}
 \end{figure}
 
-For the ThingLink dataset the counts for detecting duplicates for modified sets from table \ref{modifiedimages} aren in table \ref{simplethinglinkresults.} The accuracy according to eq. \ref{accuracy} averaged over all modified sets (table \ref{modifiedimages}) with data from table \ref{simplethinglinkresults} per $D_H$ is in figure \ref{thinglinksimpletotalaccuracy}.
-
-ROC space for $D_H \in{0,4,8,12}$ averaged over all modified sets (table \ref{modifiedimages}) for the ThingLink dataset is in figure \ref{thinglinksimpletotalroc}.
+For the ThingLink dataset the counts for detecting duplicates for modified sets from table \ref{modifiedimages} aren in table \ref{simplethinglinkresults.} The accuracy according to eq. \ref{accuracy} averaged over all modified sets (table \ref{modifiedimages}) with data from table \ref{simplethinglinkresults} per $D_H$ is in figure \ref{thinglinksimpletotalaccuracy}. ROC space for $D_H \in{0,4,8,12}$ averaged over all modified sets (table \ref{modifiedimages}) for the ThingLink dataset is in figure \ref{thinglinksimpletotalroc}. The comparison per duplicate set between the DCT Hash and the Local Features NDID systems are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal} and \ref{thinglinktntotal}.
 
 \begin{table}[htb]\footnotesize
 \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
@@ -1621,6 +1619,7 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 
 For the ThingLink dataset, the counts for running duplicate detection on modified sets for $D_H \in\{0,4,8,12\}$ (\ref{modifiedimages}) are in table \ref{thinglinkdctresults}. Based on these results the average accuracy was calculated per $D_H$ and plotted in figure \ref{thinglinkdcttotalaccuracy}. The ROC space averaged for DCT Hash duplicate dataset are in figure \ref{thinglinkdcttotalroc}.
 
+The comparison between the Simple Hash and the Local Features NDID systems are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal} and \ref{thinglinktntotal}.
 
 \begin{table}[htb]\footnotesize
 \caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
@@ -1662,7 +1661,7 @@ For the ThingLink dataset, the counts for running duplicate detection on modifie
 
 
 \subsection{Local Features}
-The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. We run the sets and plot the scores of matches from each set in ROC space. There it is easy to find the score such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
+The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1672,7 +1671,7 @@ The search by Local Features always returns the highest scoring image resulting 
 \label{figcutoff}
 \end{figure}
 
-Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so it looks like 19 would be a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
+Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so 19 is a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1706,14 +1705,7 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 
 \clearpage
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_SIFTCountROC}
-\end{center}
-\caption{ Effects of cutoff on Local Features NDID performance for ThingLink dataset. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 16$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 16$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 16$. $\mathcal{C}_s=16$ is optimal.}
-\label{thinglinkfigcutoff}
-\end{figure}
-
+For the ThingLink dataset, duplicate detection results for modified sets in table \ref{modifiedimages} are in table \ref{thinglinksiftresults}. A good $\mathcal{C}_s$ for Local Features NDID for the ThingLink dataset is 16 according to ROC space per cutoff score (figure \ref{thinglinkfigcutoffrocspace}). The FN count increases linearly where as the FP count decreases logarithmically as the $\mathcal{C}_s \rightarrow 16$ (figure \ref{thinglinkfigcutoff}. Comparison per duplicate set to the perceptual hashes are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal}, and \ref{thinglinktntotal}.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1722,6 +1714,15 @@ TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptota
 \caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 16$ built from TN ThingLink dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
 \label{thinglinkfigcutoffrocspace}
 \end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=8cm]{figures/thinglink_SIFTCountROC}
+\end{center}
+\caption{ Effects of cutoff on Local Features NDID performance for ThingLink dataset. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 16$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 16$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 16$. $\mathcal{C}_s=16$ is optimal.}
+\label{thinglinkfigcutoff}
+\end{figure}
+
 
 \begin{table*}
 \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset, with $\mathcal{C}_s = 16$.}
