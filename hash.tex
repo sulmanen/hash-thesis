@@ -177,7 +177,7 @@
 %% Muista että otsikkoja ei tavuteta!
 %% Jos otsikossa on ja-sana, se ei jää rivin viimeiseksi sanaksi
 %% vaan aloittaa uuden rivin.
-\thesistitle{Improving Large Scale Near Duplicate Image Classification with Perceptual Hashes by Object Instance Recognition}
+\thesistitle{Improving Large Scale Near-duplicate Image Classification with Perceptual Hashes by Object Instance Recognition}
 
 \place{Espoo}
 
@@ -240,7 +240,7 @@
 \keywords{near duplicate image detection, perceptual hashing, object instance recognition, large scale image retrieval}
 
 \begin{abstractpage}[english]
-  Near duplicate detection by perceptual hashing finds near duplicates via forming a hash from image pixels. Near duplicate detection by local features considers the scene or object represented by the image pixels. We define a near duplicate as having 10px crop, 10\% white border, 10\% rotation, 53\% scale, 83\% scale, normalized histogram or saturated colors. We form these modifications from the paintings dataset and the ThingLink dataset both of which have true negative sets to determine rejection rate of images known not to exist in the database. We find a good Hammning Distance for comparisons for the Simple block mean based perceptual hash and a DCT based perceptual hash. We determine a good Cutoff Score with which to reject an images as a true negative for the Local Features NDID. Based on these values the classifiers are compared against one another. The perceptual hashes perform well for all modified sets excluding the 10\% white border and 10\% rotation where they are extremely ineffective. Local Features performs well for the 10\% white border and 10\% rotation sets. For scaled sets the perceptual hashes are competitive with local features NDID. For other modified sets Local Features NDID is a moderate to a clear improvement over the Simple block mean-based perceptual hash and the DCT-based perceptual hash.
+  Near-duplicate image detection by perceptual hashing finds near duplicates via forming a hash from image pixels. Near-duplicate image detection by local features considers the scene or object represented by the image pixels. We define a near duplicate as having 10px crop, 10\% white border, 10\% rotation, 53\% scale, 83\% scale, normalized histogram or saturated colors. We form these modifications from the paintings dataset and the ThingLink dataset both of which have true negative sets to determine rejection rate of images known not to exist in the database. We find a good Hammning Distance for comparisons for the Simple block mean based perceptual hash and a DCT based perceptual hash. We determine a good Cutoff Score with which to reject an images as a true negative for the Local Features NDID. Based on these values the classifiers are compared against one another. The perceptual hashes perform well for all modified sets excluding the 10\% white border and 10\% rotation where they are extremely ineffective. Local Features performs well for the 10\% white border and 10\% rotation sets. For scaled sets the perceptual hashes are competitive with local features NDID. For other modified sets Local Features NDID is a moderate to a clear improvement over the Simple block mean-based perceptual hash and the DCT-based perceptual hash.
 \end{abstractpage}
 
 %% Force a new page so that the possible English abstract starts on a new page
@@ -400,7 +400,7 @@ $\mathbf{A} \cdot \mathbf{B}$    & vektorien $\mathbf{A}$ ja $\mathbf{B}$ pistet
 %% Leave first page empty
 \thispagestyle{empty}
 
-Images are a cornerstone of the world wide web (the web). ThingLink allows its users to annotate images and other media with clickable regions to enrich the media by linking it to relevant information on the web.
+Images are a cornerstone of the world wide web (the web). ThingLink allows its users to annotate images and other media with interactive regions to enrich the media by linking it to relevant information on the web.
 
 Responsive web design usually demands different scale images for different screen sizes for performance and quality. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink employs near duplicate image detection by perceptual hashing.
 
@@ -416,7 +416,7 @@ Matching image to meta-data is unreliable by matching incoming URI to a scene UR
 
 For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near Duplicate Image Detection.
 
-Near duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Can object instance detection be successfully used for the more strict case of detecting images with small pixel modifications to replace perceptual hashes for improved accuracy for detecting near duplicate images?
+Near duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Object instance recognition has been successfully used for the more strict case of detecting image duplicates with small modifications \cite{dong2012high}. However does it offer improved performance over perceptual hashing in near-duplicate image detection?
 
 This paper only considers near duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not considered in the scope of this paper.
 

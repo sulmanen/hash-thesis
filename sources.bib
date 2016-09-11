@@ -308,6 +308,17 @@ pages = {304--317},
 title = {{Hamming Embedding and Weak Geometry Consistency for Large Scale Image Search – Extended version –}},
 year = {2008}
 }
+@inproceedings{Jegou2009,
+abstract = {Burstiness, a phenomenon initially observed in text retrieval, is the property that a given visual element appears more times in an image than a statistically independent model would predict. In the context of image search, burstiness corrupts the visual similarity measure, i.e., the scores used to rank the images. In this paper, we propose a strategy to handle visual bursts for bag-of-features based image search systems. Experimental results on three reference datasets show that our method significantly and consistently outperforms the state of the art.},
+author = {J{\'{e}}gou, Herv{\'{e}} and Douze, Matthijs and Schmid, Cordelia},
+booktitle = {2009 IEEE Computer Society Conference on Computer Vision and Pattern Recognition Workshops, CVPR Workshops 2009},
+doi = {10.1109/CVPRW.2009.5206609},
+isbn = {9781424439935},
+issn = {1063-6919},
+pages = {1169--1176},
+title = {{On the burstiness of visual elements}},
+year = {2009}
+}
 @article{Jegou2011,
 abstract = {This paper introduces a product quantization-based approach for approximate nearest neighbor search. The idea is to decompose the space into a Cartesian product of low-dimensional subspaces and to quantize each subspace separately. A vector is represented by a short code composed of its subspace quantization indices. The euclidean distance between two vectors can be efficiently estimated from their codes. An asymmetric version increases precision, as it computes the approximate distance between a vector and a code. Experimental results show that our approach searches for nearest neighbors efficiently, in particular in combination with an inverted file system. Results for SIFT and GIST image descriptors show excellent search accuracy, outperforming three state-of-the-art approaches. The scalability of our approach is validated on a data set of two billion vectors.},
 archivePrefix = {arXiv},
@@ -325,17 +336,6 @@ pmid = {21088323},
 title = {{Product quantization for nearest neighbor search}},
 volume = {33},
 year = {2011}
-}
-@inproceedings{Jegou2009,
-abstract = {Burstiness, a phenomenon initially observed in text retrieval, is the property that a given visual element appears more times in an image than a statistically independent model would predict. In the context of image search, burstiness corrupts the visual similarity measure, i.e., the scores used to rank the images. In this paper, we propose a strategy to handle visual bursts for bag-of-features based image search systems. Experimental results on three reference datasets show that our method significantly and consistently outperforms the state of the art.},
-author = {J{\'{e}}gou, Herv{\'{e}} and Douze, Matthijs and Schmid, Cordelia},
-booktitle = {2009 IEEE Computer Society Conference on Computer Vision and Pattern Recognition Workshops, CVPR Workshops 2009},
-doi = {10.1109/CVPRW.2009.5206609},
-isbn = {9781424439935},
-issn = {1063-6919},
-pages = {1169--1176},
-title = {{On the burstiness of visual elements}},
-year = {2009}
 }
 @inproceedings{Jegou2010,
 abstract = {We address the problem of image search on a very large scale, where three constraints have to be considered jointly: the accuracy of the search, its efficiency, and the memory usage of the representation. We first propose a simple yet efficient way of aggregating local image descriptors into a vector of limited dimension, which can be viewed as a simplification of the Fisher kernel representation. We then show how to jointly optimize the dimension reduction and the indexing algorithm, so that it best preserves the quality of vector comparison. The evaluation shows that our approach significantly outperforms the state of the art: the search accuracy is comparable to the bag-of-features approach for an image representation that fits in 20 bytes. Searching a 10 million image dataset takes about 50ms.},
@@ -469,14 +469,6 @@ journal = {Usability Engineering},
 title = {{Response times: The 3 important limits}},
 year = {1993}
 }
-@article{Nielsen2010,
-abstract = {From 0.1 seconds to 10 years or more, user interface design has many different timeframes, and each has its own particular usability issues.},
-author = {Nielsen, Jakob},
-journal = {Time},
-pages = {10--15},
-title = {{Powers of 10 : Time Scales in User Experience}},
-year = {2010}
-}
 @book{Nielsen1993,
 abstract = {"The purpose of Jakob Nielsen's Usability Engineering is to help nontechnical people improve the systems so thatthey are not only error-free but also easier and more pleasant to use, and more efficient. It is a book that ...shows ushow to change the world and does so admirably....One of this book's strengths is that it provides a wide selection ofmethods for improving systems, and allows for the unavoidable constraints of the real world." -NEW SCIENTIST Written by the author of the best-selling HyperText {\&} HyperMedia, this book is an excellent guide to the methodsof usability engineering. The book provides the tools needed to avoid usability surprises and improve product quality.Step-by-step information on which method to use at various stages during the development lifecycle are included,along with detailed information on how to run a usability test and the unique issues relating to international usability. KEY FEATURESEmphasizes cost-effective methods that developers can implement immediately.Instructs readers about which methods to use and when to use them throughout the development lifecycle, ultimately helping in cost-benefit analysis. Shows readers how to avoid the four most frequently listed reasons for delay in software projects. Includes detailed information on how to run a usability test. Covers unique issues of international usability. Features an extensive bibliography allowing readers to find additional information. Written by an internationally renowned expert in the field and the author of the best-selling HyperText {\&} HyperMedia.},
 author = {Nielsen, Jakob},
@@ -491,6 +483,14 @@ title = {{Usability Engineering}},
 url = {http://www.useit.com/jakob/useengbook.html},
 volume = {44},
 year = {1993}
+}
+@article{Nielsen2010,
+abstract = {From 0.1 seconds to 10 years or more, user interface design has many different timeframes, and each has its own particular usability issues.},
+author = {Nielsen, Jakob},
+journal = {Time},
+pages = {10--15},
+title = {{Powers of 10 : Time Scales in User Experience}},
+year = {2010}
 }
 @article{Perona1990,
 abstract = {A new definition of scale-space is suggested, and a class of algorithms used to realize a diffusion process is introduced. The diffusion coefficient is chosen to vary spatially in such a way as to encourage intraregion smoothing rather than interregion smoothing. It is shown that the `no new maxima should be generated at coarse scales' property of conventional scale space is preserved. As the region boundaries in the approach remain sharp, a high-quality edge detector which successfully exploits global information is obtained. Experimental results are shown on a number of images. Parallel hardware implementations are made feasible because the algorithm involves elementary, local operations replicated over the image},
@@ -661,14 +661,22 @@ url = {w},
 year = {2010}
 }
 @misc{,
+booktitle = {W3C Architecture Domain},
+title = {{Naming and Addressing: URIs, URLs, ...}},
+url = {https://www.w3.org/Addressing/},
+urldate = {2016-04-12}
+}
+@misc{,
 booktitle = {W3C Wiki},
 title = {{Definition of User Agent}},
 url = {https://www.w3.org/WAI/UA/work/wiki/Definition{\_}of{\_}User{\_}Agent},
 urldate = {2016-04-12}
 }
-@misc{,
-booktitle = {W3C Architecture Domain},
-title = {{Naming and Addressing: URIs, URLs, ...}},
-url = {https://www.w3.org/Addressing/},
-urldate = {2016-04-12}
+@inproceedings{dong2012high,
+author = {Dong, Wei and Wang, Zhe and Charikar, Moses and Li, Kai},
+booktitle = {Proceedings of the 2nd ACM International Conference on Multimedia Retrieval},
+organization = {ACM},
+pages = {1},
+title = {{High-confidence near-duplicate image detection}},
+year = {2012}
 }
