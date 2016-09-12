@@ -1356,14 +1356,14 @@ We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for outp
 fp_{rate} = \frac{FP}{N}
 \end{equation}
 \begin{equation}\label{TPR}
-tp_{rate} = \frac{TP}{P}
+tp_{rate} = \frac{TP}{TP + FN}
 \end{equation}
 \begin{equation}\label{precision}
 precision = \frac{TP}{TP + FP}
 \end{equation}
 
 \begin{equation}\label{recall}
-recall = \frac{TP}{P}
+recall = \frac{TP}{TP + FN}
 \end{equation}
 
 \begin{equation}\label{accuracy}
@@ -1820,7 +1820,7 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 
 \clearpage
 \begin{table*} \footnotesize
-\caption{ Precision $\mathcal{P}$ and Recall $\matcal{R}$ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
+\caption{ Precision $\mathcal{P}$ (eq. \ref{precision}), Recall (eq. \ref{recall}) $\mathcal{R}$ and $\mathcal{P}/\mathcal{R}$ for NDID by Simple Hash, DCT Hash and Local Features for duplicate sets (table \ref{modifiedimages}) for Paintings dataset from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$ and $\mathcal{C}_s = 16$ for the ThingLink dataset. $D_H = 4$ for Simple Hash and $D_H = 8$ for DCT Hash.}
 \label{precisionrecall}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
