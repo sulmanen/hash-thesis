@@ -1449,14 +1449,14 @@ The ThingLink dataset consists of 446 images without duplicates exported from Th
 
 This imageset is heterogenous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A TN dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The TN-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
 
-\subsubsection{Perceptual Hashing Simulation Setup}
+\subsubsection{Perceptual Hashing Simulation}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by code running on ThingLink so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
 
 We do not know how varying the hamming distance affects classifier performance. As a result we will run all sets for hamming distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
 
 Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
-\subsubsection{Local Features Simulation Setup}
+\subsubsection{Local Features Simulation}
 Simulation code is heavily based on the code provided by ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
 
 Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
