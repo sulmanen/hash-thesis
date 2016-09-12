@@ -1481,6 +1481,9 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 \label{vedaldiquery}
 \end{figure}
 
+\subsubsection{Fisher's Exact Test}
+To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (confusion matrix fig. \ref{figconfusion}). The p-value is exact, and not an approximation as the name implies. \cite{fisher1922interpretation}
+
 \clearpage
 
 \section{Results}
