@@ -1819,6 +1819,33 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \end{figure}
 
 \clearpage
+\begin{table*} \footnotesize
+\caption{ Precision $\mathcal{P}$ and Recall $\matcal{R}$ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
+\label{precisionrecall}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{Simple} &\phantom{abc} &\multicolumn{3}{c}{DCT} &\phantom{abc} & \multicolumn{3}{c}{Local Features}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12}
+ Modification & $\mathcal{P}$ & $\mathcal{R}$ & $\mathcal{P} / \mathcal{R}$ &\phantom{abc} & $\mathcal{P}$ & $\mathcal{R}$ & $\mathcal{P} / \mathcal{R}$ &\phantom{abc} & $\mathcal{P}$ & $\mathcal{R}$ & $\mathcal{P} / \mathcal{R}$\\ \midrule
+ P 53\% Scale   & 0.8285 & 0.9994 & 0.8290 &\phantom{abc} & 0.8614 & 0.9976 & 0.8635 &\phantom{abc} & 0.9994 & 0.9924 & 1.007\\
+ T 53\% Scale   & 0.9380 & 0.9402 & 0.9977 &\phantom{abc} & 0.8234 & 0.9804 & 0.8398 &\phantom{abc} & 0.9215 & 0.9684 & 0.9515\\
+ P 83\% Scale   & 0.8291 & 1 & 0.8291 &\phantom{abc} & 0.8611 & 0.9988 & 0.8620 &\phantom{abc} & 0.9994 & 0.9982 & 1.001 \\
+ T 83\% Scale   & 0.8872 & 0.9976 & 0.8894 &\phantom{abc} & 0.8219 & 0.9804 & 0.8468 &\phantom{abc} & 0.9210 & 0.9927 & 0.9278 \\
+ P Crop 10px & 0.8109 & 0.9211 & 0.8804 &\phantom{abc} & 0.8560 & 0.9788 & 0.8746 &\phantom{abc} & 0.9994 & 0.9982 & 1.001 \\
+ T Crop 10px    & 0.8623 & 0.7597 & 1.135 &\phantom{abc} & 0.8139 & 0.9193 & 0.8853 &\phantom{abc} & 0.9210 & 0.9927 & 0.9276 \\
+ P 10\% Border  & 0.01773 & 0.006693 & 2.649 & \phantom{abc} & 0.01681& 0.03637 & 0.4597 &\phantom{abc} & 0.9994 & 0.9983 & 1.001 \\
+ T 10\% Border  & 0.1951 & 0.01865 & 10.46 & \phantom{abc} & 0.1163 & 0.05831 & 1.994 &\phantom{abc} & 0.9213 & 0.9976 & 0.9236 \\
+ P Rotate 10\%  & 0.01449 & 0.003659 & 3.961 &\phantom{abc} & 0.0205 & 0.0107 & 1.9107 &\phantom{abc} & 0.9994 & 0.9947 & 1.005 \\
+ T Rotate 10\%  & 0.2143 & 0.01382 & 15.5 &\phantom{abc} & 0.3708 & 0.07517 & 4.9326 &\phantom{abc} & 0.9208 & 0.9903 & 0.9297 \\
+ P Normalize    & 0.8232 & 0.9763 & 0.8431 &\phantom{abc} & 0.8585 & 0.9946 & 0.8631 &\phantom{abc} & 0.9994 & 0.9971 & 1.002\\
+ T Normalize    & 0.8867 & 0.9927 & 0.8932 &\phantom{abc} & 0.8300 & 0.9976 & 0.8320 &\phantom{abc} & 0.9213 & 0.9976 & 0.9235 \\
+ P Saturate     & 0.8147 & 0.9764 & 0.8543 &\phantom{abc} & 0.8612  & 1 & 0.8612 &\phantom{abc} & 0.9994 & 0.9988 & 1.000\\
+ T Saturate     & 0.8849 & 0.9537 & 0.9278 &\phantom{abc} & 0.8303 & 1 & 0.8303 &\phantom{abc} & 0.9213 & 0.9976 & 0.9236 \\
+    \bottomrule
+\end{tabular}
+\end{center}\end{table*}
 
 \section{Discussion}
 To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR excluding the 53\% scale duplicate set where the Simple Hash better (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}.
