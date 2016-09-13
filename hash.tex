@@ -61,7 +61,7 @@
 %% the 1st when using pdflatex, which directly typesets your document in
 %% pdf (use jpg or pdf figures), or
 %% the 2nd when producing a ps file (use eps figures, don't use ps figures!).
-\documentclass[english,12pt,a4paper,pdftex,elec,utf8]{aaltothesis}
+\documentclass[english,12pt,a4paper,pdftex,elec,utf8, table]{aaltothesis}
 
 %% To the \documentclass above
 %% specify your school: arts, biz, chem, elec, eng, sci
@@ -95,6 +95,7 @@
 \usepackage{listings}
 \usepackage{bm}
 \usepackage{booktabs}
+\usepackage{xcolor}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -1854,7 +1855,7 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \newcommand\y{\cellcolor{green!10}}
 
 \begin{table*} \footnotesize
-\caption{p-values. Are the differences between the NDID systems statistically significant? The near duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set. Here the null hypothesis is rejected if p < 0.05}
+\caption{p-values. Are the differences between the NDID systems statistically significant? The near duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set. Here the null hypothesis is rejected if p < 0.05. Comparisons where the null hypothesis was upheld are in gray.}
 \label{pvalues}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1863,13 +1864,13 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
     & \multicolumn{2}{c}{Paintings} &\phantom{abc} &\multicolumn{2}{c}{ThingLink}\\
 \cmidrule{2-3} \cmidrule{5-6}
  Local Features & Simple & DCT &\phantom{abc} & Simple & DCT\\ \midrule
-  53\% Scale   & 2.031e-05 & 0.009952 &\phantom{abc} & 0.0002437 & 0.5219\\
-  83\% Scale   & 0.003617 & 0.06801 &\phantom{abc} & 0.7453 & 0.06458\\
+  53\% Scale   & 2.031e-05 & 0.009952 &\phantom{abc} & 0.0002437 & \cellcolor{blue!25}0.5219\\
+  83\% Scale   & 0.003617 & \cellcolor{blue!25} 0.06801 &\phantom{abc} & \cellcolor{blue!25} 0.7453 & \cellcolor{blue!25} 0.06458\\
   Crop 10px    & < 2.2e-16 & 1.58e-10 &\phantom{abc} & < 2.2e-16 & 3.614e-07\\
   10\% Border  & < 2.2e-16 & < 2.2e-16 & \phantom{abc} & < 2.2e-16 & < 2.2e-16\\
   Rotate 10\%  & < 2.2e-16 & < 2.2e-16 &\phantom{abc} & < 2.2e-16 & < 2.2e-16\\
-  Normalize    & 9.984e-11 & 0.003543 &\phantom{abc} & 0.6964 & 1\\
-  Saturate     & < 2.2e-16 & 0.02134 &\phantom{abc} & 8.794e-05 & 1 \\
+  Normalize    & 9.984e-11 & 0.003543 &\phantom{abc} & \cellcolor{blue!25} 0.6964 & \cellcolor{blue!25} 1\\
+  Saturate     & < 2.2e-16 & 0.02134 &\phantom{abc} & 8.794e-05 & \cellcolor{blue!25}1 \\
     \bottomrule
 \end{tabular}
 \end{center}\end{table*}
