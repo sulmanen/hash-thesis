@@ -1822,6 +1822,7 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \end{figure}
 
 \clearpage
+
 \begin{table*} \footnotesize
 \caption{ Precision $\mathcal{P}$ (eq. \ref{precision}), Recall (eq. \ref{recall}) $\mathcal{R}$ and $\mathcal{P}/\mathcal{R}$ for NDID by Simple Hash, DCT Hash and Local Features for duplicate sets (table \ref{modifiedimages}) for Paintings dataset from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$ and $\mathcal{C}_s = 16$ for the ThingLink dataset. $D_H = 4$ for Simple Hash and $D_H = 8$ for DCT Hash. P in the modification column stands for Paintings dataset. T for ThingLink dataset.}
 \label{precisionrecall}
@@ -1849,6 +1850,28 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
     \bottomrule
 \end{tabular}
 \end{center}\end{table*}
+
+\begin{table*} \footnotesize
+\caption{p-values. Are the differences between the NDID systems statistically significant? The near duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set.}
+\label{pvalues}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrr@{}}
+    \toprule
+    & \multicolumn{2}{c}{Paintings} &\phantom{abc} &\multicolumn{2}{c}{ThingLink}\\
+\cmidrule{2-3} \cmidrule{5-6}
+ Local Features & Simple & DCT &\phantom{abc} & Simple & DCT\\ \midrule
+  53\% Scale   & 2.031e-05 & 0.009952 &\phantom{abc} & 0.0002437 & 0.5219\\
+  83\% Scale   & 0.003617 & 0.06801 &\phantom{abc} & 0.7453 & 0.06458\\
+  Crop 10px    & < 2.2e-16 & 1.58e-10 &\phantom{abc} & < 2.2e-16 & 3.614e-07\\
+  10\% Border  & < 2.2e-16 & < 2.2e-16 & \phantom{abc} & < 2.2e-16 & < 2.2e-16\\
+  Rotate 10\%  & < 2.2e-16 & < 2.2e-16 &\phantom{abc} & < 2.2e-16 & < 2.2e-16\\
+  Normalize    & 9.984e-11 & 0.003543 &\phantom{abc} & 0.6964 & 1\\
+  Saturate     & < 2.2e-16 & 0.02134 &\phantom{abc} & 8.794e-05 & 1 \\
+    \bottomrule
+\end{tabular}
+\end{center}\end{table*}
+
 
 \clearpage
 
