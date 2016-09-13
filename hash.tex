@@ -391,25 +391,15 @@ $\mathcal{C}_s$ & SIFT Classifier cutoff score under which an image is classifie
 %% Leave first page empty
 \thispagestyle{empty}
 
-Images are a cornerstone of the world wide web (the web). ThingLink allows its users to annotate images and other media with interactive regions to enrich the media by linking it to relevant information on the web.
-
-Responsive web design usually demands different scale images for different screen sizes for performance and quality. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink employs near duplicate image detection by perceptual hashing.
-
-A customer is reporting 20 to 30 \% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near duplicate image. The near duplicate detection system is working as expected, so an improved approach to near duplicate image detection is needed.
+Images are a cornerstone of the world wide web (the web). ThingLink allows its users to annotate images and other media with interactive regions to enrich the media by linking it to relevant information on the web. Responsive web design usually demands different scale images for different screen sizes for performance and quality. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink employs near duplicate image detection by perceptual hashing. A customer is reporting 20 to 30 \% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near duplicate image. The near duplicate detection system is working as expected, so an improved approach to near duplicate image detection is needed.
 
 Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experience on virtually any screen size. Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
 
-It is typical for a site to serve different scaled version of the same image for each break point usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UAs. The UA scaling is also not on par with expectations.
-
-Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users' time and the network providers' resources.
-
-Matching image to meta-data is unreliable by matching incoming URI to a scene URI. In a fast paced environment it is not valuable to the customer to add the same meta-data to different versions of the same image.
-
-For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near Duplicate Image Detection.
+It is typical for a site to serve different scaled version of the same image for each break point usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UAs. The UA scaling is also not on par with expectations. Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users' time and the network providers' resources. Matching image to meta-data is unreliable by matching incoming URI to a scene URI. In a fast paced environment it is not valuable to the customer to add the same meta-data to different versions of the same image. For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near Duplicate Image Detection.
 
 Near duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Object instance recognition has been successfully used for the more strict case of detecting image duplicates with small modifications \cite{dong2012high}. However does it offer improved performance over perceptual hashing in near-duplicate image detection?
 
-This paper only considers near duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not considered in the scope of this paper.
+This paper considers near duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not considered in the scope of this paper.
 
 \subsection{Research Questions}
 \begin{itemize}
