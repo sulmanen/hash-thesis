@@ -914,7 +914,6 @@ E = \frac{1}{\abs{Q}}\sum_{q\in Q}\frac{d_{LSH}}{d^*}
 
 where $d^*$ is the distance from $q$ to the nearest point over all successful queries.
 
-
 \subsubsection{min-Hash}
 min-Hash was used in \cite{Broder1997} to search for similar text documents among 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images for sample data sets. \cite{Chum2010} Uses min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. It finds similar images with a probability near to one, near similar images with small probability and unrelated images with 0 probability \cite{Chum2010}.
 
@@ -1038,8 +1037,6 @@ d(x,y)^2 \approx d(x,q(y))^2
 where $x$ is the query vector, $y$ is the database vector and quantizer function is $q(y)$. The error on estimated distance is bound by the quantization error, $e_d \leq e_q$.  \cite{Jegou2014}
 
 The quantizer should be fast enough and precise. The database vector $y$ is split $y \rightarrow [y_1 \ldots y_m]$ each of which is quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimensional vector can be split into four sub-vectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
-
-In order to query among
 
 In \emph{asymmetric distance computation} (ADC) in eq. \ref{adceq}, the database vectors $y$ are quantized but the query is not. This achieves lower distance distortion over the quantized query case (fig. \ref{nosdc}) called \emph{symmetric distance computation} (SDC) not covered here. Distance $d(x,y)$ approximation $\tilde{d}(x,y)$
 
