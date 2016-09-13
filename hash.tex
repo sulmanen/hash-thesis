@@ -1870,13 +1870,13 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \clearpage
 
 \section{Discussion}
-To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? If the $\mathcal{C}_s$ is set to a good value, for most duplicate cases yes, but for scaled duplicates the performance is equal or slightly diminished. For the 10\% white border and 10\% rotation duplicate cases Local Features doesn't lose any performance compared to other duplicate sets while the perceptual hashes perform poorly.
+To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? If the $\mathcal{C}_s$ is set to a good value, for most duplicate cases yes, but for scaled duplicates the performance is equal or slightly diminished. For the 10\% white border and 10\% rotation duplicate cases Local Features doesn't lose any performance compared to other duplicate sets while the perceptual hashes perform poorly very evident in figures \ref{tptotal} and \ref{fptotal} for the Paintings dataset and figures \ref{thinglinktptotal} and \ref{thinglinkfptotal} for the ThingLink dataset.
 
 Local features performs NDID with excellent numbers in the 10\% white border and 10\% rotate cases for both the Paintings and the ThingLink datasets with $\mathcal{P} > 92\%$ and $\mathcal{R} > 99 \%$ (table \ref{precisionrecall}). Since the rotation and adding a white border to the image alter the relative values of the image pixels, the perceptual hashes are unable to cope ($\mathcal{R}~0$ and $\mathcal{P} < 20\%$) \ref{precisionrecall}.
 
-For the Paintings dataset, there is a single false positive in every category, and it is a duplicate image in the dataset (table \ref{siftresults}). As the cutoff score $\mathcal{C}_s=19$, which was the maximum score in the TN-set, all TN images are rejected. For the 53\% scale, Local Features is in trouble with misses relative to performance in other duplicate sets. Perhaps smaller image size degrades performance?
+For the Paintings dataset, there is a single false positive in every category, and it is a duplicate image in the database (table \ref{siftresults}). As the cutoff score $\mathcal{C}_s=19$, which was the maximum score in the TN-set, all TN images are rejected. For the 53\% scale, Local Features is in trouble with misses relative to performance in other duplicate sets. Perhaps smaller image size degrades performance?
 
-For scaled images, the perceptual hashes perform surprisingly well sometimes exceeding Local Features. For the ThingLink dataset, all but the Simple Hash 53\% scale comparisons are not statistically significant.
+For scaled images, the perceptual hashes perform surprisingly well sometimes exceeding Local Features. For the ThingLink dataset, all but the Simple Hash 53\% scale comparisons are statistically indistinguishable (table \ref{pvalues}).
 
 Somewhat according to expectations, for the Paintings dataset from \cite{Vedaldi2012}, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}) excluding the 53\% scale duplicate set where the Simple Hash performs slighly better. This is evident in the precition-recall numbers . The result is statistically significant (table \ref{pvalues}). There is no statistical difference detected between the DCT-Hash and Local Features NDID for 83\% scaled Paintings set (table \ref{pvalues}).
 
@@ -1891,6 +1891,9 @@ Investigate which images are constantly missed in the ThingLink dataset by all c
 Investigate how Local Features duplicate detection does with several even smaller images.
 
 For simulation it is easy to choose the cutoff score as the set of images in the database doesn't change. It is unwise to keep raising the score to the max score of a rejected image. A $16 \leq \mathcal{C}_s \leq19$ is a good starting point according to figures \ref{thinglinkfigcutoffrocspace} and \ref{figcutoffrocspace}.
+
+TPR and FPR for the duplicate imagesets between datasets appear to follow a similar pattern comparing figures \ref{tptotal} and \ref{fptotal} for the Paintings dataset and figures \ref{thinglinktptotal} and \ref{thinglinkfptotal} for the ThingLink dataset.
+
 
 
 
