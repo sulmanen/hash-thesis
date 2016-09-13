@@ -1325,7 +1325,7 @@ We pick a sample of images from ThingLink. We pick 446 images without duplicates
 We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. In addition to ROC curves we will also construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
 \subsection{Receiver Operating Characteristic}\label{ROCSection}
-Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
+Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three binary classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1765,7 +1765,7 @@ For the paintings dataset, averaged comparison of the perceptual hashes and Loca
 \begin{center}
 \includegraphics[height=10cm]{figures/tpBar}
 \end{center}
-\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} }
+\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
 \label{tptotal}
 \end{figure}
 
@@ -1773,7 +1773,7 @@ For the paintings dataset, averaged comparison of the perceptual hashes and Loca
 \begin{center}
 \includegraphics[height=10cm]{figures/fpBar}
 \end{center}
-\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} }
+\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
 \label{fptotal}
 \end{figure}
 
@@ -1781,7 +1781,7 @@ For the paintings dataset, averaged comparison of the perceptual hashes and Loca
 \begin{center}
 \includegraphics[height=10cm]{figures/tnBar}
 \end{center}
-\caption{ TN for near duplicate modifications in table \ref{truenegatives} }
+\caption{ TN for near duplicate modifications in table \ref{truenegatives} for the Paintings dataset.}
 \label{tntotal}
 \end{figure}
 
@@ -1870,7 +1870,15 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \clearpage
 
 \section{Discussion}
-To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? As expected, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR excluding the 53\% scale duplicate set where the Simple Hash better (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}.
+To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? If the $\mathcal{C}_s$ is set to a good value, for most duplicate cases yes, but for scaled duplicates the performance is equal or slightly diminished. For the 10\% white border and 10\% rotation duplicate cases Local Features doesn't lose any performance compared to other duplicate sets while the perceptual hashes perform poorly.
+
+Local features performs NDID with excellent numbers in the 10\% white border and 10\% rotate cases for both the Paintings and the ThingLink datasets with $\mathcal{P} > 92\%$ and $\mathcal{R} > 99 \%$ (table \ref{precisionrecall}). Since the rotation and adding a white border to the image alter the relative values of the image pixels, the perceptual hashes are unable to cope ($\mathcal{R}~0$ and $\mathcal{P} < 20\%$) \ref{precisionrecall}.
+
+For the Paintings dataset, there is a single false positive in every category, and it is a duplicate image in the dataset (table \ref{siftresults}). As the cutoff score $\mathcal{C}_s=19$, which was the maximum score in the TN-set, all TN images are rejected. For the 53\% scale, Local Features is in trouble with misses relative to performance in other duplicate sets. Perhaps smaller image size degrades performance?
+
+For scaled images, the perceptual hashes perform surprisingly well sometimes exceeding Local Features. For the ThingLink dataset, all but the Simple Hash 53\% scale comparisons are not statistically significant.
+
+Somewhat according to expectations, for the Paintings dataset from \cite{Vedaldi2012}, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}) excluding the 53\% scale duplicate set where the Simple Hash performs slighly better. This is evident in the precition-recall numbers . The result is statistically significant (table \ref{pvalues}). There is no statistical difference detected between the DCT-Hash and Local Features NDID for 83\% scaled Paintings set (table \ref{pvalues}).
 
 What is a good Hamming Distance to use for near duplicate image detection by perceptual hashing?
 
@@ -1878,6 +1886,11 @@ What is a good cutoff score to classify an image a true negative in near duplica
 
 In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near duplicate detection?
 
+Investigate which images are constantly missed in the ThingLink dataset by all classifiers as the FP count seems to be around 35 for all classifiers.
+
+Investigate how Local Features duplicate detection does with several even smaller images.
+
+For simulation it is easy to choose the cutoff score as the set of images in the database doesn't change. It is unwise to keep raising the score to the max score of a rejected image. A $16 \leq \mathcal{C}_s \leq19$ is a good starting point according to figures \ref{thinglinkfigcutoffrocspace} and \ref{figcutoffrocspace}.
 
 
 
