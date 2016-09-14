@@ -199,7 +199,7 @@
 %% ennen välilyöntiä ja seuraavaa merkkijonoa.
 %% Näin tehdään, koska kyseessä ei ole lauseen loppu, jonka jälkeen tulee
 %% hieman pidempi väli vaan halutaan tavallinen väli.
-\supervisor{Prof.\ Juho Kannala} %{Prof.\ Pirjo Professori}
+\supervisor{Assistant Prof.\ Juho Kannala} %{Prof.\ Pirjo Professori}
 
 %% B.Sc. or M.Sc. thesis advisors(s). You can give upto two advisors in
 %% this template. Check with your supervisor how many official advisors
@@ -241,7 +241,7 @@
 \keywords{near duplicate image detection, perceptual hashing, object instance recognition, large scale image retrieval}
 
 \begin{abstractpage}[english]
-  Near-duplicate image detection by perceptual hashing finds near duplicates via forming a hash from image pixels. Near-duplicate image detection by local features considers the scene or object represented by the image pixels. We define a near duplicate as having 10px crop, 10\% white border, 10\% rotation, 53\% scale, 83\% scale, normalized histogram or saturated colors. We form these modifications from the paintings dataset and the ThingLink dataset both of which have true negative sets to determine rejection rate of images known not to exist in the database. We find a good Hammning Distance for comparisons for the Simple block mean based perceptual hash and a DCT based perceptual hash. We determine a good Cutoff Score with which to reject an images as a true negative for the Local Features NDID. Based on these values the classifiers are compared against one another. The perceptual hashes perform well for all modified sets excluding the 10\% white border and 10\% rotation where they are extremely ineffective. Local Features performs well for the 10\% white border and 10\% rotation sets. For scaled sets the perceptual hashes are competitive with local features NDID. For other modified sets Local Features NDID is a moderate to a clear improvement over the Simple block mean-based perceptual hash and the DCT-based perceptual hash.
+  Near-duplicate image detection by perceptual hashing queries near duplicates via hashing image pixels. Near-duplicate image detection by local features queries the scene or object in the image. We define a near duplicate as having 10px crop, 10\% white border, 10\% rotation, 53\% scale, 83\% scale, normalized histogram or saturated colors. We form these modifications from the paintings dataset and the ThingLink dataset. Both datasets are accompanied by equal size true negative sets to determine rejection rates of images known not to exist in the database. We find a good Hammning Distance for querying the Simple block mean based perceptual hash and a DCT based perceptual hash. We determine a good Cutoff Score with which to reject an images as a true negative for the Local Features NDID. Based on these values the classifiers are compared against one another. The perceptual hashes perform well for all modified sets excluding the 10\% white border and 10\% rotation where they are extremely ineffective. Local Features performs well for the 10\% white border and 10\% rotation sets. For scaled sets the perceptual hashes are competitive with local features NDID. For other modified sets Local Features NDID is a moderate to a clear improvement over the Simple block mean-based perceptual hash and the DCT-based perceptual hash.
 \end{abstractpage}
 
 %% Force a new page so that the possible English abstract starts on a new page
@@ -304,7 +304,7 @@ Otaniemi, \today
 
 \begin{tabular}{ll}
 $D_H$ & Hamming Distance\\
-$\mathcal{C}_s$ & SIFT Classifier cutoff score under which an image is classified as a miss.\\
+$\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   $\mathcal{P}$ & Precision\\
   $\mathcal{R}$ & Recall\\
 \end{tabular}
@@ -1457,6 +1457,9 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (confusion matrix fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 
+\subsubsection{Computational cost}
+Computational resources cost money. CPU time and memory footprint of the hashes in the case of perceptual hashes and image descriptors for Local Features NDID. We will run one duplicate set and record the time it takes to calculate the descriptor/hash, the final memory footprint of the descriptor/hash and the query time for both the Paintings-, and the ThingLink datasets. The image databases are roughly $\frac{1}{3}$ in relative size so it should give insight into how computational cost of a single query varies with image database size.
+
 \clearpage
 
 \section{Results}
@@ -1826,7 +1829,7 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \newcommand\y{\cellcolor{green!10}}
 
 \begin{table*} \footnotesize
-\caption{p-values. Are the differences between the NDID systems statistically significant? The near duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set. Here the null hypothesis is rejected if p < 0.05. Comparisons where the null hypothesis was upheld are in gray.}
+\caption{p-values. Are the differences between the NDID systems statistically significant? The near duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set. Here the null hypothesis is rejected if p < 0.05. Comparisons where the null hypothesis was upheld are in purple.}
 \label{pvalues}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1843,6 +1846,28 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
   Normalize    & 9.984e-11 & 0.003543 &\phantom{abc} & \cellcolor{blue!25} 0.6964 & \cellcolor{blue!25} 1\\
   Saturate     & < 2.2e-16 & 0.02134 &\phantom{abc} & 8.794e-05 & \cellcolor{blue!25}1 \\
     \bottomrule
+\end{tabular}
+\end{center}\end{table*}
+
+\clearpage
+
+\subsection{Computational cost}
+Computational cost of Local Features-, Simple Hash- and DCT Hash NDID systems for 53\% scale duplicate sets for both the Paintings- and the ThingLink dataset.Matlab version R2016a on an Intel Xeon E31230 3.20GHz with 8GB RAM on a 4.4.0 x86\_64 GNU/Linux. The descriptor size is the size of a single index in the inverted index, which contains one double for each word in the visual vocabulary, which is $1*10^6$ words in our case.  is the size of the inverted index, idf, vocabulary and metadata combined. Local Features query time is represented as x ms query + y ms geometric verification.
+
+\begin{table*} \footnotesize
+  \caption{Computational cost. $t_f^{avg}$ is the average time to calculate a single image descriptor or hash value. $s_f$ is the size of the descriptor or hash in bits. $t_q^{avg}$ is the average query time from the database and $db$ is the database.}
+\label{computationalcost}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lcrcrrcrcr@{}}
+    \toprule
+    & \multicolumn{4}{c}{Paintings} &\phantom{abc} &\multicolumn{4}{c}{ThingLink}\\
+\cmidrule{2-6} \cmidrule{7-10}
+  & $t_f^{avg} $(ms)&  $s_f$ (b) & $t_q^{avg}$ (ms)& $db$ (MB) &\phantom{abc} & $t_f^{avg} $(ms)&  $s_f$ (b) & $t_q^{avg}$ (ms)& $db$ (MB)\\ \midrule
+    Local Features & 257 & $64 \times 10^5$ & 800 & 300&\phantom{abc} & 81 & $64 \times 10^5$& 122 &95\\
+    Simple & 126 & 64 & 329 & 0.071 &\phantom{abc} & 14 & 64 & 187 & 0.017\\
+    DCT   & 133 & 64 & 338 & 0.071 & \phantom{abc} & 118 & 64 & 77 & 0.017\\
+ \bottomrule
 \end{tabular}
 \end{center}\end{table*}
 
