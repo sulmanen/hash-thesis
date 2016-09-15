@@ -1358,7 +1358,7 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 \end{equation}
 
 
-\subsection{Classifier Comparison}
+\subsection{Comparison}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. Near duplicate sets are formed using Imagemagick shell scripts. For each near duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
