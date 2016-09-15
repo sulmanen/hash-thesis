@@ -1462,12 +1462,12 @@ Modified image datasets in table \ref{modifiedimages} for the Paintings dataset 
 
 What is a good $D_H$ for the DCT- and Simple hashes for NDID? What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN?
 
-With the aid of the Paintings dataset, a good cutoff score $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). The Simple Hash was compared with $D_H=4$, the DCT-Hash used $D_H=8$ and the cutoff score for Local Features NDID was $\mathcal{C}_s=19$. Based on these values, the systems were compared head to head using the determined $\mathcal{C}_s$ and $D_H$ for TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}. Precision-Recall values were calculated and are in table \ref{precisionrecall}.
+With the aid of the Paintings dataset, a good cutoff score $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). Good $D_H$ was deteremined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy} Simple Hash was compared with $D_H=4$, the DCT-Hash used $D_H=8$ and the cutoff score for Local Features NDID was $\mathcal{C}_s=19$. Based on these $\mathcal{C}_s$ and $D_H$, the systems were compared head to head for TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}. Precision-Recall values were calculated and are in table \ref{precisionrecall}.
 
 For the ThingLink dataset consisting of images exported from the service, good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes. As with the paintings dataset, they were found to be $D_H=4$ for the simple hash and $D_H=8$ for the DCT Hash. A good $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{precisionrecall}.
 
 \subsection{Simple Hash}
-For the paintings dataset, TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}. Increasing $H_D$ moves counts from FN to FP.
+For the paintings dataset, TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}.
 
 A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
@@ -1925,6 +1925,7 @@ Do the PR graphs bring something new?
 \subsection{Simple Hash}
 The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
 
+Showing increasing $H_D$ moving counts from FN to FP, indicating tuning to be an uphill battle that cannot be won.
 
 \subsection{DCT Hash}
 Performs better than Simple Hash for changes affecting the colors, which is anticipated.
