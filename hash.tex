@@ -474,17 +474,17 @@ In addition, according to \cite{mihccak2001new} $H(I)$ where $P$ is probability 
   \end{equation}
 \end{enumerate}
 
-\subsubsection{Hamming distance}\label{HammingSection}
-According to \cite{Hamming1950} given alphabet $A$ the hamming distance $\Delta$ between strings $x \in A$ and $y \in A$ is
+\subsubsection{Hamming Distance}\label{HammingSection}
+According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $x \in A$ and $y \in A$ is
 
 \begin{equation}\label{hammingeq}
 \Delta(x,y):=\sum_{x_i\neq y_i}1\quad,\quad i=1,\ldots,n
 \end{equation}
 
-In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The hamming distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by eq. \ref{hammingeq}. If the hamming distance is within some threshold, the image can be said to be in the database.
+In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by eq. \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
 
 \begin{table}[htb]
-\caption{Hamming distance for strings.}
+\caption{Hamming Distance for strings.}
 \label{hammingexamples}
 \begin{center}
   \begin{tabular}{ccr}
@@ -1417,7 +1417,7 @@ This imageset is heterogenous in content containing landscapes, closeups of food
 \subsubsection{Perceptual Hashing Simulation}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by code running on ThingLink so we can be certain the implementation is the same here. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
 
-We do not know how varying the hamming distance affects classifier performance. As a result we will run all sets for hamming distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
+We do not know how varying the Hamming Distance affects classifier performance. As a result we will run all sets for Hamming Distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
 
 Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
@@ -1458,11 +1458,11 @@ Computational resources cost money. Knowing roughly how much resources are neede
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
 To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink dataset were queried against a database formed from the original images. The three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based system were queried separately and the results counted.
 
-What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $D_H$ for the DCT- and Simple hashes for NDID? For the Simple Hash, good $D_H$ was deteremined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $D_H$ was also determined by plotting averaged results from table \ref{dctresults} ROC space (\ref{dcttotalroc}) and accuracy plot (fig. \ref{dcttotalaccuracy}).
+What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $D_H$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $D_H$ was deteremined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $D_H$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy plot (fig. \ref{dcttotalaccuracy}).
 
-As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $D_H$, the systems were compared head to head for TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}) for the paintings dataset from \cite{Vedaldi2012}. Precision-Recall values were calculated (table \ref{precisionrecall}) to aid in comparison.
+As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID using the Paintings dataset. Based on these $\mathcal{C}_s$ and $D_H$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Precision-Recall values were calculated (table \ref{precisionrecall}) to aid in comparison.
 
-The ThingLink dataset consisting of images exported from ThingLink was used for a second opinion. Good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $D_H=4$ for the Simple Hash and $D_H=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{precisionrecall} to aid in comparison.
+The ThingLink dataset of images exported from ThingLink was used for a second opinion. Good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $D_H=4$ for the Simple Hash and $D_H=4$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{precisionrecall}.
 
 For insight into the computational costs of running each of these systems in production, the 53\% scale duplicates were queried for all NDID systems considered here and for both the Paintings- and the ThingLink datasets. As the Paintings dataset is roughly three times in size, it will give a hint on how the systems scale as the number of images in the database grows. We were interested in the average CPU time $t_f^{avg}$ for calculating a perceptual hash, or an image descriptor and the average query time $t_q^{avg}$ to find a duplicate. For memory, we measured the size of a single hash or an image descriptor and the total image database with metadata included, like the visual vocabulary for example. The results are in table \ref{computationalcost}.
 
@@ -1511,7 +1511,7 @@ A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accura
 \label{simpletotalroc}
 \end{figure}
 
-For the ThingLink dataset the counts for detecting duplicates for modified sets from table \ref{modifiedimages} aren in table \ref{simplethinglinkresults}. The accuracy according to eq. \ref{accuracy} averaged over all modified sets (table \ref{modifiedimages}) with data from table \ref{simplethinglinkresults} per $D_H$ is in figure \ref{thinglinksimpletotalaccuracy}. ROC space for $D_H \in{0,4,8,12}$ averaged over all modified sets (table \ref{modifiedimages}) for the ThingLink dataset is in figure \ref{thinglinksimpletotalroc}. The comparison per duplicate set between the DCT Hash and the Local Features NDID systems are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal} and \ref{thinglinktntotal}.
+For the ThingLink dataset the counts for detecting duplicates for modified sets from table \ref{modifiedimages} are in table \ref{simplethinglinkresults}. The accuracy according to eq. \ref{accuracy} averaged over all modified sets (table \ref{modifiedimages}) with data from table \ref{simplethinglinkresults} per $D_H$ is in figure \ref{thinglinksimpletotalaccuracy}. ROC space for $D_H \in{0,4,8,12}$ averaged over all modified sets (table \ref{modifiedimages}) for the ThingLink dataset is in figure \ref{thinglinksimpletotalroc}. The comparison per duplicate set between the DCT Hash and the Local Features NDID systems are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal} and \ref{thinglinktntotal}.
 
 \begin{table}[htb]\footnotesize
 \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
