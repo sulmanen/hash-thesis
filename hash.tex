@@ -525,45 +525,14 @@ The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the m
   \end{split}
 \end{equation}
 
-A simple hash is simple and fast to calculate so it meets all the criteria in table \ref{hashcriteria}. The calculation steps are in table \ref{simplesteps}. A single simple hash takes on average 70ms on Matlab 2015a on a Mid 2014 13 inch Macbook Pro.
-
-\def\arraystretch{1.5}
-\begin{table}[htb]
-\caption{Simple calculation hash steps.}
-\label{simplesteps}
-\begin{center}
-\begin{tabular}{lp{0.5\linewidth}}
-  Calculation step\\
-  \hline \hline
-  Scale image to 8 by 8 px gray scale\\
-  \hline
-  64 adds\\
-  \hline
-  64 logical ands\\
-  \hline
-  one multiplication\\
-  \hline
-  one division\\
-  \hline
-  128 logical ands\\
-  \hline
-  128 logical ors\\
-  \hline
-  128 bitshifts\\
-  \hline
-\end{tabular}
-\end{center}\end{table}
-
-As shown in table \ref{simplesteps}, the simple hash is very simple to calculate. It is also fast as mentioned earlier. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
+A simple hash is simple and fast to calculate so it meets all the criteria in table \ref{hashcriteria}. A single simple hash takes on average 70ms on Matlab 2015a on a Mid 2014 13 inch Macbook Pro. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
 
 Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A Hamming Distance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the Hamming Distance.
-
 
 \subsubsection{DCT based hash}
 According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromised between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
 To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. A $N =32$ DCT eq. \ref{dcteq} is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
-
 
 Using only $N = 8$ (top left corner) of the $N=32$ DCT, the average of the result is calculated and origin result value is discarded as it would throw off the average. The use of average as a threshold is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively according to eq. \ref{simplehasheq}.
 
@@ -578,7 +547,7 @@ T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)
     \end{cases}
 \end{equation}
 
-The image is scaled down to 32 by 32 px gray scale and the most significant byte of the pixel is extracted. The two dimensional $N=32$ type-II DCT (eq. \ref{dcteq}) is calculated. Only the top left 8 by 8 corner of the DCT result is used. Most of the image information resides in the low frequency components (top left corner). From these 64 values the average is calculated and the origin value is dropped from the average. In figure \ref{dctkernels} we see the origin being very large compared to the rest of the DCT basis values. This throws off the average and thresholding. The 8 by 8 values are thresholded by eq. \ref{simplehasheq} into a 64 bit hash. These steps are outlined in table \ref{dctsteps}.
+The image is scaled down to 32 by 32 px gray scale and the most significant byte of the pixel is extracted. The two dimensional $N=32$ type-II DCT (eq. \ref{dcteq}) is calculated. Only the top left 8 by 8 corner of the DCT result is used. Most of the image information resides in the low frequency components (top left corner). From these 64 values the average is calculated and the origin value is dropped from the average. In figure \ref{dctkernels} we see the origin being very large compared to the rest of the DCT basis values. This throws off the average and thresholding. The 8 by 8 values are thresholded by eq. \ref{simplehasheq} into a 64 bit hash. These steps are outlined in table \ref{dctsteps}. This version of DCT-Hash takes ~200ms to calculate on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
 
 \begin{figure}[htb]
 \begin{center}
@@ -588,36 +557,7 @@ The image is scaled down to 32 by 32 px gray scale and the most significant byte
 \label{dctkernels}
 \end{figure}
 
-\def\arraystretch{1.5}
-\begin{table}[htb]
-\caption{DCT hash calculation steps give a good idea into its simplicity. Compare to table \ref{simplesteps} for simple hash complexity.}
-\label{dctsteps}
-\begin{center}
-\begin{tabular}{lp{0.5\linewidth}}
-  Calculation step\\
-  \hline\hline
-  Scale image to 32 by 32 px grayscale\\
-  \hline
-  $32^2\quad*\quad \&$ \\
-  \hline
-  $32^4 \quad*\quad \cos, 3+, 10*, 2/$ \\
-  \hline
-  $32^2\quad*\quad 2*, /$\\
-  \hline
-  $64 \quad*\quad +$\\
-  \hline
-  $1 \quad*\quad -$\\
-  \hline
-  $1 \quad*\quad /, *, -$\\
-  \hline
-  $64 \quad*\quad |, <<$\\
-  \hline
-\end{tabular}
-\end{center}\end{table}
-
-This version of DCT-Hash takes ~200ms to calculate on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
-
-\subsection{Local features}
+\subsection{Local Features}
 To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features.
 
 Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are the same
