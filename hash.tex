@@ -355,6 +355,7 @@ $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   SURF & Sped Up Robust Features \\
   tf-idf & term frequency - inverse document frequency\\
   TP & True Positive\\
+  TNR & True Negative Rate\\
   TPR & True Positive Rate\\
   TN & True Negative\\
   UA   & User Agent facilitates end user interaction with Web content (Browser)\\
@@ -1371,7 +1372,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
-\caption{Test image datasets from the ''Recognition of Object Instances Practical'' \cite{Vedaldi2012} paintings image set generated via shellscripts. }
+\caption{Test image datasets from the ''Recognition of Object Instances Practical'' \cite{Vedaldi2012} paintings image set generated via shellscripts. Not in database dataset sampled in random from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.}
 \label{modifiedimages}
 \begin{center}
 \begin{tabular}{lp{0.5\linewidth}}
@@ -1395,18 +1396,6 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \end{tabular}
 \end{center}\end{table}
 
-\def\arraystretch{1.5}
-\begin{table}[htb]
-\caption{TN dataset taken from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.}
-\label{truenegatives}
-\begin{center}
-\begin{tabular}{lp{0.5\linewidth}}
-  Modification & Motivation \\
-  \hline \hline
-  $n$ (true no) images  & Classify images correctly as $N$?\\
-\end{tabular}
-\end{center}\end{table}
-
 The Paintings Dataset from \cite{Vedaldi2012} contains images of homogenous quality and domain.
 
 \subsubsection{ThingLink dataset}
@@ -1426,7 +1415,7 @@ Simulation code is heavily based on the code provided by ''Recognition of Object
 
 Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
-In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ data set (table \ref{truenegatives}).
+In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ dataset.
 
 If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$.
 
@@ -1499,7 +1488,7 @@ A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accura
 \begin{center}
 \includegraphics[height=10cm]{figures/simpleTotalAccuracy}
 \end{center}
-\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) and the TN set (table \ref{truenegatives}).}
+\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages})}
 \label{simpletotalaccuracy}
 \end{figure}
 
@@ -1540,7 +1529,7 @@ For the ThingLink dataset the counts for detecting duplicates for modified sets 
 \begin{center}
 \includegraphics[height=10cm]{figures/thinglink_simpleTotalAccuracy}
 \end{center}
-\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) and the TN set (table \ref{truenegatives}) for the ThingLink dataset.}
+\caption{Simple Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
 \label{thinglinksimpletotalaccuracy}
 \end{figure}
 
@@ -1586,7 +1575,7 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 \begin{center}
 \includegraphics[height=10cm]{figures/dctTotalAccuracy}
 \end{center}
-\caption{DCT Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) and the TN set (table \ref{truenegatives})}
+\caption{DCT Hash NDID average accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages})}
 \label{dcttotalaccuracy}
 \end{figure}
 
@@ -1642,13 +1631,13 @@ The comparison between the Simple Hash and the Local Features NDID systems are i
 \end{figure}
 
 \subsection{Local Features}
-The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN-set (table \ref{truenegatives}) was 19.
+The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN dataset was 19.
 
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/SIFTCountROC}
 \end{center}
-\caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset (table \ref{truenegatives}). In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
+\caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset. In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
 \label{figcutoff}
 \end{figure}
 
@@ -1658,11 +1647,11 @@ Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathca
 \begin{center}
 \includegraphics[height=8cm]{figures/SIFTROCperCutoff}
 \end{center}
-\caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from TN dataset (table \ref{truenegatives}) and duplicate sets in table \ref{modifiedimages}.}
+\caption{ ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from TN dataset and duplicate sets in table \ref{modifiedimages}.}
 \label{figcutoffrocspace}
 \end{figure}
 
-TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptotal} respectively. The Local Features NDID is denoted as SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR ~100\%. The single FP for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features loses to the Simple Hash when Simple Hash $D_H \geq 4 $ best seen comparing tables \ref{siftresults} and \ref{simpleresults}.
+TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptotal} respectively. The Local Features NDID is labeled SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR ~100\%. The single FP for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features loses to the Simple Hash when Simple Hash $D_H \geq 4 $ best seen comparing tables \ref{siftresults} and \ref{simpleresults}.
 
 \begin{table*}
 \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
@@ -1738,7 +1727,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \clearpage
 
 \subsection{Comparison}
-For the paintings dataset, averaged comparison of the perceptual hashes and Local Features NDID for duplicate sets in table \ref{modifiedimages} for TPR is in figure \ref{tptotal}. The average FPR for the duplicate sets is in figure \ref{fptotal} and the ability to produce true negatives (TN) from images not in the database is in figure \ref{tntotal}.
+For the paintings dataset, averaged comparison of the perceptual hashes and Local Features NDID for duplicate sets in table \ref{modifiedimages} for TPR is in figure \ref{tptotal}. The FPR for the duplicate sets is in figure \ref{fptotal} and the ability to produce true negatives (TN) from images not in the database is in figure \ref{tntotal}.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1766,7 +1755,7 @@ For the paintings dataset, averaged comparison of the perceptual hashes and Loca
 
 \clearpage
 
-For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the averaged FPR (fig. \ref{thinglinkfptotal}) and true negative rates (fig. \ref{thinglinktntotal}) for duplicate sets in table \ref{modifiedimages} are compared between the Simple Hash, the DCT-Hash and Local Features NDID.
+For the ThingLink dataset, the TPR (fig. \ref{thinglinktptotal}), the FPR (fig. \ref{thinglinkfptotal}) and TNR (fig. \ref{thinglinktntotal}) for duplicate sets in table \ref{modifiedimages} are compared between the Simple Hash, the DCT-Hash and Local Features NDID.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1788,7 +1777,7 @@ For the ThingLink dataset, the averaged TPR (fig. \ref{thinglinktptotal}), the a
 \begin{center}
 \includegraphics[height=10cm]{figures/thinglink_tnBar}
 \end{center}
-\caption{ TN for near duplicate modifications in table \ref{truenegatives} for the ThingLink dataset.}
+\caption{ TNR for near duplicate modifications in table \ref{truenegatives} for the ThingLink dataset.}
 \label{thinglinktntotal}
 \end{figure}
 
