@@ -238,10 +238,10 @@
 %% niin kuin se on yllä määritelty.
 %% Avainsanat
 %%
-\keywords{near duplicate image detection, perceptual hashing, object instance recognition, large scale image retrieval}
+\keywords{near-duplicate image detection, perceptual hashing, object instance recognition, large scale image retrieval}
 
 \begin{abstractpage}[english]
-  Near-duplicate image detection by perceptual hashing queries near duplicates via hashing image pixels. Near-duplicate image detection by local features queries the scene or object in the image. We define a near duplicate as having 10px crop, 10\% white border, 10\% rotation, 53\% scale, 83\% scale, normalized histogram or saturated colors. We form these modifications from the paintings dataset and the ThingLink dataset. Both datasets are accompanied by equal size true negative sets to determine rejection rates of images known not to exist in the database. We find a good Hammning Distance for querying the Simple block mean based perceptual hash and a DCT based perceptual hash. We determine a good Cutoff Score with which to reject an images as a true negative for the Local Features NDID. Based on these values the classifiers are compared against one another. The perceptual hashes perform well for all modified sets excluding the 10\% white border and 10\% rotation where they are extremely ineffective. Local Features performs well for the 10\% white border and 10\% rotation sets. For scaled sets the perceptual hashes are competitive with local features NDID. For other modified sets Local Features NDID is a moderate to a clear improvement over the Simple block mean-based perceptual hash and the DCT-based perceptual hash.
+  Near-duplicate image detection by perceptual hashing queries near-duplicates via hashing image pixels. Near-duplicate image detection by local features queries the scene or object in the image. We define a near-duplicate as having 10px crop, 10\% white border, 10\% rotation, 53\% scale, 83\% scale, normalized histogram or saturated colors. We form these modifications from the paintings dataset and the ThingLink dataset. Both datasets are accompanied by equal size true negative sets to determine rejection rates of images known not to exist in the database. We find a good Hammning Distance for querying the Simple block mean based perceptual hash and a DCT based perceptual hash. We determine a good Cutoff Score with which to reject an images as a true negative for the Local Features NDID. Based on these values the classifiers are compared against one another. The perceptual hashes perform well for all modified sets excluding the 10\% white border and 10\% rotation where they are extremely ineffective. Local Features performs well for the 10\% white border and 10\% rotation sets. For scaled sets the perceptual hashes are competitive with local features NDID. For other modified sets Local Features NDID is a moderate to a clear improvement over the Simple block mean-based perceptual hash and the DCT-based perceptual hash.
 \end{abstractpage}
 
 %% Force a new page so that the possible English abstract starts on a new page
@@ -340,7 +340,7 @@ $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   M-LDB & Modified-Local Difference Binary feature descriptor used in AKAZE features\\
   MLE & Maximum Likelihood Estimation\\
   MultiVLAD & Multiple VLAD descriptors\\
-  NDID & Near Duplicate Image Detection\\
+  NDID & Near-Duplicate Image Detection\\
   NN & Nearest Neighbor\\
   ORB & Oriented FAST and Rotated BRIEF fast robust feature detector\\
   OSS & Open Source Software\\
@@ -392,37 +392,37 @@ $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
 %% Leave first page empty
 \thispagestyle{empty}
 
-Images are a cornerstone of the world wide web. ThingLink allows its users to annotate images and other media with interactive regions to enrich the media by linking it to relevant information on the web. Responsive web design demands different scale images for different screen sizes for performance and quality. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink detects near duplicate images by perceptual hashing. A customer is reporting 20-30\% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near duplicate image. The near duplicate detection system is working as expected, so an improved approach to near duplicate image detection is needed.
+Images are a cornerstone of the world wide web. ThingLink allows its users to annotate images and other media with interactive regions to enrich the media by linking it to relevant information on the web. Responsive web design demands different scale images for different screen sizes for performance and quality. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink detects near-duplicate images by perceptual hashing. A customer is reporting 20-30\% false negatives for duplicate image detection. When duplicate detection fails,  no annotations on the near-duplicate image. The near-duplicate detection system is working as expected, so an improved approach to near-duplicate image detection is needed.
 
 Useful websites function on a variety of screens sizes from phones, tablets to desktop. Correctly executed responsive web design delivers an optimal user experience on virtually any screen size. Users and customers are primarily interested in quality content as contention for customers between sites is high and the decision to switch sites can be made in a matter of seconds. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Sites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints.
 
-It is typical for a site to serve different scaled version of the same image for each break point usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UAs. The UA scaling is also not on par with expectations. Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users' time and the network providers' resources. Matching image to meta-data is unreliable by matching incoming URI to a scene URI. In a fast paced environment it is not valuable to the customer to add the same meta-data to different versions of the same image. For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near Duplicate Image Detection.
+It is typical for a site to serve different scaled version of the same image for each break point usually from a URI specific to each image. Images may be scaled on the UA but is generally not recommended due to varying quality on different UAs. The UA scaling is also not on par with expectations. Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users' time and the network providers' resources. Matching image to meta-data is unreliable by matching incoming URI to a scene URI. In a fast paced environment it is not valuable to the customer to add the same meta-data to different versions of the same image. For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near-Duplicate Image Detection.
 
-Near duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Object instance recognition has been successfully used for the more strict case of detecting image duplicates with small modifications \cite{dong2012high}. However does it offer improved performance over perceptual hashing in near-duplicate image detection?
+near-duplicate image detection is a loosely defined concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images. Object instance detection by local features represents solving the latter extreme case which attempts to detect the scene or object in the image, not the image itself. Object instance recognition has been successfully used for the more strict case of detecting image duplicates with small modifications \cite{dong2012high}. However does it offer improved performance over perceptual hashing in near-duplicate image detection?
 
-This paper considers near duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not considered in the scope of this paper.
+This paper considers near-duplicate detection and excludes all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not considered in the scope of this paper.
 
 \subsection{Research Questions}
 \begin{itemize}
-\item[--] To what degree if any is object instance recognition by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection?
-\item[--] What is a good Hamming Distance to use for near duplicate image detection by perceptual hashing
-\item[--] What is a good cutoff score to classify an image a true negative in near duplicate image detection with local features?
-\item[--] In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near duplicate detection?
+\item[--] To what degree if any is object instance recognition by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection?
+\item[--] What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing
+\item[--] What is a good cutoff score to classify an image a true negative in near-duplicate image detection with local features?
+\item[--] In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 
 \end{itemize}
 
 \clearpage
 
 \section{Perceptual Hashing and \\Large-Scale Image Retrieval via Local Features}
-To what degree if any is object instance detection by local features an improvement over DCT-, and simple perceptual hashes for near duplicate image detection?
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple perceptual hashes for near-duplicate image detection?
 
 ThingLink requirements for a classifier are a high true positive rate (TPR), a high true negative rate, and a low false positive rate (FPR) of images at different scales. A customer is reporting 20\% to 30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
 
-Near duplicate image definitions vary according to the problem at hand. At one extreme are ''pixel perfect'' matches while methods for matching images of the same scene or object lie at the other extreme. The Simple Hash and DCT Hash are perceptual hashes in use at ThingLink every day. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
+near-duplicate image definitions vary according to the problem at hand. At one extreme are ''pixel perfect'' matches while methods for matching images of the same scene or object lie at the other extreme. The Simple Hash and DCT Hash are perceptual hashes in use at ThingLink every day. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
 
 Object instance detection by local features is a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted by the image. Local feature descriptors are by definition invariant to isotropic scaling and rotation and can withstand some offline distortion, noise and illumination changes. Object instance detection works especially well for processed duplicate images, the case we are trying to solve.
 
-In order to compare the perceptual hash classifiers to the local features classifier, we simulate near duplicate cases on a set of images. The performance of each classifier is then compared head to head. Perceptual hashing is a good choice for implementing near duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images.
+In order to compare the perceptual hash classifiers to the local features classifier, we simulate near-duplicate cases on a set of images. The performance of each classifier is then compared head to head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images.
 
 Object instance detection is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
@@ -830,7 +830,7 @@ where $d^*$ is the distance from $q$ to the nearest point over all successful qu
 \subsubsection{min-Hash}
 min-Hash was used in \cite{Broder1997} to search for similar text documents among 30 million documents. In \cite{Chum2008} the same idea is harnessed to find duplicate images for sample data sets. \cite{Chum2010} Uses min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. It finds similar images with a probability near to one, near similar images with small probability and unrelated images with 0 probability \cite{Chum2010}.
 
-Essentially it is LSH for sets \cite{Chum2010}. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets.
+Essentially it is LSH for sets \cite{Chum2010}. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold \cite{Chum2008}. In \cite{Chum2008}, it quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near-duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets.
 
 The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
 
@@ -1226,10 +1226,10 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 
 \clearpage
 
-\section{Perceptual Hashing vs. Local Features for Near Duplicate Image Detection} \label{mame}
+\section{Perceptual Hashing vs. Local Features for Near-Duplicate Image Detection} \label{mame}
 We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin implementing near similar image detection improvements we need to certain object instance detection by local features is an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
-A test set of images and modified near duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database, a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
+A test set of images and modified near-duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database, a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
 A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}. We pick a sample of images from ThingLink. We pick 446 images without duplicates as well as another 446 images to be the TN set.
 
@@ -1299,7 +1299,7 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 
 
 \subsection{Comparison}
-Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. Near duplicate sets are formed using Imagemagick shell scripts. For each near duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
+Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
 
@@ -1351,7 +1351,7 @@ We do not know how varying the Hamming Distance affects classifier performance. 
 Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
 \subsubsection{Local Features Simulation}
-Simulation code is based on the code in ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
+Simulation code is based on the code in ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near-duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
 
 Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
@@ -1388,7 +1388,7 @@ For these simulations, the metadata contains information on the original images 
 
 \section{Results}
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
-To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems and the results counted. The raw results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. Based on these results we can draw conclusions for a good $D_H$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems and the results counted. The raw results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. Based on these results we can draw conclusions for a good $D_H$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
 
 Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $D_H$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $D_H$ was deteremined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $D_H$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
 
@@ -1412,7 +1412,7 @@ Queries in the Local Features case result in list of images with scores describi
 \begin{center}
 \includegraphics[height=8cm]{figures/simpleTotalAccuracy}
 \end{center}
-\caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near duplicate sets (table \ref{modifiedimages})}
+\caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages})}
 \label{simpletotalaccuracy}
 \end{figure}
 
@@ -1428,7 +1428,7 @@ Queries in the Local Features case result in list of images with scores describi
 \begin{center}
 \includegraphics[height=8cm]{figures/dctTotalAccuracy}
 \end{center}
-\caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near duplicate sets (table \ref{modifiedimages})}
+\caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages})}
 \label{dcttotalaccuracy}
 \end{figure}
 
@@ -1438,7 +1438,7 @@ As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head N
 \begin{center}
 \includegraphics[height=8cm]{figures/tpBar}
 \end{center}
-\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
+\caption{ TPR for near-duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
 \label{tptotal}
 \end{figure}
 
@@ -1446,7 +1446,7 @@ As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head N
 \begin{center}
 \includegraphics[height=8cm]{figures/fpBar}
 \end{center}
-\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
+\caption{ FPR for near-duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
 \label{fptotal}
 \end{figure}
 
@@ -1454,7 +1454,7 @@ As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head N
 \begin{center}
 \includegraphics[height=8cm]{figures/tnBar}
 \end{center}
-\caption{ TN for near duplicate modifications for the Paintings dataset.}
+\caption{ TN for near-duplicate modifications for the Paintings dataset.}
 \label{tntotal}
 \end{figure}
 
@@ -1480,7 +1480,7 @@ The ThingLink dataset of images exported from ThingLink was used for a second op
 \begin{center}
 \includegraphics[height=8cm]{figures/thinglink_simpleTotalAccuracy}
 \end{center}
-\caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance over all near duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
+\caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance over all near-duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
 \label{thinglinksimpletotalaccuracy}
 \end{figure}
 
@@ -1488,7 +1488,7 @@ The ThingLink dataset of images exported from ThingLink was used for a second op
 \begin{center}
 \includegraphics[height=8cm]{figures/thinglink_dctTotalAccuracy}
 \end{center}
-\caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
+\caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
 \label{thinglinkdcttotalaccuracy}
 \end{figure}
 
@@ -1506,7 +1506,7 @@ The ThingLink dataset of images exported from ThingLink was used for a second op
 \begin{center}
 \includegraphics[height=8cm]{figures/thinglink_tpBar}
 \end{center}
-\caption{ TPR for near duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
+\caption{ TPR for near-duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
 \label{thinglinktptotal}
 \end{figure}
 
@@ -1514,7 +1514,7 @@ The ThingLink dataset of images exported from ThingLink was used for a second op
 \begin{center}
 \includegraphics[height=8cm]{figures/thinglink_fpBar}
 \end{center}
-\caption{ FPR for near duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
+\caption{ FPR for near-duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
 \label{thinglinkfptotal}
 \end{figure}
 
@@ -1522,7 +1522,7 @@ The ThingLink dataset of images exported from ThingLink was used for a second op
 \begin{center}
 \includegraphics[height=8cm]{figures/thinglink_tnBar}
 \end{center}
-\caption{ TNR for near duplicate modifications for the ThingLink dataset.}
+\caption{ TNR for near-duplicate modifications for the ThingLink dataset.}
 \label{thinglinktntotal}
 \end{figure}
 
@@ -1761,7 +1761,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \end{center}\end{table*}
 
 \begin{table*} \footnotesize
-\caption{p-values. Are the differences between the NDID systems statistically significant? The near duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set. Here the null hypothesis is rejected if p < 0.05. Comparisons where the null hypothesis was upheld are in purple.}
+\caption{p-values. Are the differences between the NDID systems statistically significant? The near-duplicate detection performance of the perceptual hash and local features is equal is the null hypothesis. What is the probability that the null hypothesis holds? Results are from Fisher's exact test \cite{fisher1922interpretation} comparing simulation results per duplicate set. Here the null hypothesis is rejected if p < 0.05. Comparisons where the null hypothesis was upheld are in purple.}
 \label{pvalues}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1794,11 +1794,11 @@ For scaled images, the perceptual hashes perform surprisingly well sometimes exc
 
 Somewhat according to expectations, for the Paintings dataset from \cite{Vedaldi2012}, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}) excluding the 53\% scale duplicate set where the Simple Hash performs slighly better. This is evident in the precition-recall numbers . The result is statistically significant (table \ref{pvalues}). There is no statistical difference detected between the DCT-Hash and Local Features NDID for 83\% scaled Paintings set (table \ref{pvalues}).
 
-What is a good Hamming Distance to use for near duplicate image detection by perceptual hashing?
+What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing?
 
-What is a good cutoff score to classify an image a true negative in near duplicate image detection with local features?
+What is a good cutoff score to classify an image a true negative in near-duplicate image detection with local features?
 
-In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near duplicate detection?
+In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 
 Investigate which images are constantly missed in the ThingLink dataset by all classifiers as the FP count seems to be around 35 for all classifiers.
 
@@ -1813,13 +1813,13 @@ TPR and FPR for the duplicate imagesets between datasets appear to follow a simi
 
 
 %% old
-The duplicate datasets in table \ref{modifiedimages} were chosen to represent near duplicate images and they agree with the definition of near duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers. The definition for a near duplicate image is broader here than at ThingLink, where a near duplicate refers to scaled images only. The broader definition was used to bring out differences in Simple Hash-, DCT Hash- and Local Features NDID.
+The duplicate datasets in table \ref{modifiedimages} were chosen to represent near-duplicate images and they agree with the definition of near-duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers. The definition for a near-duplicate image is broader here than at ThingLink, where a near-duplicate refers to scaled images only. The broader definition was used to bring out differences in Simple Hash-, DCT Hash- and Local Features NDID.
 
 The paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence as a ready built database for Local Features NDID had been built. It is quite small compared to the 3.5M images ThingLink hosts and homogenous. All of the images are in the JPEG format while ThingLink hosts GIF's and PNG's also. How do these methods compare on other formats?
 
 1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. Obvisously the method described in section \ref{mame} cannot be used in this scale. VLAD is a bad approximation of the actual descriptors, so the question remains is it accurate enough to better than 80\% accurate required for the ThingLink customers.
 
-According to \cite{Zauner2010}, a good $D_H$ for detecting duplicate images is 10. However we found, on average (for near duplicates in table \ref{modifiedimages}) the accuracy to be best for $D_H = 4$ for the Simple Hash and $D_H = 8$ for the DCT Hash. A closer look at the data in tables \ref{simpleresults} and \ref{dctresults} reveals that $D_H = 8$ does perform better for the scale case and we do not include 10 in our simulations due to time constraints.
+According to \cite{Zauner2010}, a good $D_H$ for detecting duplicate images is 10. However we found, on average (for near-duplicates in table \ref{modifiedimages}) the accuracy to be best for $D_H = 4$ for the Simple Hash and $D_H = 8$ for the DCT Hash. A closer look at the data in tables \ref{simpleresults} and \ref{dctresults} reveals that $D_H = 8$ does perform better for the scale case and we do not include 10 in our simulations due to time constraints.
 
 Evaluate the method.
 
@@ -1831,7 +1831,7 @@ On questions?
 
 If we were to use AKAZE features with VLAD encoding, that would need another run of simulations.
 
-20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
+20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near-duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
 
 Do the PR graphs bring something new?
 
@@ -1840,14 +1840,14 @@ The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotatio
 
 Showing increasing $H_D$ moving counts from FN to FP, indicating tuning to be an uphill battle that cannot be won.
 
-For the paintings dataset, TPR for Simple Hash NDID is over 90\% for most near duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}.
+For the paintings dataset, TPR for Simple Hash NDID is over 90\% for most near-duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}.
 
 A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
 
 
 \subsection{DCT Hash}
-TPR > 90\% for most duplicate sets (table \ref{modifiedimages}) in figure \ref{tptotal}. FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
+TPR > 90\% for most duplicate sets (table \ref{modifiedimages}) in figure \ref{tptotal}. FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near-duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
 
 The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID is in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
 
