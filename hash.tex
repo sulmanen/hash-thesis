@@ -1351,7 +1351,7 @@ We do not know how varying the Hamming Distance affects classifier performance. 
 Images with dimesions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
 \subsubsection{Local Features Simulation}
-Simulation code is heavily based on the code provided by ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
+Simulation code is based on the code in ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
 
 Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
@@ -1388,9 +1388,9 @@ For these simulations, the metadata contains information on the original images 
 
 \section{Results}
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
-To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink dataset were queried against a database of the original images. The three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based system were queried separately and the results counted.
+To what degree if any is object instance detection by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems and the results counted. The raw results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. Based on these results we can draw conclusions for a good $D_H$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
 
-Duplicate queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $D_H$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $D_H$ was deteremined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $D_H$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy plot (fig. \ref{dcttotalaccuracy}).
+Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $D_H$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $D_H$ was deteremined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $D_H$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1432,7 +1432,7 @@ Duplicate queries in the Local Features case result in list of images with score
 \label{dcttotalaccuracy}
 \end{figure}
 
-As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID using the Paintings dataset. Based on these $\mathcal{C}_s$ and $D_H$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Precision-Recall values were calculated (table \ref{precisionrecall}) to aid in comparison.
+As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $D_H$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Precision-Recall values were calculated (table \ref{precisionrecall}) to aid in comparison.
 
 \begin{figure}[htb]
 \begin{center}
