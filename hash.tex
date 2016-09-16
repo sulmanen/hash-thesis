@@ -408,7 +408,6 @@ This paper considers near-duplicate detection and excludes all other uses of per
 \item[--] What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing
 \item[--] What is a good cutoff score to classify an image a true negative in near-duplicate image detection with local features?
 \item[--] In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
-
 \end{itemize}
 
 \clearpage
@@ -1246,7 +1245,7 @@ Receiver operating characteristic \(ROC\) graphs are good in visualizing and com
 \begin{center}
 \includegraphics[height=8cm]{figures/confusion}
 \end{center}
-\caption{Confusion matrix for binary classification \cite{Fawcett2006}. }
+\caption{Contingency matrix for binary classification \cite{Fawcett2006}. }
 \label{figconfusion}
 \end{figure}
 
@@ -1376,7 +1375,7 @@ In order to determine optimum cutoff, simulations were run setting the cutoff sc
 \end{figure}
 
 \subsubsection{Fisher's Exact Test}
-To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (confusion matrix fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
+To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 
 \subsubsection{Computational Cost}
 Knowing roughly how much resources are needed for the NDID system is a basis for a rough cost estimate. CPU time and memory footprint of the hashes in the case of perceptual hashes and image descriptors for Local Features NDID. We will run the 53\% duplicate set and record the time it takes to calculate the descriptor/hash, the final memory footprint of the descriptor/hash. The query time for both the Paintings-, and the ThingLink datasets as well as the total database size in memory will also be recorded. The image databases are roughly $\frac{1}{3}$ in relative size so it should give insight into how computational cost of a single query varies with image database size. The system for these simulations is a Matlab version R2016a was used for simulations on an Intel Xeon E31230 3.20GHz with 8GB RAM on a 4.4.0 x86\_64 GNU/Linux Kernel.
