@@ -1355,9 +1355,7 @@ Simulation code is based on the code in ''Recognition of Object Instances Practi
 
 Unexpectedly, the $TN$ test set on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
-In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ dataset.
-
-If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$.
+In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the $TN$ dataset. If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$.
 
 \begin{figure}[htb]
 \begin{center}
