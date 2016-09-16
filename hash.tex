@@ -1303,7 +1303,7 @@ Paintings dataset from the ''Recognition of object instances practical'' \cite{V
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
 
-\subsubsection{Paintings dataset}
+\subsubsection{Paintings Dataset}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
 An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
@@ -1338,7 +1338,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 
 The Paintings Dataset from \cite{Vedaldi2012} contains images of homogenous quality and domain.
 
-\subsubsection{ThingLink dataset}
+\subsubsection{ThingLink Dataset}
 The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
 
 This imageset is heterogenous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A TN dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The TN-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
@@ -1378,7 +1378,7 @@ If returned matches from a search score less than $\mathcal{C_s}$, the image is 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (confusion matrix fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 
-\subsubsection{Computational cost}
+\subsubsection{Computational Cost}
 Knowing roughly how much resources are needed for the NDID system is a basis for a rough cost estimate. CPU time and memory footprint of the hashes in the case of perceptual hashes and image descriptors for Local Features NDID. We will run the 53\% duplicate set and record the time it takes to calculate the descriptor/hash, the final memory footprint of the descriptor/hash. The query time for both the Paintings-, and the ThingLink datasets as well as the total database size in memory will also be recorded. The image databases are roughly $\frac{1}{3}$ in relative size so it should give insight into how computational cost of a single query varies with image database size. The system for these simulations is a Matlab version R2016a was used for simulations on an Intel Xeon E31230 3.20GHz with 8GB RAM on a 4.4.0 x86\_64 GNU/Linux Kernel.
 
 For the perceptual hashes, the memory footprint for a single hash is well known to be 64 bits, the size of the hash. The size of the image database will be a multiple of this hash size. For the Local Features case, we will use the descriptor size of a single index in the inverted index, which contains one double for each word in the visual vocabulary, $1*10^6$ words in our case. In addition to the descriptors the database contains metadata describing the descriptor database.
