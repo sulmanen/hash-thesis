@@ -178,7 +178,7 @@
 %% Muista että otsikkoja ei tavuteta!
 %% Jos otsikossa on ja-sana, se ei jää rivin viimeiseksi sanaksi
 %% vaan aloittaa uuden rivin.
-\thesistitle{Improving Large Scale Near-duplicate Image Classification with Perceptual Hashes by Object Instance Recognition}
+\thesistitle{Improving Large Scale Near-Duplicate Image Detection with Perceptual Hashing by Object Instance Recognition}
 
 \place{Espoo}
 
@@ -1458,7 +1458,7 @@ As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head N
 \label{tntotal}
 \end{figure}
 
-The ThingLink dataset of images exported from ThingLink was used for a second opinion. Good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $D_H=4$ for the Simple Hash and $D_H=4$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{precisionrecall}.
+The ThingLink dataset of images exported from ThingLink was used for a second opinion. Good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $D_H=4$ for the Simple Hash and $D_H=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{precisionrecall}.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1529,7 +1529,7 @@ The ThingLink dataset of images exported from ThingLink was used for a second op
 As the Paintings dataset is roughly three times in size, it will give a hint on how the systems scale as the number of images in the database grows. We were interested in the average CPU time $t_f^{avg}$ for calculating a perceptual hash, or an image descriptor and the average query time $t_q^{avg}$ to find a duplicate. For memory, we measured the size of a single hash or an image descriptor and the total image database with metadata included, like the visual vocabulary for example. The results are in table \ref{computationalcost}.
 
 \begin{table*} \footnotesize
-  \caption{Computational cost. $t_f^{avg}$ is the average time to calculate a single image descriptor or hash value. $s_f$ is the size of the descriptor or hash in bits. $t_q^{avg}$ is the average query time from the database and $db$ is the database size in memory. For Local Features, 99\% of the query time $t_q^{avg}$ goes in geometric verification.}
+  \caption{Computational cost. $t_f^{avg}$ (ms) is the average time to calculate a single image descriptor or hash value. $s_f$ (bits) is the size of the descriptor or hash in bits. $t_q^{avg}$ (ms) is the average query time from the database and $db$ (MB) is the database size in memory. For Local Features, 99\% of the query time $t_q^{avg}$ goes in geometric verification.}
 \label{computationalcost}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1537,7 +1537,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
     \toprule
     & \multicolumn{4}{c}{Paintings} &\phantom{abc} &\multicolumn{4}{c}{ThingLink}\\
 \cmidrule{2-6} \cmidrule{7-10}
-  & $t_f^{avg} $(ms)&  $s_f$ (b) & $t_q^{avg}$ (ms)& $db$ (MB) &\phantom{abc} & $t_f^{avg} $(ms)&  $s_f$ (b) & $t_q^{avg}$ (ms)& $db$ (MB)\\ \midrule
+  & $t_f^{avg} $&  $s_f$ & $t_q^{avg}$& $db$ &\phantom{abc} & $t_f^{avg} $&  $s_f$& $t_q^{avg}$& $db$\\ \midrule
     Local Features & 257 & $64 \times 10^5$ & 800 & 300&\phantom{abc} & 81 & $64 \times 10^5$& 122 &95\\
     Simple & 126 & 64 & 329 & 0.071 &\phantom{abc} & 14 & 64 & 187 & 0.017\\
     DCT   & 133 & 64 & 338 & 0.071 & \phantom{abc} & 118 & 64 & 77 & 0.017\\
@@ -1732,6 +1732,35 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \end{tabular}
 \end{center}\end{table*}
 
+\begin{table*} \footnotesize
+\caption{ $Delta$ Precision $\mathcal{P}$ (eq. \ref{precision}), Recall (eq. \ref{recall}) $\mathcal{R}$ and $\mathcal{P}/\mathcal{R}$ for NDID by Simple Hash and DCT Hash vs. Local Features based on table \ref{precisionrecall}.}
+\label{deltaprecisionrecall}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{Simple} &\phantom{abc} &\multicolumn{3}{c}{DCT} &\phantom{abc}\\
+\cmidrule{2-4} \cmidrule{6-8}
+ Modification & $\Delta \mathcal{P}$ & $\Delta \mathcal{R}$ & $\Delta \mathcal{P} / \mathcal{R}$ &\phantom{abc} & $\Delta \mathcal{P}$ & $\Delta \mathcal{R}$ & $\Delta \mathcal{P} / \mathcal{R}$ \\ \midrule
+ P 53\% Scale   & 0.1709 & -0.007026  & 0.1781    &\phantom{abc} & 0.8614 & 0.9976 & 0.8635\\
+ T 53\% Scale   & -0.01660 & 0.02822  & -0.04621  &\phantom{abc} & 0.8234 & 0.9804 & 0.8398\\
+ P 83\% Scale   & 0.1703  & -0.001757 & 0.1721    &\phantom{abc} & 0.8611 & 0.9988 & 0.8620\\
+ T 83\% Scale   & 0.03379 & -0.004860 & 0.03839   &\phantom{abc} & 0.8219 & 0.9804 & 0.8468\\
+ P Crop 10px    & 0.9849  & 0.07713   & 0.1298    &\phantom{abc} & 0.8560 & 0.9788 & 0.8746\\
+ T Crop 10px    & 0.05873 & 0.2330    & -0.2072   &\phantom{abc} & 0.8139 & 0.9193 & 0.8853\\
+ P 10\% Border  & 0.9817  & 0.9915    & -1,648    &\phantom{abc} & 0.01681& 0.03637 & 0.4597\\
+ T 10\% Border  & 0.7262  & 0.9790    & -9.540    &\phantom{abc} & 0.1163 & 0.05831 & 1.994\\
+ P Rotate 10\%  & 0.9849  & 0.9911    & -2.957    &\phantom{abc} & 0.0205 & 0.0107 & 1.911 \\
+ T Rotate 10\%  & 0.7065  & 0.9764    & -14.57    &\phantom{abc} & 0.3708 & 0.07517 & 4.933 \\
+ P Normalize    & 0.1762  & 0.0021    & 0.1592    &\phantom{abc} & 0.8585 & 0.9946 & 0.8631 \\
+ T Normalize    & 0.03464 & 0.004883  & 0.0303    &\phantom{abc} & 0.8300 & 0.9976 & 0.8320 \\
+ P Saturate     & 0.1846  & 0.0.0452  & 0.1463    &\phantom{abc} & 0.8612 & 1 & 0.8612\\
+ T Saturate     & 0.03647 & 0.04380   & -0.004170 &\phantom{abc} & 0.8303 & 1 & 0.8303 \\
+    \bottomrule
+\end{tabular}
+\end{center}\end{table*}
+
+
 \newcommand\y{\cellcolor{green!10}}
 
 \begin{table*} \footnotesize
@@ -1793,7 +1822,7 @@ The paintings dataset excluding black and white images from \cite{Vedaldi2012} w
 
 1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. Obvisously the method described in section \ref{mame} cannot be used in this scale. VLAD is a bad approximation of the actual descriptors, so the question remains is it accurate enough to better than 80\% accurate required for the ThingLink customers.
 
-According to \cite{Zauner2010}, a good $D_H$ for detecting duplicate images is 10. However we found, on average (for near duplicates in table \ref{modifiedimages}) the accuracy to be best for $D_H = 4$ for the Simple Hash and $D_H = 4$ for the DCT Hash. A closer look at the data in tables \ref{simpleresults} and \ref{dctresults} reveals that $D_H = 8$ does perform better for the scale case and we do not include 10 in our simulations due to time constraints.
+According to \cite{Zauner2010}, a good $D_H$ for detecting duplicate images is 10. However we found, on average (for near duplicates in table \ref{modifiedimages}) the accuracy to be best for $D_H = 4$ for the Simple Hash and $D_H = 8$ for the DCT Hash. A closer look at the data in tables \ref{simpleresults} and \ref{dctresults} reveals that $D_H = 8$ does perform better for the scale case and we do not include 10 in our simulations due to time constraints.
 
 Evaluate the method.
 
