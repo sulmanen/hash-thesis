@@ -260,10 +260,10 @@
 \degreeprogram{Electronics and electrical engineering}
 \department{Signaalinkäsittely ja akustiikan laitos}
 \professorship{Digitaalinen signaalinkäsittely}
-\keywords{hajautusfunktio, paikalliset piirteet}
+\keywords{hajautusfunktio, paikalliset piirteet, kuvien duplikaattitunnistus}
 
 \begin{abstractpage}[finnish]
-  Kuvien duplikaattitunnistus hajautusfunktioilla perustuu suoraan kuvapikseleihin. Paikalliset piirteet taas tunnistavat kuvan sisältämän näkymän tai esineen. Määritämme kuvaduplikaatiksi kuvan, jolla voi olla 10px leikattu reunoilta, 10\% valkoinen raami, 10\% rotaatio, 53\% tai 83\% skaalaus, normalisoitu histogrammi tai muokatut värit verrattuna alkuperäiseen. Muodostamme tietokannan ja kuvaduplikaatit sekä maalauksista koostuvasta kuvasarjasta, että ThingLink palvelusta otteistetuista kuvista. Etsimme hajautusfunktioille hyvän Hamming-etäisyyden duplikaattitunnistukseen, sekä hyvän leikkausarvon paikallisilla piirteillä tunnistamiseen. Käytämme näitä arvoja ''Simple block mean based-hash''- ja ''DCT-Hash''-hajautusfunktioiden vertaamiseen paikallisten piirteiden varassa toimivan duplikaattitunnistuksen kanssa. Hajautusfunktiot pärjäävät verrattain erinomaisesti skaalattujen duplikaattien tunnistamisessa ja hyvin muissa duplikaatitapauksissa poissulkien 10\% reunuksen ja 10\% rotaation. Näissä tapauksissa hajautusfunktiot toimivat kelvottomasti duplikaattiongelman ratkaisussa. Paikallisiin piirteisiin perustuva detektori toimii erinomaisesti kaikissa mainituissa duplikaattitapauksissa mukaanlukien duplikaatit 10\% reunuksella sekä 10\% rotaatiolla.
+  Kuvien duplikaattitunnistus hajautusfunktiolla perustuu suoraan kuvapikseleihin. Paikalliset piirteet taas tunnistavat kuvan sisältämän näkymän tai esineen. Määritämme kuvaduplikaatiksi kuvan, jolla voi olla 10px leikattu reunoilta, 10\% valkoinen raami, 10\% rotaatio, 53\% tai 83\% skaalaus, normalisoitu histogrammi tai muokatut värit verrattuna alkuperäiseen. Muodostamme tietokannan ja kuvaduplikaatit sekä maalauksista koostuvasta kuvasarjasta, että ThingLink palvelusta otteistetuista kuvista. Etsimme hajautusfunktioille hyvän Hamming-etäisyyden duplikaattitunnistukseen, sekä hyvän leikkausarvon paikallisilla piirteillä tunnistamiseen. Käytämme näitä arvoja ''Simple block mean based-hash''- ja ''DCT-Hash''-hajautusfunktioiden vertaamiseen paikallisten piirteiden varassa toimivan duplikaattitunnistuksen kanssa. Hajautusfunktiot pärjäävät verrattain erinomaisesti skaalattujen duplikaattien tunnistamisessa ja hyvin muissa duplikaatitapauksissa poissulkien 10\% reunuksen ja 10\% rotaation. Näissä tapauksissa hajautusfunktiot toimivat kelvottomasti duplikaattiongelman ratkaisussa. Paikallisiin piirteisiin perustuva detektori toimii erinomaisesti kaikissa mainituissa duplikaattitapauksissa mukaanlukien duplikaatit 10\% reunuksella sekä 10\% rotaatiolla.
 \end{abstractpage}
 
 %% Force new page so that the Swedish abstract starts from a new page
@@ -1731,7 +1731,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \end{center}\end{table*}
 
 \begin{table*} \footnotesize
-\caption{ $\Delta$ Precision $\mathcal{P}$ (eq. \ref{precision}), Recall (eq. \ref{recall}) $\mathcal{R}$ and $\mathcal{P}/\mathcal{R}$ for NDID by Local Features vs. Simple Hash and DCT Hash based on table \ref{precisionrecall}. Cases where the perceptual hashing is better are highlighted.}
+\caption{ $\Delta$ Precision $\mathcal{P}$ (eq. \ref{precision}), Recall (eq. \ref{recall}) $\mathcal{R}$ and $\mathcal{P}/\mathcal{R}$ for NDID by Local Features vs. Simple Hash and DCT Hash based on table \ref{precisionrecall}. Cases where perceptual hashing is better are highlighted.}
 \label{deltaprecisionrecall}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
