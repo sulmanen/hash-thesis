@@ -1813,7 +1813,7 @@ TPR and FPR for the duplicate imagesets between datasets appear to follow a simi
 %% old
 The duplicate datasets in table \ref{modifiedimages} were chosen to represent near-duplicate images and they agree with the definition of near-duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers. The definition for a near-duplicate image is broader here than at ThingLink, where a near-duplicate refers to scaled images only. The broader definition was used to bring out differences in Simple Hash-, DCT Hash- and Local Features NDID.
 
-The paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence as a ready built database for Local Features NDID had been built. It is quite small compared to the 3.5M images ThingLink hosts and homogenous. All of the images are in the JPEG format while ThingLink hosts GIF's and PNG's also. How do these methods compare on other formats?
+The Paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence as a ready built database for Local Features NDID had been built. It is quite small compared to the 3.5M images ThingLink hosts and homogenous. All of the images are in the JPEG format while ThingLink hosts GIF's and PNG's also. How do these methods compare on other formats?
 
 1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. Obvisously the method described in section \ref{mame} cannot be used in this scale. VLAD is a bad approximation of the actual descriptors, so the question remains is it accurate enough to better than 80\% accurate required for the ThingLink customers.
 
@@ -1838,9 +1838,9 @@ The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotatio
 
 Showing increasing $H_D$ moving counts from FN to FP, indicating tuning to be an uphill battle that cannot be won.
 
-For the paintings dataset, TPR for Simple Hash NDID is over 90\% for most near-duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}.
+For the Paintings dataset, TPR for Simple Hash NDID is over 90\% for most near-duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}.
 
-A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
+A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the Paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
 
 
 
@@ -1852,7 +1852,7 @@ The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on
 Performs better than Simple Hash for changes affecting the colors, which is anticipated.
 
 \subsection{Local Features}
-The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN dataset was 19.
+The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the Paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN dataset was 19.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1870,7 +1870,7 @@ Duplicate images in the database are expected to be a challenge in designing a l
 
 
 \subsection{Comparison}
-For the paintings dataset, averaged comparison of the perceptual hashes and Local Features NDID for duplicate sets in table \ref{modifiedimages} for TPR is in figure \ref{tptotal}. The FPR for the duplicate sets is in figure \ref{fptotal} and the ability to produce true negatives (TN) from images not in the database is in figure \ref{tntotal}.
+For the Paintings dataset, averaged comparison of the perceptual hashes and Local Features NDID for duplicate sets in table \ref{modifiedimages} for TPR is in figure \ref{tptotal}. The FPR for the duplicate sets is in figure \ref{fptotal} and the ability to produce true negatives (TN) from images not in the database is in figure \ref{tntotal}.
 
 For the ThingLink dataset, the TPR (fig. \ref{thinglinktptotal}), the FPR (fig. \ref{thinglinkfptotal}) and TNR (fig. \ref{thinglinktntotal}) for duplicate sets in table \ref{modifiedimages} are compared between the Simple Hash, the DCT-Hash and Local Features NDID.
 
