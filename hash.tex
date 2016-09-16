@@ -1248,7 +1248,7 @@ Receiver operating characteristic \(ROC\) graphs are good in visualizing and com
 \label{figconfusion}
 \end{figure}
 
-We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the $tp_{rate}$ vs. the $fp_{rate}$. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
+We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the TPR vs. the FPR. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
 
 \begin{figure}[htb]
 \begin{center}
@@ -1259,10 +1259,10 @@ We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for outp
 \end{figure}
 
 \begin{equation}\label{FPR}
-fp_{rate} = \frac{FP}{N}
+FPR = \frac{FP}{N}
 \end{equation}
 \begin{equation}\label{TPR}
-tp_{rate} = \frac{TP}{TP + FN}
+TPR = \frac{TP}{TP + FN}
 \end{equation}
 \begin{equation}\label{precision}
 precision = \frac{TP}{TP + FP}
