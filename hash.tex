@@ -1232,7 +1232,7 @@ We expect the Local Features-classifier to outperform perceptual hashing for NDI
 
 A test set of images and modified near-duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database, a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
-A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed as well as originals and modifications according to table \ref{modifiedimages}. We pick a sample of images from ThingLink. We pick 446 images without duplicates as well as another 446 images to be the TN set.
+A ThingLink export of images (ThingLink dataset) should be used to gain insight into how these NDID systems perform on real world images. A TN-dataset is needed to probe the detectors's ability to reject images not in the database. Originals are stored in the database and modifications used for test queries are in table \ref{modifiedimages}. We sample 446 images from ThingLink without duplicates as well as another 446 images to be the TN set.
 
 Computational cost is interesting weighing NDID systems against one another. We will record the hash calculation time for the perceptual hashes. For the Local Features NDID this means descriptor extraction and computation time. The query time is the other component of interest. We will record times for a single run for each dataset, for each NDID system and plot the results. Also we will compare the memory requirements of each system via examining database size in memory, and memory usage during query.
 
