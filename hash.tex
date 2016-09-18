@@ -1911,6 +1911,7 @@ For the Paintings dataset, averaged comparison of the perceptual hashes and Loca
 
 For the ThingLink dataset, the TPR (fig. \ref{thinglinktptotal}), the FPR (fig. \ref{thinglinkfptotal}) and TNR (fig. \ref{thinglinktntotal}) for duplicate sets in table \ref{modifiedimages} are compared between the Simple Hash, the DCT-Hash and Local Features NDID.
 
+With the local features classifier we have been able to adjust the bias of the model to best fit the data by tuning $\mathcal{C}_s$ to reject all of images in the true negatives set \cite{POWERS2011}. However for perceptual hashes, it is not possible to tune $D_H$ in a way to reject all of the images in the TN-set. $\mathcal{C}_s$ will be dynamic as images are continuously being added to the database and some might have characteristics where they have a high similarity score even when the result is FN. A creative solution to these cases must be developed.
 
 \clearpage
 
