@@ -1252,7 +1252,13 @@ Write about the F-factor here.
 
 
 \subsubsection{Receiver Operating Characteristic}\label{ROCSection}
-Receiver operating characteristic \(ROC\) curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR.
+Receiver operating characteristic \(ROC\) curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR. The negative diagonal
+
+\begin{equation}\label{biastoprevalence}
+tpr + c*fpr=1
+\end{equation}
+
+matches Bias to Prevalence where skew is $c$ \cite{POWERS2011}. To compare classifiers in ROC space, we merely choose the point or the curve closest to the top left corner or the point (0, 1).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1339,7 +1345,19 @@ Inverse Precision = TN / (FN + TN)
 Jaccard = TP / (TP + FN + FP)
 \end{equation}
 
-\emph{rp} stands for Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}.
+\begin{equation}\label{prevalence}
+prevalence = RP / N
+\end{equation}
+
+\begin{equation}\label{bias}
+bias = PP / N
+\end{equation}
+
+\begin{equation}\label{skew}
+skew = RN / RP
+\end{equation}
+
+\emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}.
 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
