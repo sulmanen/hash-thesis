@@ -1236,7 +1236,7 @@ A ThingLink export of images (ThingLink dataset) should be used to gain insight 
 
 Computational cost is interesting weighing NDID systems against one another. We will record the hash calculation time for the perceptual hashes. For the Local Features NDID this means descriptor extraction and computation time. The query time is the other component of interest. We will record times for a single run for each dataset, for each NDID system and plot the results. Also we will compare the memory requirements of each system via examining database size in memory, and memory usage during query.
 
-We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. In addition to ROC curves we will also construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
+We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. In addition to ROC curves we will also construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance. More recently, precision and recall have been identified to be biased as they ignore true negatives (TN) \cite{POWERS2011}.
 
 \subsection{Evaluating Binary Classifiers}
 
@@ -1247,7 +1247,7 @@ Receiver operating characteristic \(ROC\) graphs are good in visualizing and com
 \begin{center}
 \includegraphics[height=8cm]{figures/confusion}
 \end{center}
-\caption{Contingency matrix for binary classification \cite{Fawcett2006}. }
+\caption{Contingency matrix for binary classification \cite{Fawcett2006}. Green denotes correct classification. Incorrect classification is in red. }
 \label{figconfusion}
 \end{figure}
 
