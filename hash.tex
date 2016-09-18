@@ -1316,9 +1316,8 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 \left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
 \end{equation}
 
-
 \subsubsection{Matthews Correlation Coefficient}
-Precision, Recall, F-Factor, and Accuracy are biased and should be used only if these biases are well understood \cite{POWERS2011}.
+Precision, Recall, F-Factor, and Accuracy are biased and should be used only if these biases are well understood. Precision nor recall tells nothing about how well the model handles negative cases. \cite{POWERS2011}
 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
