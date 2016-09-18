@@ -1298,8 +1298,6 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 \left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
 \end{equation}
 
-\subsection{Matthews Correlation Coefficient}
-\cite{POWERS2011}
 
 \subsection{Comparison}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
