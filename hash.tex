@@ -1252,7 +1252,7 @@ Write about the F-factor here.
 
 
 \subsubsection{Receiver Operating Characteristic}\label{ROCSection}
-Receiver operating characteristic \(ROC\) curves visualize classifier performance and give one way to comapre classifier TPR and FPR.
+Receiver operating characteristic \(ROC\) curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1294,6 +1294,12 @@ Recall = Sensitivity = \frac{TP}{TP + FN}
 \begin{equation}\label{accuracy}
 Accuracy = \frac{TP + TN}{P + N} = \frac{TP +TN}{TP + FP + TN + FN}
 \end{equation}
+
+\begin{equation}\label{fmeasure}
+f-measure = F_1 = \frac{2 \times TP}{TP + FP + 1}
+\end{equation}
+
+The f-measure (eq. \ref{fmeasure}) is the harmonic mean of precision (eq. \ref{precision}) and recall (eq. \ref{recall}). It has been used in to compare classifiers in document retrieval and machine learning.
 
 \subsubsection{Precision-Recall Curves}\label{PRSection}
 Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested \cite{craven2005markov} to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
