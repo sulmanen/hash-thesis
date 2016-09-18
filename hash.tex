@@ -1238,7 +1238,9 @@ Computational cost is interesting weighing NDID systems against one another. We 
 
 We also need to know how the classifiers perform against one another and report the results in a meaningful way. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. In addition to ROC curves we will also construct PR curves for the Simple Hash, DCT Hash and the Local Features Classifier and compare performance.
 
-\subsection{Receiver Operating Characteristic}\label{ROCSection}
+\subsection{Evaluating Binary Classifiers}
+
+\subsubsection{Receiver Operating Characteristic}\label{ROCSection}
 Receiver operating characteristic \(ROC\) graphs are good in visualizing and comparing classifier performance. In essence we are comparing three binary classifiers. ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix can be found in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features.
 
 \begin{figure}[htb]
@@ -1265,6 +1267,11 @@ FPR = \frac{FP}{N}
 \begin{equation}\label{TPR}
 TPR = \frac{TP}{TP + FN}
 \end{equation}
+
+\begin{equation}\label{FNR}
+FNR = Miss rate = \frac{FN}{RN}
+\end{equation}
+
 \begin{equation}\label{precision}
 Precision = Confidence = \frac{TP}{TP + FP}
 \end{equation}
@@ -1277,7 +1284,7 @@ Recall = Sensitivity = \frac{TP}{TP + FN}
 Accuracy = \frac{TP + TN}{P + N} = \frac{TP +TN}{TP + FP + TN + FN}
 \end{equation}
 
-\subsection{Precision-Recall Curves}\label{PRSection}
+\subsubsection{Precision-Recall Curves}\label{PRSection}
 Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested \cite{craven2005markov} to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
@@ -1299,11 +1306,13 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 \end{equation}
 
 
-\subsection{Matthews Correlation Coefficient}
+\subsubsection{Matthews Correlation Coefficient}
 \cite{POWERS2011}
 
+\subsubsection{Fisher's Exact Test}
+To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 
-\subsection{Comparison}
+\subsection{Duplicate Detection Simulations}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
@@ -1377,9 +1386,6 @@ In order to determine optimum cutoff, simulations were run setting the cutoff sc
 \caption{Image query in local features-classifier simulations according to \cite{Vedaldi2012}. For NDID $n=1$.}
 \label{vedaldiquery}
 \end{figure}
-
-\subsubsection{Fisher's Exact Test}
-To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 
 \subsubsection{Computational Cost}
 Knowing roughly how much resources are needed for the NDID system is a basis for a rough cost estimate. CPU time and memory footprint of the hashes in the case of perceptual hashes and image descriptors for Local Features NDID. We will run the 53\% duplicate set and record the time it takes to calculate the descriptor/hash, the final memory footprint of the descriptor/hash. The query time for both the Paintings-, and the ThingLink datasets as well as the total database size in memory will also be recorded. The image databases are roughly $\frac{1}{3}$ in relative size so it should give insight into how computational cost of a single query varies with image database size. The system for these simulations is a Matlab version R2016a was used for simulations on an Intel Xeon E31230 3.20GHz with 8GB RAM on a 4.4.0 x86\_64 GNU/Linux Kernel.
