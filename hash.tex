@@ -1359,7 +1359,7 @@ skew = RN / RP
 \end{equation}
 \emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}. $rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
 
-An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance.
+An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance. For the binary case, it was first developed by Youden and is called Youden's J statistic. We will continue to use informedness, for this paper however. It may be used to find the optimum tuning on a ROC curve. \cite{POWERS2011}.
 
 Complimentary to \emph{Informedness}
 \begin{equation}\label{informedness}
