@@ -1790,21 +1790,21 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
     \toprule
     & \multicolumn{3}{c}{Simple} &\phantom{abc} &\multicolumn{3}{c}{DCT} &\phantom{abc} & \multicolumn{3}{c}{Local Features}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12}
- Modification & $\mathcal{P}$ & $\mathcal{R}$ & $\mathcal{P} / \mathcal{R}$ &\phantom{abc} & $\mathcal{P}$ & $\mathcal{R}$ & $\mathcal{P} / \mathcal{R}$ &\phantom{abc} & $\mathcal{P}$ & $\mathcal{R}$ & $\mathcal{P} / \mathcal{R}$\\ \midrule
- P 53\% Scale   & 0.8285 & 0.9994 & 0.8290 &\phantom{abc} & 0.8614 & 0.9976 & 0.8635 &\phantom{abc} & 0.9994 & 0.9924 & 1.007\\
- T 53\% Scale   & 0.9380 & 0.9402 & 0.9977 &\phantom{abc} & 0.8234 & 0.9804 & 0.8398 &\phantom{abc} & 0.9215 & 0.9684 & 0.9515\\
- P 83\% Scale   & 0.8291 & 1 & 0.8291 &\phantom{abc} & 0.8611 & 0.9988 & 0.8620 &\phantom{abc} & 0.9994 & 0.9982 & 1.001 \\
- T 83\% Scale   & 0.8872 & 0.9976 & 0.8894 &\phantom{abc} & 0.8219 & 0.9804 & 0.8468 &\phantom{abc} & 0.9210 & 0.9927 & 0.9278 \\
- P Crop 10px & 0.8109 & 0.9211 & 0.8804 &\phantom{abc} & 0.8560 & 0.9788 & 0.8746 &\phantom{abc} & 0.9994 & 0.9982 & 1.001 \\
- T Crop 10px    & 0.8623 & 0.7597 & 1.135 &\phantom{abc} & 0.8139 & 0.9193 & 0.8853 &\phantom{abc} & 0.9210 & 0.9927 & 0.9276 \\
- P 10\% Border  & 0.01773 & 0.006693 & 2.649 & \phantom{abc} & 0.01681& 0.03637 & 0.4597 &\phantom{abc} & 0.9994 & 0.9983 & 1.001 \\
- T 10\% Border  & 0.1951 & 0.01865 & 10.46 & \phantom{abc} & 0.1163 & 0.05831 & 1.994 &\phantom{abc} & 0.9213 & 0.9976 & 0.9236 \\
- P Rotate 10\%  & 0.01449 & 0.003659 & 3.961 &\phantom{abc} & 0.0205 & 0.0107 & 1.911 & \phantom{abc} & 0.9994 & 0.9947 & 1.005 \\
- T Rotate 10\%  & 0.2143 & 0.01382 & 15.50 &\phantom{abc} & 0.3708 & 0.07517 & 4.933 &\phantom{abc} & 0.9208 & 0.9903 & 0.9297 \\
- P Normalize    & 0.8232 & 0.9763 & 0.8431 &\phantom{abc} & 0.8585 & 0.9946 & 0.8631 &\phantom{abc} & 0.9994 & 0.9971 & 1.002\\
- T Normalize    & 0.8867 & 0.9927 & 0.8932 &\phantom{abc} & 0.8300 & 0.9976 & 0.8320 &\phantom{abc} & 0.9213 & 0.9976 & 0.9235 \\
- P Saturate     & 0.8147 & 0.9764 & 0.8543 &\phantom{abc} & 0.8612  & 1 & 0.8612 &\phantom{abc} & 0.9994 & 0.9988 & 1.000\\
- T Saturate     & 0.8849 & 0.9537 & 0.9278 &\phantom{abc} & 0.8303 & 1 & 0.8303 &\phantom{abc} & 0.9213 & 0.9976 & 0.9236 \\
+ Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ \phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
+ P 53\% Scale   & 0,7952 & 0,8278 & 0,8113 &\phantom{abc} & 0,8385 & 0,8587 & 0,8485 &\phantom{abc} & 0,9918 & 0,9919 & 0,9918\\
+ T 53\% Scale   & 0,8811 & 0,8811 & 0,8811 &\phantom{abc} & 0,8024 & 0,8037 & 0,8030 &\phantom{abc} & 0,8976 & 0,8932 & 0,8954\\
+ P 83\% Scale   & 0,7963 & 0,8291 & 0,8125 &\phantom{abc} & 0,8391& 0,8597& 0,8493 &\phantom{abc} & 0,9977 & 0,9977 & 0,9977 \\
+ T 83\% Scale   & 0,8897 & 0,8849 & 0,8873 &\phantom{abc} & 0,7926 & 0,7926& 0,7926 &\phantom{abc} & 0,9199 & 0,9143 & 0,9171 \\
+ P Crop 10px    & 0,7119 & 0,7224 & 0,7171 &\phantom{abc} & 0,8166 & 0,8317 & 0,8241 &\phantom{abc} & 0,9977 & 0,9977 & 0,9977 \\
+ T Crop 10px    & 0,6555 & 0,6751 & 0,6653 &\phantom{abc} & 0,7413 & 0,7371 & 0,7392 &\phantom{abc} & 0,9199& 0,9143 & 0,9171 \\
+ P 10\% Border  & -0,2815 & -0,5026 & 0,3762 & \phantom{abc} & -0,4460 & -0,2791 & 0,3528 &\phantom{abc} & 0,9977 & 0,9977 & 0,9977 \\
+ T 10\% Border  & -0,0526 & -0,2996 & 0,1256 & \phantom{abc} & -0,2186 & -0,3323 & 0,2695&\phantom{abc} & 0,9248 & 0,9191& 0,9220 \\
+ P Rotate 10\%  & -0,2261 & -0,5298 & 0,3461 &\phantom{abc} & -0,3062 & -0,4519 & 0,3720 &\phantom{abc} & 0,9941 & 0,9942 & 0,9942\\
+ T Rotate 10\%  & -0,0348 & -0,2845 & 0,0996 &\phantom{abc} & -0,0484 & -0,1348 & 0,0808 &\phantom{abc} & 0,9175 & 0,9119 & 0,9147 \\
+ P Normalize    & 0,7703 & 0,7948 & 0,7825 & \phantom{abc} & 0,8331 & 0,8523& 0,8426 &\phantom{abc} & 0,9965 & 0,9965 & 0,9965\\
+ T Normalize    & 0,8848 & 0,8798 & 0,8823 &\phantom{abc} & 0,8229 & 0,8274& 0,8252&\phantom{abc} & 0,9248 & 0,9191 & 0,9220 \\
+ P Saturate     & 0,7430 & 0,7608 & 0,7519 &\phantom{abc} & 0,8403  & 0,8612 & 0,8507 &\phantom{abc} & 0,9982 & 0,9982& 0,9982\\
+ T Saturate     & 0,8477 & 0,8426 & 0,8451 &\phantom{abc} & 0,8254& 0,8303& 0,8278 &\phantom{abc} & 0,9248 & 0,9191 & 0,9220\\
     \bottomrule
 \end{tabular}
 \end{center}\end{table*}
