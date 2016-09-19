@@ -1254,9 +1254,6 @@ When a predicted negative image is queried from the database and a near duplicat
 
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
 
-Write about the F-factor here.
-
-
 \subsubsection{Receiver Operating Characteristic}\label{ROCSection}
 Receiver operating characteristic \(ROC\) curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR. The negative diagonal
 \begin{equation}\label{biastoprevalence}
