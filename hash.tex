@@ -1365,12 +1365,18 @@ An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid
 
 Complimentary to \emph{Informedness}
 \begin{equation}\label{informedness}
-Informedness = Recall + Inverse\quad Recall - 1 = 1 - fnr - fpr
+Informedness = DeltaP' = Recall + Inverse\quad Recall - 1 = 1 - fnr - fpr
 \end{equation}
 is \emph{Markedness}
 \begin{equation}\label{markedness}
 Markedness = DeltaP = Precision + Inverse\quad Precision - 1 = 1 - fpa - fna
 \end{equation}
+which is ''a measure of how consistently the outcome has the predictor as a Marker by combining surfaces measures about what proportion of Predictions are correct \cite{POWERS2011}''.
+
+\begin{equation}\label{matthewscorrelation}
+r_G = \pm \sqrt{Informedness \times Markedness}
+\end{equation}
+
 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
