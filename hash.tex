@@ -307,7 +307,9 @@ $D_H$ & Hamming Distance\\
 $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   $\mathcal{P}$ & Precision\\
   $\mathcal{R}$ & Recall\\
+  P & Predicted class in the contingency matrix\\
   $\rho$ & Pearson product-moment correlation coefficient\\
+  R & Realization of positive or negative in the contingency matrix\\
   $r_G$ & Matthews correlation\\
 \end{tabular}
 
@@ -1378,7 +1380,7 @@ It has its roots in the psychology and linguistics. A marker or predictor (bioma
 \begin{equation}\label{matthewscorrelation}
 r_G = \pm \sqrt{Informedness \times Markedness}
 \end{equation}
-
+The Matthews correlation can be seen as a joint probability of P informs R and R marks P \cite{POWERS2011}.
 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
