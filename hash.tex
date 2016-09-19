@@ -307,6 +307,8 @@ $D_H$ & Hamming Distance\\
 $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   $\mathcal{P}$ & Precision\\
   $\mathcal{R}$ & Recall\\
+  $\rho$ & Pearson product-moment correlation coefficient\\
+  $r_G$ & Matthews correlation\\
 \end{tabular}
 
 \subsection*{Abbreviations A-M}
@@ -1371,8 +1373,8 @@ is \emph{Markedness}
 \begin{equation}\label{markedness}
 Markedness = DeltaP = Precision + Inverse\quad Precision - 1 = 1 - fpa - fna
 \end{equation}
-which is ''a measure of how consistently the outcome has the predictor as a Marker by combining surfaces measures about what proportion of Predictions are correct \cite{POWERS2011}''.
-
+which is ''a measure of how consistently the outcome has the predictor as a marker by combining surfaces measures about what proportion of predictions are correct \cite{POWERS2011}''.
+It has its roots in the psychology and linguistics. A marker or predictor (biomarker or neuromarker) is an indicator we use to determine how our classification task succeeded. For example, in our simulations, the filename of the image is a marker. If the retrieved file for a duplicate query is contained in the query image filename, we have a TP. The Pearson product-moment correlation coefficient $-1 \leq \rho \leq +1$ is a measure of linear dependence between two variables. The contintency matrix method for calculating $\rho$ is Matthews correlation $r_G$ which is the Geometric mean of \emph{Informedness} and \emph{Markedness}
 \begin{equation}\label{matthewscorrelation}
 r_G = \pm \sqrt{Informedness \times Markedness}
 \end{equation}
