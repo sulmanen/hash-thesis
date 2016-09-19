@@ -1334,11 +1334,11 @@ Precision, Recall, F-Factor, and Accuracy are biased and should be used only if 
 The positive row and column of the contingency matrix (fig. \ref{figconfusion}) may be inversed to form statistics about the negative case. Inverse recall (eq. \ref{inverserecall}) is the fraction of real negatives that are predicted negative, which is analogous to the TNR. Inverse precision (eq. \ref{inverseprecision}) is the fraction of predicted negative cases classified as real negatives. \cite{POWERS2011}
 
 \begin{equation}\label{inverserecall}
-Inverse Recall = TN / (TN + FP)
+Inverse\quad Recall = TN / (TN + FP)
 \end{equation}
 
 \begin{equation}\label{inverseprecision}
-Inverse Precision = TN / (FN + TN)
+Inverse\quad Precision = TN / (FN + TN)
 \end{equation}
 
 \begin{equation}\label{jaccard}
@@ -1358,6 +1358,8 @@ skew = RN / RP
 \end{equation}
 
 \emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}.
+
+$rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
