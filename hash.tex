@@ -1375,6 +1375,7 @@ It has its roots in the psychology and linguistics. A marker or predictor (bioma
 r_G = \pm \sqrt{Informedness \times Markedness}
 \end{equation}
 The Matthews correlation can be seen as a joint probability of P informs R and R marks P \cite{POWERS2011}, on the condition that P to R prediction and R to P prediction are independent.
+We will evaluate the classifiers against each other on the unbiased versions of \emph{Precision} which is \emph{Informedness} and \emph{Recall} which is \emph{Markedness} and the Matthews correllation.
 
 \subsubsection{Statistical Significance in Differences of Binary Classifiers}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID were essentially interested in addressing the significance of differences between classifiers. Fisher's Exact test is a good choice in literature. It can be used when the cell size is small. This is contrary to $\chi^2$, which needs every cell to have a count $>5$. Since the number of FP for the Local Features case is small, we expect to use the The Fisher Exact test, which was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
