@@ -1810,7 +1810,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \end{center}\end{table*}
 
 \begin{table*} \footnotesize
-\caption{ $\Delta$ Precision $\mathcal{P}$ (eq. \ref{precision}), Recall (eq. \ref{recall}) $\mathcal{R}$ and $\mathcal{P}/\mathcal{R}$ for NDID by Local Features vs. Simple Hash and DCT Hash based on table \ref{informednessmarkedness}. Cases where perceptual hashing is better are highlighted.}
+\caption{ $\Delta$ Informedness $\mathcal{I}$ (eq. \ref{informedness}), Markedness (eq. \ref{markedness}) $\mathcal{M}$ and $\mathcal{R}_G$ for NDID by Local Features vs. Simple Hash and DCT Hash based on table \ref{informednessmarkedness}.}
 \label{deltainformednessmarkedness}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1819,20 +1819,20 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
     & \multicolumn{3}{c}{Simple} &\phantom{abc} &\multicolumn{3}{c}{DCT} &\phantom{abc}\\
 \cmidrule{2-4} \cmidrule{6-8}
  Local Features & $\Delta \mathcal{P}$ & $\Delta \mathcal{R}$ & $\Delta \mathcal{P} / \mathcal{R}$ &\phantom{abc} & $\Delta \mathcal{P}$ & $\Delta \mathcal{R}$ & $\Delta \mathcal{P} / \mathcal{R}$ \\ \midrule
- P 53\% Scale   & 0,1966  & 0,1641 & 0,1805 &\phantom{abc} & 0,1533& 0,1332 & 0,1433\\
- T 53\% Scale   & 0,0165  & 0,0121 & 0,0143 &\phantom{abc} & 0,0952 & 0,0895 & 0,0924\\
- P 83\% Scale   & 0,2014  & 0,1686 & 0,1851 &\phantom{abc} & 0,1585 & 0,1380 & 0,1483\\
- T 83\% Scale   & 0,0303  & 0,0294 & 0,0298 &\phantom{abc} & 0,1273 & 0,1217 & 0,1245\\
- P Crop 10px    & 0,2858  & 0,2753 & 0,2806 &\phantom{abc} & 0,1810 & 0,1660 & 0,1735\\
- T Crop 10px    & 0,2644  & 0,2392 & 0,2519 &\phantom{abc} & 0,1787 & 0,1772 & 0,1779\\
- P 10\% Border  & 1,2792  & 1,5003 & 0,6215 &\phantom{abc} & 1,4437 & 1,2767& 0,6448\\
- T 10\% Border  & 0,9774  & 1,2187 & 0,7964 &\phantom{abc} & 1,1434& 1,2514& 0,6524\\
- P Rotate 10\%  & 1,2202  & 1,5240 & 0,6481 &\phantom{abc} & 1,3003& 1,4460 & 0,6222\\
- T Rotate 10\%  & 0,9524  & 1,1965 & 0,8151 &\phantom{abc} & 0,9660 & 1,0467 & 0,8339\\
- P Normalize    & 0,2261  & 0,2017 & 0,2140 &\phantom{abc} & 0,1634& 0,1442 & 0,1539\\
- T Normalize    & 0,0400  & 0,0393 & 0,0397 &\phantom{abc} & 0,1019 & 0,0917 & 0,0968\\
- P Saturate     & 0,2552  & 0,2375 & 0,2464 &\phantom{abc} & 0,1579 & 0,1370 & 0,1475\\
- T Saturate     & 0,0771  & 0,0766 & 0,0768 &\phantom{abc} & 0,0994 & 0,0888 & 0,0941 \\
+ P 53\% Scale   & 0.1966  & 0.1641 & 0.1805 &\phantom{abc} & 0.1533 & 0.1332 & 0.1433\\
+ T 53\% Scale   & 0.0165  & 0.0121 & 0.0143 &\phantom{abc} & 0.0952 & 0.0895 & 0.0924\\
+ P 83\% Scale   & 0.2014  & 0.1686 & 0.1851 &\phantom{abc} & 0.1585 & 0.1380 & 0.1483\\
+ T 83\% Scale   & 0.0303  & 0.0294 & 0.0298 &\phantom{abc} & 0.1273 & 0.1217 & 0.1245\\
+ P Crop 10px    & 0.2858  & 0.2753 & 0.2806 &\phantom{abc} & 0.1810 & 0.1660 & 0.1735\\
+ T Crop 10px    & 0.2644  & 0.2392 & 0.2519 &\phantom{abc} & 0.1787 & 0.1772 & 0.1779\\
+ P 10\% Border  & 1.2792  & 1.5003 & 0.6215 &\phantom{abc} & 1.4437 & 1.2767& 0.6448\\
+ T 10\% Border  & 0.9774  & 1.2187 & 0.7964 &\phantom{abc} & 1.1434& 1.2514& 0.6524\\
+ P Rotate 10\%  & 1.2202  & 1.5240 & 0.6481 &\phantom{abc} & 1.3003& 1.4460 & 0.6222\\
+ T Rotate 10\%  & 0.9524  & 1.1965 & 0.8151 &\phantom{abc} & 0.9660 & 1.0467 & 0.8339\\
+ P Normalize    & 0.2261  & 0.2017 & 0.2140 &\phantom{abc} & 0.1634& 0.1442 & 0.1539\\
+ T Normalize    & 0.0400  & 0.0393 & 0.0397 &\phantom{abc} & 0.1019 & 0.0917 & 0.0968\\
+ P Saturate     & 0.2552  & 0.2375 & 0.2464 &\phantom{abc} & 0.1579 & 0.1370 & 0.1475\\
+ T Saturate     & 0.0771  & 0.0766 & 0.0768 &\phantom{abc} & 0.0994 & 0.0888 & 0.0941 \\
     \bottomrule
 \end{tabular}
 \end{center}\end{table*}
