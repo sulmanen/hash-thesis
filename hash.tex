@@ -325,8 +325,10 @@ $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   FED & Fast Explicit Diffusion a fast nonlinear diffusion filtering framework\\
   FK & Fisher Kernel\\
   FP & False Positive\\
+  FPA & False Positive Average\\
   FPR & False Positive Rate\\
   FN & False Negative\\
+  FNA & False Negative Average\\
   FV & Fisher Vector\\
   GMM & Gaussian Mixture Model\\
   IVFADC & inverted file system with asymmetric distance computation\\
@@ -1327,7 +1329,7 @@ In ROC curves it is possible to linearly interpolate between points and the inte
 \end{equation}
 
 \subsubsection{Bias in Precision-Recall Curves}
-Precision, Recall, F-Factor, and Accuracy are biased and should be used only if these biases are well understood. Precision nor recall tells nothing about how well the model handles negative cases. \cite{POWERS2011}
+Precision, Recall, F-Factor, and Accuracy are biased and should be used only if these biases are well understood. Precision nor recall tells nothing about how well a model handles negative cases. \cite{POWERS2011}
 
 The positive row and column of the contingency matrix (fig. \ref{figconfusion}) may be inversed to form statistics about the negative case. Inverse recall (eq. \ref{inverserecall}) is the fraction of real negatives that are predicted negative, which is analogous to the TNR. Inverse precision (eq. \ref{inverseprecision}) is the fraction of predicted negative cases classified as real negatives. \cite{POWERS2011}
 
@@ -1358,6 +1360,17 @@ skew = RN / RP
 \emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}.
 
 $rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
+
+An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance.
+
+Complimentary to \emph{Informedness}
+\begin{equation}\label{informedness}
+Informedness = Recall + Inverse\quad Recall - 1 = 1 - fnr - fpr
+\end{equation}
+is \emph{Markedness}
+\begin{equation}\label{markedness}
+Markedness = Precision + Inverse\quad Precision - 1 = 1 - fpa - fna
+\end{equation}
 
 \subsubsection{Fisher's Exact Test}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID we will use Fisher's Exact test. It can be used when the sample size is small (1708 for the Paintings dataset and 446 for the ThingLink dataset) and was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
