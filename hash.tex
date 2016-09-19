@@ -1360,10 +1360,7 @@ bias = PP / N
 \begin{equation}\label{skew}
 skew = RN / RP
 \end{equation}
-
-\emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}.
-
-$rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
+\emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}. $rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
 
 An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance.
 
@@ -1385,7 +1382,7 @@ The Matthews correlation can be seen as a joint probability of P informs R and R
 \subsubsection{Statistical Significance in Differences of Binary Classifiers}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID were essentially interested in addressing the significance of differences between classifiers. Fisher's Exact test is a good choice in literature. It can be used when the cell size is small. This is contrary to $\chi^2$, which needs every cell to have a count $>5$. Since the number of FP for the Local Features case is small, we expect to use the The Fisher Exact test, which was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 However, Fisher's Exact Test assumes data to be hypergeometrically distributed meaning all assignments to the contingency matrix cells are considered equally likely, with Bias and Prevalence as given. However, since Bias and Prevalence are assigned as a result of the experiment, not before hand, the assumptions made by Fisher's Exact Test are innappropriate for this problem. We will keep this in mind when evaluating the p-values.
-
+We will put the classifier results from the Local Features simulations in one row and the results from either DCT-, or Simple Hash NDID on the other row and run the Fisher Exact test. The null hypothesis $H_0$ is ''the systems are the same'' and we will use $\alpha < 0.05$ meaning the $H_0$ is rejected if it's probability based on the results is less than 5\%.
 
 \subsection{Duplicate Detection Simulations}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a $TN$-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
