@@ -1809,10 +1809,6 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{center}
 \end{sidewaystable}
 
-
-
-
-
 \begin{table*}
 \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
 \label{siftresults}
@@ -1958,6 +1954,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 
 \section{Discussion}
 To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? If both the perceptual hashes and local features NDID systems are tuned to good parameters, the unbiased Matthews correlation $\mathcal{R}_G$ and \emph{Informedness} $\mathcal{I}$ and \emph{Markedness} $\mathcal{M}$ are improved for Local Features NDID system in all duplicate cases and datasets presented in this paper (table \ref{informednessmarkedness}, \ref{deltainformednessmarkedness}). The improvements in favor of Local Features NDID are statistically significant (table \ref{pvalues}) for both the ThingLink dataset and the Paintings dataset for all duplicate sets excluding both ThingLink dataset scaled duplicates. Here the improvement is too close to call, as $H_0$ holds (table \ref{pvalues} in purple).
+
 It is worth noting that as expected, the 10\% white border and 10\% rotate duplicate set simulations, Local Features NDID performs excellent with $0.9171 \leq \mathcal{R}_G \leq 0.9977$ for the Paintings and the ThingLink datasets (table \ref{informednessmarkedness}). However, since the rotation and adding a white border to the image alter the relative values of the image pixels, the perceptual hashes are unable to cope \ref{informednessmarkedness} resulting in negative $\mathcal{I}$ and $\mathcal{M}$ stating performance worse than chance for both the Simple Hash and the DCT Hash.
 What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing? Not surprisingly it depends on the hash. The DCT Hash benefits from a looser distance parameter $D_H=8$ (\ref{})
 
