@@ -1743,7 +1743,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 
 \begin{sidewaystable}[htb]\footnotesize
 \caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
-\label{dctthinglinkunbiased}
+\label{dctunbiased}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
@@ -1786,6 +1786,32 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{tabular}
 \end{center}
 \end{table}
+
+\begin{sidewaystable}[htb]\footnotesize
+\caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+\label{dctthinglinkunbiased}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
+    53\% Scale   & 0,1629 & 0,4236 & 0,2627&\phantom{abc} & 0,3708 & 0,3948 & 0,3826  &\phantom{abc} & 0,8024 & 0,8037 & 0,8030  &\phantom{abc} & 0,5350 & 0.5771 & 0.3983\\
+    83\% Scale   & 0,1583 & 0,4193 & 0,2576 &\phantom{abc} & 0,7618  & 0,7644 & 0,7631  &\phantom{abc} & 0,7926 & 0,7926 & 0,7926 &\phantom{abc} & 0,5361 & 0.5774 & 0.3985\\
+    Crop 10px    & 0,0180 & 0,3390 & 0,0781 &\phantom{abc} & 0,4029 & 0,5063 & 0,4516  &\phantom{abc} & 0,7413 & 0,7371 & 0,7392 &\phantom{abc} & 0,5207 & 0,6186& 0,5675 \\
+    10\% Border  & 0 & 0 & 0 & \phantom{abc} & -0,0601  & -0,4094  & 0,1569 &\phantom{abc} & -0,2186 & -0,3323 & 0,2695 &\phantom{abc} & -0,1812 & -0,1008 & 0,1351\\
+    Rotate 10\%  & -0,0022 & -0,5006 & 0,0335  &\phantom{abc} & -0,0336 & -0,5086 & 0,1308&\phantom{abc} & -0,0484 & -0,1348 & 0,0808 &\phantom{abc} & -0,3859 & -0,2472& 0,3089\\
+    Normalize    & 0,7329 & 0,7540 & 0,7434 &\phantom{abc} & 0,8863 & 0,8814 & 0,8839 &\phantom{abc} & 0,8229 & 0,8274& 0,8252  &\phantom{abc} & 0,5394 & 0,6487 & 0,5916\\
+    Saturate     & 0,3586 & 0,5403 & 0,4401 &\phantom{abc} & 0,8766 & 0,8714 & 0,8740 &\phantom{abc} & 0,8254 & 0,8303 & 0,8278  &\phantom{abc} & 0,5405 & 0,6503 & 0,5929\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{sidewaystable}
+
+
+
+
 
 \begin{table*}
 \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
