@@ -1648,6 +1648,30 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{center}
 \end{table}
 
+\begin{sidewaystable}[htb]\footnotesize
+\caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
+\label{simplethinglinkunbiased}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
+    53\% Scale   & 0,9435 & 0,9452 & 0,9443 &\phantom{abc} & 0,9914 & 0,9928 & 0,9921&\phantom{abc} & 0.9000 & 0.9161 & 0.9080 &\phantom{abc} & 0.7500 & 0.9193 & 0.8303\\
+    83\% Scale   & 0,9558 & 0,9567& 0,9563&\phantom{abc} & 0,9927 & 0,9941 & 0,9934 &\phantom{abc} & 0.9000& 0.9161 & 0.9080&\phantom{abc} & 0.7500 & 0.9193 & 0.8303\\
+    Crop 10px    & 0,2124 & 0,5346 & 0,3370 &\phantom{abc} & 0,9053 & 0,8974 & 0,9013&\phantom{abc} & 0.8558 & 0.8654 & 0.8606 &\phantom{abc} & 0.6854 & 0.8807& 0.7769\\
+    10\% Border  & -0,0006 & -0,5040 & 0,0173 & \phantom{abc} & -0,1286 & -0,4757 & 0,2473&\phantom{abc} & -0.1788& -0.2577& 0.2146 &\phantom{abc} & -0.2953 & -0.2386& 0.2655\\
+    Rotate 10\%  & 0 &  $\omega$&  $\omega$ &\phantom{abc} & -0,0437 & -0,4632 & 0,1423 &\phantom{abc} & -0.1418& -0.2697 & 0.1956 &\phantom{abc} & -0.4658& -0.4056& 0.4347\\
+    Normalize    & 0,5761 & 0,6947 & 0,6326 &\phantom{abc} &  0,9655& 0,9626 & 0,9641 &\phantom{abc} & 0.9024 & 0.9193& 0.9108 &\phantom{abc} & 0.7500 & 0.9193 & 0.8303\\
+    Saturate     & 0,3741& 0,6018 &  0,4745 &\phantom{abc} & 0,9357 & 0,9307 & 0,9332 &\phantom{abc} & 0.8951 & 0.9098& 0.9024 &\phantom{abc} & 0.7476& 0.9099 & 0.8248\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{sidewaystable}
+
+
+
 \begin{table}[htb]\footnotesize
 \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
 \label{simplethinglinkresults}
@@ -1681,13 +1705,13 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
     & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
-    53\% Scale   & 0.7957 & 0.8033 & 0.7995 &\phantom{abc} & 0.9153 & 0.9168& 0.9160 &\phantom{abc} & 0.9000 & 0.9161 & 0.9080 &\phantom{abc} & 0.7500 & 0.9193 & 0.8303\\
-    83\% Scale   & 0.8175 & 0.8215 & 0.8195&\phantom{abc} & 0.9160 & 0.9168 & 0.9185 &\phantom{abc} & 0.9000& 0.9161 & 0.9080&\phantom{abc} & 0.7500 & 0.9193 & 0.8303\\
-    Crop 10px    & 0.0590 & 0.4022 & 0.1540 &\phantom{abc} & 0.6864 & 0.7149 & 0.7005&\phantom{abc} & 0.8558 & 0.8654 & 0.8606 &\phantom{abc} & 0.6854 & 0.8807& 0.7769\\
-    10\% Border  & 0 & $\omega$ & $\omega$ & \phantom{abc} & -0.0194 & -0.1747 & 0.0582 &\phantom{abc} & -0.1788& -0.2577& 0.2146 &\phantom{abc} & -0.2953 & -0.2386& 0.2655\\
-    Rotate 10\%  & 0 &  $\omega$&  $\omega$ &\phantom{abc} & 0.0001 & 0.0012 & 0.0003 &\phantom{abc} & -0.1418& -0.2697 & 0.1956 &\phantom{abc} & -0.4658& -0.4056& 0.4347\\
-    Normalize    & 0.7160 & 0.7464 & 0.7311 &\phantom{abc} & 0.9154 & 0.9118 & 0.9136 &\phantom{abc} & 0.9024 & 0.9193& 0.9108 &\phantom{abc} & 0.7500 & 0.9193 & 0.8303\\
-    Saturate     & 0.4272& 0.5811& 0.4982 &\phantom{abc} & 0.8785& 0.8757 & 0.8771 &\phantom{abc} & 0.8951 & 0.9098& 0.9024 &\phantom{abc} & 0.7476& 0.9099 & 0.8248\\
+    53\% Scale   & 0.7957 & 0.8033 & 0.7995 &\phantom{abc} & 0.8811 & 0.8811 & 0.8811 &\phantom{abc} & 0.6884 & 0.7300 & 0.7089  &\phantom{abc} & 0.2241 & 0.5230 & 0.3423\\
+    83\% Scale   & 0.8175 & 0.8215 & 0.8195&\phantom{abc} & 0.8897 & 0.8849 & 0.8873 &\phantom{abc} & 0.6884 & 0.7300  & 0.7089 &\phantom{abc} & 0.2241 & 0.5230 & 0.3423\\
+    Crop 10px    & 0.0590 & 0.4022 & 0.1540 &\phantom{abc} & 0.6555 & 0.6751 & 0.6653 &\phantom{abc} & 0.6502 & 0.6785 & 0.6642 &\phantom{abc} & 0.2157 & 0.4966 & 0.3272 \\
+    10\% Border  & 0 & $\omega$ & $\omega$ & \phantom{abc} & -0.0526 & -0.2996 & 0.1256 &\phantom{abc} & -0.3188 & -0.3389 & 0.3287 &\phantom{abc} & -0.4066 & -0.3101 & 0.3551
+    Rotate 10\%  & 0 &  $\omega$&  $\omega$ &\phantom{abc} & -0.0348 & -0.2845 & 0.0996 &\phantom{abc} & -0.3057 & -0.3788  & 0.3403 &\phantom{abc} & -0.5975 & -0.4750& 0.5327\\
+    Normalize    & 0.7160 & 0.7464 & 0.7311 &\phantom{abc} & 0.8848 & 0.8798 & 0.8823 &\phantom{abc} & 0.6909 & 0.7335 & 0.7118  &\phantom{abc} & 0.2241 & 0.5230 & 0.3423 \\
+    Saturate     & 0.4272& 0.5811& 0.4982 &\phantom{abc} & 0.8477 & 0.8426 & 0.8451 &\phantom{abc} & 0.6836  & 0.7231 & 0.7030 &\phantom{abc} & 0.2216 & 0.5132 & 0.3372\\
 \bottomrule
 \end{tabular}
 \end{center}
