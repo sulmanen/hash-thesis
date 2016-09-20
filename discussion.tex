@@ -1,0 +1,77 @@
+For scaled images, the perceptual hashes perform surprisingly well sometimes exceeding Local Features. For the ThingLink dataset, all but the Simple Hash 53\% scale comparisons are statistically indistinguishable (table \ref{pvalues}).
+
+Somewhat according to expectations, for the Paintings dataset from \cite{Vedaldi2012}, Local Features (SIFT) outperforms both perceptual hashes for all duplicate sets for TPR and FPR (fig. \ref{tptotal} and tables \ref{simpleresults} and \ref{siftresults}) excluding the 53\% scale duplicate set where the Simple Hash performs slighly better. This is evident in the precition-recall numbers . The result is statistically significant (table \ref{pvalues}). There is no statistical difference detected between the DCT-Hash and Local Features NDID for 83\% scaled Paintings set (table \ref{pvalues}).
+
+What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing?
+
+What is a good cutoff score to classify an image a true negative in near-duplicate image detection with local features?
+
+In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
+
+Investigate which images are constantly missed in the ThingLink dataset by all classifiers as the FP count seems to be around 35 for all classifiers.
+
+Investigate how Local Features duplicate detection does with several even smaller images.
+
+For simulation it is easy to choose the cutoff score as the set of images in the database doesn't change. It is unwise to keep raising the score to the max score of a rejected image. A $16 \leq \mathcal{C}_s \leq19$ is a good starting point according to figures \ref{thinglinkfigcutoffrocspace} and \ref{figcutoffrocspace}.
+
+TPR and FPR for the duplicate imagesets between datasets appear to follow a similar pattern comparing figures \ref{tptotal} and \ref{fptotal} for the Paintings dataset and figures \ref{thinglinktptotal} and \ref{thinglinkfptotal} for the ThingLink dataset.
+
+
+
+
+
+%% old
+The duplicate datasets in table \ref{modifiedimages} were chosen to represent near-duplicate images and they agree with the definition of near-duplicate images in \cite{Wang2013}. Results for horizontal- and vertical flip duplicates were not very good for any NDID method discussed here, so they were excluded from this paper. Also they do not represent a realistic use case for the majority of customers. The definition for a near-duplicate image is broader here than at ThingLink, where a near-duplicate refers to scaled images only. The broader definition was used to bring out differences in Simple Hash-, DCT Hash- and Local Features NDID.
+
+The Paintings dataset excluding black and white images from \cite{Vedaldi2012} was used due to convenicence as a ready built database for Local Features NDID had been built. It is quite small compared to the 3.5M images ThingLink hosts and homogenous. All of the images are in the JPEG format while ThingLink hosts GIF's and PNG's also. How do these methods compare on other formats?
+
+1708 images is hardly ThingLink scale. There are 5 million images on ThingLink. Obvisously the method described in section \ref{mame} cannot be used in this scale. VLAD is a bad approximation of the actual descriptors, so the question remains is it accurate enough to better than 80\% accurate required for the ThingLink customers.
+
+According to \cite{Zauner2010}, a good $D_H$ for detecting duplicate images is 10. However we found, on average (for near-duplicates in table \ref{modifiedimages}) the accuracy to be best for $D_H = 4$ for the Simple Hash and $D_H = 8$ for the DCT Hash. A closer look at the data in tables \ref{simpleresults} and \ref{dctresults} reveals that $D_H = 8$ does perform better for the scale case and we do not include 10 in our simulations due to time constraints.
+
+Evaluate the method.
+
+
+Corner cases.
+Totally white images. Totally black images.
+
+On questions?
+
+If we were to use AKAZE features with VLAD encoding, that would need another run of simulations.
+
+20\%-30\% misses looks like what the perceptual hashes are capable of. However in the customer case, were dealing only with near-duplicate images where the scale changes. For scale changes, the accuracy is x for Simple Hash and x for DCT Hash averaged over 53\% and 83\% scales.
+
+Do the PR graphs bring something new?
+
+\subsection{Simple Hash}
+The Simple Hash NDID breaks down for adding a 10\% white border and 10\% rotation duplicates with $TPR < 5\%$. In both adding a border and the rotation of the image, the relative values between pixels change dramatically, and the Simple Hash is unable to compensate. For other near similar modifications, $TPR > 90\%$. It performs surprisingly well compared to simplicity of implementation (section \ref{simplehash}).
+
+Showing increasing $H_D$ moving counts from FN to FP, indicating tuning to be an uphill battle that cannot be won.
+
+For the Paintings dataset, TPR for Simple Hash NDID is over 90\% for most near-duplicate sets from table \ref{modifiedimages} in figure \ref{tptotal}. The exceptions are adding a 10\% white border to the image, where TPR < 5\%. Another case with where TPR < 5\% is the 10 \% rotation duplicates. For the 10\% white border and the 10\% rotation it does not detect a significant amount of duplicates best evident in table \ref{simpleresults}.
+
+A good Hamming Distance (section \ref{HammingSection}) is 4 inclusive for accuracy (fig. \ref{simpletotalaccuracy}) as well as ROC space (fig. \ref{simpletotalroc}) compared to the other Hamming Distances tried. \cite{Zauner2010} cites 10 to be a good Hamming Distance for classification of two images as duplicates, but for the Paintings dataset from \cite{Vedaldi2012} and NDID, the accuracy suffers after increasing above 4.
+
+x\subsection{DCT Hash}
+TPR > 90\% for most duplicate sets (table \ref{modifiedimages}) in figure \ref{tptotal}. FPR for DCT Hash NDID are in figure \ref{fptotal}. For the 10\% white border and 10\% rotation near-duplicates, the DCT Hash breaks down for NDID. The crop 10px case is interesting as the DCT Hash has TPR $\approx 70\%$, ~20\% worse than the Simple Hash.
+
+The ROC of a DCT Hash NDID depends on the chosen Hamming Distance. The effect on setting Hamming Distance on DCT Hash NDID is in fig. \ref{dcttotalaccuracy} and ROC per Hamming Distance in figure \ref{dcttotalroc}. Accuracy increases with increasing Hamming Distance from 4 to 8 and decreases strongly at 12. The ROC suggests 4 is the optimal setting for the duplicate images used in this simulation. However setting the Hamming Distance at 8 increases accuracy (fig. \ref{dcttotalaccuracy}).
+
+Performs better than Simple Hash for changes affecting the colors, which is anticipated.
+
+\subsection{Local Features}
+The search by Local Features always returns the highest scoring image resulting in a FP every time instead of the expected TN. A sane FPR (close to zero) can be achieved by choosing a cutoff score so that ROC is optimal. For the Paintings dataset, we detect duplicates for the modified sets (table \ref{modifiedimages}) and plot the scores of matches from each set in ROC space. A good $\mathcal{C}_s$ is such that TPR is maximized and FPR is minimized. The max score from the TN dataset was 19.
+
+
+Figure \ref{figcutoff} shows Local Features NDID performance degrade as $\mathcal{C}_{s}->0$. We can see FN increase linearly as cutoff increases where as FP decreases logarithmically as cutoff goes to 19. Plotting the accuracy (eq. \ref{accuracy}) of the Local Features NDID per $0 \leq \mathcal{C}_{s} \leq 19$ so 19 is a good choice. The ROC space per $\mathcal{C}_s$ (fig. \ref{figcutoffrocspace}) confirms this as optimal performance is shown at $\mathcal{C}_s=19$.
+
+TPR and FPR for Local Features NDID are in figures \ref{tptotal} and \ref{fptotal} respectively. The Local Features NDID is labeled SIFT, due to the SIFT descriptor used in the simulations. Figure \ref{tptotal} shows the TPR ~100\%. The single FP for Local Features NDID is a duplicate image in the database resulting in a $FP$. Finding the correct duplicate depends on the duplicate taking the top spot during sorting of similarity scores. Local Features NDID outperforms the perceptual hashes for all test sets in aggregated results (fig. \ref{fptotal}) with the exception of 53\% scale duplicate dataset. Here Local Features loses to the Simple Hash when Simple Hash $D_H \geq 4 $ best seen comparing tables \ref{siftresults} and \ref{simpleresults}.
+
+For the Paintings dataset, there is a single false positive in every category, and it is a duplicate image in the database (table \ref{siftresults}). As the cutoff score $\mathcal{C}_s=19$, which was the maximum score in the TN-set, all TN images are rejected. For the 53\% scale, Local Features is in trouble with misses relative to performance in other duplicate sets. Perhaps smaller image size degrades performance? Duplicate images in the database are expected to be a challenge in designing a local features based classifier for large scale.
+
+\subsection{Comparison}
+For the Paintings dataset, averaged comparison of the perceptual hashes and Local Features NDID for duplicate sets in table \ref{modifiedimages} for TPR is in figure \ref{tptotal}. The FPR for the duplicate sets is in figure \ref{fptotal} and the ability to produce true negatives (TN) from images not in the database is in figure \ref{tntotal}.
+
+For the ThingLink dataset, the TPR (fig. \ref{thinglinktptotal}), the FPR (fig. \ref{thinglinkfptotal}) and TNR (fig. \ref{thinglinktntotal}) for duplicate sets in table \ref{modifiedimages} are compared between the Simple Hash, the DCT-Hash and Local Features NDID.
+
+With the local features classifier we have been able to adjust the bias of the model to best fit the data by tuning $\mathcal{C}_s$ to reject all of images in the true negatives set \cite{POWERS2011}. However for perceptual hashes, it is not possible to tune $D_H$ in a way to reject all of the images in the TN-set. $\mathcal{C}_s$ will be dynamic as images are continuously being added to the database and some might have characteristics where they have a high similarity score even when the result is FN. A creative solution to these cases must be developed.
