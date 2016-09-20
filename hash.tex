@@ -1774,9 +1774,9 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
     & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & 12 & 83 & 351 &\phantom{abc} & 36 & 367 & 403 &\phantom{abc} & 37 & 401 & 8 &\phantom{abc} & 40 & 406 & 0\\
-    83\% Scale   & 12 & 81 & 353 &\phantom{abc} & 33 & 356 & 57 &\phantom{abc} & 37 & 397 & 12 &\phantom{abc} & 39 & 407 & 0\\
-    Crop 10px    & 1 & 10 & 435 &\phantom{abc} & 20 & 217 & 237 &\phantom{abc} & 37 & 376 & 33 &\phantom{abc} & 44 & 398 & 4\\
+    53\% Scale   & 12 & 83 & 351 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 401 & 8 &\phantom{abc} & 40 & 406 & 0\\
+    83\% Scale   & 12 & 81 & 353 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 397 & 12 &\phantom{abc} & 39 & 407 & 0\\
+    Crop 10px    & 1 & 10 & 435 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 37 & 376 & 33 &\phantom{abc} & 44 & 398 & 4\\
     10\% Border  & 0 & 1 & 445 & \phantom{abc} & 16 & 3 & 427 &\phantom{abc} & 103 & 20 & 323&\phantom{abc} & 309 & 65 & 72\\
     Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 0 & 0 & 446 &\phantom{abc} & 7 & 33 & 406 &\phantom{abc} & 271 & 44 & 131\\
     Normalize    & 32 & 332 & 82 &\phantom{abc} & 35 & 407 & 4 &\phantom{abc} & 35 & 410 & 1 &\phantom{abc} & 36 & 410 & 0\\
@@ -1957,7 +1957,6 @@ To what degree is object instance recognition by local features an improvement o
 
 It is worth noting that as expected, the 10\% white border and 10\% rotate duplicate set simulations, Local Features NDID performs excellent with $0.9171 \leq \mathcal{R}_G \leq 0.9977$ for the Paintings and the ThingLink datasets (table \ref{informednessmarkedness}). However, since the rotation and adding a white border to the image alter the relative values of the image pixels, the perceptual hashes are unable to cope \ref{informednessmarkedness} resulting in negative $\mathcal{I}$ and $\mathcal{M}$ stating performance worse than chance for both the Simple Hash and the DCT Hash.
 What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing? Not surprisingly it depends on the hash. The DCT Hash benefits from a looser distance parameter $D_H=8$ (\ref{})
-
 
 What is a good cutoff score to classify an image a true negative in near-duplicate image detection with local features?
 
