@@ -1717,7 +1717,6 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{center}
 \end{sidewaystable}
 
-
 \begin{table}[htb]\footnotesize
 \caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
 \label{dctresults}
@@ -1741,6 +1740,28 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{tabular}
 \end{center}
 \end{table}
+
+\begin{sidewaystable}[htb]\footnotesize
+\caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
+\label{simplethinglinkunbiased}
+\begin{center}
+  \setlength\tabcolsep{3pt} % default value: 6pt
+  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+    \toprule
+    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+    Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
+    53\% Scale   & 0.2242 & 0.5606 & 0.3545 &\phantom{abc} & 0.9168 & 0.9179 & 0.9173 &\phantom{abc} & 0.8385 & 0.8587 & 0.8485  &\phantom{abc} & 0.2749 & 0.5771 & 0.3983\\
+    83\% Scale   & 0.1763 & 0.5421 & 0.3092 &\phantom{abc} & 0.8851 & 0.8891 & 0.8871 &\phantom{abc} & 0.8391  & 0.8597 & 0.8493 &\phantom{abc} & 0.2751 & 0.5774 & 0.3985\\
+    Crop 10px    & 0.0621 & 0.5068 & 0.1773&\phantom{abc} & 0.7082 & 0.7521 & 0.7298 &\phantom{abc} & 0.8166 & 0.8317 & 0.8241 &\phantom{abc} & 0.2726 & 0.5711 & 0.3945 \\
+    10\% Border  & -0.0012 & -0.5000 & 0.0242 & \phantom{abc} & -0.1249  & -0.4326 & 0.2325 &\phantom{abc} & -0.4460 & -0.2791 & 0.3528 &\phantom{abc} & -0.4387& -0.0681 & 0.1729\\
+    Rotate 10\%  & -0.0006 & -0.5001 &  0.0171 &\phantom{abc} & -0.0263 & -0.5049 & 0.1151 &\phantom{abc} & -0.3062 & -0.4519  & 0.3720 &\phantom{abc} & -0.4886 & -0.1078& 0.2295\\
+    Normalize    & 0.5997 & 0.7122 & 0.6535 &\phantom{abc} & 0.9455 & 0.9456 & 0.9455 &\phantom{abc} & 0.8331 & 0.8523 & 0.8426  &\phantom{abc} & 0.2728 & 0.5706 & 0.3945\\
+    Saturate     & 0.3974 & 0.6204 & 0.4966 &\phantom{abc} & 0.9532 & 0.9532 & 0.9532 &\phantom{abc} & 0.8403  & 0.8612 & 0.8507 &\phantom{abc} & 0.2751 & 0.5774 & 0.3985\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{sidewaystable}
 
 
 \begin{table}[htb]\footnotesize
