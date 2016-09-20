@@ -96,6 +96,8 @@
 \usepackage{bm}
 \usepackage{booktabs}
 \usepackage{xcolor}
+\usepackage{rotating}
+
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -1669,7 +1671,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{center}
 \end{table}
 
-\begin{table}[htb]\footnotesize
+\begin{sidewaystable}[htb]\footnotesize
 \caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
 \label{simplethinglinkunbiased}
 \begin{center}
@@ -1689,7 +1691,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \bottomrule
 \end{tabular}
 \end{center}
-\end{table}
+\end{sidewaystable}
 
 
 \begin{table}[htb]\footnotesize
@@ -1808,7 +1810,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \caption{ Informedness $\mathcal{I}$ (eq. \ref{informedness}), Markedness (eq. \ref{markedness}) $\mathcal{M}$ and Matthews correlation $\mathcal{R}_G$ for NDID by Simple Hash, DCT Hash and Local Features for duplicate sets (table \ref{modifiedimages}) for Paintings dataset from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$ and $\mathcal{C}_s = 16$ for the ThingLink dataset. $D_H = 4$ for Simple Hash and $D_H = 8$ for DCT Hash. P in the modification column stands for Paintings dataset. T for ThingLink dataset.}
 \label{informednessmarkedness}
 \begin{center}
-  \setlength\tabcolsep{3pt} % default value: 6pt
+  \setlength\tabcolsep{1.5pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrr@{}}
     \toprule
     & \multicolumn{3}{c}{Simple} &\phantom{abc} &\multicolumn{3}{c}{DCT} &\phantom{abc} & \multicolumn{3}{c}{Local Features}\\
