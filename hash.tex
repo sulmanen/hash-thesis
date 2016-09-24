@@ -1090,7 +1090,7 @@ is the gradient with respect to the mean $\mu_i$ and
   \end{equation}
 is the gradient with respect to the standard deviation $\sigma_i$ (vector division is done term by term). \cite{Perronnin2010}
 
-The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimensional representations (100k even) \cite{Perronnin2010a}. However when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
+The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimensional representations (100k even) \cite{Perronnin2010a}. However, when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
 
 Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors) is used. This guarantees retrieval of the query image first if it is contained in the image database \cite{Perronnin2010a}.
 
@@ -1233,7 +1233,7 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 \clearpage
 
 \section{Perceptual Hashing vs. Local Features for Near-Duplicate Image Detection} \label{mame}
-We expect the Local Features-classifier to outperform perceptual hashing for NDID. However to begin implementing near similar image detection improvements we need to certain object instance recognition by local features is an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
+We expect the Local Features-classifier to outperform perceptual hashing for NDID. However, to begin implementing near similar image detection improvements we need to certain object instance recognition by local features is an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
 A test set of images and modified near-duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database, a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
 
@@ -1317,7 +1317,7 @@ Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}
 
 Recall equals TPR (eq. \ref{recall}, \ref{TPR}) and precision is the TP-count over $TP \cup FP$ (eq. \ref{precision}). If recall $\neq 0$ then there exists a one-to-one correspondence between a ROC and PR curve \cite{Davis2006}. If a curve ''dominates another'' \cite{Provost1997}, that is is completely above the other curve in ROC space it doesn't mean this relationship is transferred into the PR curve. However, vice-versa relationship holds. If a curve dominates another in PR space it also dominates the other curve in ROC space. \cite{Davis2006}
 
-As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
+As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However, as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
 
 In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However in PR space linear interpolations do not hold and have to be calculated according to equation \ref{printerpolate}. \cite{Davis2006}
 
