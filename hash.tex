@@ -441,7 +441,9 @@ We will review state-of-the-art large scale image retrieval and it's use in near
 
 Object instance recognition is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
-\subsection{Perceptual hashing} \label{perceptualhash}
+\clearpage
+
+\subsection{Perceptual Hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
 In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations. More precisely perceptual hash
@@ -515,9 +517,7 @@ In other words, it is the number of characters two strings differ. In binary str
 \subsubsection{Block mean based simple hash}\label{simplehash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}.
 
-The simple hash (eq. \ref{simplehasheq}) scales the image to $8px \times 8px$ gray scale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to.
-
-More specifically the resulting hash has two parts. The most significant $64$ bits represent the image pixels and the least significant $64bits$ represent the horizontal flip of the $8px \times 8px$ gray scale image.
+The simple hash (eq. \ref{simplehasheq}) scales the image to $8px \times 8px$ gray scale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant $64$ bits represent the image pixels and the least significant $64bits$ represent the horizontal flip of the $8px \times 8px$ gray scale image.
 
 \begin{equation} \label{simplehasheq}
   \begin{split}
@@ -525,10 +525,7 @@ More specifically the resulting hash has two parts. The most significant $64$ bi
   b_{i} = 0 | I_{msB}(u,v) \leq px_{avg}
   \end{split}
 \end{equation}
-
-where $b_{i}$ denotes $ith$ hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \leq u,v < 8$.
-
-The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the mirror image of $I$ where $I_{msB}$ denotes the most significant byte of the image RGB pixel value.
+where $b_{i}$ denotes $i$th hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \leq u,v < 8$. The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the mirror image of $I$ where $I_{msB}$ denotes the most significant byte of the image RGB pixel value.
 
 \begin{equation} \label{simplehasheqmirror}
   \begin{split}
