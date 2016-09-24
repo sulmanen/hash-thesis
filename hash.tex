@@ -417,7 +417,7 @@ This paper considers near-duplicate detection excluding all other uses of percep
 \subsection{Research Questions}
 \begin{itemize}
 \item[--] To what degree if any is object instance recognition by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection?
-\item[--] What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing
+\item[--] What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing?
 \item[--] What is a good cutoff score to classify an image a true negative in near-duplicate image detection with local features?
 \item[--] In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 \end{itemize}
@@ -433,7 +433,7 @@ Near-duplicate image definitions vary according to the problem at hand. At one e
 
 Object instance recognition by local features is a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted in the image. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Object instance recognition works especially well for processed duplicate images, the case we are trying to solve.
 
-To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head to head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
+To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head-to-head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
 
 We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy object instance recognition at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 
@@ -584,7 +584,7 @@ Local features have been in use since Moravec invented the corner detector in th
 
 Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
-We expect to improve over perceptual hashing which withstand scaling extremely well. However they are weak under image transformations that alter the relationships between pixel values such as rotation and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
+We expect to improve over perceptual hashing which withstand scaling extremely well. However, they are weak under image transformations that alter the relationships between pixel values such as rotation and adding and removing from the image. Feature matching in a large feature database is enabled by highly distinctive features.
 
 \subsubsection{Scale Invariant Feature Transform} \label{SIFTSection}
 Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT-descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. A large number of descriptors can be computed on ''off the shelf''-hardware in near real time. \cite{Lowe2004}
