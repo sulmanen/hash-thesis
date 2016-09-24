@@ -626,7 +626,6 @@ Speeded Up Robust Features (SURF) was for fast computation of the detector and d
   \label{integralimage}
 ii(x,y) = \sum\limits_{x'\le,y'\le y} i(x', y')
 \end{equation}
-
 at point $x, y$ sums up the pixels above and below where $i(x,y)$ is the source image. \cite{Viola2001}
 
 \begin{equation}
@@ -648,9 +647,7 @@ The integral image is very quick to calculate using the cumulative row sum $s(x,
 \caption{Rectangular sums from integral images. Point 1 is the sum of pixels in A. Point 4 is $A + B + C + D$.\cite{Viola2001}}
 \label{integralimagefig}
 \end{figure}
-
 The calculation of the descriptor also uses integral images for speed. The descriptor is a distribution of Haar-wavelet responses within the interest point neighborhood. \cite{Bay2006}
-
 The orientation of the descriptor is determined by Haar-wavelet responses in $x$ and $y$ directions in the scale $s$ that the keypoint was detected with $6s$ radius at sampling step size also $s$. Wavelet size is $4s$. Responses are weighted with a Gaussian $(\sigma = 2.5s)$ at the interest point. The dominant direction is estimated by summing up the responses over a sliding window angle of $\frac{\pi}{3}$. The horizontal and vertical results are summed to form a new vector and the longest vector angle is the orientation of the interest point. The SURF descriptor is a square region centered on the interest point. \cite{Bay2006}
 
 The size of the region is $20s$ and is split into $4 \times 4$ sub-regions. Let $d_x$ and $d_y$ be Haar wavelet responses in along horizontal and vertical region edges respectively. For robustness, the responses are weighted with a Gaussian $(\sigma = 3.3)$ and $d_x, d_y$ are summed independently to form the first part of the sub-region descriptor in eq. \ref{surfdescriptor}. \cite{Bay2006}
@@ -780,7 +777,7 @@ LDB stores intensity, means of the horizontal and vertical derivatives. LDB uses
 
 When all the descriptors in the database do not fit into system RAM, the efficiency of the retrieval system collapses due to disk access \cite{Philbin2007}.
 
-In order to match among a large number of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
+In order to match among numerous of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search, the descriptor format is optimized for memory and computation speed. \cite{Jegou2010}
 
 \subsubsection{Nearest Neighbor Search}
 Matching a new image descriptor to a set of known image descriptors can be as simple as a Euclidean nearest neighbor search (eq. \ref{nneq}) which Donald Knuth also named as the \emph{post-office problem} in vol. 3 of The Art of Computer Programming (1973). It answers the question ''To which post office does this address belong to?'' which is analogous to ''which known image descriptor is closest to this new image descriptor?''.
