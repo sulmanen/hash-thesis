@@ -540,9 +540,9 @@ Content based image retrieval is done by calculating the hash of an incoming ima
 \subsubsection{DCT based hash}
 According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromise between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
-To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. A $N =32$ DCT eq. \ref{dcteq} is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
+To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. $N=32$ DCT (eq. \ref{dcteq}) is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
 
-Using only $N = 8$ (top left corner) of the $N=32$ DCT, the average of the result is calculated and origin result value is discarded as it would throw off the average. The use of average as a threshold is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively according to eq. \ref{simplehasheq}.
+Using only the $N=8$ (top left corner) of the $N=32$ DCT, the average of the result is calculated and origin result value is discarded as it would throw off the average. The use of average as a threshold is unlike \cite{Coskun2004} where the median is used. The bits of the hash are set to 1 or 0 if the DCT-value is above or below average respectively according to eq. \ref{simplehasheq}.
 
 \begin{equation}\label{dcteq}
 T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)u\pi}{2N}\right]cos\left[\frac{(2y + 1)v\pi}{2N}\right]
