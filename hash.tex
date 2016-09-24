@@ -306,7 +306,7 @@ Otaniemi, \today
 %\subsection*{Symbolit}
 
 \begin{tabular}{ll}
-$D_H$ & Hamming Distance\\
+$\Delta(q,d)$ & Hamming Distance\\
 $\mathcal{C}_s$ & SIFT Classifier cutoff score\\
   $\mathcal{P}$ & Precision\\
   $\mathcal{R}$ & Recall\\
@@ -492,10 +492,10 @@ The distance function used in finding a near duplicate for a perceptual hash in 
 \clearpage
 
 \subsubsection{Hamming Distance}\label{HammingSection}
-According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $x \in A$ and $y \in A$ is
+According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $q \in A$ and $d \in A$ is
 
 \begin{equation}\label{hammingeq}
-\Delta(x,y):=\sum_{x_i\neq y_i}1\quad,\quad i=1,\ldots,n
+\Delta(q,d):=\sum_{q_i\neq d_i}1\quad,\quad i=1,\ldots,n
 \end{equation}
 
 In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by equation \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
@@ -505,7 +505,7 @@ In other words, it is the number of characters two strings differ. In binary str
 \label{hammingexamples}
 \begin{center}
   \begin{tabular}{ccr}
-&&$\Delta(x,y)$\\
+&&$\Delta(q,d)$\\
     \hline \hline
     101 & 111 & 1\\
     \hline
@@ -1463,9 +1463,9 @@ For these simulations, the metadata contains information on the original images 
 
 \section{Results}
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
-To what degree if any is object instance recognition by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems and the results counted. The raw results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. Based on these results we can draw conclusions for a good $D_H$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
+To what degree if any is object instance recognition by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems and the results counted. The raw results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. Based on these results we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
 
-Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $D_H$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $D_H$ was determined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $D_H$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
+Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $\Delta(q,d)$ was determined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $\Delta(q,d)$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1507,7 +1507,7 @@ Queries in the Local Features case result in list of images with scores describi
 \label{dcttotalaccuracy}
 \end{figure}
 
-As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $D_H$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Precision-Recall values were calculated (table \ref{informednessmarkedness}) to aid in comparison.
+As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $\Delta(q,d)$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Precision-Recall values were calculated (table \ref{informednessmarkedness}) to aid in comparison.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1533,7 +1533,7 @@ As a result, the Simple Hash $D_H=4$ and the DCT Hash $D_H=8$ for head to head N
 \label{tntotal}
 \end{figure}
 
-The dataset of images exported from ThingLink was used for a second opinion. Good $D_H \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $D_H=4$ for the Simple Hash and $D_H=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{informednessmarkedness}.
+The dataset of images exported from ThingLink was used for a second opinion. Good $\Delta(q,d) \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $\Delta(q,d)=4$ for the Simple Hash and $\Delta(q,d)=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{informednessmarkedness}.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1627,7 +1627,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
     53\% Scale   & 9 & 1612 & 87 &\phantom{abc} & 11 & 1696 & 1 &\phantom{abc} & 11 & 1697 & 0 &\phantom{abc} & 11 & 1697 & 0\\
@@ -1651,7 +1651,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
     53\% Scale   & 0.9272 & 0.9283& 0.9278  &\phantom{abc} & 0.7952 & 0.8278 & 0.8113 &\phantom{abc} & 0.4258 & 0.6323 & 0.5189 &\phantom{abc} & 0.0797 & 0.5175 & 0.2031\\
@@ -1676,7 +1676,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
     53\% Scale   & 34 & 357 & 55 &\phantom{abc} & 11 & 409 & 26 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
@@ -1699,7 +1699,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
     53\% Scale   & 0.7957 & 0.8033 & 0.7995 &\phantom{abc} & 0.8811 & 0.8811 & 0.8811 &\phantom{abc} & 0.6884 & 0.7300 & 0.7089  &\phantom{abc} & 0.2241 & 0.5230 & 0.3423\\
@@ -1722,7 +1722,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
     53\% Scale   & 0 & 384 & 1324 &\phantom{abc} & 5 & 1605 & 98 &\phantom{abc} & 7 & 1697 & 4 &\phantom{abc} & 9 & 1699 & 0\\
@@ -1746,7 +1746,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
     53\% Scale   & 0.2242 & 0.5606 & 0.3545 &\phantom{abc} & 0.9168 & 0.9179 & 0.9173 &\phantom{abc} & 0.8385 & 0.8587 & 0.8485  &\phantom{abc} & 0.2749 & 0.5771 & 0.3983\\
@@ -1770,7 +1770,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
     53\% Scale   & 12 & 83 & 351 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 401 & 8 &\phantom{abc} & 40 & 406 & 0\\
@@ -1793,7 +1793,7 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
   \setlength\tabcolsep{3pt} % default value: 6pt
   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
     \toprule
-    & \multicolumn{3}{c}{$D_H = 0$} &\phantom{abc} &\multicolumn{3}{c}{$D_H = 4$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=8$} &\phantom{abc} & \multicolumn{3}{c}{$D_H=12$}\\
+    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
 \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
     Modification & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$ &\phantom{abc} & $\mathcal{I}$ & $\mathcal{M}$ & $\mathcal{R}_G$\\ \midrule
     53\% Scale   & 0.1629 & 0.4236 & 0.2627&\phantom{abc} & 0.8918 & 0.8868 & 0.8893  &\phantom{abc} & 0.8024 & 0.8037 & 0.8030  &\phantom{abc} & 0.5350 & 0.5771 & 0.3983\\
@@ -1882,7 +1882,7 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 %\end{figure}
 
 \begin{table*} \footnotesize
-\caption{ Informedness $\mathcal{I}$ (eq. \ref{informedness}), Markedness (eq. \ref{markedness}) $\mathcal{M}$ and Matthews correlation $\mathcal{R}_G$ for NDID by Simple Hash, DCT Hash and Local Features for duplicate sets (table \ref{modifiedimages}) for Paintings dataset from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$ and $\mathcal{C}_s = 16$ for the ThingLink dataset. $D_H = 4$ for Simple Hash and $D_H = 4$ for DCT Hash. P in the modification column stands for Paintings dataset. T for ThingLink dataset.}
+\caption{ Informedness $\mathcal{I}$ (eq. \ref{informedness}), Markedness (eq. \ref{markedness}) $\mathcal{M}$ and Matthews correlation $\mathcal{R}_G$ for NDID by Simple Hash, DCT Hash and Local Features for duplicate sets (table \ref{modifiedimages}) for Paintings dataset from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$ and $\mathcal{C}_s = 16$ for the ThingLink dataset. $\Delta(q,d) = 4$ for Simple Hash and $\Delta(q,d) = 4$ for DCT Hash. P in the modification column stands for Paintings dataset. T for ThingLink dataset.}
 \label{informednessmarkedness}
 \begin{center}
   \setlength\tabcolsep{1.5pt} % default value: 6pt
@@ -1963,13 +1963,13 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 \section{Discussion}
 To what degree is object instance recognition by local features an improvement over DCT-, and Simple- perceptual hashes for NDID? If both the perceptual hashes and local features NDID systems are tuned to good parameters, the unbiased contingency table metrics: Matthews correlation $\mathcal{R}_G$, \emph{Informedness} $\mathcal{I}$ and \emph{Markedness} $\mathcal{M}$ are all superior for the Local Features NDID system in all simulated duplicate cases and datasets presented in this paper (table \ref{informednessmarkedness}, \ref{deltainformednessmarkedness}). The improvements in favor of Local Features NDID are statistically significant (table \ref{pvalues}) for both the ThingLink dataset and the Paintings dataset for all sets excluding ThingLink dataset 83\% scale-, and Normalized-duplicates. There is an improvement, but $H_0$ holds meaning no statistical difference between the two systems for these datasets (table \ref{pvalues} in purple). For these figures to hold, we assume the image database not to contain duplicate images. These affect fpr directly and cause confusion in detecting duplicate images.
 
-The 10\% white border and 10\% rotate duplicate set simulation comparisons stand out in favor of Local Features. Local Features NDID performs excellent with $0.9171 \leq \mathcal{R}_G \leq 0.9977$ for the Paintings and the ThingLink datasets (table \ref{informednessmarkedness}). Since rotation and adding a white border to the image alter the relative values of the image pixels, perceptual hashing is unable to cope \ref{informednessmarkedness} resulting in negative $\mathcal{I}$ and $\mathcal{M}$ for the white border-, and rotated duplicates. NDID performance for these cases is much less than chance for both the Simple Hash and the DCT Hash, no matter how $D_H$ is tuned.
+The 10\% white border and 10\% rotate duplicate set simulation comparisons stand out in favor of Local Features. Local Features NDID performs excellent with $0.9171 \leq \mathcal{R}_G \leq 0.9977$ for the Paintings and the ThingLink datasets (table \ref{informednessmarkedness}). Since rotation and adding a white border to the image alter the relative values of the image pixels, perceptual hashing is unable to cope \ref{informednessmarkedness} resulting in negative $\mathcal{I}$ and $\mathcal{M}$ for the white border-, and rotated duplicates. NDID performance for these cases is much less than chance for both the Simple Hash and the DCT Hash, no matter how $\Delta(q,d)$ is tuned.
 
-What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing? Contrary to the recommendation $D_H=10$ in \cite{Zauner2010}, we find $D_H=4$ to perform better for both hashes. We come to this conclusion comparing maximum \emph{Informedness} averaged over the duplicate sets (tables \ref{simpleunbiased}, \ref{simplethinglinkunbiased}, \ref{dctunbiased} and \ref{dctthinglinkunbiased} in purple). We did not measure $D_H=10$, but since $D_H=8$ already degrades performance due to the disability of the model to classify images not in the database as TN.
+What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing? Contrary to the recommendation $\Delta(q,d)=10$ in \cite{Zauner2010}, we find $\Delta(q,d)=4$ to perform better for both hashes. We come to this conclusion comparing maximum \emph{Informedness} averaged over the duplicate sets (tables \ref{simpleunbiased}, \ref{simplethinglinkunbiased}, \ref{dctunbiased} and \ref{dctthinglinkunbiased} in purple). We did not measure $\Delta(q,d)=10$, but since $\Delta(q,d)=8$ already degrades performance due to the disability of the model to classify images not in the database as TN.
 
-If the type of duplicate a system is expected to detect is known a priori, $D_H$ may be further optimised to the specific case depends on the type of hash chosen and the duplicate definition. We stick to the average, as we do not know the type of duplicate at query time. Ultimately $D_H=4$ was used in comparison to Local Features NDID based on averaged \emph{Informedness} over the datasets and for the DCT Hash, this choice is contrary to $D_H=8$ suggested by the DCT Hash ROC space for both datasets (fig. \ref{thinglinkfigcutoffrocspace} and \ref{figcutoffrocspace}) and the accuracy diagrams (fig. \ref{dcttotalaccuracy} and \ref{thinglinkdcttotalaccuracy}). Bias in accuracy (eq. \ref{accuracy}) is the cause for the conflicting conclusions much due to leaving out TN from the analysis \cite{POWERS2011}. We choose $D_H=4$ based on the unbiased metrics.
+If the type of duplicate a system is expected to detect is known a priori, $\Delta(q,d)$ may be further optimised to the specific case depends on the type of hash chosen and the duplicate definition. We stick to the average, as we do not know the type of duplicate at query time. Ultimately $\Delta(q,d)=4$ was used in comparison to Local Features NDID based on averaged \emph{Informedness} over the datasets and for the DCT Hash, this choice is contrary to $\Delta(q,d)=8$ suggested by the DCT Hash ROC space for both datasets (fig. \ref{thinglinkfigcutoffrocspace} and \ref{figcutoffrocspace}) and the accuracy diagrams (fig. \ref{dcttotalaccuracy} and \ref{thinglinkdcttotalaccuracy}). Bias in accuracy (eq. \ref{accuracy}) is the cause for the conflicting conclusions much due to leaving out TN from the analysis \cite{POWERS2011}. We choose $\Delta(q,d)=4$ based on the unbiased metrics.
 
-What is a good cutoff score to classify an image a true negative in near-duplicate image detection with Local Features? The Local Features query returns an image with a score describing database image fit to the query image. $\mathcal{C}_s$ is the score below which the query image is labeled a TN. For both the Paintings and the ThingLink datasets $C_s \rightarrow max(s_{TN})$ FP$\rightarrow 0$ logarithmically while FN increases linearly (fig. \ref{figcutoff}, \ref{thinglinkfigcutoff}). Settting the score as high as possible picking amongst TN dataset query scores provides the optimal result. Optimal cutoff turns out to be the maximum score in the TN dataset for both the ThingLink dataset where $\mathcal{C}_s=16$ and $\mathcal{C}_s=19$ for the Paintings dataset. Part of the success of the Local Features NDID against the perceptual hashes has to do with setting the score such that all images in the TN set are labeled correctly by the Local Features classifier exposing a weakness with the perceptual hash based systems. Much of the reason for the lesser perceptual hash performance in all but the 10\% rotation and 10\% white border case, is the TN performance, very apparent in the exploding FP from the TN dataset as $D_H\rightarrow12$ (tables \ref{simpleresults}, \ref{dctresults}). Local Features NDID provides for better duplicate detection for all cases discussed in this paper, but is it feasible and practical to implement such a system?
+What is a good cutoff score to classify an image a true negative in near-duplicate image detection with Local Features? The Local Features query returns an image with a score describing database image fit to the query image. $\mathcal{C}_s$ is the score below which the query image is labeled a TN. For both the Paintings and the ThingLink datasets $C_s \rightarrow max(s_{TN})$ FP$\rightarrow 0$ logarithmically while FN increases linearly (fig. \ref{figcutoff}, \ref{thinglinkfigcutoff}). Settting the score as high as possible picking amongst TN dataset query scores provides the optimal result. Optimal cutoff turns out to be the maximum score in the TN dataset for both the ThingLink dataset where $\mathcal{C}_s=16$ and $\mathcal{C}_s=19$ for the Paintings dataset. Part of the success of the Local Features NDID against the perceptual hashes has to do with setting the score such that all images in the TN set are labeled correctly by the Local Features classifier exposing a weakness with the perceptual hash based systems. Much of the reason for the lesser perceptual hash performance in all but the 10\% rotation and 10\% white border case, is the TN performance, very apparent in the exploding FP from the TN dataset as $\Delta(q,d)\rightarrow12$ (tables \ref{simpleresults}, \ref{dctresults}). Local Features NDID provides for better duplicate detection for all cases discussed in this paper, but is it feasible and practical to implement such a system?
 
 Can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection? Our simulation results prove that for a near duplicate definition in table \ref{modifiedimages}, Local Features NDID is a statistically significant improvement over the Simple- and DCT perceptual hashes for most cases. However, if the expected set of duplicates does not include cropping, rotation and adding content to the image in the form of a border for example, it may be difficult to justify the development cost and the extra computational resources needed for the improvements in table \ref{deltainformednessmarkedness}. A local features NDID system has been successfully implemented in \cite{dong2012high}. Our Local Features NDID simulation system uses SIFT descriptors with BoW, an inverted index and geometric verification to ensure sanity of retrieved results. The geometric verification in the query step for a duplicate using this system takes 99\% of the query time \ref{computationalcost} and increases impractically with the size of the dataset. It would be worth the while to compare filtering approach in \cite{dong2012high} to the simulation used in this paper as well as IVFADC system presented in \cite{Jegou2010} providing ~50ms queries into 5 Million images, a scale very suitable for ThingLink.
 
