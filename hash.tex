@@ -585,9 +585,7 @@ We expect to improve over perceptual hashing which withstand scaling extremely w
 \subsubsection{Scale Invariant Feature Transform} \label{SIFTSection}
 Scale Invariant Feature Transform or SIFT ''transforms image data into scale-invariant coordinates relative to local features \cite{Lowe2004}''. SIFT-descriptors are suitable for matching images of the same object or scene. They are robust to image scaling, rotation and somewhat robust to change in viewpoint, scene lighting and affine distortion. Descriptors can be computed on ''off the shelf''-hardware in near real time. \cite{Lowe2004}
 
-A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}.
-
-SIFT descriptors are extracted by
+A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A SIFT-descriptor is the vector $(s, \theta, t_x, t_y)$. Examples of SIFT features can be seen in fig. \ref{siftfeatures}. SIFT descriptors are extracted by
 
 \begin{enumerate}
 \item Scale space extrema detection identifies scales and locations that can be repeatedly extracted under changing conditions.
