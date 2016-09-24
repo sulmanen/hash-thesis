@@ -613,10 +613,7 @@ $G(x,y,k\sigma) - G(x, y, \sigma)$ may be approximated by a normalized Laplacian
 \begin{equation}\label{approximatedog}
 G(x,y,k\sigma) - G(x, y, \sigma) \approx (k - 1)\sigma^{2}\nabla^{2}G
 \end{equation}\cite{Lowe2004}
-
-where the right hand side is a scale-normalized Laplacian of Gaussian.
-
-$D$ are keypoint candidates. The robust keypoints are weeded out by fitting them to the surrounding data. \cite{Lowe2004} Adding the offset
+where the right hand side is a scale-normalized Laplacian of Gaussian. $D$ are keypoint candidates. The robust keypoints are weeded out by fitting them to the surrounding data. \cite{Lowe2004} Adding the offset
 
 \begin{equation}\label{keypointoffset}
 \hat{\boldsymbol{x}} = - \frac{\partial^2D^-1}{\partial \boldsymbol{x}^2}\frac{\partial D}{\partial \boldsymbol{x}}
