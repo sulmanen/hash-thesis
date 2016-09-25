@@ -613,10 +613,15 @@ to $\boldsymbol{X}$. If $\boldsymbol{\hat{x}} > 0.5$, the extremum is closer to 
 \begin{equation}\label{rejectkeypoint}
 D(\boldsymbol{\hat{x}}= D + \frac{1}{2}\frac{\partial D^T}{\partial \boldsymbol{x}}\boldsymbol{\hat{x}}
 \end{equation}
-is used for quality control and any point where $D(\boldsymbol{\hat{x}})<0.03$ they can be discarded.
+is used for quality control and any point where $D(\boldsymbol{\hat{x}})<0.03$ they can be discarded. Additional quality control, which we will not cover here takes place. In order to promote rotation invariance, the keypoint is assigned an orientation.
 
-Orientation assignment
-
+Orientation is assigned by calculating gradient orientation $\theta(x,y)$ and magnitude $m(x,y)$ (eq. \ref{gradientmag}) 360 degrees around the keypoint in 36 bins. The orientation will be in the direction of the bin with the greatest magnitude.
+\begin{equation}\label{gradientmag}
+\sqrt{(L(x+1,y)-L(x-1,t))^2 + (L(x, y+1)- L(x, y-1))^2}
+\end{equation}
+\begin{equation}\label{gradientorient}
+\theta(x,y) = tan^-1((L(x, y+1)- L(x,y-1))/ (L(x+1,y)-L(x-1,y))
+\end{equation}
 Descriptor
 
 Indexing
