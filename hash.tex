@@ -562,16 +562,16 @@ The image is scaled down to 32 by 32 px gray scale and the most significant byte
 \label{dctkernels}
 \end{figure}
 
-\subsection{Local Features}
-To improve upon duplicate detection by perceptual hashing, we raise the abstraction level from image pixels to an object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant features. Keypoint detectors have been widely developed in the last decade. The steps for image classification with these methods are essentially
+\subsection{Feature Detection and Description}
+We attempt to improve near-duplicate detection with perceptual hashing by raising the abstraction level from image pixels-based hashes to the object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant local features. Synonyms for Local Features are many in literature. David Lowe used \emph{keypoint} in \cite{Lowe2004}, a seminal work in the field. In describing \emph{Speeded Up Robust Features}, \emph{interest points} is used. The Sivic and Zisserman refer to \emph{viewpoint invariant regions}. In this paper we will use \emph{local features} and the short version \emph{feature}. \emph{Feature} detectors and descriptors have been widely developed during the past decade. The steps for object- or scene retrieval using these methods generally takes the steps of
 
 \begin{enumerate}
-\item Find keypoints of interest in image
-\item Encode keypoints in a visual descriptor
-\item Match incoming descriptor to all known descriptors.
+\item Find features of interest in image
+\item Encode features in a visual descriptor stored in memory or disk
+\item Find nearest neighbors for query descriptor amongst all known descriptors.
 \end{enumerate}
 
-Local features have been in use since Moravec invented the corner detector in the early 1980s. The Moravec corner detector was improved by Harris and Stephens by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the \emph{Scale Invariant Feature Transform} (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF), BRISK and ORB which are not covered here. We will however cover KAZE, and AKAZE features, more recent methods using local features.
+Local features have been used since Moravec \cite{Moravec1981} from the Stanford AI Lab invented the corner detector in the early 1980s. The Moravec corner detector was improved by Harris and Stephens \cite{Harris1988} by using a Gaussian window function instead of the binary window used by Moravec. The Harris detector was not scale invariant, which lead David Lowe to come up with the \emph{Scale Invariant Feature Transform} (SIFT). SIFT has inspired many similar methods including Sped Up Robust Features (SURF), BRISK and ORB which are not covered here. We will however cover KAZE, and AKAZE features, more recent methods using local features.
 
 Scale-invariant features identify the image by a large set of local descriptors that are chosen so that they are invariant to image scale, rotation, viewpoint change, distortion and difference in lighting. The descriptors also remain stable under some degree of affine distortion. \cite{Lowe2004}
 
