@@ -593,16 +593,14 @@ A SIFT-descriptor has a location $t_x, t_y$ a scale $s$ and rotation $\theta$. A
 \begin{center}
 \includegraphics[height=8cm]{figures/siftDescriptor}
 \end{center}
-\caption{Visualized SIFT-descriptors.}
+\caption{SIFT-descriptors visualized in two images of the same scene.}
 \label{siftfeatures}
 \end{figure}
 To find scale space extrema $D$, a difference-of-Gaussian function is convolved with the image $I$.
 \begin{equation}\label{keypoints}
   D(x,y,\sigma) = (G(x,y,k\sigma) - G(x, y, \sigma))*I(x,y)
 \end{equation}
-
-$G(x,y,k\sigma) - G(x, y, \sigma)$ may be approximated by a normalized Laplacian so
-
+where $G(x,y,k\sigma) - G(x, y, \sigma)$ may be approximated by a normalized Laplacian so
 \begin{equation}\label{approximatedog}
 G(x,y,k\sigma) - G(x, y, \sigma) \approx (k - 1)\sigma^{2}\nabla^{2}G
 \end{equation}
@@ -611,6 +609,19 @@ where the right hand side is a scale-normalized Laplacian of Gaussian. $D$ are k
 \begin{equation}\label{keypointoffset}
 \hat{\boldsymbol{x}} = - \frac{\partial^2D^-1}{\partial \boldsymbol{x}^2}\frac{\partial D}{\partial \boldsymbol{x}}
 \end{equation}
+to $\boldsymbol{X}$. If $\boldsymbol{\hat{x}} > 0.5$, the extremum is closer to another interest point.
+\begin{equation}\label{rejectkeypoint}
+D(\boldsymbol{\hat{x}}= D + \frac{1}{2}\frac{\partial D^T}{\partial \boldsymbol{x}}\boldsymbol{\hat{x}}
+\end{equation}
+is used for quality control and any point where $D(\boldsymbol{\hat{x}})<0.03$ they can be discarded.
+
+Orientation assignment
+
+Descriptor
+
+Indexing
+
+Queries
 
 \subsubsection{Speeded Up Robust Features}
 Speeded Up Robust Features (SURF) was for fast computation of the detector and descriptor than state-of-the-art methods of the time. SURF introduces the 'Fast-Hessian' detector that relies on box filter approximations of Gaussian filters and integral images to reduce the computation time. \cite{Bay2006} An integral image $ii(x,y)$ (eq. \ref{integralimage})
