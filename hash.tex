@@ -620,7 +620,7 @@ Orientation is assigned by calculating gradient orientation $\theta(x,y)$ (eq. \
 \sqrt{(L(x+1,y)-L(x-1,t))^2 + (L(x, y+1)- L(x, y-1))^2}
 \end{equation}
 \begin{equation}\label{gradientorient}
-\theta(x,y) = tan^-1((L(x, y+1)- L(x,y-1))/ (L(x+1,y)-L(x-1,y))
+\theta(x,y) = tan^{-1}((L(x, y+1)- L(x,y-1))/ (L(x+1,y)-L(x-1,y))
 \end{equation}
 Descriptor
 
@@ -630,13 +630,11 @@ Queries
 
 \subsubsection{Speeded Up Robust Features}
 Speeded Up Robust Features (SURF) was introduced for fast computation of the detector and descriptor than state-of-the-art methods of the time. SURF introduces the 'Fast-Hessian' detector that relies on box filter approximations of Gaussian filters and integral images to reduce the computation time. \cite{Bay2006} An integral image $ii(x,y)$ (eq. \ref{integralimage})
-
 \begin{equation}
   \label{integralimage}
 ii(x,y) = \sum\limits_{x'\le,y'\le y} i(x', y')
 \end{equation}
 at point $x, y$ sums up the pixels above and below where $i(x,y)$ is the source image. \cite{Viola2001}
-
 \begin{equation}
   \label{integralimagerowsum}
 s(x,y) = s(x, y - 1) + i(x,y)
