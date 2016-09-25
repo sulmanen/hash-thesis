@@ -533,7 +533,7 @@ where $b_{i}$ denotes $i$th hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is
   \end{split}
 \end{equation}
 
-A simple hash is simple and fast to calculate so it meets all the criteria in table \ref{hashcriteria}. A single simple hash takes on average 70ms on Matlab 2015a on a Mid 2014 13 inch Macbook Pro. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
+A simple hash is easy to understand, implement and fast to calculate so it meets all the criteria in table \ref{hashcriteria}. A single simple hash takes on average 70ms on Matlab 2015a on a Mid 2014 13 inch Macbook Pro. Out of the methods presented in this paper it is the fastest to understand and the fastest to implement. Yet, it should perform well for isotropically scaled images and the thresholding ensures that any uniform change to pixel data where the relationships between the pixels stay the same \cite{Zauner2010}. Any nonuniform changes to pixel values especially relating to moving pixel positions relative to the original image will perform poorly.
 
 Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A Hamming Distance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the Hamming Distance.
 
