@@ -493,11 +493,9 @@ The distance function used in finding a near duplicate for a perceptual hash in 
 
 \subsubsection{Hamming Distance}\label{HammingSection}
 According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $q \in A$ and $d \in A$ is
-
 \begin{equation}\label{hammingeq}
 \Delta(q,d):=\sum_{q_i\neq d_i}1\quad,\quad i=1,\ldots,n
 \end{equation}
-
 In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by equation \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
 
 \begin{table}[htb]
