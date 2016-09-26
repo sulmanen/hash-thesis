@@ -629,7 +629,6 @@ The SIFT-descriptor is a 128 dimensional vector formed according to figure \ref{
 \caption{SIFT-descriptor format. A 2 $\times$ 2 example of the descriptor. Best results come from a 128 dimensional descriptor. It is formed from 4 $\times$ 4 subregions each with 8 gradients. \cite{Lowe2004}}
 \label{siftdescriptor}
 \end{figure}
-
 SIFT as demonstrated in \cite{Lowe2004} uses Best-Bin-First (BBF) indexing for finding approximate nearest neighbors for individual descriptors during queries. To find a matching object or scene in the database the query descriptors are matched one by one to a database of all known descriptors. The quality of individual matches is improved by finding clusters of 3 matches that agree on an object or scene. The clusters are then checked by verifying geometric fit to the model (\emph{geometric verification}) rejecting those matches not fitting to the model.
 
 
