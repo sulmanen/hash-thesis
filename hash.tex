@@ -1404,7 +1404,7 @@ Queries in the Local Features case result in list of images with scores describi
 \label{dcttotalaccuracy}
 \end{figure}
 
-As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=8$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $\Delta(q,d)$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Precision-Recall values were calculated (table \ref{informednessmarkedness}) to aid in comparison.
+As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=4$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $\Delta(q,d)$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Unbiased equivalents of presicion (Informedness $\mathcal{I}$) and recall (Markedness $\mathcal{M}$) values were calculated (table \ref{informednessmarkedness}) to aid in comparison.
 
 \begin{figure}[htb]
 \begin{center}
@@ -1430,7 +1430,7 @@ As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=8$ fo
 \label{tntotal}
 \end{figure}
 
-The dataset of images exported from ThingLink was used for a second opinion. Good $\Delta(q,d) \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $\Delta(q,d)=4$ for the Simple Hash and $\Delta(q,d)=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{P}-\mathcal{R}$ results are in table \ref{informednessmarkedness}.
+The dataset of images exported from ThingLink was used for a second opinion. Good $\Delta(q,d) \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $\Delta(q,d)=4$ for the Simple Hash and $\Delta(q,d)=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). However, the informedness and markedness calculations disagree on $\Delta(q,d)$ for the DCT-Hash. According to tables \ref{dctunbiased} and \ref{dctthinglinkunbiased} $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{I}-\mathcal{M}$ results are in table \ref{informednessmarkedness}.
 
 \begin{figure}[htb]
 \begin{center}
