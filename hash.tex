@@ -722,6 +722,7 @@ where $M$ is the total number of filtered images.
   \label{scaletotime}
 t_i = \frac{1}{2}\sigma^2_i,\{i=0\ldots M\}
 \end{equation}
+\clearpage
 To reduce noise the source image may be processed with a Gaussian of $\sigma_0$. The contrast factor $\lambda$ is the 70th percentile of the input image gradient histogram. The pyramidal FED scheme has an outer loop and an inner loop. The inner loop performs the filtering according to step sizes set by the outer loop. The outer loop also takes care of down-sampling with mask $(\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$. The down-sampled image is the input to the next octave. For 2D images the maximum step size is $\tau_{max}$ when the image derivative grid size is 1px. The contrast parameter $\lambda$ also needs to be modified for each octave as the down-sampling mask reduces contrast by 25\%. A Hessian (eq. \ref{akazehessian}) is calculated for each $L^i$
 \begin{equation}
   \label{akazehessian}
