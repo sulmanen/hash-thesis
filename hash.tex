@@ -691,7 +691,7 @@ According to \cite{Weickert1998}, $\nabla L_{\sigma}$ can be regarded as the edg
 \subsubsection{Accelerated KAZE Features}
 The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations, which is computationally intensive. A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
 
-Fast Explicit Diffusion (FED) is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. ''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''\cite{Grewenig2010}
+Fast Explicit Diffusion (FED) introduced in \cite{Grewenig2010} is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. ''Fast explicit diffusion (FED) schemes perform cycles of explicit schemes with varying time step sizes that may violate the stability restriction in up to 50 percent of all cases.''
 
 FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement. Factorization of the box filter
 \begin{equation}
@@ -722,11 +722,7 @@ where $M$ is the total number of filtered images.
   \label{scaletotime}
 t_i = \frac{1}{2}\sigma^2_i,\{i=0\ldots M\}
 \end{equation}
-To reduce noise the source image may be processed with a Gaussian of $\sigma_0$. The contrast factor $\lambda$ is the 70th percentile of the input image gradient histogram.
-
-The pyramidal FED scheme has an outer loop and an inner loop. The inner loop performs the filtering according to step sizes set by the outer loop. The outer loop also takes care of down-sampling with mask $(\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$. The down-sampled image is the input to the next octave. For 2D images the maximum step size is $\tau_{max}$ when the image derivative grid size is 1px. The contrast parameter $\lambda$ also needs to be modified for each octave as the down-sampling mask reduces contrast by 25\%.
-
-A Hessian (eq. \ref{akazehessian}) is calculated for each $L^i$
+To reduce noise the source image may be processed with a Gaussian of $\sigma_0$. The contrast factor $\lambda$ is the 70th percentile of the input image gradient histogram. The pyramidal FED scheme has an outer loop and an inner loop. The inner loop performs the filtering according to step sizes set by the outer loop. The outer loop also takes care of down-sampling with mask $(\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$. The down-sampled image is the input to the next octave. For 2D images the maximum step size is $\tau_{max}$ when the image derivative grid size is 1px. The contrast parameter $\lambda$ also needs to be modified for each octave as the down-sampling mask reduces contrast by 25\%. A Hessian (eq. \ref{akazehessian}) is calculated for each $L^i$
 \begin{equation}
   \label{akazehessian}
 L^i_{Hessian} = \sigma^2_{i,norm}(L^i_{xx}L^i_{yy}-L^i_{xy}L^i_{xy})
@@ -737,13 +733,8 @@ to obtain features. Scharr filters with step size $\sigma_{i,norm}$ are used to 
 \item it has to be greater than a threshold
 \item it is maxima at level $i+1$ and $i-1$ in a $\sigma_i\times\sigma_i$ window
 \end{enumerate}
-After detection the precise interest point location is found by fitting a 2D quadratic function to the determinant of the Hessian response in the neighborhood of $3 \times 3$ px and finding the maximum.
+After detection the precise interest point location is found by fitting a 2D quadratic function to the determinant of the Hessian response in the neighborhood of $3 \times 3$ px and finding the maximum. A-KAZE uses a Modified Local Difference Binary descriptor. The LDB descriptor is modified to speed up calculations relating to rotation invariance. LDB stores intensity, means of the horizontal and vertical derivatives. LDB uses grids of finer steps dividing the descriptor into sub-grids. M-LDB rotates these LDB grids to the interest point orientation. Due to this rotation, integral images may not be used to calculate averages of pixels inside the sub-grids, the sub-grids are sub-sampled in steps which are a function of the scale $\sigma$ M-LDB re-uses the derivatives from the detection step in the descriptor.
 
-A-KAZE uses a Modified Local Difference Binary descriptor. The LDB descriptor is modified to speed up calculations relating to rotation invariance.
-
-LDB stores intensity, means of the horizontal and vertical derivatives. LDB uses grids of finer steps dividing the descriptor into sub-grids. M-LDB rotates these LDB grids to the interest point orientation. Due to this rotation, integral images may not be used to calculate averages of pixels inside the sub-grids, the sub-grids are sub-sampled in steps which are a function of the scale $\sigma$ M-LDB re-uses the derivatives from the detection step in the descriptor.
-
-%%\lstinputlisting{fed.m}
 \clearpage
 
 \subsection{Large Scale Image Retrieval}
