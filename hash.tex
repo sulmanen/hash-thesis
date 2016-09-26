@@ -774,7 +774,7 @@ For hash function $g$ to be Locality-Sensitive, the probability of collision is 
 The goal of LSH is to hash data points in a way so the probability of collision is high for points close to one another compared to points that are far apart. By allowing for small error (eq. \ref{lsherroreq}) in the results and adding to storage requirements, the query time is significantly improved, giving up quality for speed as seen in fig. \ref{nntradeoffs}. \cite{Gionis1999} The solution presented in \cite{Gionis1999} reduces ANN time complexity to $\mathcal{O}(dn^{\frac{1}{1+\epsilon}})$.
 
 LSH has $m$ hash functions, hash tables and keys per vector. Each point in the set $P$ has $m$ hash keys as an index. At query time $m$ keys are computed on the query vector and all the vectors associated with the new keys are retrieved forming a shorter list where it's feasible to use exact distance for matching.
-
+\clearpage
 \lstinputlisting{lshinit.m}
 
 \lstinputlisting{lshquery.m}
