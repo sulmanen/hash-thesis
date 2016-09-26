@@ -623,7 +623,7 @@ Orientation is assigned by calculating gradient orientation $\theta(x,y)$ (eq. \
 \begin{equation}\label{gradientorient}
 \theta(x,y) = tan^{-1}((L(x, y+1)- L(x,y-1))/ (L(x+1,y)-L(x-1,y))
 \end{equation}
-The SIFT-descriptor is a 128 dimensional vector formed according to figure \ref{siftdescriptor}. It encodes
+The SIFT-descriptor is a 128 dimensional vector formed according to figure \ref{siftdescriptor}. It encodes gradient magnitude and direction for 16 bins 8 gradients each.
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=6cm]{figures/siftDescriptorFormat}
