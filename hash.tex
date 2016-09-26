@@ -759,18 +759,12 @@ NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \end{center}
 \caption{Tradeoffs for improving nearest neighbor search}
 \label{nntradeoffs}
-\end{figure}
-
-To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Approximate nearest neighbor methods are able to solve the ''curse of dimensionality'' in many cases.
-
-Approximate nearest neighbor is defined as in a normed space $l_p^d$ preprocess set of points $P$ to efficiently return a point $p\in P$ for any given query point $q$, such that $d(q,p) \lq (1 + \epsilon)d(q,P)$. $d(q, P)$ is the distance between the closest point in $P$ to $q$. \cite{Gionis1999}
+\end{figure} To improve scalability, one can relax the conditions on nearest neighbor. The tradeoffs involved (fig. \ref{nntradeoffs}) are memory footprint, as the descriptors the faster the memory the descriptors are stored in, the more computationally feasible matching becomes at large scale. Increasing the quality of the matches will require sacrifices in speed and the memory footprint. Approximate nearest neighbor methods in \cite{Gionis1999} are able to solve the ''curse of dimensionality'' in many cases. Approximate nearest neighbor is defined as in a normed space $l_p^d$ preprocess set of points $P$ to efficiently return a point $p\in P$ for any given query point $q$, such that $d(q,p) \lq (1 + \epsilon)d(q,P)$. $d(q, P)$ is the distance between the closest point in $P$ to $q$.
 
 \subsubsection{Locality Sensitive Hashing}
 The original SIFT descriptor has 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales linearly (poorly). Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'', where $d > 3$ for NN search \cite{Gionis1999}. LSH scales well for $d > 50$ \cite{Gionis1999}. We will only cover the main idea behind the LSH family of methods. A review of the state of the art in 2008 can be found in \cite{Andoni2008}. Finding optimal hash functions for LSH applications has attracted much more recently so we examine \emph{Optimal LSH for Angular Distance} \cite{Andoni2015} by Andoni et al. from 2015.
 
-For hash function $g$ to be Locality-Sensitive, the probability of collision is higher for points that are nearby than for those that are fare away \cite{Andoni2015}.
-
-Hash function quality can be described by $p_1$, the collision probability for points close to each other and $p_2$ the collision probability for distant points \cite{Andoni2015}. Naturally difference between $p_1$ and $p_2$ characterizes hash function reactivity to changes in distance better described by $\rho$ (eq. \ref{lshsensitivity}).
+For hash function $g$ to be Locality-Sensitive, the probability of collision is higher for points that are nearby than for those that are fare away \cite{Andoni2015}. Hash function quality can be described by $p_1$, the collision probability for points close to each other and $p_2$ the collision probability for distant points \cite{Andoni2015}. Naturally difference between $p_1$ and $p_2$ characterizes hash function reactivity to changes in distance better described by $\rho$ (eq. \ref{lshsensitivity}).
 \begin{equation}
   \label{lshsensitivity}
   \rho = \frac{log\frac{1}{p_1}}{log\frac{1}{p_2}}
@@ -800,68 +794,50 @@ The corner stone is min-Hash ability to estimate document or image similarity ba
 Considering the 128 dimensional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a data set with 128 columns but only 400 rows.
 
 min-Hash (eq. \ref{minhash}) is the smallest element of set $\mathcal{A_i}$ under ordering by $f_j$
-
 \begin{equation}\label{minhash}
 m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X). \quad \cite{Chum2008}
 \end{equation}
-
 It estimates object (text or image) similarity based on (eq. \ref{minhash}) the probability (eq. \ref{minhashsim}) that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The used similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
-
 \begin{equation}\label{similarityminhash}
 sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
 \end{equation}
-
  and for images drawing inspiration from the \emph{tf-idf} scheme a histogram intersection approach
-
 \begin{equation}\label{similarityminhashimages}
 sim_h(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
 \end{equation}
-
 where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document. $d_w \geq 0$ is the importance of $X_w$. This similarity measure performed better in efficiency and quality than Jaccard distance for the TrecVid 2006 data set. \cite{Chum2008}
-
 \begin{equation}\label{minhashsim}
 P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
 \end{equation}
-
 Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
-
 To ease retrieval the min-Hashes are organized into \emph{sketches} \cite{Chum2008}, \cite{Broder1997}
-
 \begin{equation}\label{sketch}
 (m(\mathcal{A_1},f_1) \ldots m(\mathcal{A_1},f_n))
 \end{equation}
-
 which have similarity
-
 \begin{equation}\label{sketchsim}
 sim_s(\mathcal{A}_1, \mathcal{A}_2)^n \cite{Chum2008}.
 \end{equation}
-
 Sketching reduces the number of false positives retrieved by min-Hash \cite{Chum2008}. The sketch similarity is evaluated first, and only if it is above some threshold the full similarity $sim_s(\mathcal{A}_1, \mathcal{A}_2)$ is evaluated \cite{Chum2008}. The probability $P(\mathcal{A}_1 \sim^h \mathcal{A}_2)$ of sets $\mathcal{A}_1$ and $\mathcal{A}_2$ having at least $h$ identical sketches from $k$ picked
-
 \begin{equation} \label{sketchsimilarityprob}
 P(\mathcal{A}_1 \sim^h \mathcal{A}_2) = \sum_{i=h}^k \binom{k}{i} p^{in}(1-p^n)^{k-i} \quad \cite{Chum2008}.
 \end{equation}
 \cite{Chum2008} modifies the similarity measure with ideas borrowed from \emph{tf-idf} weighting like in \cite{Sivic2003}. This is done by including each occurrence of a visual word in the representative set for the image in question as a unique member of the set resulting in an \emph{idf} like method \cite{Chum2010}. In the TrecVid 2006 data set, and University of Kentucky database cases it distanced dissimilar documents further apart when common visual words have low \emph{idf} and are weighted down as a result leading to a lower number of sketch hits and better quality search results \cite{Chum2008}. However, \cite{Chum2008} leaves min-hash performance for very large image databases (millions of images) for further research.
 
 Querying large sets of images is considered in \cite{Chum2010} where min-Hash is used for fast detection of duplicate images. This is done by using min-Hash for detection of random pairs of image with spatial overlap. These are named cluster seeds which are then used as queries to find similar images including the seed. In other words
-
 \begin{enumerate}
 \item store descriptors in a hash table where the probability of an image being in the same bin is the same as their similarity
 \item calculate exact similarity for images falling into the same bin
 \item if pair of images pass the similarity test, check spatial consistency
 \item if image pair passes step 3., they become cluster seeds \cite{Chum2010}.
 \end{enumerate}
-
 Their requirements are similar to what is attempted in this paper.
-
 \begin{enumerate}
 \item scalable to tens of millions of images
 \item adding new images to the database is possible without recomputing the entire cluster
 \item easy to parallellize
 \item probability of recall is independent of cluster size \cite{Chum2010}.
 \end{enumerate}
-
 For querying the Oxford Landmark data set, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC \cite{Chum2010}.
 
 Growing the data set size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the data set size and $L$ to be the number of images in the cluster \cite{Chum2010}. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table.
@@ -875,9 +851,7 @@ To calculate image descriptors two types of viewpoint covariant regions are form
 
 The second type of region used is the Maximally Stable (MS) region. For these regions are the region area stays constant as the intensity threshold is changed.
 
-The two types of regions complement each other in image detection. The SA regions perform well on corners and the MS regions perform well on high contrast blobs. \cite{Sivic2003}
-
-The original BoW approach uses SIFT-descriptors introduced by Lowe. The second type of region is implemented in affine covariant regions.
+The two types of regions complement each other in image detection. The SA regions perform well on corners and the MS regions perform well on high contrast blobs. \cite{Sivic2003} The original BoW approach uses SIFT-descriptors introduced by Lowe. The second type of region is implemented in affine covariant regions.
 
 BoW relies on quantizing descriptors into visual words for efficient retrieval. Descriptors are quantized by associating them with the nearest cluster of descriptors. The vector quantization is implemented by k-means clustering. \cite{Sivic2003} The original BoW implementation worked on video, but we will apply the simple image case only. In the original implementation, the Mahalanobis distance is used as the distance function in k-means clustering.
 
@@ -886,13 +860,11 @@ In text retrieval a document is stored in a vector of word frequencies. A weight
 \begin{equation}\label{tfidf}
 t_{i} = \frac{n_{id}}{n_{d}}log\frac{N}{n_{i}}
 \end{equation}
-
 with $n_{id}$ is word $i$ appearing $n$ times in document $d$ and $n_{d}$ is the total number of words in document $d$. $n_{i}$ is the total number of occurrences of term $i$. $N$ is the total number of documents. The first term is word frequency and the second term is inverse document frequency. Word frequency weighs words occurring often in a document while inverse document frequency down weights words that appear often in all documents. This weighting scheme outperformed the binary and $tf$ weighting schemes\cite{Sivic2003}
 
 \begin{equation}\label{bowrank}
   Rank = \frac{1}{NN_{rel}}\left(\sum{i=1}{N_{rel}}R_{i}-\frac{N_{rel}(N_{rel} + 1)}{2}\right)
 \end{equation}
-
 where $N_{rel}$ is the number of relevant images for particular query image, $N$ is the total number of images and $R_{i}$ is the $i$th image rank. $Rank$ is a number between 0 and 1.
 
 Retrieval uses an inverted file where each word has a hit list for all occurrences of the word in all documents. In the visual word case, each visual word has knowledge of the image it is found in. The document vector is sparse and the retrieval is very fast.
@@ -904,12 +876,10 @@ Google gives additional weight to words in the search that appear close together
 A loose definition would be to require neighboring matches in query image to lie close together also in the retrieved frame.
 
 \subsubsection{Product Quantization} \label{PQ}
-
 \begin{equation}
   \label{quantizereq}
 d(x,y)^2 \approx d(x,q(y))^2
 \end{equation}
-
 where $x$ is the query vector, $y$ is the database vector and quantizer function is $q(y)$. The error on estimated distance is bound by the quantization error, $e_d \leq e_q$.  \cite{Jegou2014}
 
 The quantizer should be fast enough and precise. The database vector $y$ is split $y \rightarrow [y_1 \ldots y_m]$ each of which is quantized $[q(y_1)\ldots q(y_m)]$. For example, and eight dimensional vector can be split into four sub-vectors each in two dimensions. In effect were using $8^4$ centroids with a quantization cost equivalent to using eight centroids. Splitting up the query vector make quantization fast. \cite{Jegou2014}
@@ -948,7 +918,6 @@ ANN search with ADC is fast and reduces memory usage with some sacrifice in qual
 \caption{Block diagram of inverted file with asymmetric distance computation (IVFADC) system. \cite{Jegou2008}}
 \label{ivfadcfig}
 \end{figure}
-
 The inverted file allows to rapidly access a short list of images close to the query \cite{Jegou2008}. An inverted file entry has and image index and an encoding of the difference between the query vector and the coarse centroid (table \ref{ivfadcentry}).
 
 To set up the inverted file, the coarse quantizer $q_c$ which assigns queries to $\mathcal{L}_i$ is learned using k-means clustering. $1000 \leq k' \leq 1000000$ for SIFT descriptors \cite{Jegou2008}. A product quantizer $q_p$ like in \cite{Sivic2003} is used to encode a residual vector $r(y)$ between the coarse quantized centroid $q_c(y)$ and the vector $y$ (eq. \ref{ivfadcres}). ANN distance $\ddot{d}$ in this scenario where product subquantizers $q_{p_j}$ (eq. \ref{ivfadcestimate}). The distances between $u_j(x-q_c(y))$
@@ -963,7 +932,6 @@ r(y) = y - q_c(y)
   \label{ivfadcestimate}
   \ddot{d}(x,y)^2 = \sum_jd\left(u_j(x-q_c(y)), q_{p_j}(u_j(y-q_c(y)))\right)^2
 \end{equation}
-
 To add vector $y$ to index $\mathcal{Y}$
 \begin{enumerate}
 \item calculate $q_c(y)$
@@ -971,18 +939,13 @@ To add vector $y$ to index $\mathcal{Y}$
 \item look up $q_p(r(y))$ by finding $u_j(y)$ per $q_j(u_j(y))$ for all product quantizers ($j = 1 \ldots m$)
 \item add new entry (table \ref{ivfadcentry}) to inverted list $\mathcal{L}_i$ in accordance to $q_c(y)$.
 \end{enumerate}
-
-When querying $k-ANN(x)$ the inverted list $L_i$ that corresponds to the coarse quantizer result is scanned. It is usual that $x$'s nearest neighbor is not quantized to the same centroid with $x$ but some centroid nearby. $w$ nearest lists $\mathcal{L}_i$ are used instead. \cite{Jegou2008}
-
-To query k-ANN of $x$
+When querying $k-ANN(x)$ the inverted list $L_i$ that corresponds to the coarse quantizer result is scanned. It is usual that $x$'s nearest neighbor is not quantized to the same centroid with $x$ but some centroid nearby. $w$ nearest lists $\mathcal{L}_i$ are used instead. According to \cite{Jegou2008}, a k-ANN query of $x$ is performed in the following way:
 \begin{enumerate}
 \item do $q_c(x)$ to find $w$ nearest lists in $\mathcal{L}_i$ and from subset of $\mathcal{Y}$
 \item $\forall j$ do $d(u_j(r(x)), c_{i,j})^2$, the squared distance for sub-quantized values and its centroids
 \item sum up $m$ looked up values by executing equation \ref{ivfadcestimate}
   \item select K nearest neighbors of $x$ from subset of $\mathcal{Y}$.
 \end{enumerate}
-\cite{Jegou2008}
-
 If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to be visited where $k'$ is the number of centroids in $q_c$ and $w$ is the number of NN for $q_c(x)$ retrieved \cite{Jegou2008}.
 
 \def\arraystretch{1.5}
@@ -1096,28 +1059,22 @@ Like in \cite{Sivic2003}, \cite{Jegou2011} a code book $\mathcal{C}={c_1 \ldots 
   \label{vladdescriptortovw}
 c_i = NN(x).
 \end{equation}
-
 Final dimension $D$ for the VLAD descriptor is in eq. \ref{vladdescriptordimention}
-
 \begin{equation}
   \label{vladdescriptordimention}
   D = k \times d,
 \end{equation}
-
 and the VLAD descriptor $v_i,j$ comes from (eq. \ref{vlad})
-
 \begin{equation}
   \label{vlad}
   v_{i,j} = \sum_{x, NN(x)=c_i} x_j - c_{i,j}
 \end{equation}
-
 where $i$ is an index for the visual word and $j$ an index for the local descriptor component. $v$ is then normalized (eq. \ref{vladnorm})
 \begin{equation}
   \label{vladnorm}
   v := \frac{v}{\norm{v}^2}
   \end{equation}
-
-.\cite{Jegou2014} Excellent results can be obtained with a small $k$ \cite{Jegou2014}. We will use $k=256$ in this paper.
+Excellent results can be obtained with a small $k$ \cite{Jegou2014}. We will use $k=256$ in this paper.
 
 To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimension $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimensionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
 
@@ -1126,43 +1083,31 @@ Principal Component Analysis (PCA) transforms observed data into linearly uncorr
 \begin{equation}\label{zeromean}
 \frac{1}{N}\sum_n \boldsymbol{x}_n = 0
 \end{equation}
-
 Let the reconstruction of $\boldsymbol{X}$ in $\Re^{q}$ be
-
 \begin{equation} \label{pca}
 f(\lambda) = \mu + v_q\lambda
 \end{equation}
-
 The dimension of the model is $q$ and the mean $\mu \in \Re^p$. $v_q$ is a $p \times q$ matrix with $q$ orthogonal unit vectors. $\lambda \in \Re^q$ are the principal components in $q$ dimensions. The reconstruction error is given by
-
 \begin{equation}\label{pcaerror}
 \min_{\mu,\lambda_1\ldots N, v_q}\sum_{n=1}^N \abs{x_n-\mu - v_q\lambda_n}.
 \end{equation}
-
 By minimizing equation \ref{pcaerror} one can choose $\mu, v_q$ and $\lambda$. \cite{Blei2008} As a projection, $x$ can be approximated by
 
 \begin{equation}\label{vladpca}
 x_p = x -\epsilon_p(x)
 \end{equation}
-
 where $\epsilon_p$ is the error vector. \cite{Jegou2014} When we run $x_p$ through the ADC quantizer we get
-
 \begin{equation}\label{vladpcaquant}
   q(x_p) = x - \epsilon_p(x) - \epsilon_q(x_p)
 \end{equation}
-
 The variance of different components of $x_p$ are not balanced due to the PCA \cite{Jegou2014} which leads to a more coarse quantization of the first principal components which by PCA definition have greater variance the the rest of the components. To fix this issue, the Householder matrix
-
 \begin{equation}\label{householder}
 Q = I - 2vv^T
 \end{equation}
-
 maybe used to find $Q$ such that $X'' = QX' = QMX$ components have equal variances.\cite{Jegou2014} Only then can the dimensionality reduction and indexing be optimized jointly to find D', the optimal PCA output dimension $D'$ by
-
 \begin{equation}\label{jointoptimization}
 e(D') = \frac{1}{card(\mathcal{L})}\sum_{x\in \mathcal{L}}\norm{\epsilon_p(x)}^2 + \norm{\epsilon_q(x_p)}^2
 \end{equation}
-
 Optimization outcome is $D'=64$ for $k=16$ and $B=128$ by which the search performs very well. From 10M images a Euclidean NN search with VLAD takes 7.2s. An ADC search takes 716ms. VLAD with IVFADC takes 46ms \cite{Jegou2014}.
 
 \begin{figure}[htb]
@@ -1184,7 +1129,6 @@ Second, if the visual vocabulary is trained using one data set and used on anoth
 \caption{Comparing retrieval performance in the INRIA Holidays data set between VLAD, \emph{innorm} intra-normalization, \emph{adapt} vocabulary adaptation, \emph{adapt+innorm} is both vocabulary adaptation and intra-normalization. \cite{Arandjelovic2013}.}
 \label{vladadapt}
 \end{figure}
-
 Third, VLAD loses to BoW in performance for objects occupying a small portion of the image. \cite{Arandjelovic2013} proposes \emph{Multiple VLAD descriptors} (MultiVLAD), which is especially useful in object recognition. MultiVLAD extracts a total of 14 VLAD descriptors from a single image. A $3 \times 3$ grid over the image gives $9$, $2 \times 2$ grid gives four and one for the whole image. This comes at the cost of memory but is still feasible on off the shelf hardware at ~28GB for 100 million images \cite{Arandjelovic2013}. MultiVLAD outperforms 1792-D (vocab. size) VLAD, but is found to be inferior for images that cover at least 20\% of the image \cite{Arandjelovic2013}.
 
 \clearpage
