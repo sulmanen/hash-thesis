@@ -666,19 +666,19 @@ The second part of the descriptor, $\sum \abs{d_x}, \sum \abs{d_y}$ accounts for
 Queries are performed by matching query image descriptor database image descriptors individually. A match is found if the second nearest neighbor is closer than 0.7 $\times$ NN. In other words, SURF uses the nearest neighbour ratio mathcing strategy. Geometric verification is used to reduce the amount of false positives. Matching requires fast indexing and additionally storing the sign of the Laplacian for the interest point speeds up searches. The 'Fast-Hessian' detector in the SURF paper was found to be three times faster than the DoG detector by Lowe used in SIFT. SURF improved over SIFT in recall by $4.5\%$. \cite{Bay2006}
 
 \subsubsection{KAZE Features}
-KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no down-sampling of the scale space like in SIFT. The computation time is similar to SIFT but slower than SURF. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundaries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. For KAZE features one must
+A more recent feature detection and description method introduced Alcantarilla et. al in \cite{Alcantarilla2012} improves especially on the difference of gaussians detection method of SIFT. The name KAZE, Japanese for wind, is a tribute to Iijima, inventor of scale space analysis. KAZE improves SIFT with nonlinear diffusion filtering in place of the difference of Gaussians scale space for detecting relevant features. Nonlinear diffusion filtering maintains or enhances edges \cite{Weickert1998}. There is no down-sampling of the scale space like in SIFT. The computation time is similar to SIFT but slower than SURF. KAZE especially improves $\mathcal{R}$ over SIFT and SURF sometimes improving by 40\%. Gaussian blurring in Gaussian scale space blurs detail and noise alike. Nonlinear diffusion filtering by Additive Operator Scaling however builds the scale space in a way which that reduces noise and leaves object boundaries unblurred leading to improved localization accuracy and distinctiveness. Computation time is comparable to SIFT and slower than SURF. For KAZE features one must
 \begin{enumerate}
 \item build nonlinear scale space using Additive Operator Splitting
 \item detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scale space
 \item compute M-SURF descriptor orientation and scale from first order image derivatives.
 \end{enumerate}
-According to \cite{Alcantarilla2013} nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter. When $t$ is large, the filtered image is simpler.
+According to \cite{Alcantarilla2013} nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter. According to  \cite{Alcantarilla2012} as $t$ grows, the filtered image is simplified.
 \begin{equation}
   \label{nonlineareq}
   \frac{\partial L}{\partial t} = \nabla \cdot c(x,y,t)\cdot\nabla L
 \end{equation}
-\cite{Alcantarilla2012}
-The conductivity function eq. \ref{conductivityfunceq} has the image gradient magnitude controlling the diffusion
+
+The conductivity function (eq. \ref{conductivityfunceq}) has the image gradient magnitude controlling the diffusion
 \begin{equation}
   \label{conductivityfunceq}
 c(x,y,t)=g(\abs{\nabla L_\sigma(x,y,t)})
