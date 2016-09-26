@@ -688,7 +688,7 @@ Perona and Malik covered several conductivity functions in \cite{Perona1990} and
   \label{gtwoeq}
 g_2 = \frac{1}{1 + \frac{\abs{\nabla L_\sigma}^{2}}{\lambda^{2}}}
 \end{equation}
-According to \cite{Weickert1998}, $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased.
+According to \cite{Weickert1998}, $\nabla L_{\sigma}$ can be regarded as the edge detector where if $\abs{\nabla L_{\sigma}} > \lambda$ an edge has been encountered. If $\abs{\nabla L_{\sigma}} < \lambda$ we are dealing with a region and diffusivity (filtering) is increased. For queries the original KAZE paper \cite{Alcantarilla2012}, like SURF in \cite{Bay2006} employ the nearest neighbor distance ratio. High quality matches between two images are then filtered for outliers.
 
 \subsubsection{Accelerated KAZE Features}
 The main drawback of KAZE features is building the nonlinear scale space by nonlinear diffusion filtering.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires solving a large system of linear equations, which is computationally intensive. A-KAZE features solves this problem by replacing AOS in KAZE with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
