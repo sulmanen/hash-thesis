@@ -766,7 +766,7 @@ NN(x) = arg \min_{y\in Y}\norm{x-y}^2
 \subsubsection{Locality Sensitive Hashing}
 The original SIFT descriptor has 128 dimensions \cite{Lowe1999}.  The SURF descriptor has 64 dimensions. Since the Nearest Neighbor search (eq. \ref{nneq}) time complexity is dependent on the descriptor dimension $d$, a search in 5 million images scales linearly (poorly). Locality Sensitive Hashing was developed to solve this ''curse of dimensionality'', where $d > 3$ for NN search \cite{Gionis1999}. LSH scales well for $d > 50$ \cite{Gionis1999}. We will only cover the main idea behind the LSH family of methods. A review of the state of the art in 2008 can be found in \cite{Andoni2008}. Finding optimal hash functions for LSH applications has attracted much more recently so we examine \emph{Optimal LSH for Angular Distance} \cite{Andoni2015} by Andoni et al. from 2015.
 
-For hash function $g$ to be Locality-Sensitive, the probability of collision is higher for points that are nearby than for those that are fare away \cite{Andoni2015}. Hash function quality can be described by $p_1$, the collision probability for points close to each other and $p_2$ the collision probability for distant points \cite{Andoni2015}. Naturally difference between $p_1$ and $p_2$ characterizes hash function reactivity to changes in distance better described by $\rho$ (eq. \ref{lshsensitivity}).
+For hash function $g$ to be Locality-Sensitive, the probability of collision is higher for points that are nearby than for those that are far away \cite{Andoni2015}. Hash function quality can be described by $p_1$, the collision probability for points close to each other and $p_2$ the collision probability for distant points \cite{Andoni2015}. Naturally difference between $p_1$ and $p_2$ characterizes hash function reactivity to changes in distance better described by $\rho$ (eq. \ref{lshsensitivity}).
 \begin{equation}
   \label{lshsensitivity}
   \rho = \frac{log\frac{1}{p_1}}{log\frac{1}{p_2}}
@@ -1146,6 +1146,88 @@ Computational cost is interesting weighing NDID systems against one another. We 
 
 We also need to know how the classifiers perform against one another, report and analyze the results. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. More recently, precision and recall have been identified to be biased as they concentrate only on the +R and +P columns of the contingency matrix leaving out true negatives (TN) \cite{POWERS2011}.
 
+\subsection{Duplicate Detection Simulations}
+Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a -P-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
+
+We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
+
+\subsubsection{Paintings Dataset}
+Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
+
+An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
+
+To test for images not in the set we pick 1708 images from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
+
+\def\arraystretch{1.5}
+\begin{table}[htb]
+\caption{Test image datasets from the ''Recognition of Object Instances Practical'' \cite{Vedaldi2012} paintings image set generated via shell scripts. Not in database dataset sampled in random from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.}
+\label{modifiedimages}
+\begin{center}
+\begin{tabular}{lp{0.5\linewidth}}
+  Modification & Motivation \\
+  \hline \hline
+  53\% Scale& Simulate responsive site case where image has a scaled duplicate. Choose prime percentage to avoid multiple of two to push scaler to produce uneven results.\\
+  \hline
+  83\% Scale& See above \\
+  \hline
+  Crop 10px & Simulate cropping image by 10px or removing a border for example\\
+  \hline
+  10\% Border & Adding a border to a known image \\
+  \hline
+  Rotate 10\% & User corrects the horizon of a photo \\
+  \hline
+  Normalize Histogram & User normalizes the histogram of a photo\\
+  \hline
+  Saturate Colors & User decides to modify the color palette of the image or photo\\
+  \hline
+  Not in database & Does the system classify images correctly as not in database?\\
+\end{tabular}
+\end{center}\end{table}
+
+The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain.
+
+\subsubsection{ThingLink Dataset}
+The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
+
+This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
+
+\subsubsection{Perceptual Hashing Simulation}
+An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by the exactly the same code running on ThingLink. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
+
+We do not know how varying the Hamming Distance affects classifier performance. As a result we will run all sets for Hamming Distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
+
+Images with dimensions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
+
+\subsubsection{Local Features Simulation}
+Simulation code is based on the code in ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near-duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
+
+Unexpectedly, the -P dataset on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
+
+In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the -P dataset. If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$.
+
+\begin{figure}[htb]
+\begin{center}
+  \includegraphics[height=7cm]{figures/vedaldigenindex}
+\end{center}
+\caption{Build image database for the local features-classifier simulations according to \cite{Vedaldi2012}}
+\label{vedaldigenindex}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=6cm]{figures/vedaldiquery}
+\end{center}
+\caption{Image query in local features-classifier simulations according to \cite{Vedaldi2012}. For NDID $n=1$.}
+\label{vedaldiquery}
+\end{figure}
+
+\subsubsection{Computational Cost}
+Knowing roughly how much resources are needed for the NDID system is a basis for a rough cost estimate. CPU time and memory footprint of the hashes in the case of perceptual hashes and image descriptors for Local Features NDID. We will run the 53\% duplicate set and record the time it takes to calculate the descriptor/hash, the final memory footprint of the descriptor/hash. The query time for both the Paintings-, and the ThingLink datasets as well as the total database size in memory will also be recorded. The image databases are roughly $\frac{1}{3}$ in relative size so it should give insight into how computational cost of a single query varies with image database size. The system for these simulations is a Matlab version R2016a was used for simulations on an Intel Xeon E31230 3.20GHz with 8GB RAM on a 4.4.0 x86\_64 GNU/Linux Kernel.
+
+For the perceptual hashes, the memory footprint for a single hash is well known to be 64 bits, the size of the hash. The size of the image database will be a multiple of this hash size. For the Local Features case, we will use the descriptor size of a single index in the inverted index, which contains one double for each word in the visual vocabulary, $1\times10^6$ words in our case. In addition to the descriptors the database contains metadata describing the descriptor database.
+
+For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary ($32 bits \times 128 \times 10^6$) is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
+
 \subsection{Evaluating Binary Classifiers}
 ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
 
@@ -1277,87 +1359,6 @@ To address statistical significance in comparing binary classifiers, the Simple 
 However, Fisher's Exact Test assumes data to be hypergeometrically distributed meaning all assignments to the contingency matrix cells are considered equally likely, with Bias and Prevalence as given. However, since Bias and Prevalence are assigned as a result of the experiment, not before hand, the assumptions made by Fisher's Exact Test are inappropriate for this problem. We will keep this in mind when evaluating the p-values.
 We will put the classifier results from the Local Features simulations in one row and the results from either DCT-, or Simple Hash NDID on the other row and run the Fisher Exact test. The null hypothesis $H_0$ is ''the systems are the same'' and we will use $\alpha < 0.05$ meaning the $H_0$ is rejected if it's probability based on the results is less than 5\%.
 
-\subsection{Duplicate Detection Simulations}
-Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a -P-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
-
-We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
-
-\subsubsection{Paintings Dataset}
-Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
-
-An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
-
-To test for images not in the set we pick 1708 images from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} and run those images against the paintings set. This will look for a $fp_{rate}$ rate with images that are not in the data set.
-
-\def\arraystretch{1.5}
-\begin{table}[htb]
-\caption{Test image datasets from the ''Recognition of Object Instances Practical'' \cite{Vedaldi2012} paintings image set generated via shell scripts. Not in database dataset sampled in random from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.}
-\label{modifiedimages}
-\begin{center}
-\begin{tabular}{lp{0.5\linewidth}}
-  Modification & Motivation \\
-  \hline \hline
-  53\% Scale& Simulate responsive site case where image has a scaled duplicate. Choose prime percentage to avoid multiple of two to push scaler to produce uneven results.\\
-  \hline
-  83\% Scale& See above \\
-  \hline
-  Crop 10px & Simulate cropping image by 10px or removing a border for example\\
-  \hline
-  10\% Border & Adding a border to a known image \\
-  \hline
-  Rotate 10\% & User corrects the horizon of a photo \\
-  \hline
-  Normalize Histogram & User normalizes the histogram of a photo\\
-  \hline
-  Saturate Colors & User decides to modify the color palette of the image or photo\\
-  \hline
-  Not in database & Does the system classify images correctly as not in database?\\
-\end{tabular}
-\end{center}\end{table}
-
-The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain.
-
-\subsubsection{ThingLink Dataset}
-The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
-
-This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
-
-\subsubsection{Perceptual Hashing Simulation}
-An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by the exactly the same code running on ThingLink. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
-
-We do not know how varying the Hamming Distance affects classifier performance. As a result we will run all sets for Hamming Distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
-
-Images with dimensions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
-
-\subsubsection{Local Features Simulation}
-Simulation code is based on the code in ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near-duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
-
-Unexpectedly, the -P dataset on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
-
-In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the -P dataset. If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$.
-
-\begin{figure}[htb]
-\begin{center}
-  \includegraphics[height=7cm]{figures/vedaldigenindex}
-\end{center}
-\caption{Build image database for the local features-classifier simulations according to \cite{Vedaldi2012}}
-\label{vedaldigenindex}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=6cm]{figures/vedaldiquery}
-\end{center}
-\caption{Image query in local features-classifier simulations according to \cite{Vedaldi2012}. For NDID $n=1$.}
-\label{vedaldiquery}
-\end{figure}
-
-\subsubsection{Computational Cost}
-Knowing roughly how much resources are needed for the NDID system is a basis for a rough cost estimate. CPU time and memory footprint of the hashes in the case of perceptual hashes and image descriptors for Local Features NDID. We will run the 53\% duplicate set and record the time it takes to calculate the descriptor/hash, the final memory footprint of the descriptor/hash. The query time for both the Paintings-, and the ThingLink datasets as well as the total database size in memory will also be recorded. The image databases are roughly $\frac{1}{3}$ in relative size so it should give insight into how computational cost of a single query varies with image database size. The system for these simulations is a Matlab version R2016a was used for simulations on an Intel Xeon E31230 3.20GHz with 8GB RAM on a 4.4.0 x86\_64 GNU/Linux Kernel.
-
-For the perceptual hashes, the memory footprint for a single hash is well known to be 64 bits, the size of the hash. The size of the image database will be a multiple of this hash size. For the Local Features case, we will use the descriptor size of a single index in the inverted index, which contains one double for each word in the visual vocabulary, $1\times10^6$ words in our case. In addition to the descriptors the database contains metadata describing the descriptor database.
-
-For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary ($32 bits \times 128 \times 10^6$) is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
 \clearpage
 
 \section{Simulation Results}
