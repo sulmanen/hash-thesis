@@ -1151,7 +1151,7 @@ Paintings dataset from the ''Recognition of object instances practical'' \cite{V
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
 
-\subsubsection{Paintings Dataset}
+\subsubsection{Paintings Dataset Description}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
 An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
@@ -1186,7 +1186,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 
 The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain.
 
-\subsubsection{ThingLink Dataset}
+\subsubsection{ThingLink Dataset Description}
 The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
 
 This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
@@ -1228,13 +1228,17 @@ For the perceptual hashes, the memory footprint for a single hash is well known 
 
 For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary ($32 bits \times 128 \times 10^6$) is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
 
+\subsection{Binary Classifier}
+
 \subsection{Evaluating Binary Classifiers}
 ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
 
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classifiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
 
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
 \subsubsection{Receiver Operating Characteristic}\label{ROCSection}
-Receiver operating characteristic \(ROC\) curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR. The negative diagonal
+According to \cite{Fan2006} ''Receiver operating characteristic'' (ROC) was first used by World War \RNum{2} radar operators reading the radar screen to discriminate between signal and noise. ROC-curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR. The negative diagonal
 \begin{equation}\label{biastoprevalence}
 tpr + c\times fpr=1
 \end{equation}
