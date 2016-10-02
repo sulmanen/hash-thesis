@@ -1,19 +1,17 @@
-Calculation demands
---------------------
-SIFT
-DCT
-SIMPLE
-
 
 Precision recall small multiples
 --------------------------------
 
+ROC small multiples
+-------------------
 
-Add the TN set effects on FPR and statistical significance
-----------------------------------------------------------
-
-
-Discussion
----------------------------------------
+Add section about duplicate image detection with local features
+------------------------------------------------------
 
 
+Duplicate image detection as binary classifier
+----------------------------------------------
+
+
+Add the rest of the Hamming Distances to the tests
+--------------------------------------------------
