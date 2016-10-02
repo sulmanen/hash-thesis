@@ -1228,9 +1228,17 @@ For the perceptual hashes, the memory footprint for a single hash is well known 
 
 For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary ($32 bits \times 128 \times 10^6$) is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
 
-\subsection{Binary Classifier}
+\subsection{Near-duplicate image detection as binary classification}
 
-\subsection{Evaluating Binary Classifiers}
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[height=6cm]{figures/contingency}
+\end{center}
+\caption{Contingency table for binary classification. Green areas are correctly classified. Red areas contain incorrectly classified items. \emph{TP, FP, TN, FN} total N, the size of the test set.}
+\label{figcontingencytable}
+\end{figure}
+
+\subsection{Evaluation of Binary Classifiers}
 ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
 
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classifiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
