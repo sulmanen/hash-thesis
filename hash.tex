@@ -430,22 +430,11 @@ This paper considers near-duplicate detection excluding all other uses of percep
 
 \clearpage
 
-\section{Near-Duplicate Image Detection with Perceptual Hashing and \\Large-Scale Image Retrieval via Local Features}
+\section{Perceptual Hashing and Near-Duplicate Image Detection}\label{perceptualhash}
 To what degree if any is object instance recognition by local features an improvement over DCT-, and simple perceptual hashes for near-duplicate image detection? ThingLink requirements for a classifier are a high true positive rate (TPR), a high true negative rate (TNR), and a low false positive rate (FPR) of images at different scales. A customer is reporting 20-30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
 
-Near-duplicate image definitions vary according to the problem at hand. At one extreme are ''pixel perfect'' matches while methods for matching images of the same scene or object lie at the other extreme. The Simple Hash and DCT Hash are perceptual hashes in use at ThingLink every day. To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image.
+Near-duplicate image definitions vary according to the problem at hand. At one extreme are ''pixel perfect'' matches while methods for matching images of the same scene or object lie at the other extreme. The Simple Hash and DCT Hash are perceptual hashes in use at ThingLink every day.
 
-Object instance recognition by local features is a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted in the image. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Object instance recognition works especially well for processed duplicate images, the case we are trying to solve.
-
-To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head-to-head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
-
-We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy object instance recognition at a scale of 5 million images at ThingLink for improved near-duplicate detection?
-
-Object instance recognition is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
-
-\clearpage
-
-\subsection{Perceptual Hashing} \label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
 In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations. More precisely perceptual hash
@@ -491,7 +480,7 @@ In addition, according to \cite{mihccak2001new} given $P$ as probability and $L$
 The distance function used in finding a near duplicate for a perceptual hash in this paper is the Hamming Distance.
 \clearpage
 
-\subsubsection{Hamming Distance}\label{HammingSection}
+\subsection{Hamming Distance}\label{HammingSection}
 According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $q \in A$ and $d \in A$ is
 \begin{equation}\label{hammingeq}
 \Delta(q,d):=\sum_{q_i\neq d_i}1\quad,\quad i=1,\ldots,n
@@ -514,7 +503,7 @@ In other words, it is the number of characters two strings differ. In binary str
 \end{tabular}
 \end{center}\end{table}
 
-\subsubsection{Block mean based simple hash}\label{simplehash}
+\subsection{Block mean based simple hash}\label{simplehash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Then thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
 \begin{equation} \label{simplehasheq}
   \begin{split}
@@ -535,7 +524,7 @@ A simple hash is easy to understand, implement and fast to calculate so it meets
 
 Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A Hamming Distance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the Hamming Distance.
 
-\subsubsection{DCT based hash}
+\subsection{DCT based hash}
 According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromise between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
 To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. $N=32$ DCT (eq. \ref{dcteq}) is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
@@ -562,6 +551,17 @@ The image is scaled down to 32 by 32 px gray scale and the most significant byte
 \caption{Discrete-cosine basis functions for $N = 4$. The lighter the color, the larger the value. \cite[p. 473]{Gonzalez2002}}
 \label{dctkernels}
 \end{figure}
+
+\section{Large-Scale Image Retrieval and Near-Duplicate Image Detection}
+To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image, and using the result to detect near-duplicate images.
+
+Object instance recognition by local features is a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted in the image. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Object instance recognition works especially well for processed duplicate images, the case we are trying to solve.
+
+To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head-to-head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
+
+We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy object instance recognition at a scale of 5 million images at ThingLink for improved near-duplicate detection?
+
+Object instance recognition is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
 \subsection{Feature Detection and Description}
 We attempt to improve near-duplicate detection with perceptual hashing by raising the abstraction level from image pixels-based hashes to the object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. We expect to improve over perceptual hashing which should withstand scaling well. However, they are weak under image transformations that alter the relationships between spatial pixel values such as rotation and adding and removing from the image.
