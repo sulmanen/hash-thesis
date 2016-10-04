@@ -504,7 +504,7 @@ In other words, it is the number of characters two strings differ. In binary str
 \end{center}\end{table}
 
 \subsection{Block mean based simple hash}\label{simplehash}
-According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Then thresholding takes place where the average value of the most significant byte (MSB) is found and hash bits are set to one if the image pixel MSB is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
+According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
 \begin{equation} \label{simplehasheq}
   \begin{split}
   b_{i} = 1 | I_{msB}(u,v) > px_{avg}\\
