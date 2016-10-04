@@ -738,7 +738,7 @@ As desrcribed in \cite{Alcantarilla2012}, after detection the precise interest p
 
 \clearpage
 
-\subsection{Large Scale Image Retrieval}
+\subsection{Retrieval}
 ThingLink hosts 5 Million annotated scenes. Large Scale Image Retrieval is an umbrella term for using an image to query for object-, scene-, category-, or duplicate amongst millions of images. In \cite{Wang2013} Wang et. al query near-duplicates amongst billions of images. However, their approach used batch processing. We are interested in a smaller scale and preferably near realtime implementations. Some of the more important limitations witht the near realtime case have to do with fitting the database into main memory for a OTS hardware. When all the descriptors in the database do not fit into system RAM, the efficiency of the retrieval system collapses due to disk access \cite{Philbin2007}. In order to match among numerous of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search \cite{Jegou2010} optimizes the descriptor format for memory footprint optimization and computation speed.
 
 Detection and description of features covered finding interesting points in an object or scene and creating a serialization, an image descriptor to add to the database of all known images. This section covers efficient querying in that database possibly consisting of millions of images. Finding an image duplicate is a special simplified case where the highest result is assumed to contain the duplicate. The first step after calculating the descriptor for a query image is finding the nearest neighbors for each descriptor in the database. The SIFT descriptor is usually 128 dimensional, which makes the NN-search especially challenging.
