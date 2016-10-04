@@ -421,16 +421,16 @@ This paper considers near-duplicate detection excluding all other uses of percep
 
 \subsection{Research Questions}
 \begin{itemize}
-\item[--] To what degree if any is object instance recognition by local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection?
+\item[--] To what degree if any is local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection?
 \item[--] What is a good Hamming Distance $\Delta(q,d)$ to use for near-duplicate image detection by perceptual hashing?
-\item[--] What is a good cutoff score $\mathcal{C}_s$ to classify an image a true negative in near-duplicate image detection with local features?
-\item[--] In theory, can object instance recognition by local features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
+\item[--] What is a good cutoff score $\mathcal{C}_s$ to classify an image a true negative in near-duplicate image detection with Local Features?
+\item[--] In theory, can Local Features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 \end{itemize}
 
 \clearpage
 
 \section{Perceptual Hashing}\label{perceptualhash}
-To what degree if any is object instance recognition by local features an improvement over DCT-, and simple perceptual hashes for near-duplicate image detection? ThingLink requirements for a classifier are a high true positive rate (TPR), a high true negative rate (TNR), and a low false positive rate (FPR) of images at different scales. A customer is reporting 20-30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
+To what degree if any is local features an improvement over DCT-, and simple perceptual hashes for near-duplicate image detection? ThingLink requirements for a classifier are a high true positive rate (TPR), a high true negative rate (TNR), and a low false positive rate (FPR) of images at different scales. A customer is reporting 20-30\% false negatives for DCT hash and reporting that the simple hash is also missing too many images though we do not have the exact numbers. We attempt to widen the duplicate image definition from pixel matches to detecting the same scene or object in an image to reduce false negatives.
 
 Near-duplicate image definitions vary according to the problem at hand. At one extreme are ''pixel perfect'' matches while methods for matching images of the same scene or object lie at the other extreme. The Simple Hash and DCT Hash are perceptual hashes in use at ThingLink every day.
 
@@ -554,13 +554,13 @@ The image is scaled down to 32 by 32 px gray scale and the most significant byte
 \section{Large-Scale Image Retrieval}
 To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image, and using the result to detect near-duplicate images.
 
-Object instance recognition by local features is a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted in the image. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Object instance recognition works especially well for processed duplicate images, the case we are trying to solve.
+Local Features are a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted in the image. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Local features works especially well for processed duplicate images, the case we are trying to solve.
 
 To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head-to-head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
 
-We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy object instance recognition at a scale of 5 million images at ThingLink for improved near-duplicate detection?
+We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy Local Features at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 
-Object instance recognition is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
+Local Features is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
 \subsection{Feature Detection and Description}
 We attempt to improve near-duplicate detection with perceptual hashing by raising the abstraction level from image pixels-based hashes to the object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. We expect to improve over perceptual hashing which should withstand scaling well. However, they are weak under image transformations that alter the relationships between spatial pixel values such as rotation and adding and removing from the image.
