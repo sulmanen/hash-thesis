@@ -456,6 +456,7 @@ is the result of the hash function $H$ taking the image $I$ as input. $H$ has th
   \bottomrule
 \end{tabular}
 \end{center}\end{table}
+\clearpage
 In addition, according to \cite{mihccak2001new} given $P$ as probability and $L$ as the length of the hash, the hash function $H(I)$ (eq. \ref{hashfunction}) should
 \begin{enumerate}
 \item Distribute hashes equally:\\
@@ -477,7 +478,6 @@ In addition, according to \cite{mihccak2001new} given $P$ as probability and $L$
   \end{equation}
 \end{enumerate}
 The distance function used in finding a near duplicate for a perceptual hash in this paper is the Hamming Distance.
-\clearpage
 
 \subsection{Block Mean Based Simple Hash}\label{simplehash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
