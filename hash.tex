@@ -1261,33 +1261,16 @@ We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for outp
 \label{figrocspace}
 \end{figure}
 
-\begin{equation}\label{FPR}
-FPR = \frac{FP}{FP + TN}
-\end{equation}
-\begin{equation}\label{TPR}
-TPR = \frac{TP}{TP + FN}
-\end{equation}
-
-\begin{equation}\label{FNR}
-FNR = Miss rate = \frac{FN}{RN}
-\end{equation}
-
-\begin{equation}\label{precision}
-Precision = Confidence = \frac{TP}{TP + FP}
-\end{equation}
-
-\begin{equation}\label{recall}
-Recall = Sensitivity = \frac{TP}{TP + FN}
-\end{equation}
-
-\begin{equation}\label{accuracy}
-Accuracy = \frac{TP + TN}{P + N} = \frac{TP +TN}{TP + FP + TN + FN}
-\end{equation}
-
-\begin{equation}\label{fmeasure}
-F_1 = \frac{2 \times TP}{TP + FP + 1}
-\end{equation}
-
+\setlength{\jot}{10pt}
+\begin{align}
+FPR &= \frac{FP}{FP + TN}\label{FPR}\\
+TPR &= \frac{TP}{TP + FN}\label{TPR}\\
+FNR &= \frac{FN}{RN}\label{FNR}\\
+Precision &= \frac{TP}{TP + FP}\label{precision}\\
+Recall &= \frac{TP}{TP + FN}\label{recall}\\
+Accuracy &= \frac{TP +TN}{TP + FP + TN + FN}\label{accuracy}\\
+F_1 &= \frac{2 \times TP}{TP + FP + 1}\label{fmeasure}
+\end{align}
 The f-measure (eq. \ref{fmeasure}) is the harmonic mean of precision (eq. \ref{precision}) and recall (eq. \ref{recall}). It has been used in to compare classifiers in document retrieval and machine learning.
 
 \subsubsection{Precision-Recall}\label{PRSection}
@@ -1315,40 +1298,22 @@ Precision, Recall, F-Factor, and Accuracy are biased and should be used only if 
 
 The positive row and column of the contingency matrix (fig. \ref{figconfusion}) may be inversed to form statistics about the negative case. Inverse recall (eq. \ref{inverserecall}) is the fraction of real negatives that are predicted negative, which is analogous to the TNR. Inverse precision (eq. \ref{inverseprecision}) is the fraction of predicted negative cases classified as real negatives. \cite{POWERS2011}
 
-\begin{equation}\label{inverserecall}
-Inverse\quad Recall = TN / (TN + FP)
-\end{equation}
-
-\begin{equation}\label{inverseprecision}
-Inverse\quad Precision = TN / (FN + TN)
-\end{equation}
-
-\begin{equation}\label{jaccard}
-Jaccard = TP / (TP + FN + FP)
-\end{equation}
-
-\begin{equation}\label{prevalence}
-prevalence = RP / N
-\end{equation}
-
-\begin{equation}\label{bias}
-bias = PP / N
-\end{equation}
-
-\begin{equation}\label{skew}
-skew = RN / RP
-\end{equation}
+\begin{align}
+Recall^{-1} &= \frac{TN}{TN + FP}\label{inverserecall}\\
+Precision^{-1} &= \frac{TN}{FN + TN} \label{inverseprecision}\\
+Jaccard &= \frac{TP}{TP + FN + FP}\label{jaccard}\\
+prevalence &= \frac{RP}{N}\label{prevalence}\\
+bias &= \frac{PP}{N}\label{bias}\\
+skew &= \frac{RN}{RP}\label{skew}
+\end{align}
 \emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}. $rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
 
-An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance. For the binary case, it was first developed by Youden and is called Youden's J statistic. We will continue to use informedness, for this paper however. It may be used to find the optimum tuning on a ROC curve. \cite{POWERS2011}. Complimentary to
-\begin{equation}\label{informedness}
-Informedness = DeltaP' = Recall + Inverse\quad Recall - 1 = 1 - fnr - fpr
-\end{equation}
-is
-\begin{equation}\label{markedness}
-Markedness = DeltaP = Precision + Inverse\quad Precision - 1 = 1 - fpa - fna
-\end{equation}
-which is ''a measure of how consistently the outcome has the predictor as a marker by combining surfaces measures about what proportion of predictions are correct \cite{POWERS2011}''.
+An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance. For the binary case, it was first developed by Youden and is called Youden's J statistic. We will continue to use informedness, for this paper however. It may be used to find the optimum tuning on a ROC curve. \cite{POWERS2011}.
+\begin{align}
+Informedness &= 1 - fnr - fpr\label{informedness}\\
+Markedness &= 1 - fpa - fna\label{markedness}
+\end{align}
+Markedness (eq. \ref{markedness}) is ''a measure of how consistently the outcome has the predictor as a marker by combining surfaces measures about what proportion of predictions are correct \cite{POWERS2011}''.
 It has its roots in the psychology and linguistics. A marker or predictor (biomarker or neuromarker) is an indicator we use to determine how our classification task succeeded. For example, in our simulations, the filename of the image is a marker. If the retrieved file for a duplicate query is contained in the query image filename, we have a TP. The Pearson product-moment correlation coefficient $-1 \leq \rho \leq +1$ is a measure of linear dependence between two variables. The contingency matrix method for calculating $\rho$ is Matthews correlation $r_G$ which is the Geometric mean of \emph{Informedness} and \emph{Markedness}
 \begin{equation}\label{matthewscorrelation}
 r_G = \pm \sqrt{Informedness \times Markedness}
