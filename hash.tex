@@ -562,7 +562,7 @@ We will review state-of-the-art large scale image retrieval and it's use in near
 
 Local Features is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
 
-\subsection{Feature Detection and Description}
+\subsection{Detection and Description of Local Features}
 We attempt to improve near-duplicate detection with perceptual hashing by raising the abstraction level from image pixels-based hashes to the object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. We expect to improve over perceptual hashing which should withstand scaling well. However, they are weak under image transformations that alter the relationships between spatial pixel values such as rotation and adding and removing from the image.
 
 Local features however identify an object in the image by a large amount of scale-, illumination-, noise- and affine distortion invariant local features. Synonyms for Local Features are many in literature. David Lowe used \emph{keypoint} in \cite{Lowe2004}, a seminal work in the field. In describing \emph{Speeded Up Robust Features}, \emph{interest points} is used. Sivic and Zisserman refer to \emph{viewpoint invariant regions}. In this paper we will use \emph{local features} and the short version \emph{feature}. \emph{Feature} detectors and descriptors have been widely developed during the past decade. Object- or scene retrieval, or in our case, near-duplicate image retrieval using local features generally takes the following steps:
