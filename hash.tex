@@ -479,30 +479,7 @@ In addition, according to \cite{mihccak2001new} given $P$ as probability and $L$
 The distance function used in finding a near duplicate for a perceptual hash in this paper is the Hamming Distance.
 \clearpage
 
-\subsection{Hamming Distance}\label{HammingSection}
-According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $q \in A$ and $d \in A$ is
-\begin{equation}\label{hammingeq}
-\Delta(q,d):=\sum_{q_i\neq d_i}1\quad,\quad i=1,\ldots,n
-\end{equation}
-In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by perceptual hashing by comparing the incoming image hash and the hashes in the database by equation \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
-
-\begin{table}[htb]
-\caption{Hamming Distance for strings.}
-\label{hammingexamples}
-\begin{center}
-  \begin{tabular}{ccr}
-&&$\Delta(q,d)$\\
-    \hline \hline
-    101 & 111 & 1\\
-    \hline
-    123 & 321 & 2\\
-    \hline
-    foo & bar & 3\\
-    \hline
-\end{tabular}
-\end{center}\end{table}
-
-\subsection{Block mean based simple hash}\label{simplehash}
+\subsection{Block Mean Based Simple Hash}\label{simplehash}
 According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
 \begin{equation} \label{simplehasheq}
   \begin{split}
@@ -523,8 +500,8 @@ A simple hash is easy to understand, implement and fast to calculate so it meets
 
 Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A Hamming Distance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the Hamming Distance.
 
-\subsection{DCT based hash}
-According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromise between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
+\subsection{DCT Based Hash}
+According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromise between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash (DCT Hash) is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT Hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
 To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. $N=32$ DCT (eq. \ref{dcteq}) is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
 
@@ -550,6 +527,29 @@ The image is scaled down to 32 by 32 px gray scale and the most significant byte
 \caption{Discrete-cosine basis functions for $N = 4$. The lighter the color, the larger the value. \cite[p. 473]{Gonzalez2002}}
 \label{dctkernels}
 \end{figure}
+\subsection{Hamming Distance}\label{HammingSection}
+According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $q \in A$ and $d \in A$ is
+\begin{equation}\label{hammingeq}
+\Delta(q,d):=\sum_{q_i\neq d_i}1\quad,\quad i=1,\ldots,n
+\end{equation}
+In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by comparing the incoming image hash and the hashes in the database by equation \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
+
+\begin{table}[htb]
+\caption{Hamming Distance for strings.}
+\label{hammingexamples}
+\begin{center}
+  \begin{tabular}{ccr}
+&&$\Delta(q,d)$\\
+    \hline \hline
+    101 & 111 & 1\\
+    \hline
+    123 & 321 & 2\\
+    \hline
+    foo & bar & 3\\
+    \hline
+\end{tabular}
+\end{center}\end{table}
+
 
 \section{Large-Scale Image Retrieval}
 To improve on detection accuracy we raise the abstraction level from image pixel based hashes to detecting the scene or object in the image, and using the result to detect near-duplicate images.
@@ -1150,8 +1150,8 @@ Paintings dataset from the ''Recognition of object instances practical'' \cite{V
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
 
-\subsubsection{Paintings Dataset}
-Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
+\subsubsection{Datasets}
+We will use two datasets in this study. The Paintings Dataset and the ThingLink Dataset. The Paintings Dataset is from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case. The ThingLink Dataset is sampled from ThingLink.
 
 An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
 
@@ -1183,10 +1183,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \end{tabular}
 \end{center}\end{table}
 
-The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain.
-
-\subsubsection{ThingLink Dataset}
-The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
+The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain. The ThingLink dataset on the other hand consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
 
 This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
 
