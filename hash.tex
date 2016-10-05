@@ -532,7 +532,7 @@ According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$
 \begin{equation}\label{hammingeq}
 \Delta(q,d):=\sum_{q_i\neq d_i}1\quad,\quad i=1,\ldots,n
 \end{equation}
-In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by comparing the incoming image hash and the hashes in the database by equation \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
+In other words, it is the number of characters two strings differ. In binary strings it is the number of bits by which two binary numbers differ. Table \ref{hammingexamples} provides some examples. The Hamming Distance can be used to for content based image retrieval by comparing the incoming image hash and the hashes in the database by eq. \ref{hammingeq}. If the Hamming Distance is within some threshold, the image can be said to be in the database.
 
 \begin{table}[htb]
 \caption{Hamming Distance for strings.}
@@ -671,7 +671,7 @@ A more recent feature detection and description method introduced Alcantarilla e
 \item detect interesting 2D features via maxima of a scale-normalized determinant of Hessian response through the nonlinear scale space
 \item compute M-SURF descriptor orientation and scale from first order image derivatives.
 \end{enumerate}
-According to \cite{Alcantarilla2013} nonlinear diffusion equation (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter. According to  \cite{Alcantarilla2012} as $t$ grows, the filtered image is simplified.
+According to \cite{Alcantarilla2013} nonlinear diffusion (eq. \ref{nonlineareq}) where $L$ is the luminance, $c$ is the conductivity function and by choosing this conductivity function in a good way the diffusion will adapt to the image structure $x, y$ and is dependent also on time $t$, which is the scale parameter. According to  \cite{Alcantarilla2012} as $t$ grows, the filtered image is simplified.
 \begin{equation}
   \label{nonlineareq}
   \frac{\partial L}{\partial t} = \nabla \cdot c(x,y,t)\cdot\nabla L
@@ -969,7 +969,7 @@ The Fisher vector according to \cite{Perronnin2010} can be used to process local
 \begin{equation}\label{fishervector}
  G_\lambda^X = \frac{1}{T}\nabla_\lambda\log u_\lambda(X)
 \end{equation}
-describes $X$ as gradient vector. The dimensionality of $G_\lambda^X$ depends only on the number of parameters in $\lambda$, not on $T$ \cite{Perronnin2010}. As different images have different numbers of interest points, this method allows for images in a database to be represented by codes of equal dimension. Equation \ref{fishervector} describes the direction in which parameters should be adjusted to best fit the model. One may characterize a signal with a gradient vector derived from a generative probability model $u_\lambda$ and to subsequently feed this representation to a discriminative classifier. \cite{Perronnin2007}
+describes $X$ as gradient vector. The dimensionality of $G_\lambda^X$ depends only on the number of parameters in $\lambda$, not on $T$ \cite{Perronnin2010}. As different images have different numbers of interest points, this method allows for images in a database to be represented by codes of equal dimension. Eq. \ref{fishervector} describes the direction in which parameters should be adjusted to best fit the model. One may characterize a signal with a gradient vector derived from a generative probability model $u_\lambda$ and to subsequently feed this representation to a discriminative classifier. \cite{Perronnin2007}
 
 We walk through the formation of the Fisher Vector as done in \cite{Perronnin2010}. The Fisher information matrix of $u_\lambda$ is $F_\lambda$.
 \begin{equation}\label{fishermatrix}
@@ -1077,7 +1077,7 @@ where $i$ is an index for the visual word and $j$ an index for the local descrip
   \end{equation}
 Excellent results can be obtained with a small $k$ \cite{Jegou2014}. We will use $k=256$ in this paper.
 
-To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimension $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in equation \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimensionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
+To decrease the memory footprint of the descriptor and make it efficiently searchable, it should be coded from a dimension $D$ to $B$-bit representation \cite{Jegou2014}. Here were outlining steps 2 and 3 jointly. ADC from section \ref{PQ} in eq. \ref{adceq} which quantizes the database vectors but not the query vector is used as a starting point. Dimensionality reduction is done using the approximation error as a quality measure. It is assumed the mean of $\mathcal{Y}$ to be a null vector.\cite{Jegou2014}
 
 Principal Component Analysis (PCA) transforms observed data into linearly uncorrelated principal components. Were assuming data $\boldsymbol{X} \in \Re^{p}$ to be zero mean, that is eq. \ref{zeromean} holds.
 
@@ -1222,7 +1222,7 @@ Knowing roughly how much resources are needed for the NDID system is a basis for
 
 For the perceptual hashes, the memory footprint for a single hash is well known to be 64 bits, the size of the hash. The size of the image database will be a multiple of this hash size. For the Local Features case, we will use the descriptor size of a single index in the inverted index, which contains one double for each word in the visual vocabulary, $1\times10^6$ words in our case. In addition to the descriptors the database contains metadata describing the descriptor database.
 
-For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary ($32 bits \times 128 \times 10^6$) is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
+For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary $32 \times 128 \times 10^6$ bits is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
 
 \subsection{Binary Classification}
 ''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
@@ -1236,14 +1236,13 @@ For these simulations, the metadata contains information on the original images 
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classifiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
 
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
-
+\clearpage
 \subsubsection{Receiver Operating Characteristic}\label{ROCSection}
 According to \cite{Fan2006} ''Receiver operating characteristic'' (ROC) was first used by World War \RNum{2} radar operators reading the radar screen to discriminate between signal and noise. ROC-curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR. The negative diagonal
 \begin{equation}\label{biastoprevalence}
 tpr + c\times fpr=1
 \end{equation}
 matches Bias to Prevalence where skew is $c$ \cite{POWERS2011}. To compare classifiers in ROC space, we merely choose the point or the curve closest to the top left corner, the point (0, 1).
-
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=8cm]{figures/confusion}
@@ -1304,9 +1303,9 @@ Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}
 
 Recall equals TPR (eq. \ref{recall}, \ref{TPR}) and precision is the TP-count over $TP \cup FP$ (eq. \ref{precision}). If recall $\neq 0$ then there exists a one-to-one correspondence between a ROC and PR curve \cite{Davis2006}. If a curve ''dominates another'' \cite{Provost1997}, that is is completely above the other curve in ROC space it doesn't mean this relationship is transferred into the PR curve. However, vice-versa relationship holds. If a curve dominates another in PR space it also dominates the other curve in ROC space. \cite{Davis2006}
 
-As one can see from equations \ref{precision} and \ref{recall} FN is absent from the PR representation. However, as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
+As one can see from eq. \ref{precision} and \ref{recall} FN is absent from the PR representation. However, as it is the only term of four to be missing, and the other three parameters of the confusion matrix are known, it is trivial to solve for the fourth, FN in this case. \cite{Davis2006}
 
-In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However, in PR space linear interpolations do not hold and have to be calculated according to equation \ref{printerpolate}. \cite{Davis2006}
+In ROC curves it is possible to linearly interpolate between points and the interpolations hold. However, in PR space linear interpolations do not hold and have to be calculated according to eq. \ref{printerpolate}. \cite{Davis2006}
 
 \begin{equation}\label{printerpolate}
 \left(\frac{TP_A+x}{Total Pos}, \frac{TP_A+x}{TP_A+x+FO_A+ \frac{FP_B-FP_A}{TP_B-TP_A}x} \right). \quad \cite{Davis2006}
