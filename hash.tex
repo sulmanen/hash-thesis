@@ -1150,7 +1150,7 @@ Paintings dataset from the ''Recognition of object instances practical'' \cite{V
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
 
-\subsubsection{Paintings Dataset Description}
+\subsubsection{Paintings Dataset}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} of a total of 1708 images (black and white images are excluded) will be used due to near ready scripts and image database for the local features case.
 
 An ImageMagick shell script generates the manipulated duplicates. 53\% and 83\% scales simulate multiple scales of the same image. Photo straightening is simulated by a 10\% rotation. For color manipulation so we will saturate the image by 50\%. Histogram normalization is quite a common operation, so we will use a normalized version of the image to try to find matches. To simulate image cropping, we crop from all sides by $10px$. Adding a border is simulated by making duplicates with a 10px border. Vertical and horizontal flips are excluded as we do not expect our classifiers to perform well on those and they are not realistic use cases anyways.
@@ -1185,19 +1185,19 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 
 The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain.
 
-\subsubsection{ThingLink Dataset Description}
+\subsubsection{ThingLink Dataset}
 The ThingLink dataset consists of 446 images without duplicates exported from ThingLink. This is for comparing the NDID systems for the types of images they are expected to work with in a production environment.
 
 This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files are in the JPEG image format. These images will form the TP-dataset forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
 
-\subsubsection{Perceptual Hashing Simulation}
+\subsubsection{Perceptual Hashing}
 An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by the exactly the same code running on ThingLink. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
 
 We do not know how varying the Hamming Distance affects classifier performance. As a result we will run all sets for Hamming Distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
 
 Images with dimensions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
 
-\subsubsection{Local Features Simulation}
+\subsubsection{Local Features}
 Simulation code is based on the code in ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. The Local Features-Classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words. The index building process is in figure \ref{vedaldigenindex} and near-duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
 
 Unexpectedly, the -P dataset on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
@@ -1227,8 +1227,8 @@ For the perceptual hashes, the memory footprint for a single hash is well known 
 
 For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary ($32 bits \times 128 \times 10^6$) is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
 
-\subsection{Near-duplicate image detection as binary classification}
-
+\subsection{Binary Classification}
+''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=6cm]{figures/contingency}
@@ -1236,10 +1236,6 @@ For these simulations, the metadata contains information on the original images 
 \caption{Contingency table for binary classification. Green areas are correctly classified. Red areas contain incorrectly classified items. \emph{TP, FP, TN, FN} total N, the size of the test set.}
 \label{figcontingencytable}
 \end{figure}
-
-\subsection{Evaluation of Binary Classifiers}
-''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
-
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classifiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
 
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
