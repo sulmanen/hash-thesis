@@ -1134,7 +1134,7 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 
 \clearpage
 
-\section{Near-Duplicate Image Detection: Perceptual Hashing vs. Local Features} \label{mame}
+\section{Near-Duplicate Image Detection} \label{mame}
 We expect the Local Features-classifier to outperform perceptual hashing for NDID. However, to begin implementing near similar image detection improvements we need to certain local features is an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
 A test set of images and modified near-duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database, a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
@@ -1145,7 +1145,7 @@ Computational cost is interesting weighing NDID systems against one another. We 
 
 We also need to know how the classifiers perform against one another, report and analyze the results. Receiver operating characteristics (ROC) (section \ref{ROCSection}) have been useful for visualizing classifier performance \cite{Fawcett2006}, however they were found not to be as precise and useful as PR curves by \cite{Davis2006}. More recently, precision and recall have been identified to be biased as they concentrate only on the +R and +P columns of the contingency matrix leaving out true negatives (TN) \cite{POWERS2011}.
 
-\subsection{Duplicate Detection Simulations}
+\subsection{Simulations}
 Paintings dataset from the ''Recognition of object instances practical'' \cite{Vedaldi2012} is used and it's images are used to build a database. Perceptual hashes for these images are calculated and stored. near-duplicate sets are formed using Imagemagick shell scripts. For each near-duplicate image, it is tested if a match can be found for it in the database using the Simple Hash the DCT Hash and the Local Features Classifier. A subset of the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012} is used as a -P-dataset. These images are not expected to be found in the database. The results are reported in PR curves chosen based on section \ref{PRSection}.
 
 We must keep in mind that the simulations are for a relatively small amount of images. We are merely proving that a Local Features Classifier improves on perceptual hashing for NDID. This information is then used to make a decision on production implementation.
