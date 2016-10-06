@@ -430,7 +430,7 @@ This thesis considers near-duplicate detection excluding all other uses of perce
 \end{itemize}
 
 \subsection{Overview}
-We begin with a review of preceptual hashing as it is in use at ThingLink today for the description and retrieval of image duplicates. We then review state-of-the art Local Features detection and description methods and large-scale image retrieval. Section \ref{NDID} covers near-duplicate image detection simulations and treating near-duplicate image detection as a binary classification problem. We also cover evaluation tools for binary classifiers. After \emph{Results}, we discuss our findings.
+We begin with a review of preceptual hashing as it is in use at ThingLink today for the description and retrieval of image duplicates. We then review state-of-the art Local Features detection and description methods and large-scale image retrieval. Section \ref{NDID} covers near-duplicate image detection simulations and treating near-duplicate image detection as a binary classification problem. We also cover evaluation tools for binary classifiers. After \emph{Results} in section \ref{results}, we discuss our findings.
 
 \clearpage
 
@@ -1333,8 +1333,7 @@ We will put the classifier results from the Local Features simulations in one ro
 
 \clearpage
 
-\section{Results}
-\epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
+\section{Results}\label{results}
 To what degree if any are Local Features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems. Near-duplicate detection was treated as a binary classification problem resulting in a contingency matrix for each dataset and each near-duplicate type. ROC and PR plots of the three classifiers for each type of near-duplicate follow in figures \ref{53roc} - \ref{Saturateprthinglink}.
 
 Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space and PR curves in fig. \ref{53roc} - \ref{Saturateprthinglink}. What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? By ROC- and PR curve analysis we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID. In addition, \emph{informedness}, \emph{markedness} and \emph{Matthews correlation} are calculated for the perceptual hashes to confirm choice of $\Delta(q,d)$.
