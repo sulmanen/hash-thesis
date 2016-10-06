@@ -1335,9 +1335,9 @@ We will put the classifier results from the Local Features simulations in one ro
 
 \section{Results}
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
-To what degree if any are Local Features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems and the results counted.
+To what degree if any are Local Features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems. Near-duplicate detection was treated as a binary classification problem resulting in a contingency matrix for each dataset and each near-duplicate type. ROC and PR plots of the three classifiers for each type of near-duplicate follow in figures \ref{53roc} - \ref{Saturateprthinglink}.
 
-Raw contingency table results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. For the ThingLink dataset, table \ref{simplethinglinkresults} contains the Simple Hash results, DCT Hash results are in table \ref{dctthinglinkresults} and the Local Features results are in table \ref{thinglinksiftresults}. By ROC analysis and calculating \emph{informedness} and \emph{markedness} we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
+Raw contingency table results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. For the ThingLink dataset, table \ref{simplethinglinkresults} contains the Simple Hash results, DCT Hash results are in table \ref{thinglinkdctresults}. Local Features results are in table \ref{thinglinksiftresults}. By ROC analysis and calculating \emph{informedness} and \emph{markedness} (table) we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
 
 Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $\Delta(q,d)$ was determined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $\Delta(q,d)$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
 
@@ -1572,139 +1572,139 @@ Queries in the Local Features case result in list of images with scores describi
 \end{figure}
 
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/SIFTROCperCutoff}
-\end{center}
-\caption{ Local Features NDID ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from query responses of duplicate sets in table \ref{modifiedimages}.}
-\label{figcutoffrocspace}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/SIFTROCperCutoff}
+%% \end{center}
+%% \caption{ Local Features NDID ROC Space for $0 < \mathcal{C}_{s} \leq 19$ built from query responses of duplicate sets in table \ref{modifiedimages}.}
+%% \label{figcutoffrocspace}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/simpleTotalROC}
-\end{center}
-\caption{Simple Hash NDID ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging query results of all duplicate sets in table \ref{modifiedimages}. }
-\label{simpletotalroc}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/simpleTotalROC}
+%% \end{center}
+%% \caption{Simple Hash NDID ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging query results of all duplicate sets in table \ref{modifiedimages}. }
+%% \label{simpletotalroc}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/simpleTotalAccuracy}
-\end{center}
-\caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages})}
-\label{simpletotalaccuracy}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/simpleTotalAccuracy}
+%% \end{center}
+%% \caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages})}
+%% \label{simpletotalaccuracy}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/dctTotalROC}
-\end{center}
-\caption{DCT Hash NDID average ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages}.}
-\label{dcttotalroc}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/dctTotalROC}
+%% \end{center}
+%% \caption{DCT Hash NDID average ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages}.}
+%% \label{dcttotalroc}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/dctTotalAccuracy}
-\end{center}
-\caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages})}
-\label{dcttotalaccuracy}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/dctTotalAccuracy}
+%% \end{center}
+%% \caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages})}
+%% \label{dcttotalaccuracy}
+%% \end{figure}
 
 As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=4$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $\Delta(q,d)$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Unbiased equivalents of presicion (Informedness $\mathcal{I}$) and recall (Markedness $\mathcal{M}$) values were calculated (table \ref{informednessmarkedness}) to aid in comparison.
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/tpBar}
-\end{center}
-\caption{ TPR for near-duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
-\label{tptotal}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/tpBar}
+%% \end{center}
+%% \caption{ TPR for near-duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
+%% \label{tptotal}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/fpBar}
-\end{center}
-\caption{ FPR for near-duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
-\label{fptotal}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/fpBar}
+%% \end{center}
+%% \caption{ FPR for near-duplicate modifications in table \ref{modifiedimages} for the Paintings dataset.}
+%% \label{fptotal}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/tnBar}
-\end{center}
-\caption{ TN for near-duplicate modifications for the Paintings dataset.}
-\label{tntotal}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/tnBar}
+%% \end{center}
+%% \caption{ TN for near-duplicate modifications for the Paintings dataset.}
+%% \label{tntotal}
+%% \end{figure}
 
 The dataset of images exported from ThingLink was used for a second opinion. Good $\Delta(q,d) \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $\Delta(q,d)=4$ for the Simple Hash and $\Delta(q,d)=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). However, the unbiased versions of \emph{informedness} and \emph{markedness} calculations disagree with $\Delta(q,d)=4$ for the DCT-Hash. According to tables \ref{dctunbiased} and \ref{dctthinglinkunbiased} $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{I}-\mathcal{M}$ results are in table \ref{informednessmarkedness}.
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_SIFTROCperCutoff}
-\end{center}
-\caption{ Local Features NDID ROC Space for $0 < \mathcal{C}_{s} \leq 16$ built from TN ThingLink dataset and duplicate sets in table \ref{modifiedimages}.}
-\label{thinglinkfigcutoffrocspace}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_SIFTROCperCutoff}
+%% \end{center}
+%% \caption{ Local Features NDID ROC Space for $0 < \mathcal{C}_{s} \leq 16$ built from TN ThingLink dataset and duplicate sets in table \ref{modifiedimages}.}
+%% \label{thinglinkfigcutoffrocspace}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_simpleTotalROC}
-\end{center}
-\caption{Simple Hash NDID ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset. }
-\label{thinglinksimpletotalroc}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_simpleTotalROC}
+%% \end{center}
+%% \caption{Simple Hash NDID ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset. }
+%% \label{thinglinksimpletotalroc}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_simpleTotalAccuracy}
-\end{center}
-\caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance over all near-duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
-\label{thinglinksimpletotalaccuracy}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_simpleTotalAccuracy}
+%% \end{center}
+%% \caption{Simple Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance over all near-duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
+%% \label{thinglinksimpletotalaccuracy}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_dctTotalAccuracy}
-\end{center}
-\caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
-\label{thinglinkdcttotalaccuracy}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_dctTotalAccuracy}
+%% \end{center}
+%% \caption{DCT Hash NDID accuracy (eq. \ref{accuracy}) per Hamming Distance averaged over all near-duplicate sets (table \ref{modifiedimages}) for the ThingLink dataset.}
+%% \label{thinglinkdcttotalaccuracy}
+%% \end{figure}
 
 \clearpage
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_dctTotalROC}
-\end{center}
-\caption{DCT Hash NDID average ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset.}
-\label{thinglinkdcttotalroc}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_dctTotalROC}
+%% \end{center}
+%% \caption{DCT Hash NDID average ROC space. Hamming Distance denoted at each ROC point. The ROC space points are based on averaging results of all duplicate sets in table \ref{modifiedimages} for the ThingLink dataset.}
+%% \label{thinglinkdcttotalroc}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_tpBar}
-\end{center}
-\caption{ TPR for near-duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
-\label{thinglinktptotal}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_tpBar}
+%% \end{center}
+%% \caption{ TPR for near-duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
+%% \label{thinglinktptotal}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_fpBar}
-\end{center}
-\caption{ FPR for near-duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
-\label{thinglinkfptotal}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_fpBar}
+%% \end{center}
+%% \caption{ FPR for near-duplicate modifications in table \ref{modifiedimages} for the ThingLink dataset.}
+%% \label{thinglinkfptotal}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_tnBar}
-\end{center}
-\caption{ TNR for near-duplicate modifications for the ThingLink dataset.}
-\label{thinglinktntotal}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_tnBar}
+%% \end{center}
+%% \caption{ TNR for near-duplicate modifications for the ThingLink dataset.}
+%% \label{thinglinktntotal}
+%% \end{figure}
 
 As the Paintings dataset is roughly three times in size, it will give a hint on how the systems scale as the number of images in the database grows. We were interested in the average CPU time $t_f^{avg}$ for calculating a perceptual hash, or an image descriptor and the average query time $t_q^{avg}$ to find a duplicate. For memory, we measured the size of a single hash or an image descriptor and the total image database with metadata included, like the visual vocabulary for example. The results are in table \ref{computationalcost}.
 
@@ -1940,21 +1940,21 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 
 For the ThingLink dataset, duplicate detection results for modified sets from table \ref{modifiedimages} are in table \ref{thinglinksiftresults}. A good $\mathcal{C}_s$ for Local Features NDID for the ThingLink dataset is 16 according to ROC space per cutoff score (figure \ref{thinglinkfigcutoffrocspace}). The FN count increases linearly where as the FP count decreases logarithmically as the $\mathcal{C}_s \rightarrow 16$ (figure \ref{thinglinkfigcutoff}. Comparison per duplicate set to the perceptual hashes are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal}, and \ref{thinglinktntotal}.
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/SIFTCountROC}
-\end{center}
-\caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset. In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
-\label{figcutoff}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/SIFTCountROC}
+%% \end{center}
+%% \caption{ Effects of cutoff on Local Features NDID performance. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 19$ for TN dataset. In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 19$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 19$. $\mathcal{C}_s=19$ is optimal.}
+%% \label{figcutoff}
+%% \end{figure}
 
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[height=8cm]{figures/thinglink_SIFTCountROC}
-\end{center}
-\caption{ Effects of cutoff on Local Features NDID performance for ThingLink dataset. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 16$ for TN dataset. In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 16$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 16$. $\mathcal{C}_s=16$ is optimal.}
-\label{thinglinkfigcutoff}
-\end{figure}
+%% \begin{figure}[htb]
+%% \begin{center}
+%% \includegraphics[height=8cm]{figures/thinglink_SIFTCountROC}
+%% \end{center}
+%% \caption{ Effects of cutoff on Local Features NDID performance for ThingLink dataset. At the top, FN increase linearly as $\mathcal{C}_s \rightarrow 16$ for TN dataset. In the middle, for the averaged duplicates data (table \ref{modifiedimages}) FP decreases logarithmically as $\mathcal{C}_s \rightarrow 16$. At the bottom we can see accuracy increase as $\mathcal{C}_s \rightarrow 16$. $\mathcal{C}_s=16$ is optimal.}
+%% \label{thinglinkfigcutoff}
+%% \end{figure}
 
 \begin{table*}
 \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset, with $\mathcal{C}_s = 16$.}
