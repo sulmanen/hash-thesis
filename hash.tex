@@ -97,7 +97,7 @@
 \usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{rotating}
-
+\usepackage{subcaption}
 %% Use the macros in this package to change how the hyperref package below
 %% typesets its hypertext -- hyperlink colour, font, etc. See the package
 %% documentation. It also defines the \url macro, so use the package when
@@ -411,13 +411,15 @@ $\mathcal{C}_s$ & Local Features Classifier cutoff score\\
 %% Leave first page empty
 \thispagestyle{empty}
 
-Images are a cornerstone of the World Wide Web. ThingLink enables students, teachers, journalists, real-estate agents, just about anyone with web access, to annotate images and other media with interactive regions linking it to relevant information on the web and place the annotated image on their website. ThingLink customer websites function on a variety of screens sizes from phones, tablets, desktops to projectors in classrooms and meeting rooms. Users and customers demand quality content as contention for customers between websites is high and the decisions to switch sites are made in seconds. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Websites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints. The design paradigm of Responsive Web Design (RWD) covers best practices in design and implementation of such websites. Correctly executed responsive web design delivers an optimal user experience on virtually any screen size.
+Images are a cornerstone of the World Wide Web. ThingLink is a commercial service enabling students, teachers, journalists, real-estate agents, just about anyone with web access, to annotate images and other media with interactive regions linking it to relevant information on the web and place the annotated image on their website. ThingLink customer websites function on a variety of screens sizes from phones, tablets, desktops to projectors in classrooms and meeting rooms. High quality screens such as the retina display on Apple platforms have put pressure to deliver crisp and clear images on all screen sizes with high speed and low latency. Websites usually adjust their layout according to breakpoints corresponding to well defined screen pixel widths. There may be fluid scaling between these breakpoints. The design paradigm of Responsive Web Design (RWD) covers best practices in design and implementation of such websites. Correctly executed responsive web design delivers an optimal user experience on virtually any screen size.
+\subsection{Problem Setting}
+Responsive websites serve scaled versions of the same image for each supported screen width. Images may be scaled on the web browser or User Agent (UA). a practice not recommended due to varying quality scalers on different UAs and increased bandwidth requirements for serving a large image and then scaling it down. The UA scaling is also not on par with expectations. Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users time and the network providers resources. Matching image to annotations is unreliable by matching incoming URI to a ThingLink image URI. In a fast paced work environment it is not valuable to the customer to add the same meta-data to different versions of the same image. Reliable matching of the incoming image to correct image meta-data must be done based on pixel values.
 
-Good responsive websites serve scaled versions of the same image for each screen width from a URI unique to each screen width. Images may be scaled on the User Agent (UA), a practice not recommended due to varying quality scalers on different UAs and increased bandwidth requirements for serving a large image and then scaling it down. The UA scaling is also not on par with expectations. Serving a large sized image through a mobile network only to be scaled down later in poorer quality is a waste of the users time and the network providers resources. Matching image to annotations is unreliable by matching incoming URI to a ThingLink image URI. In a fast paced work environment it is not valuable to the customer to add the same meta-data to different versions of the same image. For added value to the customer, reliable matching of the incoming image to correct image meta-data must be done based on pixel values. This problem is known as Near-Duplicate Image Detection. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink detects near-duplicate images by perceptual hashing. A customer is reporting 20-30\% false negatives for near-duplicate image detection. When detection fails, no annotations appear on the near-duplicate image. The near-duplicate detection system is working as expected, so an improved approach is needed. Near-duplicate image detection is a loosely defined umbrella concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images.
+This problem is known as Near-Duplicate Image Detection. To annotate once and use the same annotations for duplicates of the same image or scene, ThingLink detects near-duplicate images by perceptual hashing. A customer is reporting 20-30\% false negatives for near-duplicate image detection. When detection fails, no annotations appear on the near-duplicate image. The near-duplicate detection system is working as expected, so an improved approach is needed. Near-duplicate image detection is a loosely defined umbrella concept spanning from matching exact pixel to pixel duplicates to matching objects or scenes in images.
 
 Local Features been successfully used for the more strict case of detecting duplicate images with small modifications in \cite{Chum2008}, \cite{Chum2010}, \cite{Lee2010} and \cite{dong2012high}. However, does it offer improved performance over perceptual hashing in near-duplicate image detection?
 
-This paper considers near-duplicate detection excluding all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not in the scope of this paper. Finding an improved perceptual hashing algorithm is outside the scope of this paper. We are merely interested in comparing a two implementations of near-duplicate image detection with perceptual hashing to a single implementation using Local Features.
+This thesis considers near-duplicate detection excluding all other uses of perceptual hashing, local descriptors and large scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not in the scope of this paper. Finding an improved perceptual hashing algorithm is outside the scope of this paper. We are merely interested in comparing a two implementations of near-duplicate image detection with perceptual hashing to a single implementation using Local Features.
 
 \subsection{Research Questions}
 \begin{itemize}
@@ -426,6 +428,9 @@ This paper considers near-duplicate detection excluding all other uses of percep
 \item[--] What is a good cutoff score $\mathcal{C}_s$ to classify an image a true negative in near-duplicate image detection with Local Features?
 \item[--] In theory, can Local Features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 \end{itemize}
+
+\subsection{Overview}
+We first quickly review preceptual hashing as it is in use at ThingLink today for the description and retrieval of image duplicates. We then review some state-of-the art Local Features detection and description methods and large-scale image retrieval. Section \ref{ndid} covers near duplicate image detection simulations and the tools used for evaluating the results of the simulations. After \emph{Results}, we discuss our findings.
 
 \clearpage
 
@@ -1134,7 +1139,7 @@ Third, VLAD loses to BoW in performance for objects occupying a small portion of
 
 \clearpage
 
-\section{Near-Duplicate Image Detection} \label{mame}
+\section{Near-Duplicate Image Detection} \label{NDID}
 We expect the Local Features-classifier to outperform perceptual hashing for NDID. However, to begin implementing near similar image detection improvements we need to certain local features is an improvement over DCT-, and simple block mean- perceptual hashes by running simulations.
 
 A test set of images and modified near-duplicate sets of the originals described in table \ref{modifiedimages}. We also test the classifiers with images known not to be in the database, a subset from the Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.
@@ -1335,6 +1340,92 @@ To what degree if any are Local Features an improvement over DCT-, and simple bl
 Raw contingency table results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. For the ThingLink dataset, table \ref{simplethinglinkresults} contains the Simple Hash results, DCT Hash results are in table \ref{dctthinglinkresults} and the Local Features results are in table \ref{thinglinksiftresults}. By ROC analysis and calculating \emph{informedness} and \emph{markedness} we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
 
 Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $\Delta(q,d)$ was determined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $\Delta(q,d)$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
+
+\begin{figure}[htb]
+  \begin{center}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/53scaleROC.pdf}
+    \caption{Paintings ROC}
+    \label{53roc}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/53scalePR.pdf}
+    \caption{Paintings PR Curves}
+    \label{53rocthinglink}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/thinglink_53scaleROC.pdf}
+    \caption{ThingLink ROC}
+    \label{53pr}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/thinglink_53scalePR.pdf}
+    \caption{ThingLink PR Curve}
+    \label{53prthinglink}
+  \end{subfigure}
+  \caption{53\% scale duplicate query}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[htb]
+  \begin{center}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/83scaleROC.pdf}
+    \caption{Paintings ROC}
+    \label{83roc}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/83scalePR.pdf}
+    \caption{Paintings PR Curves}
+    \label{83rocthinglink}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/thinglink_83scaleROC.pdf}
+    \caption{ThingLink ROC}
+    \label{83pr}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/thinglink_83scalePR.pdf}
+    \caption{ThingLink PR Curve}
+    \label{83prthinglink}
+  \end{subfigure}
+  \caption{83\% scale duplicate query}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[htb]
+  \begin{center}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/Shave10pxROC.pdf}
+    \caption{Paintings ROC}
+    \label{Shaveroc}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/Shave10pxPR.pdf}
+    \caption{Paintings PR Curves}
+    \label{Shaverocthinglink}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/thinglink_Shave10pxROC.pdf}
+    \caption{ThingLink ROC}
+    \label{Shavepr}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{figures/thinglink_Shave10pxPR.pdf}
+    \caption{ThingLink PR Curve}
+    \label{Shaveprthinglink}
+  \end{subfigure}
+  \caption{Shave 10px duplicate query}
+  \end{center}
+\end{figure}
 
 \begin{figure}[htb]
 \begin{center}
