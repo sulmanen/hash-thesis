@@ -1337,9 +1337,7 @@ We will put the classifier results from the Local Features simulations in one ro
 \epigraph{The saddest aspect of life right now is that science gathers knowledge faster than society gathers wisdom.}{Isaac Asimov}
 To what degree if any are Local Features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems. Near-duplicate detection was treated as a binary classification problem resulting in a contingency matrix for each dataset and each near-duplicate type. ROC and PR plots of the three classifiers for each type of near-duplicate follow in figures \ref{53roc} - \ref{Saturateprthinglink}.
 
-Raw contingency table results for the Paintings dataset are in table \ref{simpleresults} for the Simple Hash, table \ref{dctresults} for the DCT Hash, and table \ref{siftresults} for Local Features. For the ThingLink dataset, table \ref{simplethinglinkresults} contains the Simple Hash results, DCT Hash results are in table \ref{thinglinkdctresults}. Local Features results are in table \ref{thinglinksiftresults}. By ROC analysis and calculating \emph{informedness} and \emph{markedness} (table) we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID.
-
-Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space (fig. \ref{figcutoffrocspace}). What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? For the Simple Hash good $\Delta(q,d)$ was determined from ROC space \ref{simpletotalroc} and accuracy diagram \ref{simpletotalaccuracy}. For the DCT Hash a good $\Delta(q,d)$ was also determined by plotting averaged results from table \ref{dctresults} in ROC space (fig. \ref{dcttotalroc}) and accuracy (fig. \ref{dcttotalaccuracy}).
+Queries in the Local Features case result in list of images with scores describing how well an image in the database fits the query. What is a good cutoff score $\mathcal{C}_s$ for the Local Features NDID system to classify an incoming image a TN? With the aid of the Paintings dataset, $\mathcal{C}_s$ for Local Features NDID was determined from ROC space and PR curves in fig. \ref{53roc} - \ref{Saturateprthinglink}. What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? By ROC- and PR curve analysis we can draw conclusions for a good $\Delta(q,d)$ for the perceptual hashes, and for a good $\mathcal{C}_s$ for the Local Features NDID. In addition, \emph{informedness}, \emph{markedness} and \emph{Matthews correlation} are calculated for the perceptual hashes to confirm choice of $\Delta(q,d)$.
 
 \begin{figure}[htb]
   \begin{center}
@@ -1725,29 +1723,29 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{tabular}
 \end{center}\end{table*}
 
-\begin{table}[htb]\footnotesize
-\caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
-\label{simpleresults}
-\begin{center}
-  \setlength\tabcolsep{3pt} % default value: 6pt
-  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
-    \toprule
-    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
-\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
-    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & 9 & 1612 & 87 &\phantom{abc} & 11 & 1696 & 1 &\phantom{abc} & 11 & 1697 & 0 &\phantom{abc} & 11 & 1697 & 0\\
-    83\% Scale   & 9 & 1633 & 66 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0\\
-    Crop 10px    & 9 & 370 & 1329 &\phantom{abc} & 22 & 1553 & 133 &\phantom{abc} & 27 & 1667 & 14 &\phantom{abc} & 33 & 1675 & 0\\
-    10\% Border  & 1 & 0 & 1707 & \phantom{abc} & 214 & 10 & 1484 &\phantom{abc} & 1079 & 23 & 606 &\phantom{abc} & 1639 & 29 & 40\\
-    Rotate 10\%  & 0 & 0 & 1708 &\phantom{abc} & 68 & 6 & 1634 &\phantom{abc} & 737 & 19 & 952 &\phantom{abc} & 1568 & 32 & 108\\
-    Normalize    & 7 & 987 & 714 &\phantom{abc} & 15 & 1653 & 40 &\phantom{abc} & 20 & 1679 & 9 &\phantom{abc} & 26 & 1682 & 0\\
-    Saturate     & 8 & 644 & 1056 &\phantom{abc} & 25 & 1605 & 78 &\phantom{abc} & 28 & 1675 & 5 &\phantom{abc} & 29 & 1679 & 0\\
-    Predicted Negative     & 28 & 0 & 0 &\phantom{abc} & 340 & 0 & 0 &\phantom{abc} & 976 & 0 & 0 &\phantom{abc} & 1571& 0& 0\\
+%% \begin{table}[htb]\footnotesize
+%% \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
+%% \label{simpleresults}
+%% \begin{center}
+%%   \setlength\tabcolsep{3pt} % default value: 6pt
+%%   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+%%     \toprule
+%%     & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
+%% \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+%%     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+%%     53\% Scale   & 9 & 1612 & 87 &\phantom{abc} & 11 & 1696 & 1 &\phantom{abc} & 11 & 1697 & 0 &\phantom{abc} & 11 & 1697 & 0\\
+%%     83\% Scale   & 9 & 1633 & 66 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0 &\phantom{abc} & 10 & 1698 & 0\\
+%%     Crop 10px    & 9 & 370 & 1329 &\phantom{abc} & 22 & 1553 & 133 &\phantom{abc} & 27 & 1667 & 14 &\phantom{abc} & 33 & 1675 & 0\\
+%%     10\% Border  & 1 & 0 & 1707 & \phantom{abc} & 214 & 10 & 1484 &\phantom{abc} & 1079 & 23 & 606 &\phantom{abc} & 1639 & 29 & 40\\
+%%     Rotate 10\%  & 0 & 0 & 1708 &\phantom{abc} & 68 & 6 & 1634 &\phantom{abc} & 737 & 19 & 952 &\phantom{abc} & 1568 & 32 & 108\\
+%%     Normalize    & 7 & 987 & 714 &\phantom{abc} & 15 & 1653 & 40 &\phantom{abc} & 20 & 1679 & 9 &\phantom{abc} & 26 & 1682 & 0\\
+%%     Saturate     & 8 & 644 & 1056 &\phantom{abc} & 25 & 1605 & 78 &\phantom{abc} & 28 & 1675 & 5 &\phantom{abc} & 29 & 1679 & 0\\
+%%     Predicted Negative     & 28 & 0 & 0 &\phantom{abc} & 340 & 0 & 0 &\phantom{abc} & 976 & 0 & 0 &\phantom{abc} & 1571& 0& 0\\
 
-    \bottomrule
-\end{tabular}
-\end{center}
-\end{table}
+%%     \bottomrule
+%% \end{tabular}
+%% \end{center}
+%% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
 \caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
@@ -1774,28 +1772,28 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 
 
 
-\begin{table}[htb]\footnotesize
-\caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
-\label{simplethinglinkresults}
-\begin{center}
-  \setlength\tabcolsep{3pt} % default value: 6pt
-  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
-    \toprule
-    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
-\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
-    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & 34 & 357 & 55 &\phantom{abc} & 11 & 409 & 26 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
-    83\% Scale   & 34 & 366 & 46 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
-    Crop 10px    & 4 & 30 & 412 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 42 & 391 & 13 &\phantom{abc} & 49 & 396 & 1\\
-    10\% Border  & 0 & 0 & 446 & \phantom{abc} & 17 & 8 & 421 &\phantom{abc} & 132 & 33 & 281 &\phantom{abc} & 320 & 57 & 69\\
-    Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 6 & 6 & 428 &\phantom{abc} & 93 & 27 & 326 &\phantom{abc} & 276 & 43 & 127\\
-    Normalize    & 28 & 324 & 94 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 410 & 0 &\phantom{abc} & 36 & 410 & 0\\
-    Saturate     & 17 & 199 & 230 &\phantom{abc} & 35 & 392 & 19 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 409 & 1\\
-    Predicted Negative     & 0& 0& 0 &\phantom{abc} & 16 & 0 & 0 &\phantom{abc} &113 & 0 & 0 &\phantom{abc} & 338 & 0 & 0\\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
+%% \begin{table}[htb]\footnotesize
+%% \caption{ Simple Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+%% \label{simplethinglinkresults}
+%% \begin{center}
+%%   \setlength\tabcolsep{3pt} % default value: 6pt
+%%   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+%%     \toprule
+%%     & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
+%% \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+%%     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+%%     53\% Scale   & 34 & 357 & 55 &\phantom{abc} & 11 & 409 & 26 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
+%%     83\% Scale   & 34 & 366 & 46 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 36 & 410 & 0\\
+%%     Crop 10px    & 4 & 30 & 412 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 42 & 391 & 13 &\phantom{abc} & 49 & 396 & 1\\
+%%     10\% Border  & 0 & 0 & 446 & \phantom{abc} & 17 & 8 & 421 &\phantom{abc} & 132 & 33 & 281 &\phantom{abc} & 320 & 57 & 69\\
+%%     Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 6 & 6 & 428 &\phantom{abc} & 93 & 27 & 326 &\phantom{abc} & 276 & 43 & 127\\
+%%     Normalize    & 28 & 324 & 94 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 410 & 0 &\phantom{abc} & 36 & 410 & 0\\
+%%     Saturate     & 17 & 199 & 230 &\phantom{abc} & 35 & 392 & 19 &\phantom{abc} & 36 & 407 & 3 &\phantom{abc} & 36 & 409 & 1\\
+%%     Predicted Negative     & 0& 0& 0 &\phantom{abc} & 16 & 0 & 0 &\phantom{abc} &113 & 0 & 0 &\phantom{abc} & 338 & 0 & 0\\
+%% \bottomrule
+%% \end{tabular}
+%% \end{center}
+%% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
 \caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
@@ -1820,29 +1818,29 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{center}
 \end{sidewaystable}
 
-\begin{table}[htb]\footnotesize
-\caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
-\label{dctresults}
-\begin{center}
-  \setlength\tabcolsep{3pt} % default value: 6pt
-  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
-    \toprule
-    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
-\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
-    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & 0 & 384 & 1324 &\phantom{abc} & 5 & 1605 & 98 &\phantom{abc} & 7 & 1697 & 4 &\phantom{abc} & 9 & 1699 & 0\\
-    83\% Scale   & 1 & 303 & 1404 &\phantom{abc} & 4 & 1551 & 153 &\phantom{abc} & 8 & 1698 & 2 &\phantom{abc} & 8 & 1700 & 0\\
-    Crop 10px    & 0 & 107 & 1601 &\phantom{abc} & 6 & 1250 & 452 &\phantom{abc} & 13& 1659 & 36 &\phantom{abc} & 20 & 1687 & 1\\
-    10\% Border  & 1 & 0 & 1707 & \phantom{abc} & 214 & 10 & 1484 &\phantom{abc} & 1079 & 23 & 606 &\phantom{abc} & 1639 & 29 & 40\\
-    Rotate 10\%  & 0 & 0 & 1708 &\phantom{abc} & 6 & 0 & 1702 &\phantom{abc} & 403 & 14 & 1291 &\phantom{abc} & 1605 & 38 & 65\\
-    Normalize    & 2 & 1026 & 680 &\phantom{abc} & 7 & 1654 & 47 &\phantom{abc} & 12 & 1687 & 9 &\phantom{abc} & 15 & 1691 & 2\\
-    Saturate     & 2 & 681 & 1025 &\phantom{abc} & 7 & 1667 & 34 &\phantom{abc} & 8 & 1700 & 0 &\phantom{abc} & 8 & 1700 & 0\\
-    Predicted Negative & 1 & 0 & 0 &\phantom{abc} & 39 & 0 & 0 &\phantom{abc} & 266 & 0 & 0 &\phantom{abc} & 1236 & 0 & 0\\
+%% \begin{table}[htb]\footnotesize
+%% \caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}. }
+%% \label{dctresults}
+%% \begin{center}
+%%   \setlength\tabcolsep{3pt} % default value: 6pt
+%%   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+%%     \toprule
+%%     & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
+%% \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+%%     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+%%     53\% Scale   & 0 & 384 & 1324 &\phantom{abc} & 5 & 1605 & 98 &\phantom{abc} & 7 & 1697 & 4 &\phantom{abc} & 9 & 1699 & 0\\
+%%     83\% Scale   & 1 & 303 & 1404 &\phantom{abc} & 4 & 1551 & 153 &\phantom{abc} & 8 & 1698 & 2 &\phantom{abc} & 8 & 1700 & 0\\
+%%     Crop 10px    & 0 & 107 & 1601 &\phantom{abc} & 6 & 1250 & 452 &\phantom{abc} & 13& 1659 & 36 &\phantom{abc} & 20 & 1687 & 1\\
+%%     10\% Border  & 1 & 0 & 1707 & \phantom{abc} & 214 & 10 & 1484 &\phantom{abc} & 1079 & 23 & 606 &\phantom{abc} & 1639 & 29 & 40\\
+%%     Rotate 10\%  & 0 & 0 & 1708 &\phantom{abc} & 6 & 0 & 1702 &\phantom{abc} & 403 & 14 & 1291 &\phantom{abc} & 1605 & 38 & 65\\
+%%     Normalize    & 2 & 1026 & 680 &\phantom{abc} & 7 & 1654 & 47 &\phantom{abc} & 12 & 1687 & 9 &\phantom{abc} & 15 & 1691 & 2\\
+%%     Saturate     & 2 & 681 & 1025 &\phantom{abc} & 7 & 1667 & 34 &\phantom{abc} & 8 & 1700 & 0 &\phantom{abc} & 8 & 1700 & 0\\
+%%     Predicted Negative & 1 & 0 & 0 &\phantom{abc} & 39 & 0 & 0 &\phantom{abc} & 266 & 0 & 0 &\phantom{abc} & 1236 & 0 & 0\\
 
-    \bottomrule
-\end{tabular}
-\end{center}
-\end{table}
+%%     \bottomrule
+%% \end{tabular}
+%% \end{center}
+%% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
 \caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
@@ -1868,28 +1866,28 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{sidewaystable}
 
 
-\begin{table}[htb]\footnotesize
-\caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
-\label{thinglinkdctresults}
-\begin{center}
-  \setlength\tabcolsep{3pt} % default value: 6pt
-  \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
-    \toprule
-    & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
-\cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
-    Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
-    53\% Scale   & 12 & 83 & 351 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 401 & 8 &\phantom{abc} & 40 & 406 & 0\\
-    83\% Scale   & 12 & 81 & 353 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 397 & 12 &\phantom{abc} & 39 & 407 & 0\\
-    Crop 10px    & 1 & 10 & 435 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 37 & 376 & 33 &\phantom{abc} & 44 & 398 & 4\\
-    10\% Border  & 0 & 1 & 445 & \phantom{abc} & 16 & 3 & 427 &\phantom{abc} & 103 & 20 & 323&\phantom{abc} & 309 & 65 & 72\\
-    Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 0 & 0 & 446 &\phantom{abc} & 7 & 33 & 406 &\phantom{abc} & 271 & 44 & 131\\
-    Normalize    & 32 & 332 & 82 &\phantom{abc} & 35 & 407 & 4 &\phantom{abc} & 35 & 410 & 1 &\phantom{abc} & 36 & 410 & 0\\
-    Saturate     & 16 & 170 & 260 &\phantom{abc} & 35  & 403 & 8 &\phantom{abc} & 35 & 411 & 0 &\phantom{abc} & 35 & 411 & 0\\
-   Predicted Negative & 1 & 0 & 0 &\phantom{abc} & 15  & 0 & 0 &\phantom{abc} & 49 & 0 & 0 &\phantom{abc} & 186 & 0 & 0\\
-    \bottomrule
-\end{tabular}
-\end{center}
-\end{table}
+%% \begin{table}[htb]\footnotesize
+%% \caption{ DCT Hash NDID results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+%% \label{thinglinkdctresults}
+%% \begin{center}
+%%   \setlength\tabcolsep{3pt} % default value: 6pt
+%%   \begin{tabular}{@{}lrrrrrrrrrrrrrrr@{}}
+%%     \toprule
+%%     & \multicolumn{3}{c}{$\Delta(q,d) = 0$} &\phantom{abc} &\multicolumn{3}{c}{$\Delta(q,d) = 4$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=8$} &\phantom{abc} & \multicolumn{3}{c}{$\Delta(q,d)=12$}\\
+%% \cmidrule{2-4} \cmidrule{6-8} \cmidrule{10-12} \cmidrule{14-16}
+%%     Modification & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN &\phantom{abc} & FP & TP & FN\\ \midrule
+%%     53\% Scale   & 12 & 83 & 351 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 401 & 8 &\phantom{abc} & 40 & 406 & 0\\
+%%     83\% Scale   & 12 & 81 & 353 &\phantom{abc} & 36 & 409 & 1 &\phantom{abc} & 37 & 397 & 12 &\phantom{abc} & 39 & 407 & 0\\
+%%     Crop 10px    & 1 & 10 & 435 &\phantom{abc} & 34 & 313 & 99 &\phantom{abc} & 37 & 376 & 33 &\phantom{abc} & 44 & 398 & 4\\
+%%     10\% Border  & 0 & 1 & 445 & \phantom{abc} & 16 & 3 & 427 &\phantom{abc} & 103 & 20 & 323&\phantom{abc} & 309 & 65 & 72\\
+%%     Rotate 10\%  & 0 & 0 & 446 &\phantom{abc} & 0 & 0 & 446 &\phantom{abc} & 7 & 33 & 406 &\phantom{abc} & 271 & 44 & 131\\
+%%     Normalize    & 32 & 332 & 82 &\phantom{abc} & 35 & 407 & 4 &\phantom{abc} & 35 & 410 & 1 &\phantom{abc} & 36 & 410 & 0\\
+%%     Saturate     & 16 & 170 & 260 &\phantom{abc} & 35  & 403 & 8 &\phantom{abc} & 35 & 411 & 0 &\phantom{abc} & 35 & 411 & 0\\
+%%    Predicted Negative & 1 & 0 & 0 &\phantom{abc} & 15  & 0 & 0 &\phantom{abc} & 49 & 0 & 0 &\phantom{abc} & 186 & 0 & 0\\
+%%     \bottomrule
+%% \end{tabular}
+%% \end{center}
+%% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
 \caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
@@ -1915,26 +1913,26 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 \end{center}
 \end{sidewaystable}
 
-\begin{table*}
-\caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
-\label{siftresults}
-\begin{center}
-  \begin{tabular}{@{}lccc@{}}
-    \toprule
-    Modification & FP & TP & FN\\
-    \hline
-    53\% Scale & 1 & 1694 & 13 \\
-    83\% Scale & 1 & 1704 & 3 \\
-    Crop 10px  & 1 & 1704 & 3 \\
-    10\% Border & 1 & 1704 & 3 \\
-    Rotate 10\% & 1 & 1698 & 9\\
-    Normalize Histogram & 1 & 1702 & 5\\
-    Saturate Colors & 1 & 1705 & 2\\
-    Predicted Negative & 0 & 0 & 0\\
-    \bottomrule
-\end{tabular}
-\end{center}
-\end{table*}
+%% \begin{table*}
+%% \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for Paintings data from \cite{Vedaldi2012}, with $\mathcal{C}_s = 19$.}
+%% \label{siftresults}
+%% \begin{center}
+%%   \begin{tabular}{@{}lccc@{}}
+%%     \toprule
+%%     Modification & FP & TP & FN\\
+%%     \hline
+%%     53\% Scale & 1 & 1694 & 13 \\
+%%     83\% Scale & 1 & 1704 & 3 \\
+%%     Crop 10px  & 1 & 1704 & 3 \\
+%%     10\% Border & 1 & 1704 & 3 \\
+%%     Rotate 10\% & 1 & 1698 & 9\\
+%%     Normalize Histogram & 1 & 1702 & 5\\
+%%     Saturate Colors & 1 & 1705 & 2\\
+%%     Predicted Negative & 0 & 0 & 0\\
+%%     \bottomrule
+%% \end{tabular}
+%% \end{center}
+%% \end{table*}
 
 \clearpage
 
@@ -1956,26 +1954,26 @@ For the ThingLink dataset, duplicate detection results for modified sets from ta
 %% \label{thinglinkfigcutoff}
 %% \end{figure}
 
-\begin{table*}
-\caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset, with $\mathcal{C}_s = 16$.}
-\label{thinglinksiftresults}
-\begin{center}
-  \begin{tabular}{@{}lccc@{}}
-    \toprule
-    Modification & FP & TP & FN\\
-    \hline
-    53\% Scale & 34 & 399 & 13 \\
-    83\% Scale & 35 & 408 & 3 \\
-    Crop 10px  & 35 & 408 & 3 \\
-    10\% Border & 35 & 410 & 1 \\
-    Rotate 10\% & 35 & 407 & 4\\
-    Normalize Histogram & 35 & 410 & 1\\
-    Saturate Colors & 35 & 410 & 1\\
-    Predicted Negative & 0 & 0 & 0\\
-    \bottomrule
-\end{tabular}
-\end{center}
-\end{table*}
+%% \begin{table*}
+%% \caption{ NDID by Local Features results for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset, with $\mathcal{C}_s = 16$.}
+%% \label{thinglinksiftresults}
+%% \begin{center}
+%%   \begin{tabular}{@{}lccc@{}}
+%%     \toprule
+%%     Modification & FP & TP & FN\\
+%%     \hline
+%%     53\% Scale & 34 & 399 & 13 \\
+%%     83\% Scale & 35 & 408 & 3 \\
+%%     Crop 10px  & 35 & 408 & 3 \\
+%%     10\% Border & 35 & 410 & 1 \\
+%%     Rotate 10\% & 35 & 407 & 4\\
+%%     Normalize Histogram & 35 & 410 & 1\\
+%%     Saturate Colors & 35 & 410 & 1\\
+%%     Predicted Negative & 0 & 0 & 0\\
+%%     \bottomrule
+%% \end{tabular}
+%% \end{center}
+%% \end{table*}
 
 
 %\begin{figure}[htb]
