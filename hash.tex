@@ -565,7 +565,7 @@ To compare the perceptual hash based detectors to the local features based detec
 
 We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy Local Features at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 
-Local Features is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among $10M$ images in $50ms$ \cite{Jegou2010}.
+Local Features is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among 10M images in 50ms \cite{Jegou2010}.
 
 \subsection{Detection and Description of Local Features}
 We attempt to improve near-duplicate detection with perceptual hashing by raising the abstraction level from image pixels-based hashes to the object or scene in the image itself. With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. We expect to improve over perceptual hashing which should withstand scaling well. However, they are weak under image transformations that alter the relationships between spatial pixel values such as rotation and adding and removing from the image.
