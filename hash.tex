@@ -835,25 +835,21 @@ Querying large sets of images is considered in \cite{Chum2010} where min-Hash is
 \item store descriptors in a hash table where the probability of an image being in the same bin is the same as their similarity
 \item calculate exact similarity for images falling into the same bin
 \item if pair of images pass the similarity test, check spatial consistency
-\item if image pair passes step 3., they become cluster seeds \cite{Chum2010}.
+\item if image pair passes step 3., they become cluster seeds.
 \end{enumerate}
 Their requirements are similar to what is attempted in this paper.
 \begin{enumerate}
 \item scalable to tens of millions of images
 \item adding images to the database does not result in recomputing the entire cluster
 \item easy to parallellize
-\item probability of recall is independent of cluster size \cite{Chum2010}.
+\item probability of recall is independent of cluster size
 \end{enumerate}
-For querying the Oxford Landmark data set, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC \cite{Chum2010}.
-
-Growing the data set size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the data set size and $L$ to be the number of images in the cluster \cite{Chum2010}. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table.
+For querying the Oxford Landmark data set, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC. Growing the data set size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the data set size and $L$ to be the number of images in the cluster. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table. \cite{Chum2010}
 
 In \cite{Lee2010} a high $FP$-rate is a serious problem for large data set. Another problem for direct image retrieval is low recall \cite{Chum2010}.
 
 \subsubsection{Bag-of-Visual Words}\label{BOW}
-The Bag-of-Visual Words approach to describing images was developed by Sivic and Zisserman in 2003 by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods.\cite{Sivic2003}
-
-To calculate image descriptors two types of viewpoint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.\cite{Sivic2003}
+The Bag-of-Visual Words approach to describing images was developed by Sivic and Zisserman in \cite{Sivic2003} by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods. To calculate image descriptors two types of viewpoint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.
 
 The second type of region used is the Maximally Stable (MS) region. For these regions are the region area stays constant as the intensity threshold is changed.
 
