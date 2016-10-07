@@ -1361,8 +1361,9 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{53prthinglink}
   \end{subfigure}
-  \caption{\emph{53\% scale near-duplicate query results}. Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{53\% scale near-duplicate query results}. Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.\label{53label}}
   \end{center}
+
 \end{figure}
 
 \clearpage
@@ -1390,7 +1391,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{83prthinglink}
   \end{subfigure}
-  \caption{\emph{83\% scale near-duplicate query results.} Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{83\% scale near-duplicate query results.} See figure \ref{53label} for a detailed caption.}
   \end{center}
 \end{figure}
 
@@ -1420,7 +1421,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Shaveprthinglink}
   \end{subfigure}
-  \caption{\emph{Shave 10px near-duplicate query results.} Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{Shave 10px near-duplicate query results. See figure \ref{53label} for a detailed caption.}}
   \end{center}
 \end{figure}
 
@@ -1449,9 +1450,11 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Borderprthinglink}
   \end{subfigure}
-  \caption{\emph{Border 10\% near-duplicate query results.} Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{Border 10\% near-duplicate query results. See figure \ref{53label} for a detailed caption.}}
   \end{center}
 \end{figure}
+
+
 
 \begin{figure}[htb]
   \begin{center}
@@ -1477,7 +1480,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Rotateprthinglink}
   \end{subfigure}
-  \caption{\emph{Rotate 10\% near-duplicate query results.} Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{Rotate 10\% near-duplicate query results. See figure \ref{53label} for a detailed caption.}}
   \end{center}
 \end{figure}
 
@@ -1505,7 +1508,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Normalizeprthinglink}
   \end{subfigure}
-  \caption{\emph{Normalize histogram near-duplicate query results. Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}}
+  \caption{\emph{Normalize histogram near-duplicate query results. See figure \ref{53label} for a detailed caption.}}
   \end{center}
 \end{figure}
 
@@ -1533,7 +1536,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Normalizeprthinglink}
   \end{subfigure}
-  \caption{\emph{Normalize histogram near-duplicate query results.} Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{Normalize histogram near-duplicate query results. See figure \ref{53label} for a detailed caption.}}
   \end{center}
 \end{figure}
 
@@ -1561,7 +1564,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Saturateprthinglink}
   \end{subfigure}
-  \caption{\emph{Saturate colors near-duplicate query results.} Each point for the DCT- (green and dotted) and Simple Hashes (red and dashed) is for a given $\Delta(q,d) \in \{0,4,8,12\}$. $\Delta(q,d)$ increasing from left to right in ROC space and PR space. Each point for Local Features (blue and solid) is for a given cutoff score $0 \leq \mathcal{C}_s \leq 19$ for Paintings Dataset and $0 \leq \mathcal{C}_s \leq 16$ for the ThingLink Dataset increasing from right to left. The $\mathcal{C}_s$ interval between the points is 1. The leftmost point (topmost point in PR space) corresponds to $\mathcal{C}_s=19$ for the Paintings Dataset and $\mathcal{C}_s=16$ for the ThingLink Dataset. The rightmost point (the lowest point in PR space) is for $\mathcal{C}_s = 0$ for ROC. We acknowledge we have not interpolated between points in PR space according to eq. \ref{printerpolate} but draw a straight line as the distortion is minimal. The black dashed diagonal line in ROC space represents classification performance equivalent to flipping a coin and classifying accordingly.}
+  \caption{\emph{Saturate colors near-duplicate query results. See figure \ref{53label} for a detailed caption.}}
   \end{center}
 \end{figure}
 
