@@ -307,7 +307,8 @@ Otaniemi, \today
 
 \begin{tabular}{ll}
 $\Delta(q,d)$ & Hamming Distance\\
-$\mathcal{C}_s$ & Local Features Classifier cutoff score\\
+$\mathcal{C}_s$ & Local Features Classifier cutoff score. Score is the number of visual vocabulary matches for an image in the database.\\
+$\mathcal{C}_{smax}^{-P}$ & The maximum score encountered while querying predicted negative images against the Local Features database.\\
   $\mathcal{P}$ & Precision\\
   $\mathcal{R}$ & Recall\\
   P & Predicted class in the contingency matrix\\
@@ -699,7 +700,7 @@ The main drawback of KAZE features is building the nonlinear scale space by nonl
 Fast Explicit Diffusion (FED) introduced in \cite{Grewenig2010} is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement. Factorization of the box filter
 \begin{equation}
   \label{boxfilterfactor}
-\tau_j = \frac{\tau_max}{2cos^2\left( \pi \frac{2j+1}{4n+2}\right)}
+\tau_j = \frac{\tau_{max}}{2cos^2\left( \pi \frac{2j+1}{4n+2}\right)}
 \end{equation}
 where $n$ is the number of explicit diffusion steps, $\tau_{max}$ is the maximal step size that does not violate the stability condition of the explicit scheme. The FED cycle stopping time $\theta_n$
 \begin{equation}
