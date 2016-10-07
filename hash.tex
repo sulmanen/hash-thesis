@@ -1177,7 +1177,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
   Predicted Negative & Does the system classify images correctly as not in database?\\
 \end{tabular}
 \end{center}\end{table}
-
+\clearpage
 The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain. Most notably, the Paitings Dataset contains a single pixel by pixel duplicate image. It was recognized that this duplicate image caused FP classification depending on which of the duplicates was sorted as the first item in the retrieved short list of images. Based on this finding, duplicates were removed from the ThingLink Dataset. The ThingLink Dataset consists of 446 images sampled from ThingLink. For this study, the ThingLink Dataset gives a base to compare the NDID methods with the types of images they are expected to work with in ThingLink production.
 
 This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files use lossy JPEG encoding. These images will form the predicted negative (-P) set forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
