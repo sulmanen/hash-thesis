@@ -793,11 +793,7 @@ where the distance $d^*$ from $q$ to the nearest point over all successful queri
 \subsubsection{min-Hash}
 min-Hash was used in \cite{Broder1997} to search for similar text documents among 30 million documents. In \cite{Chum2008} upon which this section is based, the same idea is harnessed to find duplicate images for sample data sets. Chum et. al \cite{Chum2010} use min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. It finds similar images with a probability near to one, near similar images with small probability and unrelated images with 0 probability.
 
-In essence min-Hashing is LSH for sets. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold. min-Hashing quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near-duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets.\cite{Chum2008}
-
-The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set.
-
-Considering the 128 dimensional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a data set with 128 columns but only 400 rows.
+In essence min-Hashing is LSH for sets. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold. min-Hashing quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near-duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets. The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set. Considering the 128 dimensional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a data set with 128 columns but only 400 rows.\cite{Chum2008}
 
 min-Hash (eq. \ref{minhash}) is the smallest element of set $\mathcal{A_i}$ under ordering by $f_j$
 \begin{equation}\label{minhash}
@@ -846,7 +842,7 @@ Their requirements are similar to what is attempted in this paper.
 \end{enumerate}
 For querying the Oxford Landmark data set, the seed generation and seed growing steps to find a match took 0.014s per image on a single 2.4GHz core for 100k images. For 5M images clustering took 0.02s per image on a 3GHz single core PC. Growing the data set size in a min-Hash database takes $\mathcal{O}(NL)$ where $N$ is the data set size and $L$ to be the number of images in the cluster. The seed generation is $\mathcal{O}(N^2)$ for infinite size databases but is linear for $N \leq M$ where $M$ is the number of bins in the hashing table. \cite{Chum2010}
 
-In \cite{Lee2010} a high $FP$-rate is a serious problem for large data set. Another problem for direct image retrieval is low recall \cite{Chum2010}.
+In \cite{Lee2010} a high $FP$-rate is a serious problem for large data set. Another problem according to \cite{Chum2010} for direct image retrieval is low recall.
 
 \subsubsection{Bag-of-Visual Words}\label{BOW}
 The Bag-of-Visual Words approach to describing images was developed by Sivic and Zisserman in \cite{Sivic2003} by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods. To calculate image descriptors two types of viewpoint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.
@@ -867,7 +863,7 @@ with $n_{id}$ is word $i$ appearing $n$ times in document $d$ and $n_{d}$ is the
 \end{equation}
 where $N_{rel}$ is the number of relevant images for particular query image, $N$ is the total number of images and $R_{i}$ is the $i$th image rank. $Rank$ is a number between 0 and 1. \cite{Sivic2003}
 
-Retrieval uses an inverted file where each word has a hit list for all occurrences of the word in all documents. In the visual word case, each visual word has knowledge of the image it is found in. The document vector is sparse and the retrieval is very fast.
+Retrieval uses an inverted file where each word has a hit list for all occurrences of the word in all documents. In the visual word case, each visual word has knowledge of the images it is found in. The document vector is sparse and the retrieval is very fast.
 
 The user specifies an area of interest in a frame and descriptors are calculated for stable regions. The descriptors are then quantized into visual words. A stop list filters out all visual words which occur frequently. Sivic and Zisserman found their case to work best dropping top 5\% and bottom 10\% of words.
 
