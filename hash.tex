@@ -1334,7 +1334,9 @@ For each perceptual hash the parameter was $\Delta(q,d) \in {0,4,8,12}$. Each ru
 
 For the Local Features classifier, the parameter was $0 \leq \mathcal{C}_s \leq \mathcal{C}_{smax}^{-P}$ where $\mathcal{C}_{smax}^{-P}$ is the maximum score from querying the -P dataset. A run at each $\mathcal{C}_s$ results in a point in ROC and PR plots in figures \ref{53roc} - \ref{Saturateprthinglink} along with perceptual hash results for easy visual comparison.
 
-In the Local Features case, the query returns a list of images with scores describing how many visual words an image in the database has in common with the query image. We choose the highest scoring image for consideration as a near-duplicate. What is a good cutoff score $\mathcal{C}_s$ reject an image, or in other words to classify an incoming image a TN? With the aid of the Paintings- and ThingLink Datasets, $\mathcal{C}_s$ was determined from ROC space and PR curves in fig. \ref{53roc} - \ref{Saturateprthinglink}.
+In the Local Features case, the query returns a list of images along with scores describing how many visual words an image in the database has in common with the query image. We choose the highest scoring image for consideration as a near-duplicate. What is a good cutoff score $\mathcal{C}_s$ reject an image, or in other words to classify an incoming image a TN? With the aid of the Paintings- and ThingLink Datasets, $\mathcal{C}_s$ was determined from ROC space and PR curves in fig. \ref{53roc} - \ref{Saturateprthinglink}.
+
+
 
 \begin{figure}[htb]
   \begin{center}
