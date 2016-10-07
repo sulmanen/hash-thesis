@@ -1450,7 +1450,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Borderprthinglink}
   \end{subfigure}
-  \caption{\emph{Border 10\% near-duplicate query results.} See figure \ref{53label} for a detailed caption.}
+  \caption{\emph{Border 10\% near-duplicate query results.} See figure \ref{53label} for a detailed caption. \label{borderlabel}}
   \end{center}
 \end{figure}
 
@@ -1480,7 +1480,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Rotateprthinglink}
   \end{subfigure}
-  \caption{\emph{Rotate 10\% near-duplicate query results.} See figure \ref{53label} for a detailed caption.}
+  \caption{\emph{Rotate 10\% near-duplicate query results.} See figure \ref{53label} for a detailed caption.\label{rotatelabel}}
   \end{center}
 \end{figure}
 
@@ -1508,7 +1508,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Normalizeprthinglink}
   \end{subfigure}
-  \caption{\emph{Normalize histogram near-duplicate query results.} See figure \ref{53label} for a detailed caption.}
+  \caption{\emph{Normalize histogram near-duplicate query results.} See figure \ref{53label} for a detailed caption. \label{histogramlabel}}
   \end{center}
 \end{figure}
 
@@ -1536,7 +1536,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
     \caption{ThingLink PR}
     \label{Saturateprthinglink}
   \end{subfigure}
-  \caption{\emph{Saturate colors near-duplicate query results.} See figure \ref{53label} for a detailed caption.}
+  \caption{\emph{Saturate colors near-duplicate query results.} See figure \ref{53label} for a detailed caption.\label{saturatelabel}}
   \end{center}
 \end{figure}
 
@@ -2027,7 +2027,17 @@ To what degree are local features an improvement over DCT-, and Simple- perceptu
 
 The 10\% white border and 10\% rotate duplicate set simulation comparisons stand out in favor of Local Features. Local Features NDID performs excellent with $0.9171 \leq \mathcal{R}_G \leq 0.9977$ for the Paintings and the ThingLink datasets (table \ref{informednessmarkedness}). Since rotation and adding a white border to the image alter the relative values of the image pixels, perceptual hashing is unable to cope \ref{informednessmarkedness} resulting in negative $\mathcal{I}$ and $\mathcal{M}$ for the white border-, and rotated duplicates. NDID performance for these cases is much less than chance for both the Simple Hash and the DCT Hash, no matter how $\Delta(q,d)$ is tuned.
 
-More specifically for the 53\% scale near-duplicate case in figure \ref{53label}, Local Features is clearly the best method of the three (topleftmost) in ROC space \ref{53roc} and in PR space. The differences between the hashes are clearly visible only in PR space (fig. \ref{53pr}) for the Paintings Dataset. For the ThingLink Dataset, it is difficult to discriminate between the best performance between Local Features and the Simple Hash (fig. \ref{53rocthinglink} and \ref{53prthinglink}). Local Features is clearly better as shown in the PR plots (fig. \ref{53pr} and \subref{53prthinglink}). It is difficult to make out what is the best $\Delta(q,d)$ for either of the perceptual hashes. It could be $\Delta=4$ but $\Delta=8$ is also possible.
+More specifically for the 53\% scale near-duplicate case in figure \ref{53label}, Local Features is clearly the best method of the three (topleftmost) in ROC space \ref{53roc} and in PR space. The differences between the hashes are clearly visible only in PR space (fig. \ref{53pr}) for the Paintings Dataset. For the ThingLink Dataset, it is difficult to discriminate between the best performance between Local Features and the Simple Hash (fig. \ref{53rocthinglink} and \ref{53prthinglink}). Local Features is clearly better as shown in the PR plots (fig. \ref{53pr} and \subref{53prthinglink}). It is difficult to make out what is the best $\Delta(q,d)$ for either of the perceptual hashes. It could be $\Delta=4$ but $\Delta=8$ is also possible. The ROC space and PR plots (fig. \ref{83label}) for 83\% scaled near-duplicate queries for both datasets Confirms the results from 53\% scale near-duplicate case. The Local Features improvement over the hashes is more clearly visible.
+
+Shaving 10px from the edges of the duplicate images nearly does nothing to Local Features performance (fig. \ref{shavelabel}). The hashes perform poorer than in the scaled case but manage decent detection. For the Paintings Dataset ROC space, the DCT Hash dominates the Simple Hash contrary to the scaled cases (fig. \ref{Shaveroc}). In other figures \ref{Shaverocthinglink}-\subref{Shaveprthinglink}, the DCT Hash dominance is limited to one point only.
+
+Adding a 10\% border to the near-duplicates (fig. \ref{borderlabel}) affects Local Features performance for detection precision for ThingLink Dataset only. All other cases, the detection performance is stable compared to previous duplicate cases. The perceptual hashes are much worse than flipping a coin and in PR space very close to origin denoting useless performance by the hashes for detecting these types of duplicates.
+
+For the rotated near-duplicate case in figure \ref{rotatelabel} Local Features detection rates suffer visibly very little compared to scaled near-duplicate cases for both datasets. There is a slight loss of precision for the ThingLink dataset. The perceptual hashes perform poorer than in the 10\% border near-duplicate case for both datasets in ROC and PR space and are worse than useless for near-duplicate image detection of border added near-duplicate images.
+
+Histogram normalized duplicates have all methods performing well (fig. \ref{histogramlabel}). Local Features dominates the hashes and the DCT Hash slightly dominates the Simple Hash, which is expected as the DCT Hash should be more stable for changes in color space of the image. For the ThingLink Dataset (fig. \ref{Normalizerocthinglink} and \subref{Normalizeprthinglink}), the hashes perform equally. Once again Local Features shows a drop in precision for the ThingLink Dataset compared to the Paintings Dataset (fig. \ref{Normalizeprthinglink}).
+
+For the near-duplicates with saturated colors in figure \ref{saturatelabel} visually Local Features dominates the perceptual hashes in both ROC- and PR spaces for both datasets. Once again, there is a loss of precision with the ThingLink Dataset compared to the Paintings Dataset for Local Features (fig. \ref{Saturateprthinglink}). Notable the DCT Hash dominates the Simple Hash in ROC space and in PR space for both datasets as expected since we are dealing with modifications regarding color where the DCT Hash is known to have better stability\cite{Zauner2006}.
 
 What is a good Hamming Distance to use for near-duplicate image detection by perceptual hashing? Contrary to the recommendation $\Delta(q,d)=10$ in \cite{Zauner2010}, we find $\Delta(q,d)=4$ to perform better for both hashes. We come to this conclusion comparing maximum \emph{Informedness} averaged over the duplicate sets (tables \ref{simpleunbiased}, \ref{simplethinglinkunbiased}, \ref{dctunbiased} and \ref{dctthinglinkunbiased} in purple). We did not measure $\Delta(q,d)=10$, but since $\Delta(q,d)=8$ already degrades performance due to the disability of the model to classify images not in the database as TN.
 
