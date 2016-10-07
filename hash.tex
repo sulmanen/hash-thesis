@@ -702,7 +702,7 @@ Fast Explicit Diffusion (FED) introduced in \cite{Grewenig2010} is able to build
   \label{boxfilterfactor}
 \tau_j = \frac{\tau_{max}}{2cos^2\left( \pi \frac{2j+1}{4n+2}\right)}
 \end{equation}
-where $n$ is the number of explicit diffusion steps, $\tau_{max}$ is the maximal step size that does not violate the stability condition of the explicit scheme. The FED cycle stopping time $\theta_n$
+where $n$ is the number of explicit diffusion steps, $\tau_{max}$ is the maximum step size keeping the stability condition of the explicit scheme intact. The FED cycle stopping time $\theta_n$
 \begin{equation}
 \theta_n = \sum_{j=0}^{n-1}\tau_j=\tau_{max}\frac{n^2+n}{3}
 \end{equation}
