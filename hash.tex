@@ -1333,7 +1333,11 @@ To what degree if any are Local Features an improvement over DCT-, and simple bl
 For each perceptual hash the parameter was $\Delta(q,d) \in {0,4,8,12}$. Each run results in a single point in ROC and PR spaces. What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? By visually examining ROC- and PR curves in figures \ref{53roc} - \ref{Saturateprthinglink} we can draw conclusions for a good $\Delta(q,d)$ and verify the results using \emph{informedness} $\mathcal{I}$, \emph{markedness} $\mathcal{M}$ and \emph{Matthews correlation} $\mathcal{R}_G$ in tables \ref{simpleunbiased} and \ref{simplethinglinkunbiased} for the simple hash. Tables \ref{dctunbiased} contain the DCT Hash $\mathcal{I}$, $\mathcal{M}$ and $\mathcal{R}_G$ for the Paintings Dataset. The ThingLink Dataset unbiased metrics are in table \ref{dctthinglinkunbiased}.
 
 In the Local Features case, the query returns a list of images along with scores describing how many visual words an image in the database has in common with the query image. We choose the highest scoring image for consideration as a near-duplicate.
-For the Local Features classifier, the tuning parameter was the cutoff score $0 \leq \mathcal{C}_s \leq \mathcal{C}_{smax}^{-P}$ where $\mathcal{C}_{smax}^{-P}$ is the maximum score from querying the -P dataset. What is a good $\mathcal{C}_s$ reject an image, or in other words to classify an incoming image a TN?  A run at each $\mathcal{C}_s$ results in a point in ROC and PR plots in figures \ref{53roc} - \ref{Saturateprthinglink} along with perceptual hash results for easy visual comparison.
+For the Local Features classifier, the tuning parameter was the cutoff score $0 \leq \mathcal{C}_s \leq \mathcal{C}_{smax}^{-P}$ where $\mathcal{C}_{smax}^{-P}$ is the maximum score from querying the -P dataset. What is a good $\mathcal{C}_s$ to reject an image, or in other words to classify an incoming image a TN?  A run at each $\mathcal{C}_s$ results in a point in ROC and PR plots in figures \ref{53roc} - \ref{Saturateprthinglink} along with perceptual hash results for easy visual comparison.
+
+Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=4$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset and $\mathcal{C}_s=16$. To numerically compare the systems, unbiased equivalents of presicion (Informedness $\mathcal{I}$) and recall (Markedness $\mathcal{M}$) values were calculated (table \ref{informednessmarkedness}) for a second opinion to visually comparing the classifiers in the ROC and PR plots in figures \ref{53roc} - \ref{Saturateprthinglink}. In order to make the differences in unbiased metrics explicit, we calculate deltas (table. \ref{deltainformednessmarkedness}) between Local Features and the perceptual hashes. For statistical significance of the differences between Local Features and the perceptual hashes for each dataset and near-duplicate type, we calculate the p-values (table \ref{pvalues}) using Fisher's exact test.
+
+For computational resources (table \ref{computationalcost}) we are interested in the average CPU time $t_f^{avg}$ for calculating a perceptual hash, or an image descriptor and the average query time $t_q^{avg}$ to find a duplicate. For memory, we measured the size of a single hash or an image descriptor and the total image database with metadata included, like the visual vocabulary for example.
 
 \begin{figure}[htb]
   \begin{center}
@@ -1606,8 +1610,6 @@ For the Local Features classifier, the tuning parameter was the cutoff score $0 
 %% \label{dcttotalaccuracy}
 %% \end{figure}
 
-As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=4$ for head to head NDID system comparisons. $\mathcal{C}_s=19$ for Local Features NDID and the Paintings dataset. Based on these $\mathcal{C}_s$ and $\Delta(q,d)$, the systems were compared in TPR (fig. \ref{tptotal}), FPR (fig. \ref{fptotal}) and TN (fig. \ref{tntotal}). Unbiased equivalents of presicion (Informedness $\mathcal{I}$) and recall (Markedness $\mathcal{M}$) values were calculated (table \ref{informednessmarkedness}) to aid in comparison.
-
 %% \begin{figure}[htb]
 %% \begin{center}
 %% \includegraphics[height=8cm]{figures/tpBar}
@@ -1631,8 +1633,6 @@ As a result, the Simple Hash $\Delta(q,d)=4$ and the DCT Hash $\Delta(q,d)=4$ fo
 %% \caption{ TN for near-duplicate modifications for the Paintings dataset.}
 %% \label{tntotal}
 %% \end{figure}
-
-The dataset of images exported from ThingLink was used for a second opinion. Good $\Delta(q,d) \in \{0,4,8,12\}$ were determined for the perceptual hashes with results in \ref{simplethinglinkresults}. As with the Paintings dataset, they were found with the aid of fig. \ref{thinglinksimpletotalroc} and \ref{thinglinksimpletotalaccuracy} to be $\Delta(q,d)=4$ for the Simple Hash and $\Delta(q,d)=8$ for the DCT Hash (fig. \ref{thinglinkdcttotalaccuracy}, \ref{thinglinkdcttotalroc}). However, the unbiased versions of \emph{informedness} and \emph{markedness} calculations disagree with $\Delta(q,d)=4$ for the DCT-Hash. According to tables \ref{dctunbiased} and \ref{dctthinglinkunbiased} $\mathcal{C}_s=16$ for Local Features NDID was found by plotting the query results in ROC space (fig. \ref{thinglinkfigcutoff}). Table \ref{modifiedimages} modifications were run with the three NDID systems and comparisons are available for TPR (fig. \ref{thinglinktptotal}), FPR (fig. \ref{thinglinkfptotal}) and TN (fig. \ref{thinglinktntotal}). The joint $\mathcal{I}-\mathcal{M}$ results are in table \ref{informednessmarkedness}.
 
 %% \begin{figure}[htb]
 %% \begin{center}
@@ -1666,8 +1666,6 @@ The dataset of images exported from ThingLink was used for a second opinion. Goo
 %% \label{thinglinkdcttotalaccuracy}
 %% \end{figure}
 
-\clearpage
-
 %% \begin{figure}[htb]
 %% \begin{center}
 %% \includegraphics[height=8cm]{figures/thinglink_dctTotalROC}
@@ -1699,8 +1697,6 @@ The dataset of images exported from ThingLink was used for a second opinion. Goo
 %% \caption{ TNR for near-duplicate modifications for the ThingLink dataset.}
 %% \label{thinglinktntotal}
 %% \end{figure}
-
-As the Paintings dataset is roughly three times in size, it will give a hint on how the systems scale as the number of images in the database grows. We were interested in the average CPU time $t_f^{avg}$ for calculating a perceptual hash, or an image descriptor and the average query time $t_q^{avg}$ to find a duplicate. For memory, we measured the size of a single hash or an image descriptor and the total image database with metadata included, like the visual vocabulary for example. The results are in table \ref{computationalcost}.
 
 \begin{table*} \footnotesize
   \caption{Computational cost. $t_f^{avg}$ (ms) is the average time to calculate a single image descriptor or hash value. $s_f$ (bits) is the size of the descriptor or hash in bits. $t_q^{avg}$ (ms) is the average query time from the database and $db$ (MB) is the database size in memory. For Local Features, 99\% of the query time $t_q^{avg}$ goes in geometric verification.}
@@ -1929,10 +1925,6 @@ As the Paintings dataset is roughly three times in size, it will give a hint on 
 %% \end{tabular}
 %% \end{center}
 %% \end{table*}
-
-\clearpage
-
-For the ThingLink dataset, duplicate detection results for modified sets from table \ref{modifiedimages} are in table \ref{thinglinksiftresults}. A good $\mathcal{C}_s$ for Local Features NDID for the ThingLink dataset is 16 according to ROC space per cutoff score (figure \ref{thinglinkfigcutoffrocspace}). The FN count increases linearly where as the FP count decreases logarithmically as the $\mathcal{C}_s \rightarrow 16$ (figure \ref{thinglinkfigcutoff}. Comparison per duplicate set to the perceptual hashes are in figures \ref{thinglinktptotal}, \ref{thinglinkfptotal}, and \ref{thinglinktntotal}.
 
 %% \begin{figure}[htb]
 %% \begin{center}
