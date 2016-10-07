@@ -851,23 +851,21 @@ In \cite{Lee2010} a high $FP$-rate is a serious problem for large data set. Anot
 \subsubsection{Bag-of-Visual Words}\label{BOW}
 The Bag-of-Visual Words approach to describing images was developed by Sivic and Zisserman in \cite{Sivic2003} by mimicking the approach of text searches into text documents. This is an approach not unlike the Google search engine. Their results show that there is no penalty from using search by visual words vs. n-nearest neighbor methods. To calculate image descriptors two types of viewpoint covariant regions are formed. The first stage iteratively finds an elliptical region around an interest point. The result is an ellipse with a center, shape and scale. Scale comes from a local extremum of a Laplacian. The shape comes from maximizing intensity gradient isotropy over the elliptical region. This is achieved using Shape Adapted (SA) regions.
 
-The second type of region used is the Maximally Stable (MS) region. For these regions are the region area stays constant as the intensity threshold is changed.
+The second type of region used is the Maximally Stable (MS) region. For these regions are the region area stays constant as the intensity threshold is changed. The two types of regions complement each other in image detection. The SA regions perform well on corners and the MS regions perform well on high contrast blobs. \cite{Sivic2003} The original BoW approach uses SIFT-descriptors introduced by Lowe. The second type of region is implemented in affine covariant regions.
 
-The two types of regions complement each other in image detection. The SA regions perform well on corners and the MS regions perform well on high contrast blobs. \cite{Sivic2003} The original BoW approach uses SIFT-descriptors introduced by Lowe. The second type of region is implemented in affine covariant regions.
-
-BoW relies on quantizing descriptors into visual words for efficient retrieval. Descriptors are quantized by associating them with the nearest cluster of descriptors. The vector quantization is implemented by k-means clustering. \cite{Sivic2003} The original BoW implementation worked on video, but we will apply the simple image case only. In the original implementation, the Mahalanobis distance is used as the distance function in k-means clustering.
+BoW relies on quantizing descriptors into visual words for efficient retrieval. Descriptors are quantized by associating them with the nearest cluster of descriptors. The vector quantization is implemented by k-means clustering. The original BoW implementation worked on video, but we will apply the simple image case only. In the original implementation, the Mahalanobis distance is used as the distance function in k-means clustering. \cite{Sivic2003}
 
 In text retrieval a document is stored in a vector of word frequencies. A weight is usually applied to the vector. Term frequency-inverse document frequency, $tf-idf$ (eq. \ref{tfidf}) is a weighting scheme common in text retrieval. In $k$ words, each document is represented by a $k$-vector $V_{d}=(t_{1},...,t_{k})^{T}$
 
 \begin{equation}\label{tfidf}
 t_{i} = \frac{n_{id}}{n_{d}}log\frac{N}{n_{i}}
 \end{equation}
-with $n_{id}$ is word $i$ appearing $n$ times in document $d$ and $n_{d}$ is the total number of words in document $d$. $n_{i}$ is the total number of occurrences of term $i$. $N$ is the total number of documents. The first term is word frequency and the second term is inverse document frequency. Word frequency weighs words occurring often in a document while inverse document frequency down weights words that appear often in all documents. This weighting scheme outperformed the binary and $tf$ weighting schemes\cite{Sivic2003}
+with $n_{id}$ is word $i$ appearing $n$ times in document $d$ and $n_{d}$ is the total number of words in document $d$. $n_{i}$ is the total number of occurrences of term $i$. $N$ is the total number of documents. The first term is word frequency and the second term is inverse document frequency. Word frequency weighs words occurring often in a document while inverse document frequency down weights words that appear often in all documents. This weighting scheme outperformed the binary and $tf$ weighting schemes
 
 \begin{equation}\label{bowrank}
   Rank = \frac{1}{NN_{rel}}\left(\sum{i=1}{N_{rel}}R_{i}-\frac{N_{rel}(N_{rel} + 1)}{2}\right)
 \end{equation}
-where $N_{rel}$ is the number of relevant images for particular query image, $N$ is the total number of images and $R_{i}$ is the $i$th image rank. $Rank$ is a number between 0 and 1.
+where $N_{rel}$ is the number of relevant images for particular query image, $N$ is the total number of images and $R_{i}$ is the $i$th image rank. $Rank$ is a number between 0 and 1. \cite{Sivic2003}
 
 Retrieval uses an inverted file where each word has a hit list for all occurrences of the word in all documents. In the visual word case, each visual word has knowledge of the image it is found in. The document vector is sparse and the retrieval is very fast.
 
