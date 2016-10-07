@@ -697,7 +697,7 @@ According to \cite{Weickert1998}, $\nabla L_{\sigma}$ can be regarded as the edg
 \subsubsection{Accelerated KAZE Features}
 According to \cite{Alcantarilla2012}, the main drawback of KAZE features is the slow nonlinear diffusion filtering used for building the nonlinear scale space.  The KAZE method of choice is Additive Operator Scaling (AOS). AOS requires computationally intensive solving a of large system of linear equations. A-KAZE features also introduced by Alcantarilla et. al in solves this problem by replacing AOS with Fast Explicit Diffusion (FED) reducing computation time of the nonlinear scale space. In addition, AKAZE uses a Modified-Local Difference Binary (M-LDB) descriptor over M-SURF descriptor used in KAZE.
 
-Fast Explicit Diffusion (FED) introduced in \cite{Grewenig2010} is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. FED is equivalent to box filtering and can approximate Gaussian kernels with good quality and is easy and fast to implement. Factorization of the box filter
+Fast Explicit Diffusion (FED) introduced in \cite{Grewenig2010} is able to build the nonlinear scale space faster than AOS. AKAZE improves in speed over KAZE-, SURF-, and SIFT features. FED is equivalent to box filtering and can provide good quality approximations of Gaussian kernels and is easy and fast to implement. The factorization of the box filter
 \begin{equation}
   \label{boxfilterfactor}
 \tau_j = \frac{\tau_{max}}{2cos^2\left( \pi \frac{2j+1}{4n+2}\right)}
@@ -721,7 +721,7 @@ $A(L_i)$ is the image conductivity matrix and $\tau$ is the constant step size o
   \label{scalespace}
   \sigma_i(o,s) = 2^{o+s/S},o \in[0\ldots O-1], s \in [0\ldots S-1], i \in [0 \ldots M]
   \end{equation}
-where $M$ is the total number of filtered images.
+where the number of filtered images is $M$.
 \begin{equation}
   \label{scaletotime}
 t_i = \frac{1}{2}\sigma^2_i,\{i=0\ldots M\}
