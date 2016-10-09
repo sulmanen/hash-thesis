@@ -1261,7 +1261,7 @@ matches Bias to Prevalence where skew is $c$ \cite{POWERS2011}. To compare class
 \label{figconfusion}
 \end{figure}
 
-We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the TPR vs. the FPR. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig.\ref{figrocspace} \cite{Fawcett2006}
+We adopt the notation from the ROC paper by Tom Fawcett and use ${Y,N}$ for output from the classifier. For true classification we use ${p,n}$ for positive and negative respectively. In case of a true positive $p$ is classified correctly as $Y$. A false positive is a $p$ classified as a $N$. A false negative is $p$ classified as $N$ and true negative is $n$ classified as $N$. ROC space in fig. \ref{figrocspace} is made by plotting the TPR vs. the FPR. The line from $(0,0)$ to $(1,1)$ represents classification by chance. Classifiers below this line do worse than luck itself. A discrete classifier outputs either $Y$ or $N$ or in our case image is found in the database or it is not. Discrete classifiers may be compared in ROC space like in fig. \ref{figrocspace} \cite{Fawcett2006}
 
 \begin{figure}[htb]
 \begin{center}
@@ -2068,6 +2068,10 @@ Can Local Features be deployed at a scale of 5 million images at ThingLink for i
 The duplicate database itself should not contain duplicates. For the Paintings Dataset, the database contains a single pixel by pixel duplicate which showed up as the single FP for all near-duplicate sets. For the ThingLink Dataset which all duplicates were removed as a result. Duplicates in the database will unneededly lower precision and fpr.
 
 \subsection{Future Research}
+First, the AKAZE M-LDB descriptor is a binary descriptor and can use $\Delta(q,d)$ as a distance function. It is readily pluggable into the ThingLink system. It would be tremendously interesting to run it through these simulations with varying $\Delta(q,d)$ and see how it performs.
+
+We should increase simulation dataset size to 5 million images. It is expected to further increase the difference between the perceptual hashes and large-scale image retrieval for near-duplicate image detection.
+
 It would be worth the while to compare filtering approach in \cite{dong2012high} to the simulation used in this thesis as well as IVFADC system presented in \cite{Jegou2010} providing ~50ms queries into 5 Million images, a scale very suitable for ThingLink.
 
 Simulations in this thesis were performed on a static database, which is not the case in a production environment. Since $\mathcal{C}_s$ is optimal for the highest score not in the database, this value is bound not to be optimal as the database grows over time and new images are presented to the system. Real performance can only be tested reliably in a production environment, a logical and exciting topic for future research.
