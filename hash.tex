@@ -418,7 +418,7 @@ $\mathcal{C}_{s_{max}}^{-P}$ & The maximum score encountered while querying pred
 %% Leip\"ateksti alkaa
 \section{Introduction}
 \thispagestyle{empty}
-Images are a cornerstone of the World Wide Web. ThingLink is a commercial service hosting over 5 million annotated images, such as Bengtskär lighthouse in figure \ref{bengtskar}, created by students, teachers, journalists, real-estate agents or just about anyone with web access. Customers annotate images with ThingLink and place a ThingLink script on their website containing the annotated images. The script asks ThingLink with an image Universal Resource Identifier (URI) for annotations. The primary identifier for finding the correct image to annotations is the image URI. For different screen widths, scaled versions of the original images are served to viewers of the annotated image. Modified versions of the original image are served from a different URI than the original image. These slightly modified versions are called \emph{near-duplicate images} and finding the original for a near-duplicate image is \emph{near-duplicate image detection} (NDID) having many applications ranging from copyright enforcement to identifying image forgeries.  ThingLink uses a perceptual hash as a secondary identifier for linking annotations of the original image to near-duplicates of the original image.
+Images are a cornerstone of the World Wide Web. ThingLink is a commercial service hosting over 5 million annotated images, such as the Bengtskär lighthouse in figure \ref{bengtskar}. created by students, teachers, journalists, real-estate agents or just about anyone with web access. Customers annotate images with ThingLink and place a ThingLink script on their website containing the annotated images. The script asks ThingLink with an image Universal Resource Identifier (URI) for annotations. Modified versions of the original image are served from a different URI than the original image. These slightly modified versions are called \emph{near-duplicate images} and finding the original for a near-duplicate image is \emph{near-duplicate image detection} (NDID). NDID has applications ranging from copyright enforcement to identifying image forgeries.  ThingLink uses a perceptual hash as a secondary identifier for linking annotations of the original image to near-duplicate images.
 
 \begin{figure}[htb]
 \begin{center}
@@ -429,7 +429,7 @@ Images are a cornerstone of the World Wide Web. ThingLink is a commercial servic
 \end{figure}
 
 \subsection{Problem Setting}
-The a simple block mean based hash (Simple Hash) and a DCT based hash (DCT Hash) are perceptual hashes used by ThingLink in production. To find matches, the Hamming Distance ($\Delta(q,d)$), the number of bit positions two perceptual hashes differ, is used as the distance function. $\Delta(q,d)=10$ is used currently as recommended in \cite{Zauner2010}. However we do not know if this is the most effective setting.
+The simple block mean based hash (Simple Hash) and a DCT based hash (DCT Hash) are perceptual hashes used by ThingLink in production. To find matches, the Hamming Distance ($\Delta(q,d)$), the number of bit positions two perceptual hashes differ, is used as the distance function. $\Delta(q,d)=10$ is used currently as recommended in \cite{Zauner2010}. However we do not know if this is the most effective setting.
 
 A customer is reporting 20-30\% false negatives for near-duplicate image detection. When detection fails, annotations do not appear on the near-duplicate image resulting in a loss of service. The near-duplicate detection system is working as expected, so an improved approach is needed. ThingLink requirements for a near-duplicate detector are a high true positive rate (TPR), a high true negative rate (TNR), and a low false positive rate (FPR) for detection of near-duplicate images.
 
@@ -439,10 +439,10 @@ We apply Local Features and Bag-of-Visual-Words system to near-duplicate image d
 
 \subsection{Research Questions}
 \begin{itemize}
-\item[--] To what degree if any is local features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection?
+\item[--] To what degree if any is Local Features and Bag-of-Visual-Words an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection?
 \item[--] What is a good Hamming Distance $\Delta(q,d)$ for near-duplicate image detection by perceptual hashing?
 \item[--] What is a good cutoff score $\mathcal{C}_s$ to classify an image a true negative in near-duplicate image detection with Local Features?
-\item[--] In theory, can Local Features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
+\item[--] In theory, can Local Features and large-scale image retrieval be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 \end{itemize}
 
 \subsection{Scope}
