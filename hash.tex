@@ -429,7 +429,7 @@ Images are a cornerstone of the World Wide Web. ThingLink is a commercial servic
 \end{figure}
 
 \subsection{Problem Setting}
-A simple block mean based hash (Simple Hash) and a DCT based hash (DCT Hash) are perceptual hashes used by ThingLink in production. To match near-duplicates to original images, Hamming Distance ($\Delta(q,d)$), the number of bit positions two perceptual hashes differ, is used as a distance function. $\Delta(q,d)=10$ is used currently as recommended in \cite{Zauner2010}. However we do not know if this is the most effective setting.
+A simple block mean based hash (Simple Hash) and a DCT based hash (DCT Hash) are perceptual hashes used by ThingLink in production. To match near-duplicates to original images, Hamming Distance ($\Delta(q,d)$), the number of bit positions two perceptual hashes differ, is used as a distance function. $\Delta(q,d)=10$ is currently used as recommended in \cite{Zauner2010}. However we do not know if this is the most effective setting.
 
 A customer is reporting 20-30\% false negatives for near-duplicate image detection. When detection fails, annotations do not appear on the near-duplicate image resulting in a loss of service. The near-duplicate detection system is working as expected, so an improved approach is needed. ThingLink requirements for a near-duplicate detector are a high true positive rate (TPR), a high true negative rate (TNR), and a low false positive rate (FPR) for detection of near-duplicate images.
 
