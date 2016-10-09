@@ -446,7 +446,7 @@ We apply Local Features and Bag-of-Visual-Words system to near-duplicate image d
 \end{itemize}
 
 \subsection{Scope}
-This thesis considers near-duplicate image detection excluding all other uses of perceptual hashing, Local Features and large-scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Object/image \emph{category} recognition is an interesting topic not in the scope of this thesis. Finding an improved perceptual hashing algorithm is outside the scope of this thesis. We are only interested in determining if the Local Features and large-scale image retrieval based NDID system is better to the currently used systems.
+This thesis considers near-duplicate image detection excluding all other uses of perceptual hashing, Local Features and large-scale image retrieval. Cryptographic hashing is not considered nor are any uses of perceptual hashing or other methods for digital watermarking. Image category recognition is an interesting topic not in the scope of this thesis. Finding an improved perceptual hashing method is also not in scope of this thesis. We are only interested in determining if the Local Features and large-scale image retrieval based NDID system is better to the currently used systems.
 
 \subsection{Overview}
 We begin with a review of preceptual hashing as it is in use at ThingLink today for the description and retrieval of near-duplicate images. A review of state-of-the-art in Local Features detection and description methods and large-scale image retrieval follows. Section \ref{NDID} covers near-duplicate image detection simulations and treating NDID as a binary classification problem and the evaluation of binary classifiers. After simulation \emph{Results} in section \ref{results}, we discuss our findings.
@@ -1247,7 +1247,6 @@ For these simulations, the metadata contains information on the original images 
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classifiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
 
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
-\clearpage
 \subsubsection{Receiver Operating Characteristic}\label{ROCSection}
 According to \cite{Fan2006} ''Receiver operating characteristic'' (ROC) was first used by World War \RNum{2} radar operators reading the radar screen to discriminate between signal and noise. ROC-curves visualize classifier performance by plotting FPR to TPR. The ideal system lies at $(0, 1)$ while $(1, 0)$ represents a system that fails at classifying everything. A random classifier will land somewhere on the positive diagonal as TPR = FPR. The negative diagonal
 \begin{equation}\label{biastoprevalence}
