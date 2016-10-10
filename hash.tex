@@ -273,7 +273,7 @@
 \keywords{hajautusfunktio, paikalliset piirteet, kuvien duplikaattitunnistus}
 
 \begin{abstractpage}[finnish]
-Hajautusfunktio on tapa luoda kuvatunniste identifioimaan kuvia, joissa voi esiintyä pieniä poikkeamia alkuperäiseen kuvaan nähden. ThingLink on kaupallinen kuvien annotaatiopalvelu, joka käyttää hajautusfunktioita palvellakseen alkuperäisen kuvan annotaatiot myös kuvaduplikaatteihin. Asiakkaan 20-30\% kuvaduplikaateista eivät tunnistu oikein. Tarvitaan parempi metodi kuvien duplikaattitunnistukseen. Sovellamme paikallisia piirteitä ''Bag-of-Visual-Words''-haun kanssa kuvien duplikaattitunnistukseen ja demonstroimme simulaatiolla metodin olevan parempi kuin käytössä olevat hajatusfunkiopohjaiset duplikaattitunnistimet.
+Hajautusfunktio on tapa luoda kuvatunniste identifioimaan kuvia, joissa voi esiintyä pieniä poikkeamia alkuperäiseen kuvaan nähden. ThingLink on kaupallinen kuvien annotaatiopalvelu, joka käyttää hajautusfunktioita palvellakseen alkuperäisen kuvan annotaatiot myös kuvaduplikaatteihin. 20-30\% asiakkaan kuvaduplikaateista eivät tunnistu oikein. Tarvitaan parempi metodi kuvien duplikaattitunnistukseen. Sovellamme paikallisia piirteitä ''Bag-of-Visual-Words''-haun kanssa kuvien duplikaattitunnistukseen ja demonstroimme simulaatiolla metodin olevan parempi kuin käytössä olevat hajatusfunkiopohjaiset duplikaattitunnistimet.
 \end{abstractpage}
 
 %% Force new page so that the Swedish abstract starts from a new page
@@ -283,7 +283,7 @@ Hajautusfunktio on tapa luoda kuvatunniste identifioimaan kuvia, joissa voi esii
 %%
 %% Esipuhe
 \mysection{Preface}
-Pia suggested I thank her for her endless patience. I would also like to thank her for introducing me to coffee. Thank you Tua for being an inspiration! A huge thank you to my parents for taking me to places I didn't want to go and my brother Arttu for going there with me.
+Pia, I love you. Thank you for introducing me to coffee. Thank you Tua for being an inspiration! A huge thank you to my parents for taking me to places I didn't want to go and my brother Arttu for going there with me.
 
 Thanks to Janne for sharp guidance over lunches and Assistant Prof.\ Juho Kannala for introducing me to some of the giants in the field of Computer Vision and taking me under his informative instruction.\\
 
@@ -316,8 +316,8 @@ Otaniemi, \today
 
 \begin{tabular}{ll}
 $\Delta(q,d)$ & Hamming Distance\\
-$\mathcal{C}_s$ & Local Features Classifier cutoff score.\\
-$\mathcal{C}_{s_{max}}^{-P}$ & The maximum score encountered while querying predicted negative images.\\
+$\mathcal{C}_s$ & Local Features Classifier cutoff score\\
+$\mathcal{C}_{s_{max}}^{-P}$ & The maximum score encountered while querying predicted negative images\\
   $\mathcal{P}$ & Precision\\
   $\mathcal{R}$ & Recall\\
   P & Predicted class in the contingency matrix\\
@@ -2038,7 +2038,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
 \section{Discussion}
 Applying large-scale image retrieval to near-duplicate image detection by simulating queries to the Paintings Dataset and the ThingLink Dataset for seven types of near-duplicates from table \ref{modifiedimages} allows us to draw conclusions on which system of the three presented here: the Simple Hash, the DCT Hash or Local Features and Bag-of-Visual-Words is the best for detecting near-duplicate images. We also find good values for $\Delta(q,d)$ for the perceptual hashes as well as a good cutoff score $\mathcal{C}_s$ for the large-scale image retrieval-based near-duplicate detector. We are able to validate our assumptions, make practical recommendations for near-duplicate detection with perceptual hashes and large-scale image retrieval, as well as provide ideas for future research. To give perceptual hashing a chance, $\Delta(q,d)$ is tuned to an optimal setting.
 
-\subsection{Optimal $\Delta(q,d)$}
+\subsection{Hamming Distance $\Delta(q,d)$ for Perceptual Hashing}
 We visually examine the ROC- and PR plots from simulations for a clear Hamming Distance $\Delta(q,d)$ setting to be used in matching near-duplicate images. For the 53\% scale near-duplicate case (fig. \ref{53label}), the perceptual hashes offer better recall for $\Delta(q,d)\geq 4$ but do not compete in overall performance against Local Features at $\mathcal{C}_s=19$ in the PR plot for the Paintings Dataset (fig. \ref{53pr}). Visually determining between $\Delta(q,d)=4$ and $\Delta(q,d)=8$ for optimal performance is a challenge. In the 83\% scale near-duplicate case (fig. \ref{83label}) examination of the ROC space and PR plots gives Simple Hash $\Delta(q,d)=4$ while for the DCT Hash $\Delta(q,d)=8$ is optimal.
 
 Contrary to the scaled near-duplicate cases, the DCT Hash has an edge in the cropped near-duplicate case (fig. \ref{shavelabel}). For the DCT Hash, $\Delta(q,d)=8$ looks to be optimal in both ROC spaces and PR plots for both datasets. For the Simple Hash, $\Delta(q,d)=4$ is optimal for the Paintings dataset, and for the ThingLink Dataset it is a close call between $\Delta(q,d)=4$ and 8.
@@ -2054,7 +2054,7 @@ If the type of duplicate a system is expected to detect is known a priori, $\Del
 \subsection{Optimal $\mathcal{C}_s$ for Local Features and Bag-of-Visual-Words}
 What is a good cutoff score to classify an image as \emph{not-in-database} for near-duplicate image detection with Local Features and Bag-of-Visual-Words? The Local Features query returns an image with a score describing database image fit to the query image. $\mathcal{C}_s$ is the score below which the query image is labeled a TN. Setting the score as high as possible picking among -P-dataset query scores provides the optimal result. This is demonstrated in all the ROC spaces in figures \ref{53roc}-\ref{Saturateprthinglink}, where $\mathcal{C}_s=19$ for the Paintings Dataset or $\mathcal{C}_s=16$ for the ThingLink Dataset is the closest to the point $(0, 1)$. PR plots confirm this by placing these points closest to $(1,1)$. In other words, optimal $\mathcal{C}_s$ is the maximum score in the -P-dataset for both the ThingLink dataset where $\mathcal{C}_s=16$ and $\mathcal{C}_s=19$ for the Paintings dataset. Also, it varies little per the type of duplicate queried visible in all ROC spaces and PR plots presented in this thesis (figures \ref{53roc}-\ref{Saturateprthinglink}).
 
-\subsection{Highest Scoring Image as the Near-Duplicate}
+\subsection{Large-Scale Image Retrieval Assumptions}
 For both the Paintings Dataset and the ThingLink Dataset assuming the highest scoring image for a query into the inverted index of a Bag-of-Visual-Words is a good candidate for a near-duplicate to the query image. With this assumption, Local Features and Bag-of-Visual-Worlds near-duplicate image detection system works as expected for both datasets and all seven types of near duplicates (table \ref{modifiedimages}) evident in the steady performance seen in ROC space and PR plots in figures \ref{53roc}-\ref{Saturateprthinglink}. This excellent performance is verified by \emph{informedness}, \emph{markedness} and Matthews correlation figures in table \ref{informednessmarkedness} for the Local Features and Bag-of-Visual-Words classifier.
 
 \subsection{Performance}
