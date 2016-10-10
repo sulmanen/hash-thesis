@@ -180,7 +180,7 @@
 %% Muista että otsikkoja ei tavuteta!
 %% Jos otsikossa on ja-sana, se ei jää rivin viimeiseksi sanaksi
 %% vaan aloittaa uuden rivin.
-\thesistitle{Applying Large Scale Image Retrieval to Near-Duplicate Image Detection}
+\thesistitle{Applying Large-Scale Image Retrieval to Near-Duplicate Image Detection}
 
 \place{Espoo}
 
@@ -239,7 +239,7 @@
 %% niin kuin se on yllä määritelty.
 %% Avainsanat
 %%
-\keywords{near-duplicate image detection, perceptual hashing,  large scale image retrieval}
+\keywords{near-duplicate image detection, perceptual hashing,  large-scale image retrieval}
 
 \begin{abstractpage}[english]
   Perceptual hashing outputs an image identifier that can be used for detecting images similar to the original image also known as near-duplicate images. ThingLink is a commercial image annotation service using perceptual hashing for placing annotations from the original annotated image to near-duplicate images. A customer is reporting 20-30\% of near-duplicate images missing annotations. The system is working as expected calling for improved near-duplicate image detection (NDID) methodology.
@@ -578,7 +578,7 @@ Local Features are a good candidate for replacing the relatively simple perceptu
 
 To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head-to-head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
 
-We will review state-of-the-art large scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy Local Features at a scale of 5 million images at ThingLink for improved near-duplicate detection?
+We will review state-of-the-art large-scale image retrieval and it's use in near duplicate image detection. We will find out if in theory, is it feasible to deploy Local Features at a scale of 5 million images at ThingLink for improved near-duplicate detection?
 
 Local Features is more complicated to implement but has become very feasible for millions of images in the last few years. VLAD encoded local-descriptors have reportedly done searches among 10M images in 50ms \cite{Jegou2010}.
 
@@ -758,7 +758,7 @@ As desrcribed in \cite{Alcantarilla2012}, after detection the precise interest p
 \clearpage
 
 \subsection{Retrieval}
-ThingLink hosts 5 Million annotated scenes. Large Scale Image Retrieval is an umbrella term for using an image to query for object-, scene-, category-, or duplicate amongst millions of images. In \cite{Wang2013} Wang et. al query near-duplicates amongst billions of images. However, their approach used batch processing. We are interested in a smaller scale and preferably near realtime implementations. Some of the more important limitations witht the near realtime case have to do with fitting the database into main memory for a OTS hardware. When all the descriptors in the database do not fit into system RAM, the efficiency of the retrieval system collapses due to disk access \cite{Philbin2007}. In order to match among numerous of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search \cite{Jegou2010} optimizes the descriptor format for memory footprint optimization and computation speed.
+ThingLink hosts 5 Million annotated scenes. Large-Scale Image Retrieval is an umbrella term for using an image to query for object-, scene-, category-, or duplicate amongst millions of images. In \cite{Wang2013} Wang et. al query near-duplicates amongst billions of images. However, their approach used batch processing. We are interested in a smaller scale and preferably near realtime implementations. Some of the more important limitations witht the near realtime case have to do with fitting the database into main memory for a OTS hardware. When all the descriptors in the database do not fit into system RAM, the efficiency of the retrieval system collapses due to disk access \cite{Philbin2007}. In order to match among numerous of images, the descriptors are quantized into visual words to speed up the search. In order to further optimize search \cite{Jegou2010} optimizes the descriptor format for memory footprint optimization and computation speed.
 
 Detection and description of features covered finding interesting points in an object or scene and creating a serialization, an image descriptor to add to the database of all known images. This section covers efficient querying in that database possibly consisting of millions of images. Finding an image duplicate is a special simplified case where the highest result is assumed to contain the duplicate. The first step after calculating the descriptor for a query image is finding the nearest neighbors for each descriptor in the database. The SIFT descriptor is usually 128 dimensional, which makes the NN-search especially challenging.
 
@@ -972,7 +972,7 @@ If $\mathcal{L}_i$ are balanced, roughly $n \times \frac{w}{k'}$ entries have to
 \end{center}\end{table}
 
 \subsubsection{The Fisher Vector}\label{FV}
-The Fisher kernel brings the best of both pattern classification with generative and discriminative methods \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector, the Fisher Vector (FV) (eq. \ref{fishervectorfinal}), given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accommodates for variable amounts of features extracted from an image. It was applied to image classification by by Perronin et al. \cite{Perronnin2007} and improved in \cite{Perronnin2010} where images are treated as signals and the generative model (GMM) is a kind of visual vocabulary. \cite{Perronnin2010a} extends FV for use in large scale image retrieval. Similar to $tf-idf$, it discounts the influence of common visual words (Gaussians in this case) \cite{Perronnin2010a}.
+The Fisher kernel brings the best of both pattern classification with generative and discriminative methods \cite{Jaakkola1999}. The Fisher kernel transforms a variable-size set of independent samples into a fixed size vector, the Fisher Vector (FV) (eq. \ref{fishervectorfinal}), given samples follow a training set based generative model \cite{Jaakkola1999}. Variable-size accommodates for variable amounts of features extracted from an image. It was applied to image classification by by Perronin et al. \cite{Perronnin2007} and improved in \cite{Perronnin2010} where images are treated as signals and the generative model (GMM) is a kind of visual vocabulary. \cite{Perronnin2010a} extends FV for use in large-scale image retrieval. Similar to $tf-idf$, it discounts the influence of common visual words (Gaussians in this case) \cite{Perronnin2010a}.
 
 The Fisher vector according to \cite{Perronnin2010} can be used to process local descriptors. $X = {x_t, t = 1 \ldots T}$ is a set of T local feature descriptors of an image generated by a process modeled by $u_\lambda$.
 \begin{equation}\label{fishervector}
@@ -1020,7 +1020,7 @@ is the gradient with respect to the mean $\mu_i$ and
   \end{equation}
 is the gradient with respect to the standard deviation $\sigma_i$ (vector division is done term by term). \cite{Perronnin2010}
 
-The Fisher vector has not been used extensively for large scale retrieval possibly due to very high dimensional representations (100k even) \cite{Perronnin2010a}. However, when combined with LSH and a binarization technique large scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
+The Fisher vector has not been used extensively for large-scale retrieval possibly due to very high dimensional representations (100k even) \cite{Perronnin2010a}. However, when combined with LSH and a binarization technique large-scale retrieval becomes feasible as shown in \cite{Perronnin2010a}.
 
 Estimating the Nearest Neighbor between Fisher Vectors can be performed via dot-product (eq. \ref{fisherdoteq}) \cite{Perronnin2010a}, a simple operation. For the actual implementation in \cite{Perronnin2010a} cosine similarity (dot product of L2-normalized vectors) is used. This guarantees retrieval of the query image first if it is contained in the image database \cite{Perronnin2010a}.
 
