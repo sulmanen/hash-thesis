@@ -457,7 +457,7 @@ We review perceptual hashing as it is used at ThingLink today for the descriptio
 \section{Perceptual Hashing}\label{perceptualhash}
 A perceptual hash $H(I)$ of image $I$ is a bit sequence of length $L$ constructed from the image pixels such that similar images have similar hash values and different images have vastly differing hash values. According to \cite{Zauner2010}, perceptual hashing has vast modes of usage from content identification to content-based media retrieval.
 
-In this paper we will only consider the use of a simple block mean based hash and a version of DCT based hash on content based media retrieval, more specifically the retrieval of content annotations. More precisely perceptual hash
+In this paper we will only consider the use of a simple block-mean-based hash and a version of DCT-based hash for content based media retrieval, more specifically the retrieval of content annotations. More precisely perceptual hash
 \begin{equation}\label{hashfunction}
 h = H(I)
 \end{equation}
@@ -500,14 +500,14 @@ In addition, according to \cite{mihccak2001new} given $P$ as probability and $L$
 The distance function used in finding a near duplicate for a perceptual hash in this paper is the Hamming Distance.
 
 \subsection{Block Mean Based Simple Hash}\label{simplehash}
-According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel is greater than the average or to zero if it is less than or equal to. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
+According to \cite[p. 20]{Hadmi2012} the simple hash belongs in the statistic-based hashing schemes and is a simplified version of the block mean value based hash in \cite{Yang2006}. The simple hash (eq. \ref{simplehasheq}) scales the image to 8px $\times$ 8px gray scale. Thresholding takes place where the average value of the most significant byte is found and hash bits are set to one if the image pixel is greater than the average or to zero if it is less than or equal to the average. More specifically the resulting hash has two parts. The most significant 64 bits represent the image pixels and the least significant 64 bits represent the horizontal flip of the 8px $\times$ 8px gray scale image.
 \begin{equation} \label{simplehasheq}
   \begin{split}
   b_{i} = 1 | I_{msB}(u,v) > px_{avg}\\
   b_{i} = 0 | I_{msB}(u,v) \leq px_{avg}
   \end{split}
 \end{equation}
-where $b_{i}$ denotes $i$th hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \leq u,v < 8$. The second part (eq. \ref{simplehasheqmirror})of the hash is calculated on the mirror image of $I$ where $I_{msB}$ denotes the most significant byte of the image RGB pixel value.
+where $b_{i}$ denotes $i$th hash bit where $0 \leq i < 64$ and $I_{msB}(u,v)$ is the most significant byte of pixel of $I$ at $(u,v)$ where $0 \leq u,v < 8$. The second part (eq. \ref{simplehasheqmirror}) of the hash is calculated on the mirror image of $I$ where $I_{msB}$ denotes the most significant byte of the image RGB pixel value.
 
 \begin{equation} \label{simplehasheqmirror}
   \begin{split}
@@ -520,8 +520,8 @@ A simple hash is easy to understand, implement and fast to calculate so it meets
 
 Content based image retrieval is done by calculating the hash of an incoming image and comparing it to the image hashes for that user. Typically the number of hashes in the set does not exceed 100. A Hamming Distance is used so the incoming image hash and a hash in the database may differ by $n$ bits where $n$ is the Hamming Distance.
 
-\subsection{DCT Based Hash}
-According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromise between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT based hash (DCT Hash) is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT Hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
+\subsection{DCT-Based Hash}
+According to \cite{Gonzalez2002}, many ''transform coding systems are based on the DCT, which provides a good compromise between information packing ability and computational complexity'', properties which are in accordance with requirements for perceptual hashes in table \ref{hashcriteria}. A DCT-based hash (DCT Hash) is formed using a gray scale scaled version of the image, a DCT transform of the scaled image and thresholding to produce a $L=64$ bit hash. Unlike the simple hash, DCT Hash operates in the frequency domain. Especially the low frequency DCT image components are difficult to change without visually altering the image \cite{Fridrich1999}.
 
 To create the hash, the image is reduced to $32$ by $32$ px gray scale. From the result, the most significant byte of the pixel (reduced image) is used. $N=32$ DCT (eq. \ref{dcteq}) is applied to the reduced image and the coefficients are set according to equation \ref{dctcoefeq}.
 
@@ -538,7 +538,7 @@ T(u,v)= \sum_{u=0}^{N-1} \sum_{v=0}^{N-1}\alpha(u)\alpha(v)cos\left[\frac{(2x-1)
     \end{cases}
 \end{equation}
 
-The image is scaled down to 32 by 32 px gray scale and the most significant byte of the pixel is extracted. The two dimensional $N=32$ type-II DCT (eq. \ref{dcteq}) is calculated. Only the top left 8 by 8 corner of the DCT result is used. Most of the image information resides in the low frequency components (top left corner). From these 64 values the average is calculated and the origin value is dropped from the average. In figure \ref{dctkernels} we see the origin being very large compared to the rest of the DCT basis values. If included in calculations, the origin throws off the average and thresholding so it is dropped. The 8 by 8 values are thresholded by eq. \ref{simplehasheq} into a 64 bit hash. This version of DCT-Hash takes ~200ms to calculate on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
+This version of DCT-Hash takes 200ms to calculate on a 13'' mid 2014 Macbook Pro and Matlab 2015b.
 
 \begin{figure}[htb]
 \begin{center}
