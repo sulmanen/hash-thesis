@@ -1153,7 +1153,7 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 
 \def\arraystretch{1.5}
 \begin{table}[htb]
-\caption{Test image datasets from the ''Recognition of Object Instances Practical'' \cite{Vedaldi2012} paintings image set generated via shell scripts. Predicted negative set sampled in random from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}.}
+\caption{Test image datasets from the ''Recognition of Object Instances Practical'' \cite{Vedaldi2012} paintings image set generated via shell scripts. Predicted negative set sampled in random from Oxford Buildings Dataset \cite{PhilbinJamesArandjelovicReljaZisserman2012}. The same procedure is run for the ThingLink dataset. -P images are also sampled from ThingLink.}
 \label{modifiedimages}
 \begin{center}
 \begin{tabular}{lp{0.5\linewidth}}
@@ -1177,17 +1177,13 @@ To test for images not in the set we pick 1708 images from the Oxford Buildings 
 \end{tabular}
 \end{center}\end{table}
 \clearpage
-The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain. Most notably, the Paintings Dataset contains a single pixel by pixel duplicate image. It was recognized that this duplicate image caused FP classification depending on which of the duplicates was sorted as the first item in the retrieved short list of images. Based on this finding, duplicates were removed from the ThingLink Dataset. The ThingLink Dataset consists of 446 images sampled from ThingLink. For this study, the ThingLink Dataset gives a base to compare the NDID methods with the types of images they are expected to work with in ThingLink production.
+The Paintings Dataset from \cite{Vedaldi2012} contains images of homogeneous quality and domain. Most notably, the Paintings Dataset contains a single pixel by pixel duplicate image. It was recognized that this duplicate image caused FP classification depending on which of the duplicates was sorted as the first item in the retrieved short list of images. Based on this finding, duplicates were removed from the ThingLink Dataset. The ThingLink Dataset consists of 446 images sampled from ThingLink. For this study, the ThingLink Dataset gives a base to compare the NDID methods with the types of images they are expected to work with in ThingLink production environment.
 
 This imageset is heterogeneous in content containing landscapes, closeups of food, portraits and product brochures as well as ads. All of the files use lossy JPEG encoding. These images will form the predicted negative (-P) set forming the database. TP modifications are formed according to table \ref{modifiedimages}. A -P-dataset is needed to make sure images not in the database are reliably rejected by the classifiers. The -P-dataset is a more recent export of JPEG images from the service. These images are of varying size and content.
 
 \subsubsection{Perceptual Hashing}
-An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by the exactly the same code running on ThingLink. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}).
-
-We do not know how varying the Hamming Distance affects classifier performance. As a result we will run all sets for Hamming Distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset.
-
-Images with dimensions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored. This is the reason why smaller scales than 53\% and 84\% were not used as some of the dataset images were too small to process.
-
+An image database is built and perceptual hashes in section \ref{perceptualhash} (Simple Hash and DCT Hash) are calculated by the exactly the same code running on ThingLink. For the hash distance function we will use Hamming Distance (section \ref{HammingSection}). We do not know how varying the Hamming Distance affects classifier performance. As a result we will run all sets for Hamming Distances of 0, 4, 8 \& 12 to find an optimal Hamming Distance for each perceptual hash. 10 was recommended by \cite{Zauner2010} but we want to know how these hashes perform on the paintings dataset and the ThingLink dataset. Images with dimensions exceeding 32px are ignored by the Simple Hash and DCT Hash algorithms. Having visual metadata for small images is counterproductive so they are ignored.
+To query we use brute force to gather all the images in the database where the $\Delta(q,d)$ to the query image hash is less than or equal to $\Delta(q,d) \in \{0, 4, 8, 12$. We then return the result image where $\Delta(q,d)$ to the query is the smallest.
 \subsubsection{Local Features for Near-Duplicate Image Detection}
 We base our simulations heavily on the code from ''Recognition of Object Instances Practical'' \cite{Vedaldi2012}. Our contribution is to use a single result from the short list of matches return from a Large-Scale Image Retrieval query.
 
