@@ -2054,7 +2054,7 @@ What is a good $\Delta(q,d)$ for near-duplicate image detection by perceptual ha
 
 If the type of duplicate a system is expected to detect is known a priori, $\Delta(q,d)$ may be further optimised to the specific case depends on the type of hash chosen and the duplicate definition. The DCT Hash does better with changes in color space of the image (fig. \ref{saturatelabel}). With duplicates concerning the colorspace, the DCT Hash does better with $\Delta(q,d)=4$ (fig. \ref{saturatelabel}). However for spatial near-duplicates, the DCT Hash performs better with $\Delta(q,d)=8$.  For head-to-head comparison, we stick to the average, as at ThingLink we do not know the type of duplicate at query time. Ultimately $\Delta(q,d)=4$ was used in comparison to Local Features NDID based on averaged \emph{Informedness} over the datasets and for the DCT Hash, this choice is contrary to $\Delta(q,d)=8$ suggested by the DCT Hash ROC spaces for both datasets (fig. \ref{53roc}-\ref{Saturateprthinglink}). We choose $\Delta(q,d)=4$ for both hashes based on the calculated unbiased metrics in tables \ref{simpleunbiased}, \ref{simplethinglinkunbiased}, \ref{dctunbiased} and \ref{dctthinglinkunbiased}.
 
-\subsection{$\mathcal{C}_s$ for Local Features and Bag-of-Visual-Words}
+\subsection{Optimal $\mathcal{C}_s$ for Local Features and Bag-of-Visual-Words}
 What is a good cutoff score to classify an image a true negative in near-duplicate image detection with Local Features? The Local Features query returns an image with a score describing database image fit to the query image. $\mathcal{C}_s$ is the score below which the query image is labeled a TN. Setting the score as high as possible picking amongst -P-dataset query scores provides the optimal result. This is demonstrated in all the ROC spaces in figures \ref{53roc}-\ref{Saturateprthinglink}, where $\mathcal{C}_s=19$ for the Paintings Dataset or $\mathcal{C}_s=16$ for the ThingLink Dataset is the closest to the point $(0, 1)$. PR plots confirm this by placing these points closest to $(1,1)$. In other words, optimal $\mathcal{C}_s$ is the maximum score in the -P-dataset for both the ThingLink dataset where $\mathcal{C}_s=16$ and $\mathcal{C}_s=19$ for the Paintings dataset. Also, it does not vary greatly per the type of duplicate queried visible in all ROC spaces and PR plots presented in this thesis (figures \ref{53roc}-\ref{Saturateprthinglink}).
 
 \subsection{Performance}
@@ -2086,11 +2086,9 @@ Can Local Features be deployed at a scale of 5 million images at ThingLink for i
 \subsection{Recommendations}
 
 \subsection{Future Research}
-For future research the AKAZE M-LDB descriptor is a binary descriptor and can use $\Delta(q,d)$ as a distance function. It is readily pluggable into the ThingLink system. It would be tremendously interesting to run it through these simulations with varying $\Delta(q,d)$ and see how it performs.
+For future research the AKAZE M-LDB descriptor is a binary descriptor and can use $\Delta(q,d)$ as a distance function. It is readily pluggable into the ThingLink system. It would be tremendously interesting to run it through these simulations with varying $\Delta(q,d)$ and see how it performs. It would be worth the while to compare filtering approach in \cite{dong2012high} to the simulation used in this thesis as well as IVFADC system presented in \cite{Jegou2010} providing ~50ms queries into 5 Million images, a scale very suitable for ThingLink.
 
 We should increase simulation dataset size to 5 million images. It is expected to further increase the difference between the perceptual hashes and large-scale image retrieval for near-duplicate image detection.
-
-It would be worth the while to compare filtering approach in \cite{dong2012high} to the simulation used in this thesis as well as IVFADC system presented in \cite{Jegou2010} providing ~50ms queries into 5 Million images, a scale very suitable for ThingLink.
 
 Simulations in this thesis were performed on a static database, which is not the case in a production environment. Since $\mathcal{C}_s$ is optimal for the highest score not in the database, this value is bound not to be optimal as the database grows over time and new images are presented to the system. Real performance can only be tested reliably in a production environment, a logical and exciting topic for future research.
 
