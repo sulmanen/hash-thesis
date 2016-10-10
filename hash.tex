@@ -1191,7 +1191,7 @@ The ready trained vocabulary for the Paintings Dataset is used for Paintings que
 
 The Local Features classifier in this case makes use of the SIFT-descriptor (section \ref{SIFTSection}) and quantization of the descriptor into visual words as well as the inverted index for querying. The index building process is in figure \ref{vedaldigenindex} and near-duplicate query process is found in figure \ref{vedaldiquery}. The code is modified for compatibility with Matlab 2015a.
 
-Unexpectedly, the -P dataset on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the images with the highest matching scores to the query, this was bound to happen. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
+Unexpectedly, the -P dataset on the Local Features-Classifier performed the worst with $FPR = 1$. Since the Local Features-Classifier always returned the highest scoring image. A cutoff score meaning ''query image not found in database'', a TN classification solves the issue but left the question of what to set the cutoff score to. The data was then used to find an optimal cutoff score $\mathcal{C}_s$.
 
 In order to determine optimum cutoff, simulations were run setting the cutoff score from 1 to 19 and finding the optimum score, which turned out to be 19, the maximum score in the -P dataset. If returned matches from a search score less than $\mathcal{C_s}$, the image is classified as a $TN$.
 
@@ -1216,15 +1216,15 @@ Knowing roughly how much resources are needed for the NDID system is a basis for
 
 For the perceptual hashes, the memory footprint for a single hash is well known to be 64 bits, the size of the hash. The size of the image database will be a multiple of this hash size. For the Local Features case, we will use the descriptor size of a single index in the inverted index, which contains one double for each word in the visual vocabulary, $1\times10^6$ words in our case. In addition to the descriptors the database contains metadata describing the descriptor database.
 
-For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary $32 \times 128 \times 10^6$ bits is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$.
+For these simulations, the metadata contains information on the original images like image name and download url and an id. In addition, a reference to the vocabulary $32 \times 128 \times 10^6$ bits is needed as well as the inverted index which needs vocabulary width per image of storage. The inverse document frequency reference for the entire vocabulary is $64 \times 10^6$ bits.
 
 \subsection{Binary Classification}
-''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006}. Near-duplicate image detection is an example of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
+''A classifier is a mapping from instances to predicted classes'' \cite{Fawcett2006} (fig. \ref{figcontingencytable}). Near-duplicate image detection is a form of binary classification. A database of known images is queried by an incoming image. We are interested in finding a near-duplicate for the query image. If a near-duplicate exists in the database, we return that image and have a true positive (TP). In case a near duplicate image is retrieved and labeled a predicted positive, but the wrong image is returned from the database, we have a false positive (FP). When the query image is predicted positive but no near-duplicate image is returned, a false positive (FP). Given a predicted negative image query from the database and a near duplicate is returned, a false negative (FN) results. When a predicted negative image query returns nothing, a true negative (TN) results. We will use the approach in \cite{POWERS2011} and label counts in capital letters, such as TP, and probabilities in small letters for example \emph{tp}.
 \begin{figure}[htb]
 \begin{center}
 \includegraphics[height=6cm]{figures/contingency}
 \end{center}
-\caption{Contingency table for binary classification. Green areas are correctly classified. Red areas contain incorrectly classified items. \emph{TP, FP, TN, FN} total N, the size of the test set.}
+\caption{Contingency table for binary classification. Green areas are correctly classified. Red areas contain incorrectly classified items. \emph{TP, FP, TN, FN} total N, the size of the test set. This is more familiar coming from a large-scale image retrieval background.}
 \label{figcontingencytable}
 \end{figure}
 In essence, we compare three binary classifiers with known data. In our case the image is classified correctly by the classification system or it is not. This is a binary classification problem. The confusion matrix is outlined in fig. \ref{figconfusion}. To compare the DCT-, and simple perceptual hash classifiers to large scale image retrieval by SIFT features we need datasets, near-duplicate system implementations, simulation scripts and methods to evaluate the outcomes. ROC curves, Precision-Recall curves and the Matthews Correlation Coefficient all provide tools for comparing binary classifiers in a systematic manner. The Fisher Exact test is used to determine statistical significance of the results.
@@ -1267,7 +1267,7 @@ F_1 &= \frac{2 \times TP}{TP + FP + 1}\label{fmeasure}
 The f-measure (eq. \ref{fmeasure}) is the harmonic mean of precision (eq. \ref{precision}) and recall (eq. \ref{recall}). It has been used in to compare classifiers in document retrieval and machine learning.
 
 \subsubsection{Precision-Recall}\label{PRSection}
-Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested \cite{craven2005markov} to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
+Provost et al. warned of misleading reporting using accuracy (eq. \ref{accuracy}) alone to rate binary classifiers \cite{Provost1997} and recommended ROC curves in place of plain accuracy. ROC curves however, may give an overly optimistic view on an algorithms performance in the case of skew in the dataset even though ROC curves and PR curves contain the same points \cite{Davis2006}. Precision-Recall (PR) (eq. \ref{precision}, \ref{recall} respectively) curves have been suggested \cite{craven2005markov} to tackle comparison of classifiers in cases of data sets with skewed class distributions. In this paper we do not output probabilities of class values, merely if the image was identified correctly or not. In other words were interested in the correct image being retrieved if it is known to the system, or a clear indication that the image is not in the system. However, \cite{Davis2006} claim PR curves can expose differences between classifiers hidden in ROC space (fig. \ref{rocpr}).
 
 \begin{figure}[htb]
 \begin{center}
@@ -1301,7 +1301,7 @@ skew &= \frac{RN}{RP}\label{skew}
 \end{align}
 \emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}. $rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
 
-An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance. For the binary case, it was first developed by Youden and is called Youden's J statistic. We will continue to use informedness, for this paper however. It may be used to find the optimum tuning on a ROC curve. \cite{POWERS2011}.
+An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance. For the binary case, it was first developed by Youden and is also called Youden's J statistic. We will continue to use informedness, for this paper however. It may be used to find the optimum tuning on a ROC curve. \cite{POWERS2011}.
 \begin{align}
 Informedness &= 1 - fnr - fpr\label{informedness}\\
 Markedness &= 1 - fpa - fna\label{markedness}
@@ -1315,7 +1315,7 @@ The Matthews correlation can be seen as a joint probability of P informs R and R
 We will evaluate the classifiers against each other on the unbiased versions of \emph{Precision} which is \emph{Informedness} and \emph{Recall} which is \emph{Markedness} and the Matthews correlation.
 
 \subsubsection{Statistical Significance}
-To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID were essentially interested in addressing the significance of differences between classifiers. Fisher's Exact test is a good choice in literature. It can be used when the cell size is small. This is contrary to $\chi^2$, which needs every cell to have a count $>5$. Since the number of FP for the Local Features case is small, we expect to use the The Fisher Exact test, which was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
+To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID were essentially interested in addressing the significance of differences between classifiers. Fisher's Exact test is a good choice according to literature. It can be used when the cell size is small, which it is in our case where for the Paintings Dataset for example, Local Features scores 1 false positive. This is contrary to $\chi^2$, which needs every cell to have a count $>5$. Since the number of FP for the Local Features case is small, we expect to use the The Fisher Exact test, which was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 However, Fisher's Exact Test assumes data to be hypergeometrically distributed meaning all assignments to the contingency matrix cells are considered equally likely, with Bias and Prevalence as given. However, since Bias and Prevalence are assigned as a result of the experiment, not before hand, the assumptions made by Fisher's Exact Test are inappropriate for this problem. We will keep this in mind when evaluating the p-values.
 We will put the classifier results from the Local Features simulations in one row and the results from either DCT-, or Simple Hash NDID on the other row and run the Fisher Exact test. The null hypothesis $H_0$ is ''the systems are the same'' and we will use $\alpha < 0.05$ meaning the $H_0$ is rejected if it's probability based on the results is less than 5\%.
 
@@ -1324,7 +1324,7 @@ We will put the classifier results from the Local Features simulations in one ro
 \section{Results}\label{results}
 To what degree if any are Local Features an improvement over DCT-, and simple block mean based- perceptual hashes for near-duplicate image detection? To find out, modified image sets in table \ref{modifiedimages} for the Paintings dataset and ThingLink datasets were queried separately against the three NDID systems- the Simple Hash-, the DCT Hash- and Local Features-based systems. Near-duplicate detection was treated as a binary classification problem resulting in a contingency matrix for each dataset and each near-duplicate type at each parameter value.
 
-For each perceptual hash the parameter was $\Delta(q,d) \in {0,4,8,12}$. Each run results in a single point in ROC and PR spaces. What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? By visually examining ROC- and PR curves in figures \ref{53roc} - \ref{Saturateprthinglink} we can draw conclusions for a good $\Delta(q,d)$ and verify the results using \emph{informedness} $\mathcal{I}$, \emph{markedness} $\mathcal{M}$ and \emph{Matthews correlation} $\mathcal{R}_G$ in tables \ref{simpleunbiased} and \ref{simplethinglinkunbiased} for the simple hash. Tables \ref{dctunbiased} contain the DCT Hash $\mathcal{I}$, $\mathcal{M}$ and $\mathcal{R}_G$ for the Paintings Dataset. The ThingLink Dataset unbiased metrics are in table \ref{dctthinglinkunbiased}.
+For each perceptual hash the parameter was $\Delta(q,d) \in \{0,4,8,12\}$. Each run results in a single point in ROC and PR spaces. What is a good $\Delta(q,d)$ for the DCT- and Simple hashes for NDID? By visually examining ROC- and PR curves in figures \ref{53roc} - \ref{Saturateprthinglink} we can draw conclusions for a good $\Delta(q,d)$ and verify the results using \emph{informedness} $\mathcal{I}$, \emph{markedness} $\mathcal{M}$ and \emph{Matthews correlation} $\mathcal{R}_G$ in tables \ref{simpleunbiased} and \ref{simplethinglinkunbiased} for the simple hash. Tables \ref{dctunbiased} contain the DCT Hash $\mathcal{I}$, $\mathcal{M}$ and $\mathcal{R}_G$ for the Paintings Dataset. The ThingLink Dataset unbiased metrics are in table \ref{dctthinglinkunbiased}.
 
 In the Local Features case, the query returns a list of images along with scores describing how many visual words an image in the database has in common with the query image. We choose the highest scoring image for consideration as a near-duplicate.
 For the Local Features classifier, the tuning parameter was the cutoff score $0 \leq \mathcal{C}_s \leq \mathcal{C}_{s_{max}}^{-P}$ where $\mathcal{C}_{s_{max}}^{-P}$ is the maximum score from querying the -P dataset. What is a good $\mathcal{C}_s$ to reject an image, or in other words to classify an incoming image a TN?  A run at each $\mathcal{C}_s$ results in a point in ROC and PR plots in figures \ref{53roc} - \ref{Saturateprthinglink} along with perceptual hash results for easy visual comparison.
@@ -1707,7 +1707,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
 %% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
-\caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
+\caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. The $\Delta(q,d)$ column with the best average $\mathcal{I}$ in purple.}
 \label{simpleunbiased}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1755,7 +1755,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
 %% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
-\caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+\caption{ Simple Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. The $\Delta(q,d)$ column with the best average $\mathcal{I}$ in purple.}
 \label{simplethinglinkunbiased}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1802,7 +1802,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
 %% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
-\caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. }
+\caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for Paintings dataset. The $\Delta(q,d)$ column with the best average $\mathcal{I}$ in purple.}
 \label{dctunbiased}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
@@ -1849,7 +1849,7 @@ For computational resources (table \ref{computationalcost}) we are interested in
 %% \end{table}
 
 \begin{sidewaystable}[htb]\footnotesize
-\caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. }
+\caption{ DCT Hash NDID unbiased metrics, \emph{Markedness} $\mathcal{M}$ (eq. \ref{markedness}), \emph{Informedness} $\mathcal{I}$ (eq. \ref{markedness}) and Matthews correlation $\mathcal{R}_G$ (eq. \ref{matthewscorrelation}) for duplicate sets (table \ref{modifiedimages}) for ThingLink dataset. The $\Delta(q,d)$ column with the best average $\mathcal{I}$ in purple.}
 \label{dctthinglinkunbiased}
 \begin{center}
   \setlength\tabcolsep{3pt} % default value: 6pt
