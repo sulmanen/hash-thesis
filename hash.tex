@@ -796,13 +796,13 @@ where the distance $d^*$ from $q$ to the nearest point over all successful queri
 \subsubsection{min-Hash}
 min-Hash was used in \cite{Broder1997} to search for similar text documents among 30 million documents. In \cite{Chum2008} upon which this section is based, the same idea is harnessed to find duplicate images for sample data sets. Chum et. al \cite{Chum2010} use min-Hash techniques to find duplicates in $10^4, 10^5$ and $5 \times 10^6$ images. It finds similar images with a probability near to one, near similar images with small probability and unrelated images with 0 probability.
 
-In essence min-Hashing is LSH for sets. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold. min-Hashing quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near-duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets. The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set. Considering the 128 dimensional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a data set with 128 columns but only 400 rows.\cite{Chum2008}
+In essence min-Hashing is LSH for sets. Like in the case of perceptual hashes (section \ref{perceptualhash}), two images are considered alike if the result of some similarity function $sim_s$ is higher than some threshold. min-Hashing quantizes and compresses SIFT descriptors. It is included in the retrieval section, as the major contributions lie in the retrieval step for finding near-duplicate objects. It solves issues of storage and efficiency in a proven way for moderately large data sets. The corner stone is min-Hash ability to estimate document or image similarity based on a set of data significantly compressed from the original data set. Considering the 128 dimensional SIFT descriptor and 10 million images, if one uses 400 independent hash functions $f_j:\mathcal{V} \rightarrow R$, $f_j, i = 1 \ldots 400$, the similarities are evaluated on a data set with 128 columns but only 400 rows.
 
 min-Hash (eq. \ref{minhash}) is the smallest element of set $\mathcal{A_i}$ under ordering by $f_j$
 \begin{equation}\label{minhash}
 m(\mathcal{A}_i,f_j)= arg \min_{X \in \mathcal{A}_i}f_j(X)
 \end{equation}
-It estimates object (text or image) similarity based on (eq. \ref{minhash}) the probability (eq. \ref{minhashsim}) that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}) \cite{Chum2008}. The used similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
+It estimates object (text or image) similarity based on (eq. \ref{minhash}) the probability (eq. \ref{minhashsim}) that sets $\mathcal{A}_1$ and $\mathcal{A}_2$ have equal min-Hashes is the same as their similarity (eq. \ref{similarityminhash}). The used similarity function can vary. Set similarity or Jaccard is similarity demonstrated in eq. \ref{similarityminhash}
 \begin{equation}\label{similarityminhash}
 sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}}
 \end{equation}
@@ -810,12 +810,11 @@ sim_W(\mathcal{A}_1,\mathcal{A}_2) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2
 \begin{equation}\label{similarityminhashimages}
 sim_h(\mathcal{A}_1, \mathcal(A)_2)=\frac{\sum_W min(t^w_1,t^w_2)}{\sum_W max(t^w_1,t^w_2)}
 \end{equation}
-where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document. $d_w \geq 0$ is the importance of $X_w$. This similarity measure performed better in efficiency and quality than Jaccard distance for the TrecVid 2006 data set. \cite{Chum2008}
+where $t_i$ is size $\abs{\mathcal{V}}$ and $t_i^w$ of the $i$-th document is the count of visual word $X_w$ in that document. $d_w \geq 0$ is the importance of $X_w$. This similarity measure performed better in efficiency and quality than Jaccard distance for the TrecVid 2006 data set.
 \begin{equation}\label{minhashsim}
 P(m(\mathcal{A}_1,f_j) = m(\mathcal{A}_2,f_j)) = \frac{\abs{\mathcal{A}_1 \cap \mathcal{A}_2}}{\abs{\mathcal{A}_1 \cup \mathcal{A}_2}} = sim_s(\mathcal{A}_1, \mathcal{A}_2)
 \end{equation}
-Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word \cite{Chum2008}.
-To ease retrieval the min-Hashes are organized into \emph{sketches} like in \cite{Broder1997}
+Just as a set of words was used in \cite{Broder1997}, to borrow the BoW approach from section \ref{BOW}, an image can be represented as a set of visual words and the min-Hash can be applied to NDID. More specifically, with vocabulary $\mathcal{V}$, an image is represented by a vector of length $\abs{\mathcal{V}}$ containing the number of features falling on a given visual word. To ease retrieval the min-Hashes are organized into \emph{sketches} like in \cite{Broder1997}
 \begin{equation}\label{sketch}
 (m(\mathcal{A_1},f_1) \ldots m(\mathcal{A_1},f_n))
 \end{equation}
