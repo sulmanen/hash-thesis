@@ -649,7 +649,6 @@ The SIFT-descriptor is a 128 dimensional vector formed according to figure \ref{
 \end{figure}
 SIFT as demonstrated in \cite{Lowe2004} uses Best-Bin-First (BBF) indexing for finding approximate nearest neighbors for individual descriptors during queries. To find a matching object or scene in the database the query descriptors are matched one by one to a database of all known descriptors. The quality of individual matches is improved by finding clusters of 3 matches that agree on an object or scene. The clusters are then checked by verifying geometric fit to the model (\emph{geometric verification}) rejecting those matches not fitting to the model.
 
-
 \subsubsection{Speeded Up Robust Features}
 Speeded Up Robust Features (SURF) was introduced in \cite{Bay2006} for faster detection of local features and faster computation of the descriptor than state-of-the-art methods of the time. SURF introduces the 'Fast-Hessian' detector that relies on box filter approximations of Gaussian filters and integral images to reduce the computation time by $\frac{2}{3}$ compared to the difference of Gaussians approach taken by SIFT. According to \cite{Viola2001}, an integral image $ii(x,y)$ (eq. \ref{integralimage})
 \begin{equation}
