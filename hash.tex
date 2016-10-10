@@ -547,6 +547,7 @@ This version of DCT-Hash takes 200ms to calculate on a 13'' mid 2014 Macbook Pro
 \caption{Discrete-cosine basis functions for $N = 4$. The lighter the color, the larger the value. \cite[p. 473]{Gonzalez2002}}
 \label{dctkernels}
 \end{figure}
+\clearpage
 \subsection{Hamming Distance}\label{HammingSection}
 According to \cite{Hamming1950} given alphabet $A$ the Hamming Distance $\Delta$ between strings $q \in A$ and $d \in A$ is
 \begin{equation}\label{hammingeq}
@@ -580,8 +581,10 @@ We will review state-of-the-art in large-scale image retrieval and it's use for 
 \subsection{Detection and Description of Local Features}
  With hashing, the image identifier is created from the image pixels to form a binary string of fixed length. We expect the Local Features-based NDID system to improve over perceptual hashing as the hashes are unstable image transformations that alter the relationships between spatial pixel values such as rotation and adding and removing from the image.
 
-Instead taking pixel values directly as input, Local Features form an image descriptor by finding large amount of scale-, illumination-, noise- and affine distortion invariant keypoints. Synonyms for Local Features are many in literature. David Lowe used \emph{keypoint} in \cite{Lowe2004}, a seminal work in the field. In describing \emph{Speeded Up Robust Features}, \emph{interest points} is used. Sivic and Zisserman refer to \emph{viewpoint invariant regions}. In this paper we will use \emph{local features} and the short version \emph{feature}. \emph{Feature} detectors and descriptors have been widely developed during the past decade. Object- or scene retrieval, or in our case, near-duplicate image retrieval using local features generally takes the following steps:
+ Instead taking pixel values directly as input, Local Features form an image descriptor by finding large amount of scale-, illumination-, noise- and affine distortion invariant keypoints. Synonyms for Local Features are many in literature. David Lowe used \emph{keypoint} in \cite{Lowe2004}, a seminal work in the field. In describing \emph{Speeded Up Robust Features}, \emph{interest points} is used. Sivic and Zisserman refer to \emph{viewpoint invariant regions}. In this paper we will use \emph{local features} and the short version \emph{feature}. \emph{Feature} detectors and descriptors have been widely developed during the past decade.
 \clearpage
+ Object- or scene retrieval, or in our case, near-duplicate image retrieval using local features generally takes the following steps:
+
 \begin{enumerate}
 \item Find features of interest in image
 \item Encode features in a visual descriptor stored in memory or disk
@@ -733,7 +736,6 @@ where the number of filtered images is $M$.
   \label{scaletotime}
 t_i = \frac{1}{2}\sigma^2_i,\{i=0\ldots M\}
 \end{equation}
-\clearpage
 To reduce noise the source image may be processed with a Gaussian of $\sigma_0$. The contrast factor $\lambda$ is the 70th percentile of the input image gradient histogram. The pyramidal FED scheme consists of an outer-  and an inner loop. The inner loop performs the filtering according to step sizes set by the outer loop. The outer loop also takes care of down-sampling with mask $(\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$. The down-sampled image is the input to the next octave. For 2D images the maximum step size is $\tau_{max}$ when the image derivative grid size is 1px. The contrast parameter $\lambda$ also needs to be modified for each octave as the down-sampling mask reduces contrast by 25\%. A Hessian (eq. \ref{akazehessian}) is calculated for each $L^i$
 \begin{equation}
   \label{akazehessian}
@@ -785,7 +787,7 @@ For hash function $g$ to be Locality-Sensitive, the collision probability increa
   \rho = \frac{log\frac{1}{p_1}}{log\frac{1}{p_2}}
   \end{equation}
 The goal of LSH is to hash data points in a way so the collision probability is high for points close to one another compared to points that are far apart. By allowing for small error (eq. \ref{lsherroreq}) in the results and adding to storage requirements, the query time is significantly improved, giving up quality for speed as seen in fig. \ref{nntradeoffs}. \cite{Gionis1999} The solution presented in \cite{Gionis1999} reduces ANN time complexity to $\mathcal{O}(dn^{\frac{1}{1+\epsilon}})$.
-
+\clearpage
 LSH has $m$ hash functions, hash tables and keys per vector. Each point in the set $P$ has $m$ hash keys as an index. At query time $m$ keys are computed on the query vector and all the vectors associated with the new keys are retrieved forming a shorter list where it's feasible to use exact distance for matching. For the Approximate 1-NNS problem the effective error $E$ is
 \begin{equation}
   \label{lsherroreq}
@@ -835,6 +837,7 @@ Querying large sets of images is considered in \cite{Chum2010} where min-Hash is
 \item if pair of images pass the similarity test, check spatial consistency
 \item if image pair passes step 3., they become cluster seeds.
 \end{enumerate}
+\clearpage
 Their requirements are similar to what is attempted in this paper.
 \begin{enumerate}
 \item scalable to tens of millions of images
@@ -852,7 +855,7 @@ The Bag-of-Visual Words approach to describing images was developed by Sivic and
 The second type of region used is the Maximally Stable (MS) region. For these regions are the region area stays constant as the intensity threshold is changed. The two types of regions complement each other in image detection. The SA regions perform well on corners and the MS regions perform well on high contrast blobs. \cite{Sivic2003} The original BoW approach uses SIFT-descriptors introduced by Lowe. The second type of region is implemented in affine covariant regions.
 
 BoW relies on quantizing descriptors into visual words for efficient retrieval. Descriptors are quantized by associating them with the nearest cluster of descriptors. The vector quantization is implemented by k-means clustering. The original BoW implementation worked on video, but we will apply the simple image case only. In the original implementation, the Mahalanobis distance is used as the distance function in k-means clustering. \cite{Sivic2003}
-
+\clearpage
 In text retrieval a document is stored in a vector of word frequencies. A weight is usually applied to the vector. Term frequency-inverse document frequency, $tf-idf$ (eq. \ref{tfidf}) is a weighting scheme common in text retrieval. In $k$ words, each document is represented by a $k$-vector $V_{d}=(t_{1},...,t_{k})^{T}$
 
 \begin{equation}\label{tfidf}
@@ -872,7 +875,7 @@ The user specifies an area of interest in a frame and descriptors are calculated
 Google gives additional weight to words in the search that appear close together in the retrieved document. With visual words, the retrieval is done per frame (image) only and the results are re-ranked based on spatial consistency.
 
 A loose definition would be to require neighboring matches in query image to lie close together also in the retrieved frame.
-
+\clearpage
 \subsubsection{Product Quantization} \label{PQ}
 Product quantization allows for the packing of image descriptors so they are able to fit in memory of off-the-shelf hardware. More specifically
 \begin{equation}
@@ -1051,7 +1054,7 @@ Roughly, the main steps of computing a VLAD descriptor are
 \item reducing the dimensionality of that vector
 \item providing efficient indexing for all vectors in the system.
 \end{enumerate}
-
+\clearpage
 Like in \cite{Sivic2003}, \cite{Jegou2011} a code book $\mathcal{C}={c_1 \ldots c_k}$ of $k$ visual words is created using k-means clustering. For each $d$-dimensional local descriptor $x$ is associated to the nearest visual word (eq. \ref{vladdescriptortovw})
 
 \begin{equation}
@@ -1090,6 +1093,7 @@ The dimension of the model is $q$ and the mean $\mu \in \Re^p$. $v_q$ is a $p \t
 \begin{equation}\label{pcaerror}
 \min_{\mu,\lambda_1\ldots N, v_q}\sum_{n=1}^N \abs{x_n-\mu - v_q\lambda_n}.
 \end{equation}
+\clearpage
 By minimizing equation \ref{pcaerror} one can choose $\mu, v_q$ and $\lambda$. \cite{Blei2008} As a projection, $x$ can be approximated by
 
 \begin{equation}\label{vladpca}
@@ -1299,6 +1303,7 @@ prevalence &= \frac{RP}{N}\label{prevalence}\\
 bias &= \frac{PP}{N}\label{bias}\\
 skew &= \frac{RN}{RP}\label{skew}
 \end{align}
+\clearpage
 \emph{rp} is the Prevalence of positive cases. \emph{pp} on the other hand is the Bias of the model \cite{lafferty2001conditional}. $rp + rn = 1$, RP + RN = N. In a skewed distribution RN and RP are highly uneven resulting in many more negative errors than positive errors \cite{POWERS2011}.
 
 An unbiased classifier accuracy was derived by Powers \cite{Powers2003} to avoid \emph{bias} and population prevalence. \emph{Informedness} (eq. \ref{informedness}) is a measure of intelligence in the model and indicates how informed a classification decision is compared to chance. For the binary case, it was first developed by Youden and is also called Youden's J statistic. We will continue to use informedness, for this paper however. It may be used to find the optimum tuning on a ROC curve. \cite{POWERS2011}.
@@ -1313,7 +1318,7 @@ r_G = \pm \sqrt{Informedness \times Markedness}
 \end{equation}
 The Matthews correlation can be seen as a joint probability of P informs R and R marks P \cite{POWERS2011}, on the condition that P to R prediction and R to P prediction are independent.
 We will evaluate the classifiers against each other on the unbiased versions of \emph{Precision} which is \emph{Informedness} and \emph{Recall} which is \emph{Markedness} and the Matthews correlation.
-
+\pagebreak
 \subsubsection{Statistical Significance}
 To address statistical significance in comparing binary classifiers, the Simple Hash-, the DCT Hash- and Local Features NDID were essentially interested in addressing the significance of differences between classifiers. Fisher's Exact test is a good choice according to literature. It can be used when the cell size is small, which it is in our case where for the Paintings Dataset for example, Local Features scores 1 false positive. This is contrary to $\chi^2$, which needs every cell to have a count $>5$. Since the number of FP for the Local Features case is small, we expect to use the The Fisher Exact test, which was specifically designed for the analysis of statistical significance regarding contingency tables (fig. \ref{figconfusion}). As the name implies. The p-value is exact, and not an approximation. \cite{fisher1922interpretation}
 However, Fisher's Exact Test assumes data to be hypergeometrically distributed meaning all assignments to the contingency matrix cells are considered equally likely, with Bias and Prevalence as given. However, since Bias and Prevalence are assigned as a result of the experiment, not before hand, the assumptions made by Fisher's Exact Test are inappropriate for this problem. We will keep this in mind when evaluating the p-values.
@@ -2031,7 +2036,7 @@ For the 10\% border- (fig. \ref{borderlabel}) and 10\% rotated (fig. \ref{rotate
 For the normalized histogram near-duplicates (fig. \ref{histogramlabel}) we have the perceptual hashes performing best at $\Delta(q,d)=4$ for both datasets in both ROC space and PR plots. Also, for near-duplicates with saturated colors (fig. \ref{saturatelabel}) $\Delta(q,d)=4$ as this point is clearly closest to (0, 1) in ROC space and (1, 1) in the PR plot for both datasets. It's safe to say that for the saturated colors case, $\Delta(q,d)=4$ is optimal for both the Simple Hash and the DCT Hash.
 
 What is a good $\Delta(q,d)$ for near-duplicate image detection by perceptual hashing? Contrary to the recommendation $\Delta(q,d)=10$ in \cite{Zauner2010}, we find $\Delta(q,d)=4$ to perform better for both hashes for the general case. We come to this conclusion comparing maximum \emph{Informedness} averaged over the duplicate sets (tables \ref{simpleunbiased}, \ref{simplethinglinkunbiased}, \ref{dctunbiased} and \ref{dctthinglinkunbiased} in purple). We did not measure $\Delta(q,d)=10$, but since $\Delta(q,d)=8$ already degrades performance due to the disability of hash-based retrieval to correctly classify predicted negative images, it is safe to say it will not improve increasing to $\Delta(q,d)=10$.
-
+\clearpage
 If the type of duplicate a system is expected to detect is known a priori, $\Delta(q,d)$ may be further optimized to the specific case. $\Delta(q,d)$ then depends on the type of hash chosen and the near-duplicate definition. For the simple hash, $\Delta(q,d)=4$ is always optimal. With duplicates concerning the colorspace, the DCT Hash does better with $\Delta(q,d)=4$ (fig. \ref{saturatelabel}). However for spatial near-duplicates, the DCT Hash performs better with $\Delta(q,d)=8$.  For head-to-head comparison, we choose the average, as at ThingLink we do not know the type of duplicate at query time. Ultimately $\Delta(q,d)=4$ was used in comparison to Local Features NDID based on averaged \emph{Informedness} over the duplicate cases and for the DCT Hash, this choice is contrary to $\Delta(q,d)=8$ suggested by the DCT Hash ROC spaces for both datasets (fig. \ref{53roc} - \ref{Saturateprthinglink}). We choose $\Delta(q,d)=4$ for both hashes based on the calculated unbiased metrics in tables \ref{simpleunbiased}, \ref{simplethinglinkunbiased}, \ref{dctunbiased} and \ref{dctthinglinkunbiased}.
 
 \subsection{Optimal $\mathcal{C}_s$ for Local Features and Bag-of-Visual-Words}
@@ -2039,7 +2044,7 @@ What is a good cutoff score to classify an image as \emph{not-in-database} for n
 
 \subsection{Large-Scale Image Retrieval Assumptions}
 For both the Paintings Dataset and the ThingLink Dataset assuming the highest scoring image for a query into the inverted index of a Bag-of-Visual-Words is a good candidate for a near-duplicate to the query image. With this assumption, Local Features and Bag-of-Visual-Worlds near-duplicate image detection system works as expected for both datasets and all seven types of near duplicates (table \ref{modifiedimages}) evident in the steady performance seen in ROC space and PR plots in figures \ref{53roc}-\ref{Saturateprthinglink}. This excellent performance is verified by \emph{informedness}, \emph{markedness} and Matthews correlation figures in table \ref{informednessmarkedness} for the Local Features and Bag-of-Visual-Words classifier.
-
+\clearpage
 \subsection{Performance}
 To what degree are Local Features an improvement over DCT-, and Simple- perceptual hashes for NDID? The degree of improvement per near duplicate case versus each perceptual hash is listed in table \ref{deltainformednessmarkedness}. Visually examining the 53\% scale near-duplicate case (fig. \ref{53label}) Local Features is closest to (0,1) in ROC space (fig. \ref{53roc} - \subref{53rocthinglink}) and closest to (1, 1) in PR space (fig. \ref{53pr} - \subref{53prthinglink}). The differences between the hashes and Local Features are clearly visible only in PR space (fig. \ref{53pr}) for the Paintings Dataset. For the ThingLink Dataset, it is difficult to determine if Local Features or Simple Hash is superior (fig. \ref{53rocthinglink} and \ref{53prthinglink}). Local Features offers improved precision (fig. \ref{53pr}-\subref{53prthinglink}) over the perceptual hashes.
 
@@ -2050,7 +2055,7 @@ Local Features dominates the perceptual hashes in both ROC space and PR plot for
 For the simple hash, adding a 10\% border changes the relative spatial relationships between image pixels and it is expected to not perform well. In the case of the DCT Hash, the border is white and adds a hard corner on four sides of the image, so it is expected to modify the frequency domain and thus the near-duplicate hashes should rarely match those found in the database. Local Features should not be affected as the original image stays intact and there will most likely be no features detected in the white border. For the 10\% border near-duplicate case we can see from the ROC space and PR plots for both datasets (fig. \ref{borderlabel}) the worse-than-chance performance of the hashes. Local Features performs on par with the previous near-duplicate cases. The loss of precision in PR plot and increased fpr in the ROC space for the ThingLink dataset are again clearly visible.
 
 For the rotated near-duplicate case in figure \ref{rotatelabel} there is heavy change in the relative spatial differences between pixels. As a result, both hashes are expected to perform poorly and they do, regardless of how the $\Delta(q, d)$ is adjusted. If possible, their performance is worse than in the 10\% border case. Local Features performance is steady and nearly on par with previous near-duplicate cases. Once again there is an increase in fpr in ROC space and a loss of precision in the PR plot.
-
+\clearpage
 Histogram normalized duplicates have all methods performing well (fig. \ref{histogramlabel}). Local Features dominates the hashes and the DCT Hash slightly dominates the Simple Hash, which is expected as the DCT Hash should be more stable for changes in color space of the image. For the ThingLink Dataset (fig. \ref{Normalizerocthinglink} and \subref{Normalizeprthinglink}), the hashes perform equally well. Once again Local Features shows a drop in precision for the ThingLink Dataset compared to the Paintings Dataset (fig. \ref{Normalizeprthinglink}).
 
 For the near-duplicates with saturated colors in figure \ref{saturatelabel} Local Features dominates the perceptual hashes in both ROC- and PR spaces for both datasets. Once again, there is a loss of precision with the ThingLink Dataset compared to the Paintings Dataset for Local Features (fig. \ref{Saturateprthinglink}). Distinctly, the DCT Hash offers superior performance compared to the Simple Hash in all plots, most clearly for the Paintings Dataset but also visible in the ThingLink Dataset plots. This is expected we are dealing with modifications regarding color where the DCT Hash is known to offer better stability \cite{Zauner2010}.
@@ -2060,7 +2065,7 @@ Visually inspecting the ROC spaces and PR plots for both datasets and all near-d
 The 10\% white border and 10\% rotate duplicate cases stand out in favor of Local Features. Local Features NDID performs excellent with $0.9171 \leq \mathcal{R}_G \leq 0.9977$ for the Paintings and the ThingLink datasets (table \ref{informednessmarkedness}). Since rotation and adding a white border to the image alter the relative values of the image pixels, perceptual hashing is unable to cope resulting in negative $\mathcal{I}$ and $\mathcal{M}$ for the white border-, and rotated duplicates (table \ref{informednessmarkedness}). NDID performance for these cases is much less than chance for both the Simple Hash and the DCT Hash, no matter how $\Delta(q,d)$ is tuned.
 
 Choosing $\Delta(q,d)=4$ for the perceptual hashes, $\mathcal{C}_s=19$ for Local Features and the Paintings Dataset and $\mathcal{C}_s = 16$ for the ThingLink Dataset. The unbiased contingency table metrics: Matthews correlation $\mathcal{R}_G$, \emph{Informedness} $\mathcal{I}$ and \emph{Markedness} $\mathcal{M}$ (table \ref{informednessmarkedness}) are all superior (table \ref{deltainformednessmarkedness}) in favor of the Local Features NDID system for both datasets and all seven near-duplicate cases (table \ref{modifiedimages}) presented in this thesis. The contingency table differences between the perceptual hashes and Local Features are statistically significant for $p \leq 0.05$ (table \ref{pvalues}) for both datasets and all near-duplicate cases excluding the ThingLink Dataset 83\% scale-, and normalized histogram-duplicate cases. $H_0$ holds (table \ref{pvalues} in purple) meaning for these duplicate cases we cannot statistically tell the systems apart from one another.
-
+\clearpage
 \subsection{Improved NDID for ThingLink}
 Can Local Features be deployed at a scale of 5 million images at ThingLink for improved near-duplicate detection? Our simulation results prove that for a near duplicate definition in table \ref{modifiedimages}, Local Features and Bag-of-Visual-Words NDID is an improvement over the Simple- and DCT perceptual hashes for most cases. The differences between the perceptual hashes and the Local Features and Bag-of-Visual-Words NDID are statistically valid for all but two cases presented in this thesis. A local features NDID system has been successfully implemented in \cite{dong2012high}. Local Features and Bag-of-Visual-Words does need more computational resources, but the increase in demand for resources is manageable (table \ref{computationalcost}). If the large-scale image retrieval methods used in this thesis are inadequate, the IVFADC system presented in \cite{Jegou2010} provides 50ms queries among 5 million images, a scale very suitable for ThingLink. However, that system was not evaluated here and is an interesting topic for future research.
 
@@ -2070,7 +2075,7 @@ The contributions of this thesis are minimal and very specific to the cases stud
 For picking the Local Features and Bag-of-Visual-Words cutoff score $\mathcal{C}_s$ we recommend to use a training set of predicted negative images and recording the scores of those images. The maximum score from this set will, according to figures \ref{53roc}-\ref{Saturateprthinglink}, yield the best results. This holds for both the Paintings Dataset and the ThingLink Dataset used in this study.
 
 We demonstrate, for the two small datasets used in this thesis, the Local Features and Bag-of-Visual-Words near-duplicate detector to be superior to the perceptual hashes. Based on the steady near-duplicate detection performance of the Local Features-based system (fig. \ref{53roc}-\ref{Saturateprthinglink} and table \ref{informednessmarkedness}), we show that for the Paintings Dataset and the ThingLink dataset, the assumption of the highest scoring result image from the query into the inverted index of a Bag-of-Visual-Words-based retrieval system is the best candidate for a near-duplicate to the query image.
-
+\clearpage
 \subsection{Recommendations}
 We recommend not to have exact duplicate images in the near-duplicate database as this will result in a higher fpr proportional to the number of duplicates in the database. The single FP in table \ref{siftresults} for the Paintings Dataset and the Local Features and Bag-of-Visual-Words based classifier is due to an exact duplicate in the database. Ironically, all exact duplicates were removed from the ThingLink Dataset before simulations and still a drop in precision due to an increased fpr as shown in all ROC spaces and PR plots for the ThingLink Dataset in figures \ref{53roc}-\ref{Saturateprthinglink} is present.
 We also recommend the Local Features and Bag-of-Visual-Words to be taken into use at ThingLink based on the findings of this study. However, exact method needs to be verified and is a topic for future research.
@@ -2081,7 +2086,7 @@ For future research the AKAZE M-LDB descriptor is a binary descriptor and can us
 We should increase simulation dataset size to 5 million images. It is expected to further increase the difference between the perceptual hashes and large-scale image retrieval for near-duplicate image detection. The datasets in this thesis do not contain many images of the same object, or scene. This could throw off the assumption that the highest scoring image for an inverted index query in a Bag-of-Visual-Words retrieval system is the best candidate for the original image. The Bag-of-Visual-Words vocabulary was trained by the very images forming the originals database. An interesting topic would also be to see how training the database with one set of images and then adding images to the database affects near-duplicate detection performance.
 
 Simulations in this thesis were performed on a static database, which is not the case in a production environment. Since $\mathcal{C}_s$ is optimal for the highest score not in the database, this value is bound not to be optimal as the database grows over time and new images are presented to the system. Real performance can only be tested reliably in a production environment, a logical and exciting topic for future research.
-
+\clearpage
 \section{Conclusions}
 As expected, applying large-scale image retrieval to near-duplicate detection yields improved results over perceptual hashing. It is superior despite finding the optimal Hamming Distance to be 4 for near-duplicate image detection using the simple block-mean-based hash and a DCT-based hash for the general case. The perceptual hashes are totally useless for detecting near-duplicates with rotation and the addition of a border.
 The large-scale image retrieval based near-duplicate detection system may be optimized by setting a cutoff score to the maximum score encountered while querying predicted negative images against the inverted index of a Bag-of-Visual-Words retrieval system.
