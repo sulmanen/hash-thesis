@@ -572,7 +572,7 @@ In other words, it is the number of characters two strings differ. In binary str
 
 \clearpage
 \section{Large-Scale Image Retrieval}
-Local Features are a good candidate for replacing the relatively simple perceptual hashes. It raises the abstraction level from image pixels to the object or scene depicted in the image. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Local features works especially well for processed duplicate images, the case we are trying to solve.
+Local Features are a good candidate for replacing the perceptual hashes. Image descriptors based on local features are by definition invariant to isotropic scaling and rotation and can withstand some affine distortion, noise and illumination changes. Local features works especially well for processed duplicate images, the case we are trying to solve.
 
 To compare the perceptual hash based detectors to the local features based detector, we simulate near-duplicate cases on two image datasets, the Paintings dataset and the ThingLink dataset. The performance of each classifier is then compared head-to-head. Perceptual hashing is a good choice for implementing near-duplicate image detection due to simplicity of implementation and the ability to scale the solution to millions of images. The trade-off will be complexity of implementation vs. improvement in the results.
 
